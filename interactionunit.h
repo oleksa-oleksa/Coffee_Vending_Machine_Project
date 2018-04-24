@@ -1,7 +1,7 @@
 #ifndef INTERACTIONUNIT_H
 #define INTERACTIONUNIT_H
 
-#include 'userchoice.h'
+#include "userchoice.h"
 
 
 class InteractionUnit
@@ -12,7 +12,7 @@ public:
     void ButtonPollingRoutine();
 
 private:
-    UserChoice choise;
+    UserChoice *choise;
     Button addSugar;
     Button removeSugar;
     Button addMilk;

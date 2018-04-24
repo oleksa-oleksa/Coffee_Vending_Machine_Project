@@ -1,6 +1,9 @@
 #ifndef USERCHOICE_H
 #define USERCHOICE_H
 
+#include "card.h"
+#include "drinktype.h"
+
 class UserChoice
 {
 public:
@@ -14,7 +17,7 @@ public:
     DrinkType setSelectedDrink(DrinkType drink);
 
 private:
-    DrinkType selectedDrink;
+    DrinkType *selectedDrink;
     Card card;
     int extraSugar;
     int extraMilk;
