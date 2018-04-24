@@ -1,1 +1,9 @@
+#iOS Folders should be ignored
 .DS_Store
+**/.DS_Store
+
+#Folders from Linux/Unix
+
+#Folders and files from QT IDE should be ignored
+**/.idea
+**/cmake-build-debug
