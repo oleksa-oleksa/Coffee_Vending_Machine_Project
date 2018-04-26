@@ -7,5 +7,4 @@
 #Folders and files from QT IDE should be ignored
 **/.idea
 **/cmake-build-debug
-**/*.pro
 **/*.pro.user
