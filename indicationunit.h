@@ -5,20 +5,20 @@
 
 class IndicationUnit
 {
-public:
-    IndicationUnit();
-    ~IndicationUnit();
-    void setChoice(DrinkType drink);
-    void incSugar();
-    void decSugar();
-    void incMilk();
-    void decMilk();
+    private:
+        LED sugar;
+        LED milk;
+        LED choice;
+        Display info;
 
-private:
-    LED sugar;
-    LED milk;
-    LED choice;
-    Display info;
+    public:
+        IndicationUnit();
+        ~IndicationUnit();
+        void setChoice(DrinkType drink);
+        void incSugar();
+        void decSugar();
+        void incMilk();
+        void decMilk();
 };
 
 #endif // INDICATIONUNIT_H

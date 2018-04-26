@@ -6,22 +6,22 @@
 
 class UserChoice
 {
-public:
-    UserChoice();
-    ~UserChoice();
-    bool payDrink(double price);
-    DrinkType getProgramButtonState();
-    int getSugarButtonState();
-    int getMilkButtonState();
-    bool getOKButtonState();
-    DrinkType setSelectedDrink(DrinkType drink);
+    private:
+        DrinkType *selectedDrink;
+        Card card;
+        int extraSugar;
+        int extraMilk;
+        double price;
 
-private:
-    DrinkType *selectedDrink;
-    Card card;
-    int extraSugar;
-    int extraMilk;
-    double price;
+    public:
+        UserChoice();
+        ~UserChoice();
+        bool payDrink(double price);
+        DrinkType getProgramButtonState();
+        int getSugarButtonState();
+        int getMilkButtonState();
+        bool getOKButtonState();
+        DrinkType setSelectedDrink(DrinkType drink);
 };
 
 #endif // USERCHOICE_H

@@ -31,7 +31,6 @@ SOURCES += \
     indicationunit.cpp \
     card.cpp \
     account.cpp \
-    accountstatus.cpp \
     bankaccount.cpp \
     dataset.cpp \
     admin.cpp \
@@ -40,7 +39,6 @@ SOURCES += \
     person.cpp \
     serviceroutine.cpp \
     account.cpp \
-    accountstatus.cpp \
     actuator.cpp \
     actuatortype.cpp \
     admin.cpp \
