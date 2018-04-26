@@ -6,18 +6,17 @@
 
 class Account
 {
-public:
-    Account();
-    ~Account();
-    AccountStatus getAccountStatus(Card card);
-    void setAccountStatus(Card card);
+    private:
+        Card *card;
+        BankAccount *bankAccount;
+        double credit;
+        AccountStatus state;
 
-private:
-    Card *card;
-    BankAccount *bankAccount;
-    double credit;
-    AccountStatus state;
-
+    public:
+        Account();
+        ~Account();
+        AccountStatus getAccountStatus(Card card);
+        void setAccountStatus(Card card);
 };
 
 #endif // ACCOUNT_H

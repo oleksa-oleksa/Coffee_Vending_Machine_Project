@@ -4,14 +4,14 @@
 
 class Card
 {
-public:
-    Card();
-    ~Card();
-    long getCardID();
-    void setCardID(Card card);
+    private:
+        long cardID;
 
-private:
-    long cardID;
+    public:
+        Card();
+        ~Card();
+        long getCardID();
+        void setCardID(Card card);
 };
 
 #endif // CARD_H
