@@ -1,24 +1,16 @@
 #ifndef SENSORTYPE_H
 #define SENSORTYPE_H
 
-
-class SensorType
+enum
 {
-public:
-    SensorType();
-    ~SensorType();
-
-private:
-    enum{
-        RFID,
-        OPTICAL,
-        PRESSURE,
-        TEMPERATURE,
-        FLOW,
-        BUTTON,
-        BRIGHTNESS,
-        PROXIMITY
-    };
+    RFID,
+    OPTICAL,
+    PRESSURE,
+    TEMPERATURE,
+    FLOW,
+    BUTTON,
+    BRIGHTNESS,
+    PROXIMITY
 };
 
 #endif // SENSORTYPE_H
