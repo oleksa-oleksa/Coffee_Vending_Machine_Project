@@ -4,14 +4,14 @@
 
 class Dataset
 {
-public:
-    Dataset();
-    ~Dataset();
-    void addBill(long cardID, double price);
+    private:
+        long dbID;
+        Account *account;
 
-private:
-    long dbID;
-    Account *account;
+    public:
+        Dataset();
+        ~Dataset();
+        void addBill(long cardID, double price);
 };
 
 #endif // DATASET_H

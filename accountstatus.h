@@ -1,11 +1,10 @@
 #ifndef ACCOUNTSTATUS_H
 #define ACCOUNTSTATUS_H
 
-
-
 enum {
      ACTIVE_OK,
      BLOCKED_UNPAID,
      DEACTIVATED_OLD
 };
+
 #endif // ACCOUNTSTATUS_H
