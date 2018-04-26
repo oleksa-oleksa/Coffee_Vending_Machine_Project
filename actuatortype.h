@@ -1,7 +1,7 @@
 #ifndef ACTUATORTYPE_H
 #define ACTUATORTYPE_H
 
-enum
+enum ActuatorType
 {
     DC_MOTOR,
     LCD,
