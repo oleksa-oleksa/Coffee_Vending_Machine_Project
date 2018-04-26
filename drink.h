@@ -4,8 +4,8 @@
 #include "userchoice.h"
 #include "opticalsensor.h"
 #include "proximitysensor.h"
-#include "dc-motor.h"
-#include "temperaturesensor.h"
+#include "dc_motor.h"
+#include "temperatursensor.h"
 #include "waterheater.h"
 #include "flowmeter.h"
 #include "brewgroup.h"
@@ -18,8 +18,8 @@ class Drinktype
       Userchoice drinkSpecs;
       OpticalSensor filllevel[4];
       ProximitySensor cupsensor;
-      DC-Motor motor;
-      TemperatureSensor temp;
+      DC_Motor motor;
+      TemperaturSensor temp;
       Waterheater temp;
       Flowmeter flow;
       Brewgroup brew;

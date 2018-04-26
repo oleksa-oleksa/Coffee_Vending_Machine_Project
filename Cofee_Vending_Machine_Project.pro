@@ -38,7 +38,41 @@ SOURCES += \
     drink.cpp \
     ingredient.cpp \
     person.cpp \
-    serviceroutine.cpp
+    serviceroutine.cpp \
+    account.cpp \
+    accountstatus.cpp \
+    actuator.cpp \
+    actuatortype.cpp \
+    admin.cpp \
+    bankaccount.cpp \
+    brewgroup.cpp \
+    brightnesssensor.cpp \
+    button.cpp \
+    card.cpp \
+    dataset.cpp \
+    dc_motor.cpp \
+    drink.cpp \
+    flowmeter.cpp \
+    indicationunit.cpp \
+    ingredient.cpp \
+    interactionunit.cpp \
+    lcd_display.cpp \
+    led.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    milkmaker.cpp \
+    opticalsensor.cpp \
+    person.cpp \
+    pressuresensor.cpp \
+    proximitysensor.cpp \
+    rfid_scanner.cpp \
+    sensor.cpp \
+    sensortype.cpp \
+    serviceroutine.cpp \
+    state.cpp \
+    temperatursensor.cpp \
+    userchoice.cpp \
+    waterheater.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -61,10 +95,52 @@ HEADERS += \
     ingredient.h \
     lattemacchiato.h \
     person.h \
-    serviceroutine.h
+    serviceroutine.h \
+    account.h \
+    accountstatus.h \
+    actuator.h \
+    actuatortype.h \
+    admin.h \
+    bankaccount.h \
+    brewgroup.h \
+    brightnesssensor.h \
+    button.h \
+    cacao.h \
+    cappuccino.h \
+    card.h \
+    coffee.h \
+    dataset.h \
+    dc_motor.h \
+    drink.h \
+    drinktype.h \
+    espresso.h \
+    flowmeter.h \
+    hotwater.h \
+    indicationunit.h \
+    ingredient.h \
+    interactionunit.h \
+    lattemacchiato.h \
+    lcd_display.h \
+    led.h \
+    mainwindow.h \
+    milkmaker.h \
+    opticalsensor.h \
+    person.h \
+    pressuresensor.h \
+    proximitysensor.h \
+    rfid_scanner.h \
+    sensor.h \
+    sensortype.h \
+    serviceroutine.h \
+    state.h \
+    temperatursensor.h \
+    userchoice.h \
+    waterheater.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    mainwindow.ui
 
 DISTFILES += \
-    Cofee_Vending_Machine_Project.pro.user
+    Cofee_Vending_Machine_Project.pro.user \
+    README.md
