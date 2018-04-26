@@ -1,7 +1,7 @@
 #ifndef SENSORTYPE_H
 #define SENSORTYPE_H
 
-enum
+enum SensorType
 {
     RFID,
     OPTICAL,
