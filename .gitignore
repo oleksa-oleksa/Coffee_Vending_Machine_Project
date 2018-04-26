@@ -1,5 +1,3 @@
-**/.git
-
 #iOS Folders should be ignored
 .DS_Store
 **/.DS_Store
