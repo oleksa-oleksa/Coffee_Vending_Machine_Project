@@ -19,7 +19,7 @@ class Drinktype
       OpticalSensor filllevel[4];
       ProximitySensor cupsensor;
       DC_Motor motor;
-      TemperatureSensor temp;
+      TemperaturSensor temp;
       Waterheater temp;
       Flowmeter flow;
       Brewgroup brew;
