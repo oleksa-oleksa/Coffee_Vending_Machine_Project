@@ -12,7 +12,7 @@
 #include "milkmaker.h"
 #include "rfid_scanner.h"
 
-class Drinktype
+class Drink
 {
    private:
       Userchoice drinkSpecs;
