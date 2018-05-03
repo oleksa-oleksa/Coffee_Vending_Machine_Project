@@ -4,3 +4,8 @@ InteractionUnit::InteractionUnit()
 {
 
 }
+
+void InteractionUnit::ButtonPollingRoutine()
+{
+
+}
