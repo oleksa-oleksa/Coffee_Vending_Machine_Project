@@ -1,19 +1,20 @@
 #ifndef BANKACCOUNT_H
 #define BANKACCOUNT_H
 #include "account.h"
+#include <string>
 
 class BankAccount
 {
     private:
-        String IBAN;
+        std::string IBAN;
         int taxClass;
     public:
         BankAccount();
         ~BankAccount();
-        void setIBAN(String iban);
-        String getIBAN(BankAccount b);
+        void setIBAN(std::string iban);
+        std::string getIBAN();
         void setTaxClass(int tc);
-        int getTaxClass(BankAccount b);
+        int getTaxClass();
 };
 
 #endif // BANKACCOUNT_H

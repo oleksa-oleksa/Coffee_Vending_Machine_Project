@@ -1,16 +1,17 @@
 #include "bankaccount.h"
+#include <string>
 
 BankAccount::BankAccount()
 {
 
 }
 
-void BankAccount::setIBAN(String iban)
+void BankAccount::setIBAN(std::string iban)
 {
 
 }
 
-String BankAccount::getIBAN(BankAccount b)
+std::string BankAccount::getIBAN()
 {
 
 }
@@ -20,7 +21,7 @@ void BankAccount::setTaxClass(int tc)
 
 }
 
-int BankAccount::getTaxClass(BankAccount b)
+int BankAccount::getTaxClass()
 {
 
 }

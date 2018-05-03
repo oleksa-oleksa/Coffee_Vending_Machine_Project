@@ -2,6 +2,7 @@
 #define INTERACTIONUNIT_H
 
 #include "userchoice.h"
+#include "button.h"
 
 
 class InteractionUnit

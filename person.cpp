@@ -1,4 +1,4 @@
-#include <iostreams>
+#include <iostream>
 
 #include "person.h"
 
@@ -24,7 +24,7 @@ long Person::getID() const
 
 void Person::setName(std::string name)
 {
-    if ( name = "" )
+    if ( name == "" )
         std::cerr << "Name cannot be an empty String" << std::endl;
     else
         this->name = name;
@@ -32,7 +32,7 @@ void Person::setName(std::string name)
 
 void Person::setSurname(std::string surname)
 {
-    if ( surname = "" )
+    if ( surname == "" )
         std::cerr << "Surname cannot be an empty String" << std::endl;
     else
         this->surname = surname;

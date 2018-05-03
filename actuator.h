@@ -3,7 +3,7 @@
 
 #include "state.h"
 #include <string>
-class ActuatorType;
+#include "actuatortype.h"
 
 class Actuator
 {
@@ -11,12 +11,12 @@ class Actuator
         Actuator();
         ~Actuator();
         void act(State state, unsigned int duration);
-        enum ActuatorType getActuatorType() const;
+        ActuatorType getActuatorType() const;
         unsigned int getActuatorDuration() const;
         int getActuatorState() const;
         void setActuatorState(int state);
         void setActuatorDuration(unsigned int duration);
-        void setActuatorType(string name);
+        void setActuatorType(std::string name);
 
     private:
         ActuatorType actuatorType;

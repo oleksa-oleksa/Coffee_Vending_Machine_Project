@@ -40,7 +40,6 @@ SOURCES += \
     serviceroutine.cpp \
     account.cpp \
     actuator.cpp \
-    actuatortype.cpp \
     admin.cpp \
     bankaccount.cpp \
     brewgroup.cpp \
@@ -67,12 +66,15 @@ SOURCES += \
     sensor.cpp \
     sensortype.cpp \
     serviceroutine.cpp \
-    state.cpp \
     temperatursensor.cpp \
     userchoice.cpp \
     waterheater.cpp \
     controlunit.cpp \
-    staff.cpp
+    staff.cpp \
+    person.cpp \
+    button.cpp \
+    actuatortype.cpp \
+    sensortype.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -143,7 +145,9 @@ HEADERS += \
     sensor.h \
     sensortype.h \
     staff.h \
-    state.h
+    state.h \
+    person.h \
+    button.h
 
 FORMS += \
         mainwindow.ui \

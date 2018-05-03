@@ -1,4 +1,5 @@
 #include "indicationunit.h"
+#include "drinktype.h"
 
 IndicationUnit::IndicationUnit()
 {

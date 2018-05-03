@@ -1,5 +1,5 @@
 #include "userchoice.h"
-#include "drinktype.h"
+#include "DrinkType.h"
 
 UserChoice::UserChoice()
 {
@@ -31,7 +31,7 @@ bool UserChoice::getOKButtonState()
 
 }
 
-Drinktype UserChoice::setSelectedDrink(DrinkType drink)
+DrinkType UserChoice::setSelectedDrink(DrinkType drink)
 {
 
 }

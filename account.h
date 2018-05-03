@@ -1,8 +1,9 @@
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
+
+#include "bankaccount.h"
 #include "card.h"
 #include "accountstatus.h"
-#include "bankaccount.h"
 
 // test
 
@@ -10,7 +11,7 @@ class Account
 {
     private:
         Card *card;
-        BankAccount *bankAccount;
+       // BankAccount *bAccount;
         double credit;
         AccountStatus state;
 

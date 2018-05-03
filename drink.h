@@ -15,12 +15,12 @@
 class Drink
 {
    private:
-      Userchoice drinkSpecs;
+      UserChoice drinkSpecs;
       OpticalSensor filllevel[4];
       ProximitySensor cupsensor;
       DC_Motor motor;
-      TemperaturSensor temp;
-      Waterheater temp;
+      TemperaturSensor temperature;
+      Waterheater heater;
       Flowmeter flow;
       Brewgroup brew;
       Milkmaker milk;
