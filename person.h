@@ -11,10 +11,10 @@ class Person
       long id;
       std::string address;
    public:
-      std::string getName();
-      std::string getSurname();
-      long getID();
-      std::string getAddress();
+      std::string const & getName() const;
+      std::string const & getSurname() const;
+      std::string const & getAddress() const;
+      long getID() const;
       void setName(std::string name);
       void setSurname(std::string surname);
       void setID(long ID);
