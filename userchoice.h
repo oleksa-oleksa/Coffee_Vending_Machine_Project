@@ -2,7 +2,7 @@
 #define USERCHOICE_H
 
 #include "card.h"
-#include "DrinkType.h"
+#include "drinktype.h"
 
 class UserChoice
 {

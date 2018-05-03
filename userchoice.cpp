@@ -1,5 +1,5 @@
 #include "userchoice.h"
-#include "DrinkType.h"
+#include "drinktype.h"
 
 UserChoice::UserChoice()
 {
