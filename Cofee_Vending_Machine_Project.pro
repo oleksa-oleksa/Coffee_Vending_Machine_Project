@@ -70,7 +70,9 @@ SOURCES += \
     state.cpp \
     temperatursensor.cpp \
     userchoice.cpp \
-    waterheater.cpp
+    waterheater.cpp \
+    controlunit.cpp \
+    staff.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -133,7 +135,15 @@ HEADERS += \
     state.h \
     temperatursensor.h \
     userchoice.h \
-    waterheater.h
+    waterheater.h \
+    actuator.h \
+    actuatortype.h \
+    controlunit.h \
+    drink.h \
+    sensor.h \
+    sensortype.h \
+    staff.h \
+    state.h
 
 FORMS += \
         mainwindow.ui \
