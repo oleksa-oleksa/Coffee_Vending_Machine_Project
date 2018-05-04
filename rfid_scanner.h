@@ -6,7 +6,6 @@ class RFID_Scanner : public Sensor
 {
 public:
     RFID_Scanner();
-    ~RFID_Scanner();
 };
 
 #endif // RFID_SCANNER_H

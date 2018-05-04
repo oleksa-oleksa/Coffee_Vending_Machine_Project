@@ -6,7 +6,6 @@ class Button : public Sensor
 {
 public:
     Button();
-    ~Button();
 };
 
 #endif // BUTTON_H

@@ -15,7 +15,6 @@ class UserChoice
 
     public:
         UserChoice();
-        ~UserChoice();
         bool payDrink(double price);
         DrinkType getProgramButtonState();
         int getSugarButtonState();

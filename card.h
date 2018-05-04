@@ -9,7 +9,6 @@ class Card
 
     public:
         Card();
-        ~Card();
         long getCardID();
         void setCardID(Card card);
 };

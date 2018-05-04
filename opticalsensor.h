@@ -6,7 +6,6 @@ class OpticalSensor : public Sensor
 {
 public:
     OpticalSensor();
-    ~OpticalSensor();
 };
 
 #endif // OPTICALSENSOR_H

@@ -6,7 +6,6 @@ class ProximitySensor : public Sensor
 {
 public:
     ProximitySensor();
-    ~ProximitySensor();
 };
 
 #endif // PROXIMITYSENSOR_H

@@ -9,7 +9,6 @@ class Actuator
 {
     public:
         Actuator();
-        ~Actuator();
         void act(State state, unsigned int duration);
         ActuatorType getActuatorType() const;
         unsigned int getActuatorDuration() const;

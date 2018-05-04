@@ -9,7 +9,6 @@ class Sensor
 {
     public:
         Sensor();
-        ~Sensor();
         SensorType getValue() const;
         SensorType getSensorType() const;
         bool getSensorState() const;

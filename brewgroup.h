@@ -6,7 +6,6 @@ class Brewgroup : public Actuator
 {
 public:
     Brewgroup();
-    ~Brewgroup();
 };
 
 #endif // BREWGROUP_H

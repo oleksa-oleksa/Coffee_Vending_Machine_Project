@@ -6,7 +6,6 @@ class TemperaturSensor : public Sensor
 {
 public:
     TemperaturSensor();
-    ~TemperaturSensor();
 };
 
 #endif // TEMPERATURSENSOR_H

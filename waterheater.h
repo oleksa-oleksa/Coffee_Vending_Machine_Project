@@ -6,7 +6,6 @@ class Waterheater : public Actuator
 {
 public:
     Waterheater();
-    ~Waterheater();
 };
 
 #endif // WATERHEATER_H

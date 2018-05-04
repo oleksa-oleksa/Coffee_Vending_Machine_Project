@@ -6,7 +6,6 @@ class Milkmaker : public Actuator
 {
 public:
     Milkmaker();
-    ~Milkmaker();
 };
 
 #endif // MILKMAKER_H

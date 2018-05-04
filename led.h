@@ -6,7 +6,6 @@ class LED : public Actuator
 {
 public:
     LED();
-    ~LED();
 };
 
 #endif // LED_H

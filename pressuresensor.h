@@ -6,7 +6,6 @@ class PressureSensor : public Sensor
 {
 public:
     PressureSensor();
-    ~PressureSensor();
 };
 
 #endif // PRESSURESENSOR_H

@@ -6,7 +6,6 @@ class Flowmeter : public Sensor
 {
 public:
     Flowmeter();
-    ~Flowmeter();
 };
 
 #endif // FLOWMETER_H
