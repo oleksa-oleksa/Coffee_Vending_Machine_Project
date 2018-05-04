@@ -1,6 +1,5 @@
 #ifndef BANKACCOUNT_H
 #define BANKACCOUNT_H
-#include "account.h"
 #include <string>
 
 class BankAccount

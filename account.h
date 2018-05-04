@@ -1,7 +1,6 @@
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 
-#include "bankaccount.h"
 #include "card.h"
 #include "accountstatus.h"
 
@@ -17,7 +16,7 @@ class Account
 
     public:
         Account();
-        ~Account();
+        // ~Account();
         AccountStatus getAccountStatus(Card card);
         void setAccountStatus(Card card);
 };
