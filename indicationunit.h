@@ -1,15 +1,17 @@
 #ifndef INDICATIONUNIT_H
 #define INDICATIONUNIT_H
 #include "led.h"
+#include "lcd_display.h"
+#include "drinktype.h"
 
 
 class IndicationUnit
 {
     private:
-        LED sugar;
-        LED milk;
-        LED choice;
-        Display info;
+        class LED sugar;
+        class LED milk;
+        class LED choice;
+        LCD_Display info;
 
     public:
         IndicationUnit();

@@ -1,7 +1,8 @@
 #ifndef ACCOUNTSTATUS_H
 #define ACCOUNTSTATUS_H
 
-enum {
+enum AccountStatus
+{
      ACTIVE_OK,
      BLOCKED_UNPAID,
      DEACTIVATED_OLD

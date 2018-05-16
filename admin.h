@@ -10,7 +10,7 @@ class Admin : public Person
          Admin();
         ~Admin();
         Card createCard();
-        deactivateCard(card c);
+        void deactivateCard(Card c);
         void createBill();
 };
 

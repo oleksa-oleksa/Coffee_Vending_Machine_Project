@@ -31,7 +31,7 @@ bool UserChoice::getOKButtonState()
 
 }
 
-Drinktype UserChoice::setSelectedDrink(DrinkType drink)
+DrinkType UserChoice::setSelectedDrink(DrinkType drink)
 {
 
 }

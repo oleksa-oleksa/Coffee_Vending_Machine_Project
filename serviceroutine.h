@@ -9,9 +9,9 @@ public:
     ~ServiceRoutine();
 
 private:
-    boolean isCleanedStorageContainer = false;
-    boolean isCleanedModules = false;
-    boolean isCleanedGarbageBin = false;
+    bool isCleanedStorageContainer = false;
+    bool isCleanedModules = false;
+    bool isCleanedGarbageBin = false;
 };
 
 #endif // SERVICEROUTINE_H

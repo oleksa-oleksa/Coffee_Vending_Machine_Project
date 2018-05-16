@@ -6,7 +6,6 @@ class DC_Motor: public Actuator
 {
 public:
     DC_Motor();
-    ~DC_Motor();
 };
 
 #endif // DC_MOTOR_H

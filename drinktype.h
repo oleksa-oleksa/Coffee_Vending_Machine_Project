@@ -1,7 +1,7 @@
 #ifndef DRINKTYPE_H
 #define DRINKTYPE_H
 
-enum Drinktype
+enum DrinkType
 {
    COFFEE,
    CAPPUCCINO,
