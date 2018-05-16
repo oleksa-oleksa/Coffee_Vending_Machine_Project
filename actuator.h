@@ -8,7 +8,7 @@ class Actuator
 {
     ActuatorType actuatorType;
     unsigned int act_duration = 0;
-    State actuatorState;
+    enum State actuatorState; //new add
 
     public:
         Actuator();
