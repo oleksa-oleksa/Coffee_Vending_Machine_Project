@@ -2,11 +2,11 @@
 #define PROXIMITYSENSOR_H
 #include "sensor.h"
 
-class ProximitySensor : public Sensor
+class ProximitySensor: public Sensor
 {
-public:
-    ProximitySensor();
-    ~ProximitySensor();
+    public:
+        ProximitySensor();
+        ~ProximitySensor();
 };
 
 #endif // PROXIMITYSENSOR_H

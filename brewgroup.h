@@ -2,11 +2,11 @@
 #define BREWGROUP_H
 #include "actuator.h"
 
-class Brewgroup : public Actuator
+class Brewgroup: public Actuator
 {
-public:
-    Brewgroup();
-    ~Brewgroup();
+    public:
+        Brewgroup();
+        ~Brewgroup();
 };
 
 #endif // BREWGROUP_H

@@ -67,7 +67,6 @@ SOURCES += \
     sensor.cpp \
     sensortype.cpp \
     serviceroutine.cpp \
-    state.cpp \
     temperatursensor.cpp \
     userchoice.cpp \
     waterheater.cpp \

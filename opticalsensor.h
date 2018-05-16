@@ -2,11 +2,11 @@
 #define OPTICALSENSOR_H
 #include "sensor.h"
 
-class OpticalSensor : public Sensor
+class OpticalSensor: Sensor
 {
-public:
-    OpticalSensor();
-    ~OpticalSensor();
+    public:
+        OpticalSensor();
+        ~OpticalSensor();
 };
 
 #endif // OPTICALSENSOR_H

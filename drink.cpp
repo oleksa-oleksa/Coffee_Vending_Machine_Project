@@ -2,10 +2,12 @@
 
 Drink::Drink()
 {
+
 }
 
 Drink::~Drink()
 {
+
 }
 
 Drink Drink::getinstance(DrinkType type)

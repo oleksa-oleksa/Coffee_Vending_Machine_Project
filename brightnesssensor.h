@@ -2,11 +2,11 @@
 #define BRIGHTNESSSENSOR_H
 #include "sensor.h"
 
-class BrightnessSensor : public Sensor
+class BrightnessSensor: public Sensor
 {
-public:
-    BrightnessSensor();
-    ~BrightnessSensor();
+    public:
+        BrightnessSensor();
+        ~BrightnessSensor();
 };
 
 #endif // BRIGHTNESSSENSOR_H

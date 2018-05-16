@@ -2,11 +2,11 @@
 #define LED_H
 #include "actuator.h"
 
-class LED : public Actuator
+class LED: public Actuator
 {
-public:
-    LED();
-    ~LED();
+    public:
+        LED();
+        ~LED();
 };
 
 #endif // LED_H

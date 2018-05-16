@@ -2,11 +2,11 @@
 #define MILKMAKER_H
 #include "actuator.h"
 
-class Milkmaker : public Actuator
+class Milkmaker: public Actuator
 {
-public:
-    Milkmaker();
-    ~Milkmaker();
+    public:
+        Milkmaker();
+        ~Milkmaker();
 };
 
 #endif // MILKMAKER_H
