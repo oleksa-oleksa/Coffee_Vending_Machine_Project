@@ -10,5 +10,4 @@ enum DrinkType
    CACAO,
    HOTWATER
 };
-
 #endif

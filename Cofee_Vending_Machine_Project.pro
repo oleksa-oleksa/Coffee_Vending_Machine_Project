@@ -25,64 +25,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SUBDIRS += \
     Cofee_Vending_Machine_Project.pro
 
-<<<<<<< HEAD
-SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    userchoice.cpp \
-    interactionunit.cpp \
-    indicationunit.cpp \
-    card.cpp \
-    account.cpp \
-    bankaccount.cpp \
-    dataset.cpp \
-    admin.cpp \
-    drink.cpp \
-    ingredient.cpp \
-    person.cpp \
-    serviceroutine.cpp \
-    account.cpp \
-    actuator.cpp \
-    actuatortype.cpp \
-    admin.cpp \
-    bankaccount.cpp \
-    brewgroup.cpp \
-    brightnesssensor.cpp \
-    button.cpp \
-    card.cpp \
-    dataset.cpp \
-    dc_motor.cpp \
-    drink.cpp \
-    flowmeter.cpp \
-    indicationunit.cpp \
-    ingredient.cpp \
-    interactionunit.cpp \
-    lcd_display.cpp \
-    led.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    milkmaker.cpp \
-    opticalsensor.cpp \
-    person.cpp \
-    pressuresensor.cpp \
-    proximitysensor.cpp \
-    rfid_scanner.cpp \
-    sensor.cpp \
-    sensortype.cpp \
-    serviceroutine.cpp \
-    temperatursensor.cpp \
-    userchoice.cpp \
-    waterheater.cpp \
-    controlunit.cpp \
-    staff.cpp
-=======
 FORMS += \
     mainwindow.ui
 
 DISTFILES += \
     Cofee_Vending_Machine_Project.pro.user \
     README.md
->>>>>>> b29e107393a341e8ed723a49fcea80dd74fe9793
 
 HEADERS += \
     account.h \

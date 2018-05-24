@@ -2,7 +2,7 @@
 #define DC_MOTOR_H
 #include "actuator.h"
 
-class DC_Motor: public Actuator
+class DC_Motor : public Actuator
 {
 public:
     DC_Motor();
