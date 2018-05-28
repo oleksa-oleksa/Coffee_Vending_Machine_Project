@@ -14,10 +14,12 @@ UserChoice::UserChoice() : selectedDrink(NO_DRINK),
 
 bool UserChoice::payDrink(double price)
 {
+
 }
 
 DrinkType UserChoice::getProgramButtonState()
 {
+
 }
 
 int UserChoice::getSugarButtonState()
