@@ -3,11 +3,12 @@
 
 enum DrinkType
 {
-   COFFEE,
-   CAPPUCCINO,
-   ESPRESSO,
-   LATTEMACCHIOTO,
-   CACAO,
-   HOTWATER
+    NO_DRINK,
+    COFFEE,
+    CAPPUCCINO,
+    ESPRESSO,
+    LATTEMACCHIOTO,
+    CACAO,
+    HOTWATER
 };
 #endif

@@ -3,14 +3,16 @@
 
 #include "card.h"
 #include "drinktype.h"
+#include "button.h"
 
 class UserChoice
 {
     private:
-        DrinkType *selectedDrink;
+        DrinkType selectedDrink;
         Card card;
         int extraSugar;
         int extraMilk;
+        bool isBigPortion;
         double price;
 
     public:
@@ -21,6 +23,10 @@ class UserChoice
         int getMilkButtonState();
         bool getOKButtonState();
         DrinkType setSelectedDrink(DrinkType drink);
+
+        void setExtraSugar(int sugar);
+        void setMilkQuantity(int milkQuantity);
+        void setBigPortion(bool isBigPortion);
 };
 
 #endif // USERCHOICE_H

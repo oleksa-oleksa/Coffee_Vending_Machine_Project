@@ -8,7 +8,7 @@
 class InteractionUnit
 {
     private:
-        UserChoice *choise;
+        UserChoice *choice;
         Button addSugar;
         Button removeSugar;
         Button addMilk;
