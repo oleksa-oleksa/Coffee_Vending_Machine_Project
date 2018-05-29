@@ -17,16 +17,16 @@ class UserChoice
 
     public:
         UserChoice();
-        bool payDrink(double price);
+        bool payDrink();
         DrinkType getProgramButtonState();
         int getSugarButtonState();
         int getMilkButtonState();
         bool getOKButtonState();
         DrinkType setSelectedDrink(DrinkType drink);
-
         void setExtraSugar(int sugar);
         void setMilkQuantity(int milkQuantity);
         void setBigPortion(bool isBigPortion);
+        double setPrice();
 };
 
 #endif // USERCHOICE_H

@@ -2,6 +2,7 @@
 #include "drinktype.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QtDebug>
 
 UserChoice::UserChoice() : selectedDrink(NO_DRINK),
                            card(),
@@ -12,9 +13,16 @@ UserChoice::UserChoice() : selectedDrink(NO_DRINK),
 {  
 }
 
-bool UserChoice::payDrink(double price)
+bool UserChoice::payDrink()
 {
+    if (price == 0)
+    {
+        printf("Please make a choice first!\n");
+    }
+    else
+    {
 
+    }
 }
 
 DrinkType UserChoice::getProgramButtonState()
@@ -56,4 +64,39 @@ void UserChoice::setMilkQuantity(int milkQuantity)
 void UserChoice::setBigPortion(bool isBig)
 {
     isBigPortion = isBig;
+}
+
+double UserChoice::setPrice()
+{
+    if (selectedDrink == COFFEE)
+    {
+        price = 0.80;
+    }
+    else if (selectedDrink == CAPPUCCINO)
+    {
+        price = 0.90;
+    }
+    else if (selectedDrink == ESPRESSO)
+    {
+        price = 1.20;
+    }
+    else if (selectedDrink == LATTEMACCHIOTO)
+    {
+        price = 1.40;
+    }
+    else if (selectedDrink == CACAO)
+    {
+        price = 1.40;
+    }
+    else if (selectedDrink == HOTWATER)
+    {
+        price = 0.20;
+    }
+    else if (selectedDrink == NO_DRINK)
+    {
+        price = 0;
+    }
+
+    qDebug() << "Price for the drink " << selectedDrink << "is " << price;
+    return price;
 }
