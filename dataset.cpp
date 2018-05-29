@@ -7,7 +7,7 @@ Dataset::Dataset()
 
 void Dataset::addBill()
 {
-    if (!canPayBill(account))
+/*    if (!canPayBill(account))
     {
         account->block();
     }
@@ -17,4 +17,5 @@ void Dataset::addBill()
     {
         account->activate();
     }
+*/
 }

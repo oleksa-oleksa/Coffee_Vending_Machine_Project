@@ -5,6 +5,7 @@
 #include "accountstatus.h"
 
 // test
+class Card;
 
 class Account
 {

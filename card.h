@@ -3,6 +3,8 @@
 
 #include "account.h"
 
+class Account;
+
 class Card
 {
     private:
