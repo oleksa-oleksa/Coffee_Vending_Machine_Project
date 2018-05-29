@@ -5,7 +5,16 @@ Dataset::Dataset()
 
 }
 
-void Dataset::addBill(long cardID, double price)
+void Dataset::addBill()
 {
+    if (!canPayBill(account))
+    {
+        account->block();
+    }
 
+    if (paymentSucceeded() &&
+        account->getAccountStatus() == BLOCKED_UNPAID)
+    {
+        account->activate();
+    }
 }

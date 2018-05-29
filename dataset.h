@@ -11,7 +11,7 @@ class Dataset
     public:
         Dataset();
         ~Dataset();
-        void addBill(long cardID, double price);
+        void addBill();
 };
 
 #endif // DATASET_H

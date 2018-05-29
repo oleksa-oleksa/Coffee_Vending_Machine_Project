@@ -25,7 +25,7 @@ class UserChoice
         DrinkType setSelectedDrink(DrinkType drink);
         void setExtraSugar(int sugar);
         void setMilkQuantity(int milkQuantity);
-        void setBigPortion(bool isBigPortion);
+        void setBigPortion();
         double setPrice();
 };
 

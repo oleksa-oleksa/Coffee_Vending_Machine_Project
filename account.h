@@ -9,16 +9,17 @@
 class Account
 {
     private:
-        Card *card;
-       // BankAccount *bAccount;
         double credit;
         AccountStatus state;
 
     public:
         Account();
-        // ~Account();
-        AccountStatus getAccountStatus(Card card);
+        AccountStatus getAccountStatus();
+        double getAccountCredit();
         void setAccountStatus(Card card);
+        bool addCredit(float amount);
+        void block();
+        void activate();
 };
 
 #endif // ACCOUNT_H

@@ -3,7 +3,15 @@
 
 InteractionUnit::InteractionUnit()
 {
+    choice = new UserChoice();
+}
 
+InteractionUnit::~InteractionUnit()
+{
+    if (choice != NULL)
+    {
+        delete(choice);
+    }
 }
 
 void InteractionUnit::ButtonPollingRoutine()
@@ -12,25 +20,25 @@ void InteractionUnit::ButtonPollingRoutine()
     {
         int newSugar = addSugar.getValue();
         choice->setExtraSugar(newSugar);
-        Debug() << "Selected: " << "Add more sugar:" << newSugar;
+        qDebug() << "Selected: " << "Add more sugar: " << newSugar;
     }
     else if (removeSugar.getSensorState())
     {
         int newSugar = removeSugar.getValue();
         choice->setExtraSugar(newSugar);
-        Debug() << "Selected: " << "Remove sugar:" << newSugar;
+        qDebug() << "Selected: " << "Remove sugar: " << newSugar;
     }
     else if (addMilk.getSensorState())
     {
         int newMilk = addMilk.getValue();
         choice->setMilkQuantity(newMilk);
-        Debug() << "Selected: " << "Add more milk:" << newMilk;
+        qDebug() << "Selected: " << "Add more milk: " << newMilk;
     }
     else if (removeMilk.getSensorState())
     {
         int newMilk = removeMilk.getSensorState();
         choice->setMilkQuantity(newMilk);
-        Debug() << "Selected: " << "Remove milk:" << newMilk;
+        qDebug() << "Selected: " << "Remove milk: " << newMilk;
     }
     else if (coffee.getSensorState())
     {
@@ -55,23 +63,23 @@ void InteractionUnit::ButtonPollingRoutine()
     else if (cacao.getSensorState())
     {
         choice->setSelectedDrink(CACAO);
-        Debug() << "Selected: " << "CACAO";
+        qDebug() << "Selected: " << "CACAO";
     }
     else if (hotWater.getSensorState())
     {
         choice->setSelectedDrink(HOTWATER);
-        Debug() << "Selected: " << "HOTWATER";
+        qDebug() << "Selected: " << "HOTWATER";
     }
     else if (bigPortion.getSensorState())
     {
-        choice->setBigPortion(true);
-        Debug() << "Selected: " << "Big Portion";
+        choice->setBigPortion();
+        qDebug() << "Selected: " << "Big Portion";
     }
     else if (start.getSensorState())
     {
         choice->setPrice();
         qDebug() << "Price is set";
         choice->payDrink();
-        Debug() << "Drink Paid";
+        qDebug() << "Drink Paid";
     }
 }

@@ -4,23 +4,24 @@
 #include "ui_mainwindow.h"
 #include <QtDebug>
 
-UserChoice::UserChoice() : selectedDrink(NO_DRINK),
-                           card(),
-                           extraSugar(0),
-                           extraMilk(0),
-                           isBigPortion(false),
-                           price(0.0)
-{  
+UserChoice::UserChoice()
+{
+    selectedDrink = NO_DRINK;
+    extraSugar = 0;
+    extraMilk = 0;
+    isBigPortion = false;
+    price = 0.0;
 }
 
 bool UserChoice::payDrink()
 {
-    if (price == 0)
+    if (selectedDrink == NO_DRINK)
     {
-        printf("Please make a choice first!\n");
+        qDebug() << "Please select a drink first!";
     }
     else
     {
+        card.withdraw(price);
 
     }
 }
@@ -48,22 +49,26 @@ bool UserChoice::getOKButtonState()
 DrinkType UserChoice::setSelectedDrink(DrinkType drink)
 {
     selectedDrink = drink;
+    qDebug() << "Drink is set: " << selectedDrink;
     return selectedDrink;
 }
 
 void UserChoice::setExtraSugar(int sugar)
 {
     extraSugar = sugar;
+    qDebug() << "Extra sugar is set: " << extraSugar;
 }
 
 void UserChoice::setMilkQuantity(int milkQuantity)
 {
     extraMilk = milkQuantity;
+    qDebug() << "Extra milk is set: " << extraMilk;
 }
 
-void UserChoice::setBigPortion(bool isBig)
+void UserChoice::setBigPortion()
 {
-    isBigPortion = isBig;
+    isBigPortion = !isBigPortion;
+    qDebug() << "Big Portion is set: " << isBigPortion;
 }
 
 double UserChoice::setPrice()
