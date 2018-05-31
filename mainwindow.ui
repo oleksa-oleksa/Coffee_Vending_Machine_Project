@@ -83,7 +83,7 @@
      <string notr="true">border: 2px solid;
 border-color: rgb(218, 218, 218);</string>
     </property>
-    <widget class="QLabel" name="label_4">
+    <widget class="QLabel" name="labelYourChoice">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -127,7 +127,7 @@ border-color: rgb(218, 218, 218);</string>
 </string>
         </property>
         <property name="text">
-         <string>1.20€</string>
+         <string>0.80€</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -211,7 +211,7 @@ border-color: rgb(218, 218, 218);</string>
        <string>+</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_5">
+     <widget class="QLabel" name="labelMilk">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -234,6 +234,22 @@ border-color: rgb(218, 218, 218);</string>
       </property>
       <property name="text">
        <string>Milk</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelMilkAmount">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>40</y>
+        <width>20</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -302,7 +318,7 @@ border-color: rgb(218, 218, 218);</string>
        <string>+</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="labelSugar">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -325,6 +341,22 @@ border-color: rgb(218, 218, 218);</string>
       </property>
       <property name="text">
        <string>Sugar</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelSugarAmount">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>40</y>
+        <width>20</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
