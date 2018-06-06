@@ -1,4 +1,5 @@
 #include "account.h"
+#include <QtDebug>
 const float CREDIT_LIMIT = 10.0;
 
 Account::Account()
@@ -11,8 +12,13 @@ AccountStatus Account::getAccountStatus()
     return state;
 }
 
-void Account::setAccountStatus(Card card)
+void Account::setAccountStatus()
 {
+    if (credit >= CREDIT_LIMIT)
+    {
+        qDebug() << "Limit: " << CREDIT_LIMIT  << " is reached. Oops!";
+        blockAccount();
+    }
 }
 
 bool Account::addCredit(float amount)
@@ -22,16 +28,36 @@ bool Account::addCredit(float amount)
         return false;
     }
 
+    double checkCredit = getAccountCredit();
     credit += amount;
+    qDebug() << "Credit: " << amount  << " added to the card";
+    qDebug() << "New credit: " <<  credit;
     return true;
 }
 
-void Account::block()
+
+double Account::getAccountCredit()
 {
-    state = BLOCKED_UNPAID;
+   return credit;
 }
 
-void Account::activate()
+void Account::setAccountCredit()
 {
-    state = ACTIVE_OK;
+
+}
+
+
+void Account::activateAccount()
+{
+
+}
+
+void Account::deactivateAccount()
+{
+    state = DEACTIVATED_OLD;
+}
+
+void Account::blockAccount()
+{
+    state = BLOCKED_UNPAID;
 }

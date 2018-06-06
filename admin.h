@@ -14,9 +14,7 @@ class Admin : public Person
         void deactivateCard(Card c);
         void createBill();
         Account createAccount();
-        void activateAccount(Account account);
-        void deactivateAccount(Account account);
-        void blockAccount(Account account);
+        void addCard(Account account);
 };
 
 #endif // ADMIN_H

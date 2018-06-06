@@ -2,25 +2,25 @@
 #define ACCOUNT_H
 
 #include "card.h"
+#include "person.h"
 #include "accountstatus.h"
-
-// test
-class Card;
 
 class Account
 {
     private:
         double credit;
         AccountStatus state;
-
+        Person owner;
     public:
         Account();
+        void setAccountStatus();
         AccountStatus getAccountStatus();
         double getAccountCredit();
-        void setAccountStatus(Card card);
+        void setAccountCredit();
         bool addCredit(float amount);
-        void block();
-        void activate();
+        void activateAccount();
+        void deactivateAccount();
+        void blockAccount();
 };
 
 #endif // ACCOUNT_H

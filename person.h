@@ -10,6 +10,7 @@ class Person
       std::string surname;
       long id;
       std::string address;
+      bool isEmployed;
    public:
       std::string const & getName() const;
       std::string const & getSurname() const;
@@ -18,6 +19,8 @@ class Person
       void setName(std::string name);
       void setSurname(std::string surname);
       void setID(long ID);
+      bool getEmployed();
+      void setEmployed();
 };
 
 #endif
