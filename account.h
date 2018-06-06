@@ -4,20 +4,24 @@
 #include "card.h"
 #include "person.h"
 #include "accountstatus.h"
+#include "bankaccount.h"
 
 class Account
 {
     private:
         double credit;
         AccountStatus state;
-        Person owner;
+        Person *owner;
+        BankAccount *ba;
+
     public:
-        Account();
-        void setAccountStatus();
+        Account(Person *newEmployee, BankAccount *newBa);
+        void setAccountStatus(AccountStatus newState);
         AccountStatus getAccountStatus();
+        bool checkCreditLimit();
         double getAccountCredit();
-        void setAccountCredit();
-        bool addCredit(float amount);
+        void setAccountCredit(double amount);
+        bool addCredit(double amount);
         void activateAccount();
         void deactivateAccount();
         void blockAccount();

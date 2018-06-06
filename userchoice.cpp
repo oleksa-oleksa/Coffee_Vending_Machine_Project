@@ -17,33 +17,15 @@ bool UserChoice::payDrink()
 {
     if (selectedDrink == NO_DRINK)
     {
-        qDebug() << "Please select a drink first!";
+        qDebug() << "LCD: Please select a drink first!";
+        return false;
     }
     else
     {
-        card.withdraw(price);
-
+        // Paying
+        return (card.withdraw(price));
+        qDebug() << "payDrink() finished.";
     }
-}
-
-DrinkType UserChoice::getProgramButtonState()
-{
-
-}
-
-int UserChoice::getSugarButtonState()
-{
-
-}
-
-int UserChoice::getMilkButtonState()
-{
-
-}
-
-bool UserChoice::getOKButtonState()
-{
-
 }
 
 DrinkType UserChoice::setSelectedDrink(DrinkType drink)
@@ -65,7 +47,7 @@ void UserChoice::setMilkQuantity(int milkQuantity)
     qDebug() << "Extra milk is set: " << extraMilk;
 }
 
-void UserChoice::setBigPortion()
+void UserChoice::toggleBigPortion()
 {
     isBigPortion = !isBigPortion;
     qDebug() << "Big Portion is set: " << isBigPortion;

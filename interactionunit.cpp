@@ -72,14 +72,20 @@ void InteractionUnit::ButtonPollingRoutine()
     }
     else if (bigPortion.getSensorState())
     {
-        choice->setBigPortion();
+        choice->toggleBigPortion();
         qDebug() << "Selected: " << "Big Portion";
     }
     else if (start.getSensorState())
     {
         choice->setPrice();
         qDebug() << "Price is set";
-        choice->payDrink();
-        qDebug() << "Drink Paid";
+        if (choice->payDrink())
+        {
+            qDebug() << "Drink Paid";
+        }
+        else
+        {
+            qDebug() << "Payment failed";
+        }
     }
 }

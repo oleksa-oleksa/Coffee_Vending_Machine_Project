@@ -10,11 +10,11 @@ class Admin : public Person
     public:
          Admin();
         ~Admin();
-        Card createCard();
+        Card * createCard();
         void deactivateCard(Card c);
         void createBill();
-        Account createAccount();
-        void addCard(Account account);
+        Account * createAccount(Person *newEmployee);
+        void addCard(Account *account, Card *card);
 };
 
 #endif // ADMIN_H

@@ -74,7 +74,8 @@ HEADERS += \
     ingredient.h \
     lattemacchiato.h \
     lcd_display.h \
-    mainwindow.h
+    mainwindow.h \
+    cardid.h
 
 SOURCES += \
     account.cpp \
@@ -110,6 +111,7 @@ SOURCES += \
     temperatursensor.cpp \
     waterheater.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    cardid.cpp
 
 
