@@ -1,20 +1,31 @@
 #include "card.h"
+#include <iostream>
 #include "accountstatus.h"
 #include <QtDebug>
 
 Card::Card()
 {
-
+    cardID = "0";
+    account = new Account();
 }
 
-long Card::getCardID()
+Card::~Card()
 {
-
+    if (account != NULL)
+    {
+        delete(account);
+    }
 }
 
-void Card::setCardID(Card card)
+std::string Card::getCardID()
 {
+    return cardID;
+}
 
+void Card::setCardID(std::string newCardID)
+{
+    cardID = newCardID;
+    qDebug() << "Card ID is set";
 }
 
 bool Card::withdraw(double price)

@@ -2,19 +2,21 @@
 #define CARD_H
 
 #include "account.h"
+#include <iostream>
 
 class Account;
 
 class Card
 {
     private:
-        long cardID;
+        std::string cardID;
         Account *account;
 
     public:
         Card();
-        long getCardID();
-        void setCardID(Card card);
+        ~Card();
+        std::string getCardID();
+        void setCardID(std::string newCardID);
         bool withdraw(double price);
 };
 

@@ -96,7 +96,7 @@ border-color: rgb(218, 218, 218);</string>
       <string notr="true">border: 0px;</string>
      </property>
      <property name="text">
-      <string>Ihre Wahl:</string>
+      <string>Your choice</string>
      </property>
     </widget>
     <widget class="QWidget" name="layoutWidget">
@@ -116,7 +116,7 @@ border-color: rgb(218, 218, 218);</string>
 </string>
         </property>
         <property name="text">
-         <string>Kaffee</string>
+         <string>Coffee</string>
         </property>
        </widget>
       </item>
@@ -582,7 +582,7 @@ border-color: rgb(218, 218, 218);</string>
      <x>0</x>
      <y>0</y>
      <width>540</width>
-     <height>19</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

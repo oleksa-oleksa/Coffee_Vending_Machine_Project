@@ -3,6 +3,7 @@
 
 #include "person.h"
 #include "card.h"
+#include "account.h"
 
 class Admin : public Person
 {
@@ -12,6 +13,10 @@ class Admin : public Person
         Card createCard();
         void deactivateCard(Card c);
         void createBill();
+        Account createAccount();
+        void activateAccount(Account account);
+        void deactivateAccount(Account account);
+        void blockAccount(Account account);
 };
 
 #endif // ADMIN_H
