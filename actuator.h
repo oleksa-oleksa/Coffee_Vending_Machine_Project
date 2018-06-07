@@ -1,25 +1,25 @@
 #ifndef ACTUATOR_H
 #define ACTUATOR_H
-
-#include "state.h"
 #include <string>
+#include "state.h"
 #include "actuatortype.h"
 
 class Actuator
 {
+    protected:
+    ActuatorType actuator_Type;
+    unsigned int actuator_duration = 0;
+    State actuator_state;
+
     public:
         Actuator();
-        void act(State state, unsigned int duration);
-        ActuatorType getActuatorType() const;
-        unsigned int getActuatorDuration() const;
-        int getActuatorState() const;
-        void setActuatorState(int state);
-        void setActuatorDuration(unsigned int duration);
-        void setActuatorType(std::string name);
-
-    private:
-        ActuatorType actuatorType;
-        unsigned int act_duration = 0;
+        virtual ~Actuator();
+        virtual ActuatorType getActuatorType() const = 0;
+        virtual unsigned int getActuatorDuration() const = 0;
+        virtual State getActuatorState() const = 0;
+        virtual void setActuatorState(State actuator_state) = 0 ;
+        virtual void setActuatorDuration(unsigned int actuator_duration) = 0 ;
+        virtual void setActuatorType(ActuatorType actuator_Type) = 0;
 };
 
 #endif // ACTUATOR_H
