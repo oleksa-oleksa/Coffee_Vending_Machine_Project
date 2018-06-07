@@ -4,8 +4,17 @@
 
 class OpticalSensor : public Sensor
 {
-public:
-    OpticalSensor();
+    private:
+        bool isFree;
+
+    public:
+        OpticalSensor();
+        OpticalSensor(bool);
+        ~OpticalSensor();
+
+        bool getOpticalValue();
+
+
 };
 
 #endif // OPTICALSENSOR_H

@@ -4,8 +4,15 @@
 
 class Flowmeter : public Sensor
 {
-public:
-    Flowmeter();
+    private:
+        double flow;
+
+    public:
+        Flowmeter();
+        Flowmeter(double);
+        virtual ~Flowmeter();
+
+        double getFlow();
 };
 
 #endif // FLOWMETER_H

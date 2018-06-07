@@ -111,5 +111,3 @@ SOURCES += \
     waterheater.cpp \
     main.cpp \
     mainwindow.cpp
-
-

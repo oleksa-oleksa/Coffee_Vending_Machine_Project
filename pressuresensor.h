@@ -4,8 +4,15 @@
 
 class PressureSensor : public Sensor
 {
-public:
-    PressureSensor();
+    private:
+        double pressure;
+
+    public:
+        PressureSensor();
+        PressureSensor(double);
+        virtual ~PressureSensor();
+
+        double getPressureValue();
 };
 
 #endif // PRESSURESENSOR_H

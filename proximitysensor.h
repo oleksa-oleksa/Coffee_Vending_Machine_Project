@@ -4,8 +4,16 @@
 
 class ProximitySensor : public Sensor
 {
-public:
-    ProximitySensor();
+    private:
+        double proximity;
+
+    public:
+        ProximitySensor();
+        ProximitySensor(double);
+        virtual ~ProximitySensor();
+
+        double getProximity();
+
 };
 
 #endif // PROXIMITYSENSOR_H

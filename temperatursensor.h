@@ -4,8 +4,15 @@
 
 class TemperaturSensor : public Sensor
 {
-public:
-    TemperaturSensor();
+    private:
+        double temperature;
+
+    public:
+        TemperaturSensor();
+        TemperaturSensor(double);
+        virtual ~TemperaturSensor();
+
+        double getTemperature();
 };
 
 #endif // TEMPERATURSENSOR_H
