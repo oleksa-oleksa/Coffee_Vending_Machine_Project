@@ -12,17 +12,32 @@ Actuator::~Actuator()
 
 }
 
-void Actuator:: setActuatorState(State actuator_state)
+void Actuator:: setActuatorState(State actuatorState)
 {
-    this->actuator_state = actuator_state;
+    this->actuatorState = actuatorState;
 }
 
-void Actuator:: setActuatorDuration(unsigned int actuator_duration)
+void Actuator:: setActuatorDuration(unsigned int actuatorDuration)
 {
-    this->actuator_duration = actuator_duration;
+    this->actuatorDuration = actuatorDuration;
 }
 
-void Actuator:: setActuatorType(ActuatorType actuator_Type)
+void Actuator:: setActuatorType(ActuatorType actuatorType)
 {
-    this->actuator_Type = actuator_Type;
+    this->actuatorType = actuatorType;
+}
+
+ActuatorType Actuator::getActuatorType() const
+{
+    return actuatorType;
+}
+
+unsigned int Actuator::getActuatorDuration() const
+{
+    return actuatorDuration;
+}
+
+State Actuator::getActuatorState() const
+{
+    return actuatorState;
 }

@@ -3,8 +3,8 @@
 LCD_Display::LCD_Display()
 {
     //actuator_duration
-    actuator_Type = LCD;
-    actuator_state = UNDEFINED;
+    actuatorType = LCD;
+    actuatorState = UNDEFINED;
 }
 
 LCD_Display::~LCD_Display()
@@ -12,71 +12,63 @@ LCD_Display::~LCD_Display()
   //to implement
 }
 
-ActuatorType LCD_Display::getActuatorType() const
-{
-    return actuator_Type;
-}
 
-unsigned int LCD_Display::getActuatorDuration() const
-{
-    return actuator_duration;
-}
-
-State LCD_Display::getActuatorState() const
-{
-    return actuator_state;
-}
-
-unsigned int LCD_Display:: get_xScreenPos() const
+unsigned int LCD_Display:: getXScreenPos() const
 {
     return xScreenPos;
 }
 
-unsigned int LCD_Display::get_yscreenPos() const
+unsigned int LCD_Display::getYscreenPos() const
 {
     return yScreenPos;
 }
 
-string LCD_Display::get_title() const
+string LCD_Display::getTitle() const
 {
     return title;
 }
 
-string LCD_Display::get_description() const
+string LCD_Display::getDescription() const
 {
     return description;
 }
 
-string LCD_Display::get_errorMessage() const
+string LCD_Display::getErrorMessage() const
 {
     return errorMessage;
 }
 
-void LCD_Display::setActuatorState(State actuator_state)
+double LCD_Display::getPrice() const
 {
-    this->actuator_state = actuator_state;
+    return price;
 }
 
-void LCD_Display::setActuatorDuration(unsigned int actuator_duration)
+void LCD_Display::setTitle(string title)
 {
-    this->actuator_duration = actuator_duration;
+    this->title = title;
 }
 
-void LCD_Display::setActuatorType(ActuatorType actuator_Type)
+void LCD_Display::setDescription(string description)
 {
-  this->actuator_Type = actuator_Type;
+    this->description = description;
 }
 
+void LCD_Display::setXScreenPos(unsigned int xScreenPos)
+{
+    this->xScreenPos = xScreenPos;
+}
 
+void LCD_Display::setYScreenPos(unsigned int yScreenPos)
+{
+    this->yScreenPos = yScreenPos;
+}
 
+void LCD_Display::setPrice(double price)
+{
+    this->price = price;
+}
 
-
-
-
-
-
-
-
-
-
-
+void LCD_Display::setErrorMessage(string errorMessage)
+{
+    this->errorMessage = errorMessage;
+}

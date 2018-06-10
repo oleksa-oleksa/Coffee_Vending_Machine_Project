@@ -3,8 +3,8 @@
 LED::LED()
 {
     //actuator_duration;
-    actuator_Type = Led;
-    actuator_state = UNDEFINED;
+    actuatorType = Led;
+    actuatorState = UNDEFINED;
 }
 
 LED::~LED()
@@ -12,39 +12,16 @@ LED::~LED()
 
 }
 
-ActuatorType LED::getActuatorType() const
+bool LED::startStop(int status)
 {
-    return actuator_Type;
-}
-
-unsigned int LED::getActuatorDuration() const
-{
-    return actuator_duration;
-}
-
-State LED::getActuatorState() const
-{
-    return actuator_state;
-}
-
-void LED::setActuatorState(State actuator_state)
-{
-    this->actuator_state = actuator_state;
-}
-
-void LED::setActuatorDuration(unsigned int actuator_duration)
-{
-    this->actuator_duration = actuator_duration;
-}
-
-void LED::setActuatorType(ActuatorType actuator_Type)
-{
-  this->actuator_Type = actuator_Type;
-}
-
-void LED::an_aus(int status)
-{
-  this->status = status;
+    if(status)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 

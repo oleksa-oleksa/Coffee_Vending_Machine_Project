@@ -9,17 +9,18 @@ class LCD_Display : protected Actuator
 public:
     LCD_Display();
     virtual ~LCD_Display();
-    ActuatorType getActuatorType() const override;
-    unsigned int getActuatorDuration() const override;
-    State getActuatorState() const override;
-    void setActuatorState(State actuator_state) override;
-    void setActuatorDuration(unsigned int actuator_duration) override;
-    void setActuatorType(ActuatorType actuator_Type) override;
-    unsigned int get_xScreenPos() const;
-    unsigned int get_yscreenPos() const;
-    string get_title() const;
-    string get_description() const;
-    string get_errorMessage() const;
+    unsigned int getXScreenPos() const;
+    unsigned int getYscreenPos() const;
+    string getTitle() const;
+    string getDescription() const;
+    string getErrorMessage() const;
+    double getPrice() const;
+    void setTitle(string title);
+    void setDescription(string description);
+    void setXScreenPos(unsigned int xSreenPos);
+    void setYScreenPos(unsigned int yScreenPos);
+    void setPrice(double price);
+    void setErrorMessage(string errorMessage);
 
 private:
     unsigned int xScreenPos = 0;
@@ -28,8 +29,6 @@ private:
     string title;
     string description;
     string errorMessage;
-
-
 };
 
 #endif // LCD_DISPLAY_H

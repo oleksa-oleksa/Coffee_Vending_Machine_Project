@@ -7,19 +7,19 @@
 class Actuator
 {
     protected:
-    ActuatorType actuator_Type;
-    unsigned int actuator_duration = 0;
-    State actuator_state;
+        ActuatorType actuatorType;
+        unsigned int actuatorDuration = 0;
+        State actuatorState;
 
     public:
         Actuator();
         virtual ~Actuator();
-        virtual ActuatorType getActuatorType() const = 0;
-        virtual unsigned int getActuatorDuration() const = 0;
-        virtual State getActuatorState() const = 0;
-        virtual void setActuatorState(State actuator_state) = 0 ;
-        virtual void setActuatorDuration(unsigned int actuator_duration) = 0 ;
-        virtual void setActuatorType(ActuatorType actuator_Type) = 0;
+        virtual ActuatorType getActuatorType() const;
+        virtual unsigned int getActuatorDuration() const;
+        virtual State getActuatorState() const;
+        virtual void setActuatorState(State actuatorState);
+        virtual void setActuatorDuration(unsigned int actuatorDuration);
+        virtual void setActuatorType(ActuatorType actuatorType);
 };
 
 #endif // ACTUATOR_H
