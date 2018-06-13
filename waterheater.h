@@ -2,10 +2,13 @@
 #define WATERHEATER_H
 #include "actuator.h"
 
-class Waterheater : public Actuator
+class Waterheater : protected Actuator
 {
+
 public:
     Waterheater();
+    virtual ~Waterheater();
+
 };
 
 #endif // WATERHEATER_H
