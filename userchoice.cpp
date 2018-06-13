@@ -23,7 +23,7 @@ bool UserChoice::payDrink()
     else
     {
         // Paying
-        return (card.withdraw(price));
+        return (card->withdraw(price));
         qDebug() << "payDrink() finished.";
     }
 }

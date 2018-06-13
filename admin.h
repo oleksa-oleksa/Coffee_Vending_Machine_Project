@@ -12,7 +12,7 @@ class Admin : public Person
         ~Admin();
         Card *createCard(Account *account);
         void deleteCard();
-        Account *createAccount(Person *newEmployee);
+        Account *createAccount(Person *Employee, BankAccount *Ba);
         void deleteAccount(Account *account);
         void addCard(Account *account, Card *card);
 

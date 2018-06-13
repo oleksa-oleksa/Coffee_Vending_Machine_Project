@@ -18,7 +18,6 @@ Card::~Card()
 
 CardID Card::getCardID()
 {
-    qDebug() << "Card ID is: " << cardID;
     return cardID;
 }
 
@@ -50,7 +49,7 @@ void Card::deactivateCard()
 void Card::activateCard()
 {
     qDebug() << "Card will be deactivated";
-    c.setCardStatus(DEACTIVATED);
+    setCardStatus(DEACTIVATED);
 }
 
 Account *Card::getAccount()

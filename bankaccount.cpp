@@ -20,24 +20,24 @@ Account *BankAccount::getAccount()
 void BankAccount::setIBAN(std::string iban)
 {
     IBAN = iban;
-    QDebug() << "New IBAN is set: " << IBAN;
+    qDebug() << "New IBAN is set: " << IBAN.c_str();
 
 }
 
 std::string BankAccount::getIBAN()
 {
-    QDebug() << "IBAN is: " << IBAN;
+    qDebug() << "IBAN is: " << IBAN.c_str();
     return IBAN;
 }
 
 void BankAccount::setTaxClass(int tc)
 {
     taxClass = tc;
-    QDebug() << "New tax class is set:" << taxClass;
+    qDebug() << "New tax class is set:" << taxClass;
 }
 
 int BankAccount::getTaxClass()
 {
-    QDebug() << "Tax class is:" << taxClass;
+    qDebug() << "Tax class is:" << taxClass;
     return taxClass;
 }

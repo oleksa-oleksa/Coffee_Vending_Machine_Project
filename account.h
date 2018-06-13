@@ -6,6 +6,8 @@
 #include "accountstatus.h"
 #include "bankaccount.h"
 
+class BankAccount;
+
 class Account
 {
     private:

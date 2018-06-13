@@ -9,7 +9,7 @@ class UserChoice
 {
     private:
         DrinkType selectedDrink;
-        Card card;
+        Card *card;
         int extraSugar;
         int extraMilk;
         bool isBigPortion;
