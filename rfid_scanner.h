@@ -1,20 +1,25 @@
 #ifndef RFID_SCANNER_H
 #define RFID_SCANNER_H
+
 #include "sensor.h"
+#include "card.h"
+#include <map>
 
 class RFID_Scanner : public Sensor
 {
     private:
-        bool rfidValid;
-        std::string rfidUID;
+        std::map<Card, bool> cardsDatabase;
 
     public:
+// TODO: Implement as Singleton Class
         RFID_Scanner();
-        RFID_Scanner(bool, std::string);
+/* TODO: Read database from file:
+ * RFID_Scanner( FILE* );
+ */
         virtual ~RFID_Scanner();
 
-        bool getRfidValidation();
-        std::string getRfidUID();
+        bool getRfidValidation ( Card& );
+        void registerNewCard ( Card& );
 
 };
 

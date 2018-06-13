@@ -1,33 +1,46 @@
 #include "rfid_scanner.h"
+#include <utility>
 
 RFID_Scanner::RFID_Scanner()
 {
     sensorType = RFID;
     sensorState = UNDEFINED;
-    rfidValid = false;
-    rfidUID = "XX XX XX XX";
-}
 
-RFID_Scanner::RFID_Scanner(bool setRfidValid, std::string setRfidUID)
-{
-    sensorType = RFID;
-    sensorState = UNDEFINED;
-    rfidValid = setRfidValid;
-    rfidUID = setRfidUID;
+/*
+// For testing:
+    Card testCard;
+// insert testcard to cardsDatabase
+    cardsDatabase[testCard] = true;
+*/
 }
+/*
+RFID_Scanner::RFID_Scanner( FILE* )
+{
+    FILE *cards = fopen(./"cardsDB.txt");
+    ...
+}
+*/
 
 RFID_Scanner::~RFID_Scanner()
 {
 
 }
 
-bool RFID_Scanner::getRfidValidation()
+bool RFID_Scanner::getRfidValidation( Card& usercard )
 {
-    return this->rfidValid;
+/*
+   for( std::map<Card,bool>::iterator it = cardsDatabase.begin(); it != cardsDatabase.end(); ++it) { // For each element in cardsDatabase
+    {
+        if ( it->first == usercard )
+            return it->second;
+    }
+    return false;
+*/
 }
 
-std::string RFID_Scanner::getRfidUID()
+void RFID_Scanner::registerNewCard( Card& newCard )
 {
-    return this->rfidUID;
+
 }
+
 
