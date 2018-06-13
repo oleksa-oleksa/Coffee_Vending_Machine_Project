@@ -4,9 +4,15 @@
 
 class BrightnessSensor : public Sensor
 {
-public:
-    BrightnessSensor();
-    ~BrightnessSensor();
+    private:
+        unsigned int brightness;
+
+    public:
+        BrightnessSensor();
+        BrightnessSensor(unsigned int);
+        virtual ~BrightnessSensor();
+
+        unsigned int getBrightness();
 };
 
 #endif // BRIGHTNESSSENSOR_H

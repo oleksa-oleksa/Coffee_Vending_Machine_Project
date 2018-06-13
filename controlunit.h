@@ -10,6 +10,9 @@
 #include "brewgroup.h"
 #include "milkmaker.h"
 #include "rfid_scanner.h"
+#include "card.h"
+
+#define NO_CUP_PROXIMITY 100
 
 class ControlUnit
 {
@@ -22,14 +25,20 @@ class ControlUnit
         Flowmeter flow;
         Brewgroup brew;
         Milkmaker milk;
-        RFID_Scanner rfid;
+// For testing:
+        RFID_Scanner testRfidScanner;
+        RFID_Scanner& rfid = testRfidScanner;
 
         bool checkIngredients();
         bool checkCup();
-        bool checkCard();
+        bool checkCard( Card& );
+
+
 
     public:
+// TODO: Implement as Singleton Class
         ControlUnit();
+        ~ControlUnit();
         void maintenanceRoutine();
 };
 

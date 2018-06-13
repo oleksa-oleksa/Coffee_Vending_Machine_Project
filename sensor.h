@@ -7,16 +7,21 @@
 
 class Sensor
 {
+    protected:
+        SensorType sensorType;
+        State sensorState;
+        //Sensor(SensorType type, State state) : sensorType(type), sensorState(state) {}
+
     public:
         Sensor();
-        SensorType getValue() const;
-        SensorType getSensorType() const;
-        bool getSensorState() const;
-        void setSensorType(std::string type);
-        void setSensorstate(State state);
+        virtual ~Sensor();
 
-    private:
-        SensorType sensor_type;
+        virtual SensorType getSensorType();
+        virtual State getSensorState();
+        virtual void setSensorType(SensorType);
+        virtual void setSensorstate(State);
+
+
 };
 
 #endif // SENSOR_H

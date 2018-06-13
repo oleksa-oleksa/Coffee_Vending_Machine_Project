@@ -114,5 +114,3 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     cardid.cpp
-
-

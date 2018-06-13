@@ -3,11 +3,19 @@
 #include "sensor.h"
 class Button : public Sensor
 {
-public:
-    Button();
+    private:
+        bool isPushed;
+        int quantity;
 
-    bool getSensorState() const;
-    int getValue() const;
+
+    public:
+        Button();
+        Button(bool);
+        virtual ~Button();
+
+        bool getButtonValue();
+        int getValue();
+        void toggleButton();
 };
 
 #endif // BUTTON_H

@@ -2,15 +2,36 @@
 
 Button::Button()
 {
+    sensorType = BUTTON;
+    sensorState = UNDEFINED;
+    isPushed = false;
+    quantity = 0;
+}
+
+Button::Button(bool setIsPushed)
+{
+    sensorType = BUTTON;
+    sensorState = UNDEFINED;
+    isPushed = setIsPushed;
+    quantity = 0;
+}
+
+Button::~Button()
+{
 
 }
 
-bool Button::getSensorState() const
+bool Button::getButtonValue()
 {
-    return false; // for first purposes
+    return this->isPushed;
 }
 
-int Button::getValue() const
+int Button::getValue()
 {
-    return 42; // Stub of a real value check
+   return quantity;
+}
+
+void Button::toggleButton()
+{
+    this->isPushed = !(this->isPushed);
 }
