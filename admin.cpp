@@ -1,25 +1,23 @@
 #include "admin.h"
 #include "card.h"
+#include "account.h"
+#include "cardstatus.h"
 
 Admin::Admin()
 {
 
 }
 
-Card * Admin::createCard()
+// creates new active card with random id
+Card *Admin::createCard(Account *account)
 {
-    Card *newRandomCard = new Card();
+    Card *newRandomCard = new Card(Account *account);
     return newRandomCard;
 }
 
-void Admin::deactivateCard(Card c)
+void deleteCard(Card *c)
 {
-
-}
-
-void Admin::createBill()
-{
-
+    delete c;
 }
 
 Account * Admin:: createAccount(Person *newEmployee)
@@ -27,10 +25,3 @@ Account * Admin:: createAccount(Person *newEmployee)
     Account *newAccount = new Account(newEmployee);
     return newAccount;
 }
-
-void Admin::addCard(Account *account, Card *card)
-{
-    card->setAccount(account);
-}
-
-

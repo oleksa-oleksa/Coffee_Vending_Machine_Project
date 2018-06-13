@@ -16,8 +16,8 @@ class Account
 
     public:
         Account(Person *newEmployee, BankAccount *newBa);
-        void setAccountStatus(AccountStatus newState);
         AccountStatus getAccountStatus();
+        void setAccountStatus(AccountStatus newState);
         bool checkCreditLimit();
         double getAccountCredit();
         void setAccountCredit(double amount);

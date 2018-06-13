@@ -3,6 +3,7 @@
 
 #include "account.h"
 #include "cardid.h"
+#include "cardstatus.h"
 
 class Account;
 
@@ -10,15 +11,20 @@ class Card
 {
     private:
         CardID cardID;
+        CardStatus cardStatus;
         Account *account;
 
     public:
-        Card();
+        Card(Account *ac);
         ~Card();
-        void setAccount(Account *account);
-        Account *getAccount();
         CardID getCardID();
         void setCardID(CardID newCardID);
+        CardStatus getCardStatus();
+        void setCardStatus(CardStatus newStatus);
+        void deactivateCard();
+        void activateCard();
+        Account *getAccount();
+        void setAccount(Account *account);
         bool withdraw(double price);
 };
 

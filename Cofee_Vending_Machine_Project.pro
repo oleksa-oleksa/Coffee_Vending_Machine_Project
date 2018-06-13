@@ -75,7 +75,8 @@ HEADERS += \
     lattemacchiato.h \
     lcd_display.h \
     mainwindow.h \
-    cardid.h
+    cardid.h \
+    cardstatus.h
 
 SOURCES += \
     account.cpp \

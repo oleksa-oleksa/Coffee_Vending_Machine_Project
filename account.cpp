@@ -2,17 +2,24 @@
 #include <QtDebug>
 const float CREDIT_LIMIT = 10.0;
 
-Account::Account(Person *newEmployee, BankAccount *newBa)
+Account::Account(Person *Employee, BankAccount *Ba)
 {
     credit = 0.0;
     state = ACTIVE_OK;
-    owner = newEmployee;
-    ba = newBa;
+    owner = Employee;
+    ba = Ba;
 }
 
 AccountStatus Account::getAccountStatus()
 {
     return state;
+}
+
+
+void Account::setAccountStatus(AccountStatus newState)
+{
+    state = newState;
+    qDebug() << "Account status is now: " << state;
 }
 
 bool Account::checkCreditLimit()
@@ -27,10 +34,15 @@ bool Account::checkCreditLimit()
     return true;
 }
 
-void Account::setAccountStatus(AccountStatus newState)
+
+double Account::getAccountCredit()
 {
-    state = newState;
-    qDebug() << "Account status is now: " << state;
+   return credit;
+}
+
+void Account::setAccountCredit(double amount)
+{
+    credit += amount;
 }
 
 bool Account::addCredit(double amount)
@@ -55,18 +67,6 @@ bool Account::addCredit(double amount)
         return false;
     }
 }
-
-
-double Account::getAccountCredit()
-{
-   return credit;
-}
-
-void Account::setAccountCredit(double amount)
-{
-    credit += amount;
-}
-
 
 void Account::activateAccount()
 {
