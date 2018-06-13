@@ -24,6 +24,11 @@ void Card::setAccount(Account *newAccount)
     account = newAccount;
 }
 
+Account *Card::getAccount()
+{
+    return account;
+}
+
 void Card::setCardID(CardID newCardID)
 {
     cardID = newCardID;

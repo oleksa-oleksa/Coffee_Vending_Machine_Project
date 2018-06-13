@@ -15,8 +15,9 @@ class Card
     public:
         Card();
         ~Card();
-        CardID getCardID();
         void setAccount(Account *account);
+        Account *getAccount();
+        CardID getCardID();
         void setCardID(CardID newCardID);
         bool withdraw(double price);
 };
