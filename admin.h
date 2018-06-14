@@ -11,10 +11,9 @@ class Admin : public Person
          Admin();
         ~Admin();
         Card *createCard(Account *account);
-        void deleteCard();
+        void deleteCard(Card *c);
         Account *createAccount(Person *Employee, BankAccount *Ba);
         void deleteAccount(Account *account);
-        void addCard(Account *account, Card *card);
 
 };
 
