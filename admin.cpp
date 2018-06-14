@@ -15,7 +15,7 @@ Card *Admin::createCard(Account *account)
     return newRandomCard;
 }
 
-void deleteCard(Card *c)
+void Admin::deleteCard(Card *c)
 {
     delete c;
 }
@@ -24,4 +24,9 @@ Account *Admin:: createAccount(Person *Employee, BankAccount *Ba)
 {
     Account *newAccount = new Account(Employee, Ba);
     return newAccount;
+}
+
+void Admin::deleteAccount(Account *a)
+{
+    delete a;
 }
