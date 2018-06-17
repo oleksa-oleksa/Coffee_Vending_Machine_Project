@@ -5,7 +5,7 @@
 class BankAccountID
 {
     private:
-        std::string bankAccountID;
+        std::string IBAN;
 
     public:
         BankAccountID();

@@ -11,17 +11,37 @@
 #include <QSqlError>
 #include <QSqlDatabase>
 
+#define DATABASE_HOSTNAME "CoffeeMachine"
+#define DATABASE_NAME "project_database.db"
 
-class Dataset
+
+
+class Database : public QObject
 {
+    Q_OBJECT
+
     private:
-        long dbID;
-        Account *account;
+        // Database object
+         QSqlDatabase db;
 
     public:
-        Dataset();
-        ~Dataset();
-        void addBill();
+        Database(QObject *parent = 0);
+        ~Database();
+        bool openDB();
+        bool deleteDB();
+        bool restoreDatabase();
+        void closeDatabase();
+        QSqlError lastError();
+
+        // Database create tables
+        bool createPersonTable();
+        bool createBankAccountTable();
+        bool createAccountTable();
+        bool createCardTable();
+
+        // Adding the new rows to the existing tables
+        int insertPerson(QString firstname, QString lastname, int age);
+
 };
 
 #endif

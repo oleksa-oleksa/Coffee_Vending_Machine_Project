@@ -1,9 +1,9 @@
 #include "bankaccountid.h"
 #include "tools.h"
-#define BA_ID_LEN 8
+#define IBAN_LEN 20 // will create 22 symbols
 
 
 BankAccountID::BankAccountID()
 {
-    bankAccountID = createRandomID(BA_ID_LEN);
+    IBAN = std::string("DE") + createRandomID(IBAN_LEN);
 }

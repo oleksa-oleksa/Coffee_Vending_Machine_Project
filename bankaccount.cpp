@@ -7,9 +7,9 @@ BankAccount::BankAccount()
     taxClass = 1; // default tax class
 }
 
-void BankAccount::setAccount(Account *newAccount)
+void BankAccount::setAccount(Account *account)
 {
-    account = newAccount;
+    this->account = account;
 }
 
 Account *BankAccount::getAccount()
@@ -17,23 +17,20 @@ Account *BankAccount::getAccount()
     return account;
 }
 
-void BankAccount::setIBAN(std::string iban)
+void BankAccount::setIBAN(BankAccountID IBAN)
 {
-    IBAN = iban;
-    qDebug() << "New IBAN is set: " << IBAN.c_str();
-
+    this->IBAN = IBAN;
 }
 
-std::string BankAccount::getIBAN()
+BankAccountID BankAccount::getIBAN()
 {
-    qDebug() << "IBAN is: " << IBAN.c_str();
     return IBAN;
 }
 
-void BankAccount::setTaxClass(int tc)
+void BankAccount::setTaxClass(int taxClass)
 {
-    taxClass = tc;
-    qDebug() << "New tax class is set:" << taxClass;
+    this->taxClass = taxClass;
+    qDebug() << "New tax class is set:" << this->taxClass;
 }
 
 int BankAccount::getTaxClass()

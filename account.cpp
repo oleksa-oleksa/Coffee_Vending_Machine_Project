@@ -48,8 +48,8 @@ Person *Account::getOwner()
 
 void Account::setOwner(Person *owner)
 {
-    qDebug() << "Account owner is: " << owner;
     this->owner = owner;
+    qDebug() << "Account owner is: " << this->owner;
 }
 
 BankAccount *Account::getBankAccount()
@@ -61,6 +61,7 @@ BankAccount *Account::getBankAccount()
 void Account::setBankAccount(BankAccount *ba)
 {
     this->ba = ba;
+    qDebug() << "Associated bank account is: " << this->ba;
 }
 
 void Account::setAccountCredit(double amount)

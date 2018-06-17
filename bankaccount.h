@@ -9,8 +9,7 @@ class Account;
 class BankAccount
 {
     private:
-        BankAccountID bankAccountID;
-        std::string IBAN;
+        BankAccountID IBAN;
         int taxClass;
         Account *account; // create account before card and ba instances
     public:
@@ -18,8 +17,8 @@ class BankAccount
         ~BankAccount();
         void setAccount(Account *account);
         Account *getAccount();
-        void setIBAN(std::string iban);
-        std::string getIBAN();
+        void setIBAN(BankAccountID iban);
+        BankAccountID getIBAN();
         void setTaxClass(int tc);
         int getTaxClass();
 };

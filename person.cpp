@@ -23,7 +23,6 @@ std::string const & Person::getAddress() const
 
 PersonID Person::getID() const
 {
-    qDebug() << "ID is: " << id;
     return personID;
 }
 
@@ -32,8 +31,8 @@ void Person::setName(std::string name)
     if ( name == "" )
         qDebug() << "Name cannot be an empty String!";
     else
-        qDebug() << "Name is set: " << name.c_str();
         this->name = name;
+        qDebug() << "Name is set: " << this->name.c_str();
 }
 
 void Person::setSurname(std::string surname)
@@ -41,14 +40,14 @@ void Person::setSurname(std::string surname)
     if ( surname == "" )
         qDebug() << "Name cannot be an empty String!";
     else
-        qDebug() << "Surname is set: " << surname.c_str();
         this->surname = surname;
+        qDebug() << "Surname is set: " << this->surname.c_str();
 }
 
 void Person::setID(PersonID personID)
 {
-    qDebug() << "Name is set: " << name.c_str();
     this->personID = personID;
+
 }
 
 bool Person::getEmployed()
@@ -60,7 +59,7 @@ bool Person::getEmployed()
 void Person::setEmployed(bool isEmployed)
 {
     this->isEmployed = isEmployed;
-    qDebug() << "Employed flag is set: " << isEmployed;
+    qDebug() << "Employed flag is set: " << this->isEmployed;
 }
 
 bool Person ::getAdmin()
@@ -72,7 +71,7 @@ bool Person ::getAdmin()
 void Person::setAdmin(bool isAdmin)
 {
     this->isAdmin = isAdmin;
-    qDebug() << "Admin flag is set: " << isAdmin;
+    qDebug() << "Admin flag is set: " << this->isAdmin;
 }
 
 bool Person::getStaff()
@@ -84,5 +83,5 @@ bool Person::getStaff()
 void Person::setStaff(bool isStaff)
 {
     this->isStaff = isStaff;
-    qDebug() << "Staff flag is set: " << isStaff;
+    qDebug() << "Staff flag is set: " << this->isStaff;
 }

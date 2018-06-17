@@ -10,7 +10,6 @@ class Person
       PersonID personID;
       std::string name;
       std::string surname;
-      long id;
       std::string address;
 
 

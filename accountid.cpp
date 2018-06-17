@@ -1,6 +1,6 @@
 #include "accountid.h"
 #include "tools.h"
-#define ACCOUNT_ID_LEN 10
+#define ACCOUNT_ID_LEN 12
 
 AccountID::AccountID()
 {
