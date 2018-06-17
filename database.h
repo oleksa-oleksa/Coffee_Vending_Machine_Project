@@ -40,7 +40,12 @@ class Database : public QObject
         bool createCardTable();
 
         // Adding the new rows to the existing tables
-        int insertPerson(QString firstname, QString lastname, int age);
+        bool insertPerson(QString name, QString surname,
+                         QString address, int isEmployed, int isAdmin, int isStaff);
+        bool insertBankAccount(QString accountID, int taxClass);
+        bool insertAccount(QString personID, QString IBAN,
+                           int credit, int state);
+        bool insertCard(int cardStatus, QString accountID);
 
 };
 

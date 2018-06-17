@@ -1,5 +1,12 @@
+/* Database designed and created by Oleksandra Baga */
 #include "database.h"
 #include "QString"
+#include "personid.h"
+#include "bankaccountid.h"
+#include "accountid.h"
+#include "cardid.h"
+#include "iostream"
+#include "tools.h"
 
 bool Database::createPersonTable()
 {
@@ -11,12 +18,12 @@ bool Database::createPersonTable()
         ret = query.exec("create table Person "
                          "(personID VARCHAR(5) NOT NULL, "
                          "name VARCHAR(30) NOT NULL, "
-                          "surname VARCHAR(50) NOT NULL, "
-                           "address VARCHAR(100), "
-                           "isEmployed INT, "
-                           "isAdmin INT, "
-                           "isStaff INT, "
-                           "primary key (personID))");
+                         "surname VARCHAR(50) NOT NULL, "
+                         "address VARCHAR(100), "
+                         "isEmployed INT, "
+                         "isAdmin INT, "
+                         "isStaff INT, "
+                         "primary key (personID))");
      }
      return ret;
 }
@@ -76,6 +83,63 @@ bool Database::createCardTable()
      return ret;
 }
 
+bool Database::insertPerson(QString name, QString surname,
+                 QString address, int isEmployed, int isAdmin, int isStaff)
+{
+    bool ret = false;
+    std::string personID = createRandomID(PERSON_ID_LEN);
+
+    if (db.isOpen())
+    {
+           QSqlQuery query;
+           // HINT: query.exec().arg().arg() => obj.arg().arg() => obj.arg()
+           ret = query.exec(QString("insert into Person values('%1','%2', '%3', '%4', %5, %6, %7)")
+           .arg(personID.c_str()).arg(name).arg(surname).arg(address).arg(isEmployed).arg(isAdmin).arg(isStaff));
+     }
+     return ret;
+}
+
+bool Database::insertBankAccount(QString accountID, int taxClass)
+{
+    bool ret = false;
+    std::string IBAN = createRandomID(IBAN_LEN);
+
+    if (db.isOpen())
+    {
+           QSqlQuery query;
+           ret = query.exec(QString("insert into BankAccount values('%1','%2', %3)")
+           .arg(IBAN.c_str()).arg(accountID).arg(taxClass));
+     }
+     return ret;
+}
+
+bool Database::insertAccount(QString personID, QString IBAN, int credit, int state)
+{
+    bool ret = false;
+    std::string accountID = createRandomID(ACCOUNT_ID_LEN);
+
+    if (db.isOpen())
+    {
+           QSqlQuery query;
+           ret = query.exec(QString("insert into Account values('%1','%2', '%3', %4, %5)")
+           .arg(accountID.c_str()).arg(personID).arg(IBAN).arg(credit).arg(state));
+    }
+    return ret;
+}
+
+bool Database::insertCard(int cardStatus, QString accountID)
+{
+    bool ret = false;
+    std::string cardID = createRandomID(CARD_ID_LEN);
+
+    if (db.isOpen())
+    {
+           QSqlQuery query;
+           ret = query.exec(QString("insert into Card values('%1',%2, '%3'")
+           .arg(cardID.c_str()).arg(cardStatus).arg(accountID));
+    }
+    return ret;
+}
 
 bool Database::openDB()
 {

@@ -2,6 +2,8 @@
 #define CARDID_H
 #include <iostream>
 
+#define CARD_ID_LEN 16
+
 class CardID
 {
     private:
