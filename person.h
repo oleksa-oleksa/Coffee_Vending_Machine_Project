@@ -10,7 +10,18 @@ class Person
       std::string surname;
       long id;
       std::string address;
+
+
+      // a person should be emploeyd at the company to be able to buy a drink
+      // if person will be fired, the all flags must be reseted.
       bool isEmployed;
+
+      // It is allowed to be an admin and a staff at the same time
+      // a person could be an admin
+      bool isAdmin;
+
+      //a person could provide service functions
+      bool isStaff;
    public:
       std::string const & getName() const;
       std::string const & getSurname() const;
@@ -21,6 +32,10 @@ class Person
       void setID(long ID);
       bool getEmployed();
       void setEmployed();
+      bool getAdmin();
+      void setAdmin();
+      bool getStaff();
+      void setStaff();
 };
 
 #endif
