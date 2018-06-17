@@ -2,12 +2,14 @@
 #define BANKACCOUNT_H
 #include <string>
 #include "account.h"
+#include "bankaccountid.h"
 
 class Account;
 
 class BankAccount
 {
     private:
+        BankAccountID bankAccountID;
         std::string IBAN;
         int taxClass;
         Account *account; // create account before card and ba instances

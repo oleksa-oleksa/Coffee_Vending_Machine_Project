@@ -1,29 +1,30 @@
 #include <iostream>
 #include <QtDebug>
 #include "person.h"
+#include "tools.h"
 
 std::string const & Person::getName() const
 {
-    qDebug() << "Name is: " << name;
+    qDebug() << "Name is: " << name.c_str();
     return name;
 }
 
 std::string const & Person::getSurname() const
 {
-    qDebug() << "Surname is: " << name;
+    qDebug() << "Surname is: " << name.c_str();
     return surname;
 }
 
 std::string const & Person::getAddress() const
 {
-    qDebug() << "Adress is: " << address;
+    qDebug() << "Adress is: " << address.c_str();
     return address;
 }
 
-long Person::getID() const
+PersonID Person::getID() const
 {
     qDebug() << "ID is: " << id;
-    return id;
+    return personID;
 }
 
 void Person::setName(std::string name)
@@ -31,7 +32,7 @@ void Person::setName(std::string name)
     if ( name == "" )
         qDebug() << "Name cannot be an empty String!";
     else
-        qDebug() << "Name is set: " << name;
+        qDebug() << "Name is set: " << name.c_str();
         this->name = name;
 }
 
@@ -40,18 +41,14 @@ void Person::setSurname(std::string surname)
     if ( surname == "" )
         qDebug() << "Name cannot be an empty String!";
     else
-        qDebug() << "Surname is set: " << surname;
+        qDebug() << "Surname is set: " << surname.c_str();
         this->surname = surname;
 }
 
-void Person::setID(long ID)
+void Person::setID(PersonID personID)
 {
-    /*
-         TODO Check, if the ID is in Range of valid IDs
-         we need to decide a valid range
-    */
-    qDebug() << "Name is set: " << name;
-    this->id = ID;
+    qDebug() << "Name is set: " << name.c_str();
+    this->personID = personID;
 }
 
 bool Person::getEmployed()
@@ -78,13 +75,13 @@ void Person::setAdmin(bool isAdmin)
     qDebug() << "Admin flag is set: " << isAdmin;
 }
 
-void Person::getStaff()
+bool Person::getStaff()
 {
     qDebug() << "Staff flag is: " << isStaff;
     return isStaff;
 }
 
-set Person::setStaff(bool isStaff)
+void Person::setStaff(bool isStaff)
 {
     this->isStaff = isStaff;
     qDebug() << "Staff flag is set: " << isStaff;

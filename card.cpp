@@ -54,17 +54,27 @@ void Card::activateCard()
 
 Account *Card::getAccount()
 {
+
+    qDebug() << "Account is: " << account;
     return account;
 }
 
 void Card::setAccount(Account *newAccount)
 {
     account = newAccount;
-}
+    qDebug() << "Account is set: " << account;
 
+}
 
 bool Card::withdraw(double price)
 {
+   if (!account->getOwner()->getEmployed())
+   {
+       qDebug() << "Person is not a employee, payment is denied!";
+       account->deactivateAccount();
+       return false;
+   }
+
    if (account->addCredit(price))
    {
        qDebug() << "Credit added to card's account";

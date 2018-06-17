@@ -4,6 +4,7 @@
 #include "card.h"
 #include "person.h"
 #include "accountstatus.h"
+#include "accountid.h"
 #include "bankaccount.h"
 
 class BankAccount;
@@ -11,6 +12,7 @@ class BankAccount;
 class Account
 {
     private:
+        AccountID accountID;
         double credit;
         AccountStatus state;
         Person *owner;
@@ -23,6 +25,10 @@ class Account
         bool checkCreditLimit();
         double getAccountCredit();
         void setAccountCredit(double amount);
+        Person *getOwner();
+        void setOwner(Person *owner);
+        BankAccount *getBankAccount();
+        void setBankAccount(BankAccount *ba);
         bool addCredit(double amount);
         void activateAccount();
         void deactivateAccount();

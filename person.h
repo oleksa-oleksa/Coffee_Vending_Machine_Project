@@ -2,10 +2,12 @@
 #define PERSON_H
 
 #include <string>
+#include "personid.h"
 
 class Person
 {
    private:
+      PersonID personID;
       std::string name;
       std::string surname;
       long id;
@@ -26,16 +28,16 @@ class Person
       std::string const & getName() const;
       std::string const & getSurname() const;
       std::string const & getAddress() const;
-      long getID() const;
+      PersonID getID() const;
       void setName(std::string name);
       void setSurname(std::string surname);
-      void setID(long ID);
+      void setID(PersonID ID);
       bool getEmployed();
-      void setEmployed();
+      void setEmployed(bool isEmployed);
       bool getAdmin();
-      void setAdmin();
+      void setAdmin(bool isAdmin);
       bool getStaff();
-      void setStaff();
+      void setStaff(bool isStaff);
 };
 
 #endif

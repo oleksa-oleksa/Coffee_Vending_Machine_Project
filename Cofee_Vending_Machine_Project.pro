@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -68,7 +69,6 @@ HEADERS += \
     cacao.h \
     cappuccino.h \
     coffee.h \
-    dataset.h \
     espresso.h \
     hotwater.h \
     ingredient.h \
@@ -76,7 +76,12 @@ HEADERS += \
     lcd_display.h \
     mainwindow.h \
     cardid.h \
-    cardstatus.h
+    cardstatus.h \
+    database.h \
+    accountid.h \
+    tools.h \
+    personid.h \
+    bankaccountid.h
 
 SOURCES += \
     account.cpp \
@@ -85,7 +90,6 @@ SOURCES += \
     bankaccount.cpp \
     card.cpp \
     controlunit.cpp \
-    dataset.cpp \
     drink.cpp \
     indicationunit.cpp \
     interactionunit.cpp \
@@ -113,4 +117,9 @@ SOURCES += \
     waterheater.cpp \
     main.cpp \
     mainwindow.cpp \
-    cardid.cpp
+    cardid.cpp \
+    database.cpp \
+    accountid.cpp \
+    tools.cpp \
+    personid.cpp \
+    bankaccountid.cpp

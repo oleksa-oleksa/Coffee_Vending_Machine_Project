@@ -16,9 +16,9 @@ AccountStatus Account::getAccountStatus()
 }
 
 
-void Account::setAccountStatus(AccountStatus newState)
+void Account::setAccountStatus(AccountStatus state)
 {
-    state = newState;
+    this->state = state;
     qDebug() << "Account status is now: " << state;
 }
 
@@ -40,9 +40,35 @@ double Account::getAccountCredit()
    return credit;
 }
 
+Person *Account::getOwner()
+{
+    qDebug() << "Account owner is: " << owner;
+    return owner;
+}
+
+void Account::setOwner(Person *owner)
+{
+    qDebug() << "Account owner is: " << owner;
+    this->owner = owner;
+}
+
+BankAccount *Account::getBankAccount()
+{
+    qDebug() << "Associated bank account is: " << ba;
+    return ba;
+}
+
+void Account::setBankAccount(BankAccount *ba)
+{
+    this->ba = ba;
+}
+
 void Account::setAccountCredit(double amount)
 {
+
     credit += amount;
+    qDebug() << "Credit now is: " << credit;
+
 }
 
 bool Account::addCredit(double amount)
@@ -63,7 +89,7 @@ bool Account::addCredit(double amount)
     else
     {
         blockAccount();
-        qDebug() << "Attemt blocked, credit limit is reached " <<  credit;
+        qDebug() << "Payment attemt is blocked, credit limit is reached " <<  credit;
         return false;
     }
 }
@@ -71,14 +97,17 @@ bool Account::addCredit(double amount)
 void Account::activateAccount()
 {
     setAccountStatus(ACTIVE_OK);
+    qDebug() << "Account is activated";
 }
 
 void Account::deactivateAccount()
 {
     setAccountStatus(DEACTIVATED_OLD);
+    qDebug() << "Account is deactivated";
 }
 
 void Account::blockAccount()
 {
     setAccountStatus(BLOCKED_UNPAID);
+    qDebug() << "Account is blocked";
 }
