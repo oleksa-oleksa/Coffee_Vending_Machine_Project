@@ -1,5 +1,6 @@
 /* Database designed and created by Oleksandra Baga */
 #include "database.h"
+#include <QDebug>
 #include "QString"
 #include "personid.h"
 #include "bankaccountid.h"
@@ -25,6 +26,7 @@ bool Database::createPersonTable()
                          "isStaff INT, "
                          "primary key (personID))");
      }
+     qDebug() << "Table Person was created with exit code: " << ret;
      return ret;
 }
 
@@ -42,6 +44,7 @@ bool Database::createBankAccountTable()
                          "primary key (IBAN), "
                          "foreign key (accountID) references Account(accountID))");
      }
+     qDebug() << "Table BankAccount was created with exit code: " << ret;
      return ret;
 }
 
@@ -62,6 +65,7 @@ bool Database::createAccountTable()
                            "foreign key (personID) references Person(personID), "
                            "foreign key (IBAN) references BankAccount(IBAN))");
      }
+     qDebug() << "Table Account was created with exit code: " << ret;
      return ret;
 }
 
@@ -80,6 +84,7 @@ bool Database::createCardTable()
                           "primary key (cardID), "
                           "foreign key (accountID) references Account(accountID))");
      }
+     qDebug() << "Table Card was created with exit code: " << ret;
      return ret;
 }
 
@@ -96,6 +101,7 @@ bool Database::insertPerson(QString name, QString surname,
            ret = query.exec(QString("insert into Person values('%1','%2', '%3', '%4', %5, %6, %7)")
            .arg(personID.c_str()).arg(name).arg(surname).arg(address).arg(isEmployed).arg(isAdmin).arg(isStaff));
      }
+     qDebug() << "Insert into Person finished with exit code: " << ret;
      return ret;
 }
 
@@ -110,6 +116,7 @@ bool Database::insertBankAccount(QString accountID, int taxClass)
            ret = query.exec(QString("insert into BankAccount values('%1','%2', %3)")
            .arg(IBAN.c_str()).arg(accountID).arg(taxClass));
      }
+     qDebug() << "Insert into BankAccount finished with exit code: " << ret;
      return ret;
 }
 
@@ -124,6 +131,7 @@ bool Database::insertAccount(QString personID, QString IBAN, int credit, int sta
            ret = query.exec(QString("insert into Account values('%1','%2', '%3', %4, %5)")
            .arg(accountID.c_str()).arg(personID).arg(IBAN).arg(credit).arg(state));
     }
+    qDebug() << "Insert into Account finished with exit code: " << ret;
     return ret;
 }
 
@@ -138,6 +146,7 @@ bool Database::insertCard(int cardStatus, QString accountID)
            ret = query.exec(QString("insert into Card values('%1',%2, '%3'")
            .arg(cardID.c_str()).arg(cardStatus).arg(accountID));
     }
+    qDebug() << "Insert into Card finished with exit code: " << ret;
     return ret;
 }
 

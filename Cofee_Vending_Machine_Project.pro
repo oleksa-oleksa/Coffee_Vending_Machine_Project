@@ -123,3 +123,28 @@ SOURCES += \
     tools.cpp \
     personid.cpp \
     bankaccountid.cpp
+
+test {
+    message(TEST BUILD)
+
+    QT += testlib
+    TARGET = Coffee-TEST
+
+    SOURCES -= \
+        main.cpp \
+        mainwindow.cpp \
+
+    SOURCES += \
+        test/testmain.cpp \
+        test/mainwindow.cpp \
+
+    HEADERS -= \
+        mainwindow.h \
+
+    HEADERS += \
+        test/mainwindow.h \
+
+} else {
+    message(NORMAL BUILD)
+}
+

@@ -14,8 +14,6 @@
 #define DATABASE_HOSTNAME "CoffeeMachine"
 #define DATABASE_NAME "project_database.db"
 
-
-
 class Database : public QObject
 {
     Q_OBJECT
@@ -26,7 +24,6 @@ class Database : public QObject
 
     public:
         Database(QObject *parent = 0);
-        ~Database();
         bool openDB();
         bool deleteDB();
         bool restoreDatabase();
