@@ -23,7 +23,7 @@ class Database : public QObject
          QSqlDatabase db;
 
     public:
-        Database(QObject *parent = 0);
+        // Database(QObject *parent = 0);
         bool openDB();
         bool deleteDB();
         bool restoreDatabase();

@@ -81,7 +81,8 @@ HEADERS += \
     accountid.h \
     tools.h \
     personid.h \
-    bankaccountid.h
+    bankaccountid.h \
+    test/userchoicetest.h
 
 SOURCES += \
     account.cpp \
@@ -122,7 +123,8 @@ SOURCES += \
     accountid.cpp \
     tools.cpp \
     personid.cpp \
-    bankaccountid.cpp
+    bankaccountid.cpp \
+    test/userchoicetest.cpp
 
 test {
     message(TEST BUILD)
@@ -137,12 +139,17 @@ test {
     SOURCES += \
         test/testmain.cpp \
         test/mainwindow.cpp \
+        test/databasetest.cpp
+
 
     HEADERS -= \
         mainwindow.h \
 
+
     HEADERS += \
         test/mainwindow.h \
+        test/databasetest.h
+
 
 } else {
     message(NORMAL BUILD)
