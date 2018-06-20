@@ -17,6 +17,8 @@ class Card
     public:
         Card(Account *ac);
         ~Card();
+        static std::vector<Card> AllCards;
+
         CardID getCardID();
         void setCardID(CardID newCardID);
         CardStatus getCardStatus();
@@ -27,5 +29,7 @@ class Card
         void setAccount(Account *account);
         bool withdraw(double price);
 };
+
+typedef std::vector<Card> Cards;
 
 #endif // CARD_H

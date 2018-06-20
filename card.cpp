@@ -5,6 +5,8 @@
 #include "cardid.h"
 #include <QtDebug>
 
+std::vector<Card>Card::AllCards = std::vector<Card>();
+
 Card::Card(Account *ac)
 {
     cardStatus = ACTIVE;
@@ -48,8 +50,8 @@ void Card::deactivateCard()
 
 void Card::activateCard()
 {
-    qDebug() << "Card will be deactivated";
-    setCardStatus(DEACTIVATED);
+    qDebug() << "Card will be activated";
+    setCardStatus(ACTIVE);
 }
 
 Account *Card::getAccount()

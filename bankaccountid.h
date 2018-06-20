@@ -3,7 +3,7 @@
 #include <iostream>
 #include <QString>
 
-#define IBAN_LEN 20 // will create 22 symbols
+#define IBAN_LEN 16 // will create 22 symbols for IBAN starting with DEBBER
 
 class BankAccountID
 {

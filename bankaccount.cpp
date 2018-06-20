@@ -1,6 +1,9 @@
+// Created by Oleksandra Baga
 #include "bankaccount.h"
 #include <string>
 #include <QtDebug>
+
+std::vector<BankAccount>BankAccount::AllBankAccounts = std::vector<BankAccount>();
 
 // Default constructor
 BankAccount::BankAccount()
@@ -65,4 +68,36 @@ int BankAccount::getTaxClass()
 {
     qDebug() << "Tax class is:" << taxClass;
     return taxClass;
+}
+
+bool BankAccount::linkAccount()
+{
+    bool ret = false;
+
+    for (size_t i = 0; i < Account::AllAccounts.size(); i++)
+    {
+       if (Account::AllAccounts[i].getAccountID().toQstring() == accountID.toQstring())
+       {
+          setAccount(&Account::AllAccounts[i]);
+          qDebug() << "Account is set to AccountID:" << Account::AllAccounts[i].getAccountID().toQstring();
+          ret = true;
+       }
+    }
+    return ret;
+}
+
+bool BankAccount::linkProvidedAccount(AccountID accountID)
+{
+    bool ret = false;
+
+    for (size_t i = 0; i < Account::AllAccounts.size(); i++)
+    {
+       if (Account::AllAccounts[i].getAccountID().toQstring() == accountID.toQstring())
+       {
+          setAccount(&Account::AllAccounts[i]);
+          qDebug() << "Account is set to AccountID:" << Account::AllAccounts[i].getAccountID().toQstring();
+          ret = true;
+       }
+    }
+    return ret;
 }

@@ -113,7 +113,7 @@ bool Database::insertPerson(QString name, QString surname,
 bool Database::insertBankAccount(QString accountID, int taxClass)
 {
     bool ret = false;
-    std::string IBAN = std::string("DE") + createRandomID(IBAN_LEN);
+    std::string IBAN = std::string("DEBBER") + createRandomID(IBAN_LEN);
 
     if (db.isOpen())
     {
@@ -226,7 +226,7 @@ bool Database::loadPeople(People &people)
         people.push_back(p);
     }
 
-    qDebug() << "Loaded " << people.size() << " people";
+    qDebug() << "Loaded " << people.size() << " persons";
     return ret;
 }
 
@@ -236,7 +236,7 @@ bool Database::loadBankAccounts(BAccounts &ba)
 
     bool ret = query.exec("SELECT IBAN, accountID, taxClass FROM BankAccount");
 
-    if (!ret) {
+    if (ret == false) {
         qDebug() << query.lastError().text();
         return ret;
     }
@@ -248,6 +248,27 @@ bool Database::loadBankAccounts(BAccounts &ba)
     }
 
     qDebug() << "Loaded " << ba.size() << " bank accounts";
+    return ret;
+}
+
+bool Database::loadAccounts(Accounts &a)
+{
+    QSqlQuery query(db);
+
+    bool ret = query.exec("SELECT accountID, personID, IBAN, credit, state FROM Account");
+
+    if (ret == false) {
+        qDebug() << query.lastError().text();
+        return ret;
+    }
+
+    while(query.next()) {
+        QSqlRecord rec = query.record();
+        Account p(rec);
+        a.push_back(p);
+    }
+
+    qDebug() << "Loaded " << a.size() << " accounts";
     return ret;
 }
 

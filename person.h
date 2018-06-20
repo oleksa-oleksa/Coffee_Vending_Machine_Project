@@ -32,6 +32,7 @@ class Person
 
    public:
       Person();
+      static std::vector<Person> AllEmployee;
 
       std::string const & getName() const;
       std::string const & getSurname() const;

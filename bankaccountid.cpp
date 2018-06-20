@@ -8,7 +8,7 @@ BankAccountID::BankAccountID(std::string id) : IBAN(id)
 
 BankAccountID::BankAccountID()
 {
-    IBAN = std::string("DE") + createRandomID(IBAN_LEN);
+    IBAN = std::string("DEBBER") + createRandomID(IBAN_LEN);
 }
 
 QString BankAccountID::toQstring()

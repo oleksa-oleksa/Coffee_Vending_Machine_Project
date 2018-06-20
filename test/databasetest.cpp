@@ -104,7 +104,6 @@ void DatabaseTest::testInsertAccount()
 
        QVERIFY(db_t.insertAccount(q_aid, q_pid, q_baid, 0.0, 0));
     }
-
 }
 
 void DatabaseTest::testInsertCard()
@@ -117,15 +116,9 @@ void DatabaseTest::testLoadPeople()
     Database db_t;
     db_t.openDB();
 
-    // People is a type alias for vector of Person
-    // See person.h
-    People people;
-    QVERIFY(db_t.loadPeople(people));
+    // Saving from DB into static global
+    QVERIFY(db_t.loadPeople(Person::AllEmployee));
 
-    /* for (size_t i = 0; i < people.size(); i++) {
-       people[i].getName();
-    }
-    */
 }
 
 
@@ -134,10 +127,22 @@ void DatabaseTest::testLoadBankAccounts()
     Database db_t;
     db_t.openDB();
 
-    // People is a type alias for vector of Person
-    // See person.h
-    BAccounts ba;
-    QVERIFY(db_t.loadBankAccounts(ba));
+    // Saving from DB into static global
+    QVERIFY(db_t.loadBankAccounts(BankAccount::AllBankAccounts));
+}
+
+void DatabaseTest::testLoadAccounts()
+{
+    Database db_t;
+    db_t.openDB();
+
+    QVERIFY(db_t.loadAccounts(Account::AllAccounts));
+
+    // connect account and bank account verification
+    for (size_t i = 0; i < Account::AllAccounts.size(); i++)
+    {
+        QVERIFY(Account::AllAccounts[i].getBankAccount()->linkProvidedAccount(Account::AllAccounts[i].getAccountID()));
+    }
 }
 
 void DatabaseTest::testCloseDatabase()
@@ -147,11 +152,9 @@ void DatabaseTest::testCloseDatabase()
 }
 
 // Uncomment to clear the DB after testing
-/*
 void DatabaseTest::testDeleteDB()
 {
     Database db_t;
     QVERIFY(db_t.deleteDB());
 }
-*/
 

@@ -27,6 +27,8 @@ class BankAccount
 
     public:
         BankAccount();
+        static std::vector<BankAccount> AllBankAccounts;
+
         void setIBAN(BankAccountID iban);
         BankAccountID getIBAN();
         void setAccountID(AccountID accountID);
@@ -35,6 +37,8 @@ class BankAccount
         Account *getAccount();
         void setTaxClass(int tc);
         int getTaxClass();
+        bool linkAccount();
+        bool linkProvidedAccount(AccountID accountID);
 };
 
 typedef std::vector<BankAccount> BAccounts;

@@ -1,6 +1,11 @@
+// Created by Oleksandra Baga
 #include "account.h"
+#include "personid.h"
+#include "person.h"
 #include <QtDebug>
 const float CREDIT_LIMIT = 10.0;
+
+std::vector<Account>Account::AllAccounts = std::vector<Account>();
 
 Account::Account()
 {
@@ -10,20 +15,23 @@ Account::Account()
 // This constructor assumes that it receives a valid query
 // pointing at some row of data from Person table
 // Assumed row positions are
-/* Account::Account(QSqlRecord &query)
+ Account::Account(QSqlRecord &query)
 {
     using namespace std;
 
-    QString q_pid = query.value(0).toString();
-    QString q_iban = query.value(1).toString();
-    QString q_aid = query.value(2).toString();
+    QString q_aid = query.value(0).toString();
+    QString q_pid = query.value(1).toString();
+    QString q_baid = query.value(2).toString();
     credit = query.value(3).toDouble();
     state = (AccountStatus)query.value(4).toInt();;
 
-    PersonID personID = PersonID(q_pid.toUtf8().constData());
-    BankAccountID iban = BankAccountID(q_iban.toUtf8().constData());
     accountID = AccountID(q_aid.toUtf8().constData());
-} */
+
+    PersonID personID = PersonID(q_pid.toUtf8().constData());
+    linkOwner(personID);
+    BankAccountID iban = BankAccountID(q_baid.toUtf8().constData());
+    linkBankAccount(iban);
+}
 
 Account::Account(Person *Employee, BankAccount *Ba)
 {
@@ -72,7 +80,7 @@ Person *Account::getOwner()
 void Account::setOwner(Person *owner)
 {
     this->owner = owner;
-    qDebug() << "Account owner is: " << this->owner;
+    qDebug() << "Account owner is: " << this->owner->getID().toQstring();
 }
 
 BankAccount *Account::getBankAccount()
@@ -81,10 +89,21 @@ BankAccount *Account::getBankAccount()
     return ba;
 }
 
+void Account::setAccountID(AccountID accountID)
+{
+   this->accountID = accountID;
+}
+
+AccountID Account::getAccountID()
+{
+    qDebug() << "Associated account is: " << accountID.toQstring();
+    return accountID;
+}
+
 void Account::setBankAccount(BankAccount *ba)
 {
     this->ba = ba;
-    qDebug() << "Associated bank account is: " << this->ba;
+    qDebug() << "Associated bank account is: " << this->ba->getIBAN().toQstring();
 }
 
 void Account::setAccountCredit(double amount)
@@ -134,4 +153,36 @@ void Account::blockAccount()
 {
     setAccountStatus(BLOCKED_UNPAID);
     qDebug() << "Account is blocked";
+}
+
+bool Account::linkOwner(PersonID personID)
+{
+    bool ret = false;
+
+    for (size_t i = 0; i < Person::AllEmployee.size(); i++)
+    {
+       if (Person::AllEmployee[i].getID().toQstring() == personID.toQstring())
+       {
+          setOwner(&Person::AllEmployee[i]);
+          qDebug() << "Owner is set to PersonID:" << Person::AllEmployee[i].getID().toQstring();
+          ret = true;
+       }
+    }
+    return ret;
+}
+
+bool Account::linkBankAccount(BankAccountID iban)
+{
+    bool ret = false;
+
+    for (size_t i = 0; i < BankAccount::AllBankAccounts.size(); i++)
+    {
+       if (BankAccount::AllBankAccounts[i].getIBAN().toQstring() == iban.toQstring())
+       {
+          setBankAccount(&BankAccount::AllBankAccounts[i]);
+          qDebug() << "BA is set to IBAN:" << BankAccount::AllBankAccounts[i].getIBAN().toQstring();
+          ret = true;
+       }
+    }
+    return ret;
 }

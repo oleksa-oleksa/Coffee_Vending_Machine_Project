@@ -1,7 +1,10 @@
+// Created by Oleksandra Baga
 #include <iostream>
 #include <QtDebug>
 #include "person.h"
 #include "tools.h"
+
+std::vector<Person>Person::AllEmployee = std::vector<Person>();
 
 // Default constructor is necessary b/c other is defined
 // Effectively it's a default constructor

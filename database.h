@@ -46,6 +46,9 @@ class Database : public QObject
 
         bool loadPeople(People &people);
         bool loadBankAccounts(BAccounts &ba);
+        bool loadAccounts(Accounts &a);
+        bool loadCards(Cards &c);
+
 };
 
 #endif

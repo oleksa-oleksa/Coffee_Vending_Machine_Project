@@ -29,11 +29,12 @@ class DatabaseTest: public QObject
         // Loading from DB into std::vector
         void testLoadPeople();
         void testLoadBankAccounts();
-
+        void testLoadAccounts();
+        void testLoadCards();
 
         void testCloseDatabase();
         // Uncomment to clear the DB after testing
-        //void testDeleteDB();
+        void testDeleteDB();
 };
 
 #endif // DATABASETEST_H
