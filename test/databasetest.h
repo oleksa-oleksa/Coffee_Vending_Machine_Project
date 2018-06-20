@@ -26,7 +26,10 @@ class DatabaseTest: public QObject
         void testInsertAccount();
         void testInsertCard();
 
+        // Loading from DB into std::vector
         void testLoadPeople();
+        void testLoadBankAccounts();
+
 
         void testCloseDatabase();
         // Uncomment to clear the DB after testing

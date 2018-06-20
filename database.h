@@ -40,11 +40,12 @@ class Database : public QObject
         bool insertPerson(QString name, QString surname,
                          QString address, int isEmployed, int isAdmin, int isStaff);
         bool insertBankAccount(QString accountID, int taxClass);
-        bool insertAccount(QString personID, QString IBAN,
+        bool insertAccount(QString accountID, QString personID, QString IBAN,
                            double credit, int state);
         bool insertCard(int cardStatus, QString accountID);
 
         bool loadPeople(People &people);
+        bool loadBankAccounts(BAccounts &ba);
 };
 
 #endif

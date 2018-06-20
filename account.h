@@ -6,6 +6,8 @@
 #include "accountstatus.h"
 #include "accountid.h"
 #include "bankaccount.h"
+#include <QSqlRecord>
+#include <string>
 
 // The Accounts are saved in std::vector Accounts
 
@@ -23,7 +25,7 @@ class Account
         AccountStatus state;
 
         // Constructor to be used by database class
-        Account(QSqlRecord &query);
+        //Account(QSqlRecord &query);
 
     public:
         Account();

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <QString>
 
-#define ACCOUNT_ID_LEN 12
+#define ACCOUNT_ID_LEN 8
 
 class AccountID
 {

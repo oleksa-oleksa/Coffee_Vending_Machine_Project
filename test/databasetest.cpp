@@ -73,7 +73,7 @@ void DatabaseTest::testInsertBankAccount()
 
     for (size_t i = 0; i < people.size(); i++)
     {
-       std::string tmp_accID = createRandomID(ACCOUNT_ID_LEN);
+       std::string tmp_accID = std::string("ACC") + createRandomID(ACCOUNT_ID_LEN);
        QString str = QString::fromUtf8(tmp_accID.c_str());
        QVERIFY(db_t.insertBankAccount(str, 1));
     }
@@ -85,17 +85,24 @@ void DatabaseTest::testInsertAccount()
     db_t.openDB();
     People people;
     db_t.loadPeople(people);
+    BAccounts ba;
+    db_t.loadBankAccounts(ba);
 
     // Obtaining Foreign Keys
+    // Bank Accounts and Account are always corresponding to the amount of people
+    // this is the solution for this particular issue
     for (size_t i = 0; i < people.size(); i++)
     {
-       PersonID tmp_id = people[i].getID();
-       QString q_pid = tmp_id.toQstring();
+       AccountID tmp_id1 = ba[i].getAccountID();
+       QString q_aid = tmp_id1.toQstring();
 
-       //AccountID tmp_id2 = people[i].getID();
-       //QString q_aid = tmp_id2.toQstring();
+       BankAccountID tmp_id2 = ba[i].getIBAN();
+       QString q_baid = tmp_id2.toQstring();
 
-       //QVERIFY(db_t.insertBankAccount(q_pid, 1));
+       PersonID tmp_id3 = people[i].getID();
+       QString q_pid = tmp_id3.toQstring();
+
+       QVERIFY(db_t.insertAccount(q_aid, q_pid, q_baid, 0.0, 0));
     }
 
 }
@@ -113,12 +120,24 @@ void DatabaseTest::testLoadPeople()
     // People is a type alias for vector of Person
     // See person.h
     People people;
-    db_t.loadPeople(people);
+    QVERIFY(db_t.loadPeople(people));
 
-    for (size_t i = 0; i < people.size(); i++) {
-        people[i].getID();
-        people[i].getName();
+    /* for (size_t i = 0; i < people.size(); i++) {
+       people[i].getName();
     }
+    */
+}
+
+
+void DatabaseTest::testLoadBankAccounts()
+{
+    Database db_t;
+    db_t.openDB();
+
+    // People is a type alias for vector of Person
+    // See person.h
+    BAccounts ba;
+    QVERIFY(db_t.loadBankAccounts(ba));
 }
 
 void DatabaseTest::testCloseDatabase()
@@ -135,3 +154,4 @@ void DatabaseTest::testDeleteDB()
     QVERIFY(db_t.deleteDB());
 }
 */
+

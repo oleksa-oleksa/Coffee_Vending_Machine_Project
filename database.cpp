@@ -126,16 +126,15 @@ bool Database::insertBankAccount(QString accountID, int taxClass)
      return ret;
 }
 
-bool Database::insertAccount(QString personID, QString IBAN, double credit, int state)
+bool Database::insertAccount(QString accountID, QString personID, QString IBAN, double credit, int state)
 {
     bool ret = false;
-    std::string accountID = createRandomID(ACCOUNT_ID_LEN);
 
     if (db.isOpen())
     {
            QSqlQuery query;
            ret = query.exec(QString("insert into Account values('%1','%2', '%3', %4, %5)")
-           .arg(accountID.c_str()).arg(personID).arg(IBAN).arg(credit).arg(state));
+           .arg(accountID).arg(personID).arg(IBAN).arg(credit).arg(state));
            qDebug() << query.lastError().text();
     }
     qDebug() << "Insert into Account finished with exit code: " << ret;
@@ -216,7 +215,7 @@ bool Database::loadPeople(People &people)
 
     bool ret = query.exec("SELECT personID, name, surname, address, isEmployed, isAdmin, isStaff FROM Person");
 
-    if (!ret) {
+    if (ret == false) {
         qDebug() << query.lastError().text();
         return ret;
     }
@@ -230,3 +229,25 @@ bool Database::loadPeople(People &people)
     qDebug() << "Loaded " << people.size() << " people";
     return ret;
 }
+
+bool Database::loadBankAccounts(BAccounts &ba)
+{
+    QSqlQuery query(db);
+
+    bool ret = query.exec("SELECT IBAN, accountID, taxClass FROM BankAccount");
+
+    if (!ret) {
+        qDebug() << query.lastError().text();
+        return ret;
+    }
+
+    while(query.next()) {
+        QSqlRecord rec = query.record();
+        BankAccount p(rec);
+        ba.push_back(p);
+    }
+
+    qDebug() << "Loaded " << ba.size() << " bank accounts";
+    return ret;
+}
+

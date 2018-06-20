@@ -10,7 +10,7 @@ Account::Account()
 // This constructor assumes that it receives a valid query
 // pointing at some row of data from Person table
 // Assumed row positions are
-Account::Account(QSqlRecord &query)
+/* Account::Account(QSqlRecord &query)
 {
     using namespace std;
 
@@ -23,7 +23,7 @@ Account::Account(QSqlRecord &query)
     PersonID personID = PersonID(q_pid.toUtf8().constData());
     BankAccountID iban = BankAccountID(q_iban.toUtf8().constData());
     accountID = AccountID(q_aid.toUtf8().constData());
-}
+} */
 
 Account::Account(Person *Employee, BankAccount *Ba)
 {

@@ -9,7 +9,7 @@ AccountID::AccountID(std::string id) : accountID(id)
 
 AccountID::AccountID()
 {
-    accountID = createRandomID(ACCOUNT_ID_LEN);
+    accountID = std::string("ACC") + createRandomID(ACCOUNT_ID_LEN);
 }
 
 QString AccountID::toQstring()
