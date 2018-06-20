@@ -1,5 +1,8 @@
 #include "rfid_scanner.h"
 #include <utility>
+#include <QDebug>
+
+using namespace std;
 
 RFID_Scanner::RFID_Scanner()
 {
@@ -26,16 +29,12 @@ RFID_Scanner::~RFID_Scanner()
 
 }
 
-bool RFID_Scanner::getRfidValidation( Card& usercard )
+bool RFID_Scanner::getRfidValidation( Card usercard )
 {
-/*
-   for( std::map<Card,bool>::iterator it = cardsDatabase.begin(); it != cardsDatabase.end(); ++it) { // For each element in cardsDatabase
-    {
-        if ( it->first == usercard )
-            return it->second;
-    }
-    return false;
-*/
+//   if ( cardsDatabase.find(usercard) == cardsDatabase.end())
+        qDebug() << "Error: Not yet implemented!";
+
+// return cardsDatabase[usercard];
 }
 
 void RFID_Scanner::registerNewCard( Card& newCard )

@@ -18,7 +18,7 @@ class RFID_Scanner : public Sensor
  */
         virtual ~RFID_Scanner();
 
-        bool getRfidValidation ( Card& );
+        bool getRfidValidation( Card );
         void registerNewCard ( Card& );
 
 };

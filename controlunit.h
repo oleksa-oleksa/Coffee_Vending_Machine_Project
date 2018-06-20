@@ -11,6 +11,7 @@
 #include "milkmaker.h"
 #include "rfid_scanner.h"
 #include "card.h"
+#include <QDebug>
 
 #define NO_CUP_PROXIMITY 100
 
@@ -25,20 +26,28 @@ class ControlUnit
         Flowmeter flow;
         Brewgroup brew;
         Milkmaker milk;
-// For testing:
+        RFID_Scanner rfid;
+/* For testing:
         RFID_Scanner testRfidScanner;
         RFID_Scanner& rfid = testRfidScanner;
+*/
 
         bool checkIngredients();
         bool checkCup();
         bool checkCard( Card& );
 
-
+        ControlUnit();
+        ControlUnit(ControlUnit const&);              // Don't Implement.
+        ControlUnit& operator=(ControlUnit const&); // Don't implement
 
     public:
-// TODO: Implement as Singleton Class
-        ControlUnit();
-        ~ControlUnit();
+
+        static ControlUnit& getInstance()
+        {
+            static ControlUnit instance;
+            return instance;
+        }
+
         void maintenanceRoutine();
 };
 

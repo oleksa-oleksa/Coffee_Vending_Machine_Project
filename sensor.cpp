@@ -12,11 +12,13 @@ Sensor::~Sensor()
 
 SensorType Sensor::getSensorType()
 {
+    qDebug() << "Sensor Type:" << sensorType;
     return sensorType;
 }
 
 State Sensor::getSensorState()
 {
+    qDebug() << "Sensor State:" << sensorType;
     return sensorState;
 }
 
