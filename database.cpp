@@ -210,7 +210,7 @@ void Database::closeDatabase()
     db.close();
 }
 
-void Database::loadPeople(People &people)
+bool Database::loadPeople(People &people)
 {
     QSqlQuery query(db);
 
@@ -218,7 +218,7 @@ void Database::loadPeople(People &people)
 
     if (!ret) {
         qDebug() << query.lastError().text();
-        return;
+        return ret;
     }
 
     while(query.next()) {
@@ -228,4 +228,5 @@ void Database::loadPeople(People &people)
     }
 
     qDebug() << "Loaded " << people.size() << " people";
+    return ret;
 }

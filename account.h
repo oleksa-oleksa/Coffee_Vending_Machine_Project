@@ -7,10 +7,14 @@
 #include "accountid.h"
 #include "bankaccount.h"
 
+// The Accounts are saved in std::vector Accounts
+
+
 class BankAccount;
 
 class Account
 {
+    friend class Database;
     private:
         AccountID accountID;
         double credit;
@@ -18,7 +22,12 @@ class Account
         Person *owner;
         BankAccount *ba;
 
+        // Constructor to be used by database class
+        Account(QSqlRecord &query);
+
     public:
+        Account();
+
         Account(Person *newEmployee, BankAccount *newBa);
         AccountStatus getAccountStatus();
         void setAccountStatus(AccountStatus newState);
@@ -34,5 +43,7 @@ class Account
         void deactivateAccount();
         void blockAccount();
 };
+
+typedef std::vector<Account> Accounts;
 
 #endif // ACCOUNT_H

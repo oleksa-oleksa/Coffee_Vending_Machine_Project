@@ -10,3 +10,8 @@ PersonID::PersonID()
 {
     personID = createRandomID(PERSON_ID_LEN);
 }
+
+QString PersonID::toQstring()
+{
+  return QString::fromUtf8(personID.c_str());
+}

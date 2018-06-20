@@ -5,6 +5,7 @@
 #include <qsqlrecord.h>
 #include "personid.h"
 
+// The Persons are saved in std::vector People
 
 class Person
 {
@@ -14,7 +15,6 @@ class Person
       std::string name;
       std::string surname;
       std::string address;
-
 
       // a person should be emploeyd at the company to be able to buy a drink
       // if person will be fired, the all flags must be reseted.
@@ -29,6 +29,7 @@ class Person
 
       // Constructor to be used by database class
       Person(QSqlRecord &query);
+
    public:
       Person();
 
@@ -48,6 +49,5 @@ class Person
 };
 
 typedef std::vector<Person> People;
-
 
 #endif

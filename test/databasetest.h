@@ -28,6 +28,8 @@ class DatabaseTest: public QObject
         void testInsertAccount();
         void testInsertCard();
 
+        void testLoadPeople();
+
 };
 
 #endif // DATABASETEST_H

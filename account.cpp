@@ -2,6 +2,11 @@
 #include <QtDebug>
 const float CREDIT_LIMIT = 10.0;
 
+Account::Account()
+{
+
+}
+
 Account::Account(Person *Employee, BankAccount *Ba)
 {
     credit = 0.0;

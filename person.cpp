@@ -21,10 +21,10 @@ Person::Person(QSqlRecord &query)
     QString q_surname = query.value(2).toString();
     QString q_address = query.value(3).toString();
 
-    // can also be converted to bool with toBool()
-    isEmployed = query.value(4).toInt();
-    isAdmin = query.value(5).toInt();
-    isStaff = query.value(6).toInt();
+    // can also be converted to int with toInt()
+    isEmployed = query.value(4).toBool();
+    isAdmin = query.value(5).toBool();
+    isStaff = query.value(6).toBool();
 
     // qs.toUtf8().constData() is a way to convert QString to std::string
     personID = PersonID(q_pid.toUtf8().constData());

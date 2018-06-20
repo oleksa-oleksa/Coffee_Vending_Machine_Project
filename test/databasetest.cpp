@@ -61,40 +61,73 @@ void DatabaseTest::testCreateCardTable()
 
 void DatabaseTest::testInsertPerson()
 {
-    srand(time(NULL));
-
     Database db_t;
     db_t.openDB();
 
-    QVERIFY(db_t.insertPerson("Oleksandra", "Admin", "Beuth strasse 2018", 1, 1, 0));
-    QVERIFY(db_t.insertPerson("Vicent", "Staff", "Toller strasse 2018", 1, 0, 1));
-    QVERIFY(db_t.insertPerson("Patric", "Unemployed", "Grün Avenu 17", 0, 0, 0));
-    QVERIFY(db_t.insertPerson("Patric", "UnemployedStaff", "Grün Avenu 17", 0, 0, 0));
-
-    // People is a type alias for vector of Person
-    // See person.h
-    People people;
-    db_t.loadPeople(people);
-
-    for (int i = 0; i<people.size(); i++) {
-        qDebug() << people[i].getAddress().c_str();
-    }
+    QVERIFY(db_t.insertPerson("Oleksandra", "EmployedAdmin", "Beuthstrasse 2018", 1, 1, 0));
+    QVERIFY(db_t.insertPerson("Lara", "EmployedNormalPerson", "Kurze Strasse 22", 1, 0, 0));
+    QVERIFY(db_t.insertPerson("Eugenia", "EmployedNormalPerson", "Teltowstrasse 12a", 1, 0, 0));
+    QVERIFY(db_t.insertPerson("Vincent", "EmployedStaff", "Toller Strasse 2018", 1, 0, 1));
+    QVERIFY(db_t.insertPerson("Patric", "UnemployedAtAll", "Grün Avenue 17", 0, 0, 0));
+    QVERIFY(db_t.insertPerson("Jack", "UnemployedStaff", "Schlossstrasse 17", 0, 0, 1));
+    QVERIFY(db_t.insertPerson("Anetta", "UnemployedAdmin", "Bismarkstrasse 45", 0, 1, 0));
 }
 
 void DatabaseTest::testInsertBankAccount()
 {
     Database db_t;
     db_t.openDB();
+    People people;
+    db_t.loadPeople(people);
 
-    //QVERIFY(db_t.insertBankAccount());
+    // Obtaining PersonID (Primary Key) to use
+    // as Foreign Key in BankAccount Table
+    for (size_t i = 0; i < people.size(); i++)
+    {
+       PersonID tmp_id = people[i].getID();
+       QString q_pid = tmp_id.toQstring();
+       QVERIFY(db_t.insertBankAccount(q_pid, 1));
+    }
 }
 
 void DatabaseTest::testInsertAccount()
 {
+    Database db_t;
+    db_t.openDB();
+    People people;
+    db_t.loadPeople(people);
+
+    // Obtaining Foreign Keys
+    for (size_t i = 0; i < people.size(); i++)
+    {
+       PersonID tmp_id = people[i].getID();
+       QString q_pid = tmp_id.toQstring();
+
+       AccountID tmp_id2 = people[i].getID();
+
+
+       QVERIFY(db_t.insertBankAccount(q_pid, 1));
+    }
 
 }
 
 void DatabaseTest::testInsertCard()
 {
 
+}
+
+void DatabaseTest::testLoadPeople()
+{
+    Database db_t;
+    db_t.openDB();
+
+    // People is a type alias for vector of Person
+    // See person.h
+    People people;
+    db_t.loadPeople(people);
+
+    for (size_t i = 0; i < people.size(); i++) {
+        people[i].getID();
+        people[i].getName();
+    }
 }
