@@ -14,8 +14,7 @@ Account::Account()
 
 // This constructor assumes that it receives a valid query
 // pointing at some row of data from Person table
-// Assumed row positions are
- Account::Account(QSqlRecord &query)
+Account::Account(QSqlRecord &query)
 {
     using namespace std;
 
@@ -180,7 +179,7 @@ bool Account::linkBankAccount(BankAccountID iban)
        if (BankAccount::AllBankAccounts[i].getIBAN().toQstring() == iban.toQstring())
        {
           setBankAccount(&BankAccount::AllBankAccounts[i]);
-          qDebug() << "BA is set to IBAN:" << BankAccount::AllBankAccounts[i].getIBAN().toQstring();
+          qDebug() << "Bank account is set to IBAN:" << BankAccount::AllBankAccounts[i].getIBAN().toQstring();
           ret = true;
        }
     }

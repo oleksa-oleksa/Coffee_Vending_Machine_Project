@@ -4,15 +4,21 @@
 #include "account.h"
 #include "cardid.h"
 #include "cardstatus.h"
+#include "accountid.h"
+#include <QSqlRecord>
 
 class Account;
 
 class Card
 {
+    friend class Database;
     private:
         CardID cardID;
         CardStatus cardStatus;
         Account *account;
+
+        // Constructor to be used by database class
+        Card(QSqlRecord &query);
 
     public:
         Card(Account *ac);
@@ -28,6 +34,7 @@ class Card
         Account *getAccount();
         void setAccount(Account *account);
         bool withdraw(double price);
+        bool linkAccount(AccountID accountID);
 };
 
 typedef std::vector<Card> Cards;

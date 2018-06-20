@@ -34,7 +34,7 @@ class DatabaseTest: public QObject
 
         void testCloseDatabase();
         // Uncomment to clear the DB after testing
-        void testDeleteDB();
+        // void testDeleteDB();
 };
 
 #endif // DATABASETEST_H

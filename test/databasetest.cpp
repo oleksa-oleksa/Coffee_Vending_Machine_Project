@@ -108,7 +108,18 @@ void DatabaseTest::testInsertAccount()
 
 void DatabaseTest::testInsertCard()
 {
+    Database db_t;
+    db_t.openDB();
+    Accounts a;
+    db_t.loadAccounts(a);
 
+    for (size_t i = 0; i < a.size(); i++)
+    {
+        AccountID tmp_id1 = a[i].getAccountID();
+        QString q_aid = tmp_id1.toQstring();
+
+        QVERIFY(db_t.insertCard(0, q_aid));
+    }
 }
 
 void DatabaseTest::testLoadPeople()
@@ -145,16 +156,30 @@ void DatabaseTest::testLoadAccounts()
     }
 }
 
+void DatabaseTest::testLoadCards()
+{
+    Database db_t;
+    db_t.openDB();
+
+    QVERIFY(db_t.loadCards(Card::AllCards));
+}
+
 void DatabaseTest::testCloseDatabase()
 {
     Database db_t;
     db_t.closeDatabase();
+
+    // COMMENT THIS STATEMENT TO SAVE DB
+    // SAVING DB WILL CAUSE ERROR OF PRIMARY KEYS IN UNIT TEST (THIS IS NORMAL!)
+    // THIS WILL NOT APPER WITH MANUAL FUNCTION CALLS
+    //db_t.deleteDB();
 }
 
-// Uncomment to clear the DB after testing
+// Uncomment to test delete
+/*
 void DatabaseTest::testDeleteDB()
 {
     Database db_t;
     QVERIFY(db_t.deleteDB());
 }
-
+*/

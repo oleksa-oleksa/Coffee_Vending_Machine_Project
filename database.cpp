@@ -144,12 +144,12 @@ bool Database::insertAccount(QString accountID, QString personID, QString IBAN, 
 bool Database::insertCard(int cardStatus, QString accountID)
 {
     bool ret = false;
-    std::string cardID = createRandomID(CARD_ID_LEN);
+    std::string cardID = std::string("5100") + createRandomID(CARD_ID_LEN);
 
     if (db.isOpen())
     {
            QSqlQuery query;
-           ret = query.exec(QString("insert into Card values('%1',%2, '%3'")
+           ret = query.exec(QString("insert into Card values('%1',%2, '%3')")
            .arg(cardID.c_str()).arg(cardStatus).arg(accountID));
            qDebug() << query.lastError().text();
     }
@@ -272,3 +272,23 @@ bool Database::loadAccounts(Accounts &a)
     return ret;
 }
 
+bool Database::loadCards(Cards &c)
+{
+    QSqlQuery query(db);
+
+    bool ret = query.exec("SELECT cardID, cardStatus, accountID FROM Card");
+
+    if (ret == false) {
+        qDebug() << query.lastError().text();
+        return ret;
+    }
+
+    while(query.next()) {
+        QSqlRecord rec = query.record();
+        Card p(rec);
+        c.push_back(p);
+    }
+
+    qDebug() << "Loaded " << c.size() << " cards";
+    return ret;
+}
