@@ -16,11 +16,11 @@ class Account
 {
     friend class Database;
     private:
+        Person *owner;
+        BankAccount *ba;
         AccountID accountID;
         double credit;
         AccountStatus state;
-        Person *owner;
-        BankAccount *ba;
 
         // Constructor to be used by database class
         Account(QSqlRecord &query);

@@ -7,6 +7,24 @@ Account::Account()
 
 }
 
+// This constructor assumes that it receives a valid query
+// pointing at some row of data from Person table
+// Assumed row positions are
+Account::Account(QSqlRecord &query)
+{
+    using namespace std;
+
+    QString q_pid = query.value(0).toString();
+    QString q_iban = query.value(1).toString();
+    QString q_aid = query.value(2).toString();
+    credit = query.value(3).toDouble();
+    state = (AccountStatus)query.value(4).toInt();;
+
+    PersonID personID = PersonID(q_pid.toUtf8().constData());
+    BankAccountID iban = BankAccountID(q_iban.toUtf8().constData());
+    accountID = AccountID(q_aid.toUtf8().constData());
+}
+
 Account::Account(Person *Employee, BankAccount *Ba)
 {
     credit = 0.0;

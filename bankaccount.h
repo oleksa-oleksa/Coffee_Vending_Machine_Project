@@ -8,6 +8,7 @@ class Account;
 
 class BankAccount
 {
+    friend class Database;
     private:
         BankAccountID IBAN;
         int taxClass;

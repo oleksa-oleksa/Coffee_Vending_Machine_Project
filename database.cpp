@@ -113,7 +113,7 @@ bool Database::insertPerson(QString name, QString surname,
 bool Database::insertBankAccount(QString accountID, int taxClass)
 {
     bool ret = false;
-    std::string IBAN = createRandomID(IBAN_LEN);
+    std::string IBAN = std::string("DE") + createRandomID(IBAN_LEN);
 
     if (db.isOpen())
     {
@@ -126,7 +126,7 @@ bool Database::insertBankAccount(QString accountID, int taxClass)
      return ret;
 }
 
-bool Database::insertAccount(QString personID, QString IBAN, int credit, int state)
+bool Database::insertAccount(QString personID, QString IBAN, double credit, int state)
 {
     bool ret = false;
     std::string accountID = createRandomID(ACCOUNT_ID_LEN);

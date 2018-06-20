@@ -15,7 +15,7 @@ std::string createRandomID(int lenght)
     std::string newID(lenght, '0');
     static const char alphanum[] =
             "0123456789"
-            "abcdefghijklmnopqrstuvwxyz";
+            "BBERDED";
 
         for (int i = 0; i < lenght; ++i)
         {

@@ -12,9 +12,7 @@ class DatabaseTest: public QObject
     Q_OBJECT
     private slots:
         void testOpenDB();
-        //bool testDeleteDB();
         //bool testRestoreDatabase();
-        void testCloseDatabase();
 
         // Database create tables
         void testCreatePersonTable();
@@ -30,6 +28,9 @@ class DatabaseTest: public QObject
 
         void testLoadPeople();
 
+        void testCloseDatabase();
+        // Uncomment to clear the DB after testing
+        //void testDeleteDB();
 };
 
 #endif // DATABASETEST_H

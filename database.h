@@ -41,7 +41,7 @@ class Database : public QObject
                          QString address, int isEmployed, int isAdmin, int isStaff);
         bool insertBankAccount(QString accountID, int taxClass);
         bool insertAccount(QString personID, QString IBAN,
-                           int credit, int state);
+                           double credit, int state);
         bool insertCard(int cardStatus, QString accountID);
 
         bool loadPeople(People &people);
