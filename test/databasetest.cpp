@@ -1,5 +1,8 @@
 #include "databasetest.h"
 #include "database.h"
+#include <stdlib.h>
+#include <time.h>
+#include <vector>
 
 void DatabaseTest::testOpenDB()
 {
@@ -58,6 +61,8 @@ void DatabaseTest::testCreateCardTable()
 
 void DatabaseTest::testInsertPerson()
 {
+    srand(time(NULL));
+
     Database db_t;
     db_t.openDB();
 
@@ -66,6 +71,14 @@ void DatabaseTest::testInsertPerson()
     QVERIFY(db_t.insertPerson("Patric", "Unemployed", "Grün Avenu 17", 0, 0, 0));
     QVERIFY(db_t.insertPerson("Patric", "UnemployedStaff", "Grün Avenu 17", 0, 0, 0));
 
+    // People is a type alias for vector of Person
+    // See person.h
+    People people;
+    db_t.loadPeople(people);
+
+    for (int i = 0; i<people.size(); i++) {
+        qDebug() << people[i].getAddress().c_str();
+    }
 }
 
 void DatabaseTest::testInsertBankAccount()

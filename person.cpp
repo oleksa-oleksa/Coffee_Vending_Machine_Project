@@ -3,6 +3,37 @@
 #include "person.h"
 #include "tools.h"
 
+// Default constructor is necessary b/c other is defined
+// Effectively it's a default constructor
+Person::Person()
+{
+}
+
+// This constructor assumes that it receives a valid query
+// pointing at some row of data from Person table
+// Assumed row positions are
+Person::Person(QSqlRecord &query)
+{
+    using namespace std;
+
+    QString q_pid = query.value(0).toString();
+    QString q_name = query.value(1).toString();
+    QString q_surname = query.value(2).toString();
+    QString q_address = query.value(3).toString();
+
+    // can also be converted to bool with toBool()
+    isEmployed = query.value(4).toInt();
+    isAdmin = query.value(5).toInt();
+    isStaff = query.value(6).toInt();
+
+    // qs.toUtf8().constData() is a way to convert QString to std::string
+    personID = PersonID(q_pid.toUtf8().constData());
+    name = q_name.toUtf8().constData();
+    surname = q_surname.toUtf8().constData();
+    address = q_address.toUtf8().constData();
+}
+
+
 std::string const & Person::getName() const
 {
     qDebug() << "Name is: " << name.c_str();

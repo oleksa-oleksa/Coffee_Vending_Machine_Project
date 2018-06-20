@@ -210,6 +210,22 @@ void Database::closeDatabase()
     db.close();
 }
 
+void Database::loadPeople(People &people)
+{
+    QSqlQuery query(db);
 
+    bool ret = query.exec("SELECT personID, name, surname, address, isEmployed, isAdmin, isStaff FROM Person");
 
+    if (!ret) {
+        qDebug() << query.lastError().text();
+        return;
+    }
 
+    while(query.next()) {
+        QSqlRecord rec = query.record();
+        Person p(rec);
+        people.push_back(p);
+    }
+
+    qDebug() << "Loaded " << people.size() << " people";
+}

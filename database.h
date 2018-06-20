@@ -44,6 +44,7 @@ class Database : public QObject
                            int credit, int state);
         bool insertCard(int cardStatus, QString accountID);
 
+        void loadPeople(People &people);
 };
 
 #endif

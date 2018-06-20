@@ -1,5 +1,7 @@
 #include <iostream>
 #include <tools.h>
+#include <QDebug>
+
 
 /* Created a random ID of fixed lenght
    The ID entyties is used for DB as:
@@ -11,7 +13,6 @@
 std::string createRandomID(int lenght)
 {
     std::string newID(lenght, '0');
-
     static const char alphanum[] =
             "0123456789"
             "abcdefghijklmnopqrstuvwxyz";

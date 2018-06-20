@@ -2,10 +2,13 @@
 #define PERSON_H
 
 #include <string>
+#include <qsqlrecord.h>
 #include "personid.h"
+
 
 class Person
 {
+   friend class Database;
    private:
       PersonID personID;
       std::string name;
@@ -23,7 +26,12 @@ class Person
 
       //a person could provide service functions
       bool isStaff;
+
+      // Constructor to be used by database class
+      Person(QSqlRecord &query);
    public:
+      Person();
+
       std::string const & getName() const;
       std::string const & getSurname() const;
       std::string const & getAddress() const;
@@ -38,5 +46,8 @@ class Person
       bool getStaff();
       void setStaff(bool isStaff);
 };
+
+typedef std::vector<Person> People;
+
 
 #endif

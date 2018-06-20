@@ -6,9 +6,13 @@
 
 class PersonID
 {
+    friend class Database;
     private:
         std::string personID;
+
+
     public:
+        PersonID(std::string id);
         PersonID();
 };
 
