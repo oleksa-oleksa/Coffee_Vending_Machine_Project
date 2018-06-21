@@ -10,13 +10,17 @@
 #include "iostream"
 #include "tools.h"
 
+// TODO after meeting with Hoefig
+// typedeff => std::vector
+// test the initialisation of class instances separately
+
 bool Database::createPersonTable()
 {
     // Create table "Person"
     bool ret = false;
-    if (db.isOpen())
+    if (isOpen())
     {
-        QSqlQuery query(db);
+        QSqlQuery query;
         ret = query.exec("create table IF NOT EXISTS Person "
                          "(personID VARCHAR(5) NOT NULL primary key asc, "
                          "name VARCHAR(30) NOT NULL, "
@@ -35,7 +39,7 @@ bool Database::createBankAccountTable()
 {
     // Create table "BankAccount"
     bool ret = false;
-    if (db.isOpen())
+    if (isOpen())
     {
         QSqlQuery query;
         ret = query.exec("create table IF NOT EXISTS BankAccount "
@@ -54,14 +58,14 @@ bool Database::createAccountTable()
 {
     // Create table "Account"
     bool ret = false;
-    if (db.isOpen())
+    if (isOpen())
     {
         QSqlQuery query;
         ret = query.exec("create table IF NOT EXISTS Account "
                          "(accountID VARCHAR(12) NOT NULL, "
                          "personID  VARCHAR(5), "
                           "IBAN VARCHAR(22), "
-                          "credit INT, "
+                          "credit FLOAT, "
                           "state INT, "
                           "primary key (accountID), "
                            "foreign key (personID) references Person(personID), "
@@ -77,7 +81,7 @@ bool Database::createCardTable()
 {
     // Create table "Account"
     bool ret = false;
-    if (db.isOpen())
+    if (isOpen())
     {
         QSqlQuery query;
         ret = query.exec("create table IF NOT EXISTS Card "
@@ -98,7 +102,7 @@ bool Database::insertPerson(QString name, QString surname,
     bool ret = false;
     std::string personID = createRandomID(PERSON_ID_LEN);
 
-    if (db.isOpen())
+    if (isOpen())
     {
            QSqlQuery query;
            // HINT: query.exec().arg().arg() => obj.arg().arg() => obj.arg()
@@ -115,7 +119,7 @@ bool Database::insertBankAccount(QString accountID, int taxClass)
     bool ret = false;
     std::string IBAN = std::string("DEBBER") + createRandomID(IBAN_LEN);
 
-    if (db.isOpen())
+    if (isOpen())
     {
            QSqlQuery query;
            ret = query.exec(QString("insert into BankAccount values('%1','%2', %3)")
@@ -130,7 +134,7 @@ bool Database::insertAccount(QString accountID, QString personID, QString IBAN, 
 {
     bool ret = false;
 
-    if (db.isOpen())
+    if (isOpen())
     {
            QSqlQuery query;
            ret = query.exec(QString("insert into Account values('%1','%2', '%3', %4, %5)")
@@ -146,7 +150,7 @@ bool Database::insertCard(int cardStatus, QString accountID)
     bool ret = false;
     std::string cardID = std::string("5100") + createRandomID(CARD_ID_LEN);
 
-    if (db.isOpen())
+    if (isOpen())
     {
            QSqlQuery query;
            ret = query.exec(QString("insert into Card values('%1',%2, '%3')")
@@ -157,26 +161,28 @@ bool Database::insertCard(int cardStatus, QString accountID)
     return ret;
 }
 
-bool Database::openDB()
+bool Database::openDB(std::string db_name)
 {
     // Find QSLite driver
-    db = QSqlDatabase::addDatabase("QSQLITE");
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
 
     #ifdef Q_OS_LINUX
    // NOTE: We have to store database file into user home folder in Linux
    QString path(QDir::home().path());
-   path.append(QDir::separator()).append(DATABASE_NAME);
+   path.append(QDir::separator()).append(db_name);
    path = QDir::toNativeSeparators(path);
    db.setDatabaseName(path);
    #else
    // NOTE: File exists in the application private folder, in Symbian Qt implementation
    qDebug() << QDir::currentPath();
-   db.setDatabaseName(DATABASE_NAME);
+   db.setDatabaseName(db_name.c_str());
    #endif
 
    // Open databasee
    bool ret = db.open();
-   qDebug() << db.lastError().text();
+   if (!ret) {
+    qDebug() << db.lastError().text();
+   }
    return ret;
 }
 
@@ -184,13 +190,15 @@ QSqlError Database::lastError()
 {
     // If opening database has failed user can ask
     // error description by QSqlError::text()
+    QSqlDatabase db = QSqlDatabase::database();
+
     return db.lastError();
 }
 
 bool Database::deleteDB()
 {
     // Close database
-    db.close();
+    closeDatabase();
 
     #ifdef Q_OS_LINUX
     // NOTE: We have to store database file into user home folder in Linux
@@ -204,15 +212,21 @@ bool Database::deleteDB()
     #endif
 }
 
+bool Database::isOpen()
+{
+    return QSqlDatabase::database().isOpen();
+}
+
 void Database::closeDatabase()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+
     db.close();
 }
 
 bool Database::loadPeople(People &people)
 {
-    QSqlQuery query(db);
-
+    QSqlQuery query;
     bool ret = query.exec("SELECT personID, name, surname, address, isEmployed, isAdmin, isStaff FROM Person");
 
     if (ret == false) {
@@ -232,7 +246,7 @@ bool Database::loadPeople(People &people)
 
 bool Database::loadBankAccounts(BAccounts &ba)
 {
-    QSqlQuery query(db);
+    QSqlQuery query;
 
     bool ret = query.exec("SELECT IBAN, accountID, taxClass FROM BankAccount");
 
@@ -253,7 +267,7 @@ bool Database::loadBankAccounts(BAccounts &ba)
 
 bool Database::loadAccounts(Accounts &a)
 {
-    QSqlQuery query(db);
+    QSqlQuery query;
 
     bool ret = query.exec("SELECT accountID, personID, IBAN, credit, state FROM Account");
 
@@ -274,7 +288,7 @@ bool Database::loadAccounts(Accounts &a)
 
 bool Database::loadCards(Cards &c)
 {
-    QSqlQuery query(db);
+    QSqlQuery query;
 
     bool ret = query.exec("SELECT cardID, cardStatus, accountID FROM Card");
 

@@ -1,3 +1,4 @@
+// Created by Oleksandra Baga
 #ifndef BANKACCOUNT_H
 #define BANKACCOUNT_H
 #include <string>

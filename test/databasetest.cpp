@@ -1,3 +1,4 @@
+// Created by Oleksandra Baga
 #include "databasetest.h"
 #include "database.h"
 #include <stdlib.h>
@@ -9,7 +10,7 @@ void DatabaseTest::testOpenDB()
 {
     Database db_t;
 
-    QVERIFY2(db_t.openDB() == true, "OpenDB() failed");
+    QVERIFY2(db_t.openDB(DATABASE_NAME_TEST) == true, "OpenDB() failed");
 }
 
 
@@ -22,35 +23,35 @@ void DatabaseTest::testOpenDB()
 void DatabaseTest::testCreatePersonTable()
 {
     Database db_t;
-    db_t.openDB();
+    db_t.openDB(DATABASE_NAME_TEST);
     QVERIFY(db_t.createPersonTable());
 }
 
 void DatabaseTest::testCreateBankAccountTable()
 {
     Database db_t;
-    db_t.openDB();
+    db_t.openDB(DATABASE_NAME_TEST);
     QVERIFY(db_t.createBankAccountTable());
 }
 
 void DatabaseTest::testCreateAccountTable()
 {
     Database db_t;
-    db_t.openDB();
+    db_t.openDB(DATABASE_NAME_TEST);
     QVERIFY(db_t.createAccountTable());
 }
 
 void DatabaseTest::testCreateCardTable()
 {
     Database db_t;
-    db_t.openDB();
+    db_t.openDB(DATABASE_NAME_TEST);
     QVERIFY(db_t.createCardTable());
 }
 
 void DatabaseTest::testInsertPerson()
 {
     Database db_t;
-    db_t.openDB();
+    db_t.openDB(DATABASE_NAME_TEST);
 
     QVERIFY(db_t.insertPerson("Oleksandra", "EmployedAdmin", "Beuthstrasse 2018", 1, 1, 0));
     QVERIFY(db_t.insertPerson("Lara", "EmployedNormalPerson", "Kurze Strasse 22", 1, 0, 0));
@@ -64,7 +65,7 @@ void DatabaseTest::testInsertPerson()
 void DatabaseTest::testInsertBankAccount()
 {
     Database db_t;
-    db_t.openDB();
+    db_t.openDB(DATABASE_NAME_TEST);
 
     // In Unit Test we want to know the amount of persons
     // in order to create exactly amount of BA
@@ -82,7 +83,7 @@ void DatabaseTest::testInsertBankAccount()
 void DatabaseTest::testInsertAccount()
 {
     Database db_t;
-    db_t.openDB();
+    db_t.openDB(DATABASE_NAME_TEST);
     People people;
     db_t.loadPeople(people);
     BAccounts ba;
@@ -109,7 +110,7 @@ void DatabaseTest::testInsertAccount()
 void DatabaseTest::testInsertCard()
 {
     Database db_t;
-    db_t.openDB();
+    db_t.openDB(DATABASE_NAME_TEST);
     Accounts a;
     db_t.loadAccounts(a);
 
@@ -125,7 +126,7 @@ void DatabaseTest::testInsertCard()
 void DatabaseTest::testLoadPeople()
 {
     Database db_t;
-    db_t.openDB();
+    db_t.openDB(DATABASE_NAME_TEST);
 
     // Saving from DB into static global
     QVERIFY(db_t.loadPeople(Person::AllEmployee));
@@ -136,7 +137,7 @@ void DatabaseTest::testLoadPeople()
 void DatabaseTest::testLoadBankAccounts()
 {
     Database db_t;
-    db_t.openDB();
+    db_t.openDB(DATABASE_NAME_TEST);
 
     // Saving from DB into static global
     QVERIFY(db_t.loadBankAccounts(BankAccount::AllBankAccounts));
@@ -145,7 +146,7 @@ void DatabaseTest::testLoadBankAccounts()
 void DatabaseTest::testLoadAccounts()
 {
     Database db_t;
-    db_t.openDB();
+    db_t.openDB(DATABASE_NAME_TEST);
 
     QVERIFY(db_t.loadAccounts(Account::AllAccounts));
 
@@ -159,7 +160,7 @@ void DatabaseTest::testLoadAccounts()
 void DatabaseTest::testLoadCards()
 {
     Database db_t;
-    db_t.openDB();
+    db_t.openDB(DATABASE_NAME_TEST);
 
     QVERIFY(db_t.loadCards(Card::AllCards));
 }
@@ -172,7 +173,7 @@ void DatabaseTest::testCloseDatabase()
     // COMMENT THIS STATEMENT TO SAVE DB
     // SAVING DB WILL CAUSE ERROR OF PRIMARY KEYS IN UNIT TEST (THIS IS NORMAL!)
     // THIS WILL NOT APPER WITH MANUAL FUNCTION CALLS
-    //db_t.deleteDB();
+    db_t.deleteDB();
 }
 
 // Uncomment to test delete

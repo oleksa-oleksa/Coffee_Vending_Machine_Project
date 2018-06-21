@@ -12,7 +12,7 @@ BankAccount::BankAccount()
 }
 
 // This constructor assumes that it receives a valid query
-// pointing at some row of data from Person table
+// pointing at some row of data from BankAccount table
 BankAccount::BankAccount(QSqlRecord &query)
 {
     using namespace std;

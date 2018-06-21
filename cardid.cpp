@@ -1,3 +1,4 @@
+// Created by Oleksandra Baga
 #include "cardid.h"
 #include "tools.h"
 #include <iostream>

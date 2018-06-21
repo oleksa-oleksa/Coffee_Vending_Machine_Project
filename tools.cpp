@@ -1,7 +1,7 @@
+// Created by Oleksandra Baga
 #include <iostream>
 #include <tools.h>
 #include <QDebug>
-
 
 /* Created a random ID of fixed lenght
    The ID entyties is used for DB as:
@@ -23,4 +23,14 @@ std::string createRandomID(int lenght)
         }
 
         return newID;
+}
+
+bool assert(bool flag, const char *error_msg)
+{
+  if (!flag)
+  {
+    qDebug() << error_msg;
+    return false;
+  }
+  return true;
 }

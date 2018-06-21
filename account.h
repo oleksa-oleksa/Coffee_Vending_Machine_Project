@@ -1,3 +1,4 @@
+// Created by Oleksandra Baga
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 

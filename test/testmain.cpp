@@ -3,6 +3,7 @@
 #include <QTest>
 #include <QDebug>
 #include "databasetest.h"
+#include "accounttest.h"
 
 
 int main(int argc, char *argv[])
@@ -14,9 +15,12 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    // TESTS
-    DatabaseTest dbtst;
-    return QTest::qExec(&dbtst, argc, argv);
+    // UNIT TESTS: SEPARATE CLASSES
+    DatabaseTest dbtst01;
+    return QTest::qExec(&dbtst01, argc, argv);
+
+//    AccountTest dbtst02;
+//    return QTest::qExec(&dbtst02, argc, argv);
 
     return a.exec();
 }

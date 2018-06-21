@@ -3,5 +3,7 @@
 #include <iostream>
 
 std::string createRandomID(int lenght);
+bool assert(bool flag, const char *error_msg);
+
 
 #endif // TOOLS_H

@@ -1,3 +1,4 @@
+// Created by Oleksandra Baga
 #ifndef CARD_H
 #define CARD_H
 

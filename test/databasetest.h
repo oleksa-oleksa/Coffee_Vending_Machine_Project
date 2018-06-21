@@ -1,3 +1,4 @@
+// Created by Oleksandra Baga
 #ifndef DATABASETEST_H
 #define DATABASETEST_H
 
@@ -12,7 +13,6 @@ class DatabaseTest: public QObject
     Q_OBJECT
     private slots:
         void testOpenDB();
-        //bool testRestoreDatabase();
 
         // Database create tables
         void testCreatePersonTable();

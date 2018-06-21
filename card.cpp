@@ -1,3 +1,4 @@
+// Created by Oleksandra Baga
 #include "card.h"
 #include <iostream>
 #include "accountstatus.h"
@@ -19,7 +20,7 @@ Card::~Card()
 }
 
 // This constructor assumes that it receives a valid query
-// pointing at some row of data from Person table
+// pointing at some row of data from Card table
 Card::Card(QSqlRecord &query)
 {
     using namespace std;
@@ -72,14 +73,14 @@ void Card::activateCard()
 Account *Card::getAccount()
 {
 
-    qDebug() << "Account is: " << account;
+    qDebug() << "Account is: " << account->getAccountID().toQstring();
     return account;
 }
 
 void Card::setAccount(Account *newAccount)
 {
     account = newAccount;
-    qDebug() << "Account is set: " << account;
+    qDebug() << "Account is set: " << account->getAccountID().toQstring();
 
 }
 

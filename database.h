@@ -10,23 +10,20 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QSqlDatabase>
+#include <string>
 
 #define DATABASE_HOSTNAME "CoffeeMachine"
 #define DATABASE_NAME "project_database.db"
+#define DATABASE_NAME_TEST "project_database.db"
 
 class Database : public QObject
 {
     Q_OBJECT
 
-    private:
-        // Database object
-         QSqlDatabase db;
-
     public:
         // Database(QObject *parent = 0);
-        bool openDB();
+        bool openDB(std::string db_name);
         bool deleteDB();
-        bool restoreDatabase();
         void closeDatabase();
         QSqlError lastError();
 
@@ -48,7 +45,7 @@ class Database : public QObject
         bool loadBankAccounts(BAccounts &ba);
         bool loadAccounts(Accounts &a);
         bool loadCards(Cards &c);
-
+        bool isOpen();
 };
 
 #endif

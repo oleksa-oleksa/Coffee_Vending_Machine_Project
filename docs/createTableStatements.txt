@@ -24,7 +24,7 @@ create table Account
     accountID VARCHAR(12) NOT NULL,
     personID  VARCHAR(5),
     IBAN VARCHAR(22),
-    credit INT,
+    credit FLOAT,
     state INT,
     primary key (accountID),
     foreign key (personID) references Person(personID),

@@ -1,3 +1,4 @@
+// Created by Oleksandra Baga
 #ifndef PERSON_H
 #define PERSON_H
 
