@@ -104,7 +104,6 @@ bool DefaultCoffeeMachine::createDefaulDB(std::string db_name)
     // and then they could be accessed via corresponding classes and methods.
 
     coffeeMachine_DB.closeDatabase();
-
     return ret;
 }
 
