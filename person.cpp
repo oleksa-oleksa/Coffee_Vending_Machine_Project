@@ -8,8 +8,11 @@ std::vector<Person>Person::AllEmployee = std::vector<Person>();
 
 // Default constructor is necessary b/c other is defined
 // Effectively it's a default constructor
-Person::Person()
+Person::Person() : personID()
 {
+    isEmployed = true;
+    isAdmin = false;
+    isStaff = false;
 }
 
 // This constructor assumes that it receives a valid query

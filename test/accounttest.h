@@ -14,9 +14,9 @@ class AccountTest: public QObject
         void testAddCredit();
         void testActivateAccount();
         void testDeactivateAccount();
-//        void testBlockAccount();
-//        void testLinkOwner(PersonID personID);
-//        void testLinkBankAccount(BankAccountID iban);
+        void testBlockAccount();
+        void testLinkOwner();
+        void testLinkBankAccount();
 };
 
 #endif // ACCOUNTTEST_H

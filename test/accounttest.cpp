@@ -1,5 +1,5 @@
 #include "accounttest.h"
-
+#include "person.h"
 
 void AccountTest::testCheckCreditLimit()
 {
@@ -108,5 +108,72 @@ void AccountTest::testDeactivateAccount()
     test01.getAccountStatus();
     test01.deactivateAccount();
     test01.getAccountStatus();
+
+}
+
+void AccountTest::testBlockAccount()
+{
+    Account test01;
+
+    // PASS
+    qDebug() << "01:";
+    test01.getAccountStatus();
+    test01.blockAccount();
+    test01.getAccountStatus();
+
+    // PASS
+    qDebug() << "02:";
+    test01.blockAccount();
+    test01.getAccountStatus();
+
+    // PASS
+    qDebug() << "03:";
+    test01.setAccountStatus(DEACTIVATED_OLD);
+    test01.getAccountStatus();
+    test01.blockAccount();
+    test01.getAccountStatus();
+
+}
+
+void AccountTest::testLinkOwner()
+{
+    Person test01;
+    Person test02;
+
+    Person::AllEmployee.push_back(test01);
+    Person::AllEmployee.push_back(test02);
+
+    PersonID tmpID01 = test01.getID();
+    PersonID tmpID02 = test02.getID();
+
+    Account acc01;
+
+    qDebug() << "VERIFY: New created account personID: " << acc01.getOwner();
+
+    QVERIFY(acc01.linkOwner(tmpID01));
+    qDebug() << "VERIFY: Linked account personID is: " << acc01.getOwner()->getID().toQstring();
+
+    QVERIFY(acc01.linkOwner(tmpID02));
+    qDebug() << "VERIFY: Linked account personID is: " << acc01.getOwner()->getID().toQstring();
+}
+
+void AccountTest::testLinkBankAccount()
+{
+    BankAccount test01;
+    BankAccount::AllBankAccounts.push_back(test01);
+
+    BankAccountID tmpID01 = test01.getIBAN();
+    BankAccountID tmpID02; // Random ID not existing in AllBankAccounts
+
+    Account acc01;
+
+    qDebug() << "VERIFY: New created account IBAN: " << acc01.getBankAccount();
+
+    // PASS, ID existing in Array
+    QCOMPARE(acc01.linkBankAccount(tmpID01), true);
+
+    // FAILED, ID NOT existing in Array, OLD ID kept
+    QCOMPARE(acc01.linkBankAccount(tmpID02), false);
+
 
 }

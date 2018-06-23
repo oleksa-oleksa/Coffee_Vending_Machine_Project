@@ -7,7 +7,7 @@ const float CREDIT_LIMIT = 10.0;
 
 std::vector<Account>Account::AllAccounts = std::vector<Account>();
 
-Account::Account()
+Account::Account() : accountID()
 {
     credit = 0.0;
     state = ACTIVE_OK;
@@ -95,7 +95,13 @@ double Account::getAccountCredit()
 
 Person *Account::getOwner()
 {
-    qDebug() << "GETTER: Account owner is: " << owner;
+    if (owner != NULL)
+    {
+        qDebug() << "GETTER: Account owner is: " << owner->getID().toQstring();
+    } else
+    {
+        qDebug() << "GETTER: Account owner is set to NULL";
+    }
     return owner;
 }
 
@@ -107,7 +113,15 @@ void Account::setOwner(Person *owner)
 
 BankAccount *Account::getBankAccount()
 {
-    qDebug() << "GETTER: Associated bank account is: " << ba;
+    if (ba != NULL)
+    {
+        qDebug() << "GETTER: Associated bank account is: " << ba->getIBAN().toQstring();
+    }
+    else
+    {
+        qDebug() << "GETTER: Associated bank account is NULL";
+
+    }
     return ba;
 }
 
@@ -125,7 +139,7 @@ AccountID Account::getAccountID()
 void Account::setBankAccount(BankAccount *ba)
 {
     this->ba = ba;
-    qDebug() << "Associated bank account is: " << this->ba->getIBAN().toQstring();
+    qDebug() << "SETTER: Associated bank account is: " << this->ba->getIBAN().toQstring();
 }
 
 // Simple setter
@@ -193,7 +207,7 @@ bool Account::linkOwner(PersonID personID)
        if (Person::AllEmployee[i].getID().toQstring() == personID.toQstring())
        {
           setOwner(&Person::AllEmployee[i]);
-          qDebug() << "Owner is set to PersonID:" << Person::AllEmployee[i].getID().toQstring();
+          qDebug() << "LINK: Owner is set to PersonID:" << Person::AllEmployee[i].getID().toQstring();
           ret = true;
        }
     }
@@ -209,9 +223,13 @@ bool Account::linkBankAccount(BankAccountID iban)
        if (BankAccount::AllBankAccounts[i].getIBAN().toQstring() == iban.toQstring())
        {
           setBankAccount(&BankAccount::AllBankAccounts[i]);
-          qDebug() << "Bank account is set to IBAN:" << BankAccount::AllBankAccounts[i].getIBAN().toQstring();
+          qDebug() << "LINK: Bank account is set to IBAN:" << BankAccount::AllBankAccounts[i].getIBAN().toQstring();
           ret = true;
        }
+    }
+    if (!ret)
+    {
+        qDebug() << "Bank Account was not linked! No corresponding record in array!";
     }
     return ret;
 }

@@ -6,7 +6,7 @@
 std::vector<BankAccount>BankAccount::AllBankAccounts = std::vector<BankAccount>();
 
 // Default constructor
-BankAccount::BankAccount()
+BankAccount::BankAccount() : IBAN(), accountID()
 {
     taxClass = 1; // default tax class
 }
@@ -24,17 +24,19 @@ BankAccount::BankAccount(QSqlRecord &query)
     // qs.toUtf8().constData() is a way to convert QString to std::string
     IBAN = BankAccountID(q_iban.toUtf8().constData());
     accountID = AccountID(q_aid.toUtf8().constData());
-    // account = AccountID(q_aid.toUtf8().constData());
     account = NULL;
 }
 
 void BankAccount::setIBAN(BankAccountID IBAN)
 {
     this->IBAN = IBAN;
+    qDebug() << "SETTER: IBAN is set: " << this->IBAN.toQstring();
+
 }
 
 BankAccountID BankAccount::getIBAN()
 {
+    qDebug() << "GETTER: IBAN is: " << IBAN.toQstring();
     return IBAN;
 }
 
