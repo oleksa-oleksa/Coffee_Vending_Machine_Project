@@ -1,0 +1,41 @@
+create table Person
+(
+    personID VARCHAR(5) NOT NULL,
+    name VARCHAR(30) NOT NULL,
+    surname VARCHAR(50) NOT NULL,
+    address VARCHAR(100),
+    isEmployed INT,
+    isAdmin INT,
+    isStaff INT,
+    primary key (personID)
+);
+
+create table BankAccount
+(
+    IBAN VARCHAR(22) NOT NULL,
+    accountID VARCHAR(12),
+    taxClass INT,
+    primary key (IBAN),
+    foreign key (accountID) references Account(accountID)
+);
+
+create table Account
+(
+    accountID VARCHAR(12) NOT NULL,
+    personID  VARCHAR(5),
+    IBAN VARCHAR(22),
+    credit FLOAT,
+    state INT,
+    primary key (accountID),
+    foreign key (personID) references Person(personID),
+    foreign key (IBAN) references BankAccount(IBAN)
+);
+
+create table Card
+(
+    cardID VARCHAR(16) NOT NULL,
+    cardStatus INT NOT NULL,
+    accountID VARCHAR(12),
+    primary key (cardID),
+    foreign key (accountID) references Account(accountID)
+);

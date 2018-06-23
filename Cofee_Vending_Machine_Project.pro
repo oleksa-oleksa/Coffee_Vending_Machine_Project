@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -68,7 +69,6 @@ HEADERS += \
     cacao.h \
     cappuccino.h \
     coffee.h \
-    dataset.h \
     espresso.h \
     hotwater.h \
     ingredient.h \
@@ -76,7 +76,14 @@ HEADERS += \
     lcd_display.h \
     mainwindow.h \
     cardid.h \
-    cardstatus.h
+    cardstatus.h \
+    database.h \
+    accountid.h \
+    tools.h \
+    personid.h \
+    bankaccountid.h \
+    test/userchoicetest.h \
+    defaultcoffeemachine.h \
 
 SOURCES += \
     account.cpp \
@@ -85,7 +92,6 @@ SOURCES += \
     bankaccount.cpp \
     card.cpp \
     controlunit.cpp \
-    dataset.cpp \
     drink.cpp \
     indicationunit.cpp \
     interactionunit.cpp \
@@ -113,4 +119,43 @@ SOURCES += \
     waterheater.cpp \
     main.cpp \
     mainwindow.cpp \
-    cardid.cpp
+    cardid.cpp \
+    database.cpp \
+    accountid.cpp \
+    tools.cpp \
+    personid.cpp \
+    bankaccountid.cpp \
+    test/userchoicetest.cpp \
+    defaultcoffeemachine.cpp \
+
+test {
+    message(TEST BUILD)
+
+    QT += testlib
+    TARGET = Coffee-TEST
+
+    SOURCES -= \
+        main.cpp \
+        mainwindow.cpp \
+
+    SOURCES += \
+        test/testmain.cpp \
+        test/mainwindow.cpp \
+        test/databasetest.cpp \
+        test/accounttest.cpp \
+
+    HEADERS -= \
+        mainwindow.h \
+
+
+    HEADERS += \
+        test/mainwindow.h \
+        test/databasetest.h \
+        test/accounttest.h \
+
+
+
+} else {
+    message(NORMAL BUILD)
+}
+

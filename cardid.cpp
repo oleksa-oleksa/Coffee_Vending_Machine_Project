@@ -1,24 +1,19 @@
+// Created by Oleksandra Baga
 #include "cardid.h"
+#include "tools.h"
 #include <iostream>
-#define ID_LEN 5
+
+CardID::CardID(std::string id) : cardID(id)
+{
+
+}
 
 CardID::CardID()
 {
-    createRandomID();
+    cardID = std::string("5100") + createRandomID(CARD_ID_LEN);
 }
 
-void CardID::createRandomID()
+QString CardID::toQstring()
 {
-    std::string newID(5, '0');
-
-    static const char alphanum[] =
-            "0123456789"
-            "abcdefghijklmnopqrstuvwxyz";
-
-        for (int i = 0; i < ID_LEN; ++i)
-        {
-            newID[i] = alphanum[rand() % (sizeof(alphanum) - 1)];
-        }
-
-        id = newID;
+  return QString::fromUtf8(cardID.c_str());
 }

@@ -1,5 +1,7 @@
+// Created by Oleksandra Baga
 #ifndef ACCOUNTSTATUS_H
 #define ACCOUNTSTATUS_H
+
 
 enum AccountStatus
 {

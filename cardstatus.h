@@ -1,3 +1,4 @@
+// Created by Oleksandra Baga
 #ifndef CARDSTATUS_H
 #define CARDSTATUS_H
 
