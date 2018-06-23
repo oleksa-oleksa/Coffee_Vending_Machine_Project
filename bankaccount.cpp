@@ -30,13 +30,10 @@ BankAccount::BankAccount(QSqlRecord &query)
 void BankAccount::setIBAN(BankAccountID IBAN)
 {
     this->IBAN = IBAN;
-    qDebug() << "SETTER: IBAN is set: " << this->IBAN.toQstring();
-
 }
 
 BankAccountID BankAccount::getIBAN()
 {
-    qDebug() << "GETTER: IBAN is: " << IBAN.toQstring();
     return IBAN;
 }
 
@@ -62,12 +59,12 @@ Account *BankAccount::getAccount()
 void BankAccount::setTaxClass(int taxClass)
 {
     this->taxClass = taxClass;
-    qDebug() << "New tax class is set:" << this->taxClass;
+    qDebug() << "SETTER: New tax class is set:" << this->taxClass;
 }
 
 int BankAccount::getTaxClass()
 {
-    qDebug() << "Tax class is:" << taxClass;
+    qDebug() << "GETTER: Tax class is:" << taxClass;
     return taxClass;
 }
 
@@ -96,9 +93,13 @@ bool BankAccount::linkProvidedAccount(AccountID accountID)
        if (Account::AllAccounts[i].getAccountID().toQstring() == accountID.toQstring())
        {
           setAccount(&Account::AllAccounts[i]);
-          qDebug() << "Account is set to AccountID:" << Account::AllAccounts[i].getAccountID().toQstring();
+          qDebug() << "LINK: Account is set to AccountID:" << Account::AllAccounts[i].getAccountID().toQstring();
           ret = true;
        }
+    }
+    if (!ret)
+    {
+        qDebug() << "Account was not linked! No corresponding record in array!";
     }
     return ret;
 }

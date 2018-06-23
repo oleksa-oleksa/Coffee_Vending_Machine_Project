@@ -4,6 +4,7 @@
 #include <QDebug>
 #include "databasetest.h"
 #include "accounttest.h"
+#include "bankaccounttest.h"
 
 
 int main(int argc, char *argv[])
@@ -19,8 +20,11 @@ int main(int argc, char *argv[])
 //    DatabaseTest dbtst01;
 //    return QTest::qExec(&dbtst01, argc, argv);
 
-    AccountTest dbtst02;
-    return QTest::qExec(&dbtst02, argc, argv);
+//    AccountTest dbtst02;
+//    return QTest::qExec(&dbtst02, argc, argv);
+
+    BankAccountTest dbtst03;
+    return QTest::qExec(&dbtst03, argc, argv);
 
     return a.exec();
 }

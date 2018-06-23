@@ -163,7 +163,10 @@ void AccountTest::testLinkBankAccount()
     BankAccount::AllBankAccounts.push_back(test01);
 
     BankAccountID tmpID01 = test01.getIBAN();
+    qDebug() << "GETTER: IBAN is: " << tmpID01.toQstring();
+
     BankAccountID tmpID02; // Random ID not existing in AllBankAccounts
+    qDebug() << "GETTER: IBAN is: " << tmpID02.toQstring();
 
     Account acc01;
 

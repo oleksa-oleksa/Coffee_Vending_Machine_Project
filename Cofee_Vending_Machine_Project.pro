@@ -143,6 +143,7 @@ test {
         test/mainwindow.cpp \
         test/databasetest.cpp \
         test/accounttest.cpp \
+        test/bankaccounttest.cpp \
 
     HEADERS -= \
         mainwindow.h \
@@ -152,8 +153,7 @@ test {
         test/mainwindow.h \
         test/databasetest.h \
         test/accounttest.h \
-
-
+        test/bankaccounttest.h \
 
 } else {
     message(NORMAL BUILD)

@@ -54,8 +54,8 @@ void ControlUnit::maintenanceRoutine()
     {
         if (fillevel[i].getSensorState() == UNDEFINED)
             fillevel[i].setSensorstate(OK);
-        if (motor[i].getActuatorState() == UNDEFINED)
-            motor[i].setActuatorState(OK);
+        //if (motor[i].getActuatorState() == UNDEFINED)
+          //  motor[i].setActuatorState(OK);
     }
 
     if (cupsensor.getSensorState() == UNDEFINED)
@@ -70,14 +70,14 @@ void ControlUnit::maintenanceRoutine()
     if (rfid.getSensorState() == UNDEFINED)
         rfid.setSensorstate(OK);
 
-    if (heater.getActuatorState() == UNDEFINED)
-        heater.setActuatorState(OK);
+    //if (heater.getActuatorState() == UNDEFINED)
+    //    heater.setActuatorState(OK);
 
-    if (brew.getActuatorState() == UNDEFINED)
-        brew.setActuatorState(OK);
+   // if (brew.getActuatorState() == UNDEFINED)
+   //     brew.setActuatorState(OK);
 
-    if (milk.getActuatorState() == UNDEFINED)
-        milk.setActuatorState(OK);
+   // if (milk.getActuatorState() == UNDEFINED)
+   //     milk.setActuatorState(OK);
 
-    qDebug() << "ControlUnit: Checking ingredients and state done."
+    qDebug() << "ControlUnit: Checking ingredients and state done.";
 }

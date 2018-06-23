@@ -132,14 +132,12 @@ void Account::setAccountID(AccountID accountID)
 
 AccountID Account::getAccountID()
 {
-    qDebug() << "Associated account is: " << accountID.toQstring();
     return accountID;
 }
 
 void Account::setBankAccount(BankAccount *ba)
 {
     this->ba = ba;
-    qDebug() << "SETTER: Associated bank account is: " << this->ba->getIBAN().toQstring();
 }
 
 // Simple setter
