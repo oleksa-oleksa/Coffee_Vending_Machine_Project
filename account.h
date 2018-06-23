@@ -50,6 +50,7 @@ class Account
         void blockAccount();
         bool linkOwner(PersonID personID);
         bool linkBankAccount(BankAccountID iban);
+        QString printAccountStatus();
 };
 
 typedef std::vector<Account> Accounts;

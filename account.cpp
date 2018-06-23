@@ -9,7 +9,10 @@ std::vector<Account>Account::AllAccounts = std::vector<Account>();
 
 Account::Account()
 {
-
+    credit = 0.0;
+    state = ACTIVE_OK;
+    owner = NULL;
+    ba = NULL;
 }
 
 // This constructor assumes that it receives a valid query
@@ -42,6 +45,8 @@ Account::Account(Person *Employee, BankAccount *Ba)
 
 AccountStatus Account::getAccountStatus()
 {
+    QString str = printAccountStatus();
+    qDebug() << "GETTER: Account status is now: " << str;
     return state;
 }
 
@@ -49,16 +54,24 @@ AccountStatus Account::getAccountStatus()
 void Account::setAccountStatus(AccountStatus state)
 {
     this->state = state;
-    qDebug() << "Account status is now: " << state;
+    QString str = printAccountStatus();
+    qDebug() << "SETTER: Account status is now: " << str;
 }
 
 bool Account::checkCreditLimit(double amount)
 {
+    // Not active account case
+    if (getAccountStatus() != ACTIVE_OK)
+    {
+        qDebug() << "Account is not active, purchase canceled...";
+        return false;
+    }
+
+    // Check Limit case
     if (credit >= CREDIT_LIMIT)
     {
         qDebug() << "Limit: " << CREDIT_LIMIT  << " is reached. Oops!";
         blockAccount();
-        qDebug() << "Account blocked, please contact your system administrator :)";
         return false;
     }
 
@@ -69,30 +82,32 @@ bool Account::checkCreditLimit(double amount)
         qDebug() << tmp << "€ is available for drink purchase!";
         return false;
     }
+    qDebug() << "Credit is OK, drink can be purchased!";
     return true;
 }
 
 
 double Account::getAccountCredit()
 {
-   return credit;
+    qDebug() << "GETTER: Credit is: " << credit;
+    return credit;
 }
 
 Person *Account::getOwner()
 {
-    qDebug() << "Account owner is: " << owner;
+    qDebug() << "GETTER: Account owner is: " << owner;
     return owner;
 }
 
 void Account::setOwner(Person *owner)
 {
     this->owner = owner;
-    qDebug() << "Account owner is: " << this->owner->getID().toQstring();
+    qDebug() << "SETTER: Account owner is: " << this->owner->getID().toQstring();
 }
 
 BankAccount *Account::getBankAccount()
 {
-    qDebug() << "Associated bank account is: " << ba;
+    qDebug() << "GETTER: Associated bank account is: " << ba;
     return ba;
 }
 
@@ -117,15 +132,16 @@ void Account::setBankAccount(BankAccount *ba)
 void Account::setAccountCredit(double credit)
 {
     this->credit = credit;
-    qDebug() << "Setter: credit is set: " << credit;
+    qDebug() << "SETTER: credit is set: " << credit;
 
 }
 
-// increases credit
+// increases credit if account is not blocked and limit will be not exceeded
 bool Account::addCredit(double amount)
 {
     if (getAccountStatus() != ACTIVE_OK)
     {
+        qDebug() << "Account is not active, purchase canceled...";
         return false;
     }
 
@@ -137,7 +153,7 @@ bool Account::addCredit(double amount)
         // increasing
         tmp_cr += amount;
         // setting
-        setAccountCredit(amount);
+        setAccountCredit(tmp_cr);
 
         qDebug() << "Credit: " << amount  << " added to the card";
         qDebug() << "New credit: " <<  credit;
@@ -145,8 +161,7 @@ bool Account::addCredit(double amount)
     }
     else
     {
-        blockAccount();
-        qDebug() << "Payment attemt is blocked, credit limit is reached " <<  credit;
+        qDebug() << "Payment attemt is canceled...";
         return false;
     }
 }
@@ -154,19 +169,19 @@ bool Account::addCredit(double amount)
 void Account::activateAccount()
 {
     setAccountStatus(ACTIVE_OK);
-    qDebug() << "Account is activated";
+    qDebug() << "ACTIVATE: Account is activated";
 }
 
 void Account::deactivateAccount()
 {
     setAccountStatus(DEACTIVATED_OLD);
-    qDebug() << "Account is deactivated";
+    qDebug() << "DEACTIVATE: Account is deactivated";
 }
 
 void Account::blockAccount()
 {
     setAccountStatus(BLOCKED_UNPAID);
-    qDebug() << "Account is blocked";
+    qDebug() << "BLOCK: Account is blocked";
 }
 
 bool Account::linkOwner(PersonID personID)
@@ -200,3 +215,23 @@ bool Account::linkBankAccount(BankAccountID iban)
     }
     return ret;
 }
+
+QString Account::printAccountStatus()
+{
+    QString str;
+    switch (this->state) {
+    case ACTIVE_OK:
+            str = "ACTIVE_OK";
+            return str;
+    case BLOCKED_UNPAID:
+            str = "BLOCKED_UNPAID";
+            return str;
+    case DEACTIVATED_OLD:
+            str = "DEACTIVATED_OLD";
+            return str;
+    default:
+        break;
+    }
+
+}
+
