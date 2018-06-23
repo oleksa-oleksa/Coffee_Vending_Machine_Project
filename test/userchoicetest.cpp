@@ -1,6 +1,18 @@
+// Created by Oleksandra Baga
 #include "userchoicetest.h"
+#include "drinktype.h"
 
-UserChoiceTest::UserChoiceTest()
-{
+//void testPayDrink()
+//{
 
-}
+//}
+
+//void testSetSelectedDrink()
+//{
+
+//}
+
+//void testSetPrice()
+//{
+
+//}

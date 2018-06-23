@@ -11,8 +11,8 @@ class CardID
     private:
         std::string cardID;
     public:
-        CardID(std::string id);
         CardID();
+        CardID(std::string id);
         QString toQstring();
 };
 

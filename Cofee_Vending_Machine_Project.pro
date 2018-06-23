@@ -144,6 +144,9 @@ test {
         test/databasetest.cpp \
         test/accounttest.cpp \
         test/bankaccounttest.cpp \
+        test/cardtest.cpp \
+        test/userchoicetest.cpp \
+
 
     HEADERS -= \
         mainwindow.h \
@@ -154,6 +157,8 @@ test {
         test/databasetest.h \
         test/accounttest.h \
         test/bankaccounttest.h \
+        test/cardtest.h \
+        test/userchoicetest.h \
 
 } else {
     message(NORMAL BUILD)

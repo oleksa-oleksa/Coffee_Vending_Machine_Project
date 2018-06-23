@@ -8,6 +8,11 @@
 
 std::vector<Card>Card::AllCards = std::vector<Card>();
 
+Card::Card() : cardID()
+{
+    cardStatus = ACTIVE;
+}
+
 Card::Card(Account *ac)
 {
     cardStatus = ACTIVE;
@@ -47,7 +52,8 @@ void Card::setCardID(CardID newCardID)
 
 CardStatus Card::getCardStatus()
 {
-    qDebug() << "Card status is: " << cardStatus;
+    QString str = printCardStatus();
+    qDebug() << "GETTER: Card status is: " << str;
     return cardStatus;
 
 }
@@ -55,18 +61,17 @@ CardStatus Card::getCardStatus()
 void Card::setCardStatus(CardStatus newStatus)
 {
     cardStatus = newStatus;
-    qDebug() << "Card status is set: " << cardStatus;
 }
 
 void Card::deactivateCard()
 {
-    qDebug() << "Card will be deactivated";
+    qDebug() << "DEACTIVATE: Card is deactivated";
     setCardStatus(DEACTIVATED);
 }
 
 void Card::activateCard()
 {
-    qDebug() << "Card will be activated";
+    qDebug() << "ACTIVATE: Card is activated";
     setCardStatus(ACTIVE);
 }
 
@@ -88,7 +93,7 @@ bool Card::withdraw(double price)
 {
    if (!account->getOwner()->getEmployed())
    {
-       qDebug() << "Person is not a employee, payment is denied!";
+       qDebug() << "Person is not employeed, payment is denied!";
        account->deactivateAccount();
        return false;
    }
@@ -118,5 +123,25 @@ bool Card::linkAccount(AccountID accountID)
           ret = true;
        }
     }
+    if (!ret)
+    {
+        qDebug() << "Account was not linked! No corresponding record in array!";
+    }
     return ret;
+}
+
+QString Card::printCardStatus()
+{
+    QString str;
+    switch (cardStatus) {
+    case ACTIVE:
+            str = "ACTIVE";
+            return str;
+    case DEACTIVATED:
+            str = "DEACTIVATED";
+            return str;
+    default:
+        break;
+    }
+
 }

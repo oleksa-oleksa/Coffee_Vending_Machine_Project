@@ -5,7 +5,8 @@
 #include "databasetest.h"
 #include "accounttest.h"
 #include "bankaccounttest.h"
-
+#include "cardtest.h"
+#include "userchoicetest.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,14 +18,23 @@ int main(int argc, char *argv[])
     w.show();
 
     // UNIT TESTS: SEPARATE CLASSES
+    // ACTIVATE ONLY ONE TEST CALL
+
 //    DatabaseTest dbtst01;
 //    return QTest::qExec(&dbtst01, argc, argv);
 
 //    AccountTest dbtst02;
 //    return QTest::qExec(&dbtst02, argc, argv);
 
-    BankAccountTest dbtst03;
-    return QTest::qExec(&dbtst03, argc, argv);
+//    BankAccountTest dbtst03;
+//    return QTest::qExec(&dbtst03, argc, argv);
+
+//    CardTest dbtst04;
+//    return QTest::qExec(&dbtst04, argc, argv);
+
+    UserChoiceTest dbtst05;
+    return QTest::qExec(&dbtst05, argc, argv);
+
 
     return a.exec();
 }

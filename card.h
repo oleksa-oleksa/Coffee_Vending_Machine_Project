@@ -22,6 +22,7 @@ class Card
         Card(QSqlRecord &query);
 
     public:
+        Card();
         Card(Account *ac);
         ~Card();
         static std::vector<Card> AllCards;
@@ -36,6 +37,7 @@ class Card
         void setAccount(Account *account);
         bool withdraw(double price);
         bool linkAccount(AccountID accountID);
+        QString printCardStatus();
 };
 
 typedef std::vector<Card> Cards;
