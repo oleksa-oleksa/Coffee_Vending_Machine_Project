@@ -10,8 +10,8 @@ class AccountTest: public QObject
 {
     Q_OBJECT
     private slots:
+        void testAddCredit();
         void testCheckCreditLimit();
-//        void testAddCredit(double amount);
 //        void testActivateAccount();
 //        void testDeactivateAccount();
 //        void testBlockAccount();

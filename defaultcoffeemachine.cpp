@@ -118,6 +118,6 @@ bool DefaultCoffeeMachine::restoreDefaultDB(std::string db_name)
     assert(coffeeMachine_DB.loadAccounts(Account::AllAccounts) == true, "Load global Accounts failed");
     assert(coffeeMachine_DB.loadCards(Card::AllCards) == true, "Load global Cards failed");
 
-    // coffeeMachine_DB.closeDatabase();
+    coffeeMachine_DB.closeDatabase();
     return ret;
 }

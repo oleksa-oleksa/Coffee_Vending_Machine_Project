@@ -16,11 +16,11 @@ int main(int argc, char *argv[])
     w.show();
 
     // UNIT TESTS: SEPARATE CLASSES
-    DatabaseTest dbtst01;
-    return QTest::qExec(&dbtst01, argc, argv);
+//    DatabaseTest dbtst01;
+//    return QTest::qExec(&dbtst01, argc, argv);
 
-//    AccountTest dbtst02;
-//    return QTest::qExec(&dbtst02, argc, argv);
+    AccountTest dbtst02;
+    return QTest::qExec(&dbtst02, argc, argv);
 
     return a.exec();
 }

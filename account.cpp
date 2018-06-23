@@ -52,13 +52,21 @@ void Account::setAccountStatus(AccountStatus state)
     qDebug() << "Account status is now: " << state;
 }
 
-bool Account::checkCreditLimit()
+bool Account::checkCreditLimit(double amount)
 {
     if (credit >= CREDIT_LIMIT)
     {
         qDebug() << "Limit: " << CREDIT_LIMIT  << " is reached. Oops!";
         blockAccount();
         qDebug() << "Account blocked, please contact your system administrator :)";
+        return false;
+    }
+
+    if ((credit + amount) >= CREDIT_LIMIT)
+    {
+        qDebug() << "You can not buy this drink, the limit will be exceeded!";
+        double tmp = CREDIT_LIMIT -  getAccountCredit();
+        qDebug() << tmp << "€ is available for drink purchase!";
         return false;
     }
     return true;
@@ -105,14 +113,15 @@ void Account::setBankAccount(BankAccount *ba)
     qDebug() << "Associated bank account is: " << this->ba->getIBAN().toQstring();
 }
 
-void Account::setAccountCredit(double amount)
+// Simple setter
+void Account::setAccountCredit(double credit)
 {
-
-    credit += amount;
-    qDebug() << "Credit now is: " << credit;
+    this->credit = credit;
+    qDebug() << "Setter: credit is set: " << credit;
 
 }
 
+// increases credit
 bool Account::addCredit(double amount)
 {
     if (getAccountStatus() != ACTIVE_OK)
@@ -121,9 +130,15 @@ bool Account::addCredit(double amount)
     }
 
     // if credit limit is not reached, user can buy a new drink
-    if (checkCreditLimit())
+    if (checkCreditLimit(amount))
     {
+        // Obtaining actual credit
+        double tmp_cr = getAccountCredit();
+        // increasing
+        tmp_cr += amount;
+        // setting
         setAccountCredit(amount);
+
         qDebug() << "Credit: " << amount  << " added to the card";
         qDebug() << "New credit: " <<  credit;
         return true;

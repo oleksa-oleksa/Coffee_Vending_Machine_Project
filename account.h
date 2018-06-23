@@ -35,16 +35,16 @@ class Account
 
         AccountStatus getAccountStatus();
         void setAccountStatus(AccountStatus newState);
-        bool checkCreditLimit();
+        bool checkCreditLimit(double amount);
         double getAccountCredit();
-        void setAccountCredit(double amount);
+        void setAccountCredit(double credit); // Simple setter
+        bool addCredit(double amount); // increases credit
         Person *getOwner();
         void setOwner(Person *owner);
         BankAccount *getBankAccount();
         void setBankAccount(BankAccount *ba);
         void setAccountID(AccountID accountID);
         AccountID getAccountID();
-        bool addCredit(double amount);
         void activateAccount();
         void deactivateAccount();
         void blockAccount();
