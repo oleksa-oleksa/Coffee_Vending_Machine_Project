@@ -2,16 +2,15 @@
 
 Waterheater::Waterheater()
 {
-    //actuator_duration = ;
+    //actuator_duration;
     actuatorState = UNDEFINED;
     actuatorType = WATERHEATER;
 }
 
 Waterheater::~Waterheater()
 {
-  //to implement
-}
 
+}
 
 
 

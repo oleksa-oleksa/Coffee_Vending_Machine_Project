@@ -4,7 +4,7 @@
 #include "actuator.h"
 using namespace std;
 
-class LCD_Display : protected Actuator
+class LCD_Display : public Actuator
 {
 public:
     LCD_Display();

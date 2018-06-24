@@ -1,4 +1,5 @@
 #include "lcd_display.h"
+#include <QDebug>
 
 LCD_Display::LCD_Display()
 {
@@ -9,7 +10,7 @@ LCD_Display::LCD_Display()
 
 LCD_Display::~LCD_Display()
 {
-  //to implement
+
 }
 
 

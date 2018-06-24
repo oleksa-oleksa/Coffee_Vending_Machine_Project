@@ -2,16 +2,17 @@
 #define BREWGROUP_H
 #include "actuator.h"
 
-class Brewgroup: protected Actuator
+class Brewgroup: public Actuator
 {
 
 public:
     Brewgroup();
+    Brewgroup(bool isOn);
     virtual ~Brewgroup();
-    void startStop(int status);
+    bool getBrewgroupStatus() const;
 
 private:
-    int status;
+    bool isOn;
 };
 
 #endif // BREWGROUP_H

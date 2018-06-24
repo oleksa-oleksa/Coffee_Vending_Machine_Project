@@ -26,6 +26,10 @@ class InteractionUnit
     public:
         InteractionUnit();
         ~InteractionUnit();
+
+        void buttonPollingRoutine();
+        UserChoice *initUserChoice(Card *card);
+
         void setAddSugar(Button *addSugar);
         void setRemoveSugar(Button *removeSugar);
         void setAddMilk(Button *addMilk);
@@ -36,7 +40,7 @@ class InteractionUnit
         void setLatteMacchiato(Button *latteMacchiato);
         void setCacao(Button *cacao);
         void setHotWater(Button *hotWater);
-        void setBigPortio(Button *bigPortio);
+        void setBigPortion(Button *bigPortio);
         void setStart(Button *start);
 
         Button *getAddSugar();
@@ -49,10 +53,8 @@ class InteractionUnit
         Button *getLatteMacchiato();
         Button *getCacao();
         Button *getHotWater();
-        Button *getBigPortio();
+        Button *getBigPortion();
         Button *getStart();
-
-        void buttonPollingRoutine();
 };
 
 #endif // INTERACTIONUNIT_H

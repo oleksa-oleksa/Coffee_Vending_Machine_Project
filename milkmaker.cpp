@@ -10,21 +10,8 @@ Milkmaker::Milkmaker()
 
 Milkmaker::~Milkmaker()
 {
-  //to implement
-}
 
-bool Milkmaker::startStop(int status)
-{
-    if(status)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
 }
-
 
 
 

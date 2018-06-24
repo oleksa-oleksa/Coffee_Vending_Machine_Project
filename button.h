@@ -5,17 +5,14 @@ class Button : public Sensor
 {
     private:
         bool isPushed;
-        int quantity;
-
 
     public:
         Button();
         Button(bool);
-        virtual ~Button();
 
         bool getButtonValue();
-        int getValue();
         void toggleButton();
+        virtual void setSensorstate(State newState);
 };
 
 #endif // BUTTON_H

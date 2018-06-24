@@ -4,8 +4,9 @@
 enum State
 {
     OK,
-    IS_EVENT,
     ALARM,
+    PRESSED,
+    RELEASED,
     UNDEFINED
 };
 

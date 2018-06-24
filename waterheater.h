@@ -2,7 +2,7 @@
 #define WATERHEATER_H
 #include "actuator.h"
 
-class Waterheater : protected Actuator
+class Waterheater : public Actuator
 {
 
 public:

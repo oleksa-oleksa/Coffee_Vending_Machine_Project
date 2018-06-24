@@ -10,6 +10,7 @@ class InteractionUnitTest : public QObject
     Q_OBJECT
     private slots:
         void testButtonPollingRoutine();
+        void testInitUserChoice();
 };
 
 #endif // INTERACTIONUNITTEST_H
