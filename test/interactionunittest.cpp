@@ -43,25 +43,37 @@ void InteractionUnitTest::testButtonPollingRoutine()
     iunit.setAddSugar(&addSugar);
     iunit.setRemoveSugar(&removeSugar);
     iunit.setAddMilk(&addMilk);
+    iunit.setRemoveMilk(&removeMilk);
 
     // At this point no user choice was initialized
     // Calling buttonPoillingRoutine must quit without an effect
     iunit.buttonPollingRoutine();
 
+    // UserChoise is now initialised, drink can be modified
     UserChoice *userChoice;
-
     userChoice = iunit.initUserChoice(&test_card);
 
     // SIMULATION
-    // COFFEF WITH 1 ADDITIONAL SUGAR
+    // COFFEF WITH 4 ADDITIONAL SUGAR
     // NO MILK AT ALL
     // BIG PORTION
 
+    // Simulate "coffee" click: sugar 3, milk 3
+    userChoice->setSelectedDrink(COFFEE);
 
-    // Simulate "add sugar" click
+    // Simulate "add sugar" click: sugar 4
     TRIGGER_BUTTON(addSugar);
 
-    QCOMPARE(userChoice->getExtraSugar(), 1);
+    // simulate milk 3 => milk 0
+    TRIGGER_BUTTON(removeMilk);
+    TRIGGER_BUTTON(removeMilk);
+    TRIGGER_BUTTON(removeMilk);
+
+    QCOMPARE(userChoice->getSelectedDrink(), COFFEE);
+    QCOMPARE(userChoice->getExtraSugar(), 4);
+    QCOMPARE(userChoice->getExtraMilk(), 0);
+    QCOMPARE(userChoice->getPrice(), 0.90);
+
 
 
 /*

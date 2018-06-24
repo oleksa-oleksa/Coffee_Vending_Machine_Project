@@ -14,22 +14,31 @@
 
 class Drink
 {
-   private:
-      UserChoice drinkSpecs;
-      OpticalSensor filllevel[4];
-      ProximitySensor cupsensor;
-      DC_Motor motor;
-      TemperaturSensor temperature;
-      Waterheater heater;
-      Flowmeter flow;
-      Brewgroup brew;
-      Milkmaker milk;
-      RFID_Scanner rfid;
+    protected:
+
+    int sugarAmount;
+    int milkAmount;
+    int hotWaterAmount;
+    int recipeTemperature;
+    double price;
+
+    Drink();
+
    public:
-      Drink();
-      ~Drink();
-      Drink getinstance(DrinkType type);
-          void brewDrink(int extraSugar, int extraMilk);
+//      Drink(int sugar, int milk, int coffee,
+//            int cacao, int water, int temp, double p);
+      Drink(int sugarAmount,
+            int milkAmount,
+            int hotWaterAmount,
+            int recipeTemperature,
+            double price);
+
+      int getSugarAmount();
+      int getMilkAmount();
+      double getPrice();
 };
+
+
+extern Drink DrinkRecipes[];
 
 #endif

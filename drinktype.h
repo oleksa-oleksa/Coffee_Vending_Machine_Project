@@ -3,12 +3,13 @@
 
 enum DrinkType
 {
-    NO_DRINK,
-    COFFEE,
+    NO_DRINK = -1,
+    COFFEE = 0,
     CAPPUCCINO,
     ESPRESSO,
     LATTEMACCHIOTO,
     CACAO,
-    HOTWATER
+    HOTWATER,
+    NUMBER_OF_RECIPES
 };
 #endif

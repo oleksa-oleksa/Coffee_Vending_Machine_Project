@@ -3,32 +3,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QtDebug>
-
-// ===============================================================
-
-struct DrinkPreset {
-    int milk;
-    int sugar;
-    float price;
-
-    DrinkPreset() : milk(-1), sugar(-1), price(0.0) {}
-    DrinkPreset(int m, int s, float p) : milk(m), sugar(s), price(p) {}
-};
-
-
-// Offset in this array MUST correspond to values of
-// the DrinkType enum
-DrinkPreset g_DrinkPresets[] = {
-    DrinkPreset(),          // NO_DRINK
-    DrinkPreset(0, 1, 0.8), // COFFEE
-    DrinkPreset(2, 1, 1),   // CAPPUCCINO
-    DrinkPreset(0, 0, 0.7), // ESPRESSO
-    DrinkPreset(3, 2, 0.9), // LATTEMACCHIOTO
-    DrinkPreset(2, 0, 0.5), // CACAO
-    DrinkPreset(0, 0, 0.3)  // HOTWATER
-};
-
-// ===============================================================
+#include "coffee.h"
 
 UserChoice::UserChoice(Card *card) : UserChoice()
 {
@@ -58,6 +33,20 @@ bool UserChoice::payDrink()
 void UserChoice::setSelectedDrink(DrinkType selectedDrink)
 {
     this->selectedDrink = selectedDrink;
+
+    //Drink d = DrinkRecipes[selectedDrink];
+
+    //setExtraMilk(d.getMilkAmount());
+    //setExtraSugar(d.getSugarAmount());
+
+    if (selectedDrink == COFFEE)
+    {
+        Coffee drink;
+        extraSugar = drink.getSugarAmount();
+        extraMilk = drink.getMilkAmount();
+        price = drink.getPrice();
+    }
+
     QString str = printSelectedDrink();
     qDebug() << "SETTER: Selected Drink is set: " << str;
 }
@@ -113,9 +102,9 @@ bool UserChoice::getBigPortion()
 
 double UserChoice::getPrice()
 {
-/*    if (selectedDrink == COFFEE)
+    if (selectedDrink == COFFEE)
     {
-        price = 0.80;
+        price = 0.90;
     }
     else if (selectedDrink == CAPPUCCINO)
     {
@@ -144,7 +133,7 @@ double UserChoice::getPrice()
     else
     {
         price = 0;
-    } */
+    }
 
 
     QString str = printSelectedDrink();

@@ -124,7 +124,8 @@ SOURCES += \
     tools.cpp \
     personid.cpp \
     bankaccountid.cpp \
-    defaultcoffeemachine.cpp
+    defaultcoffeemachine.cpp \
+    coffee.cpp
 
 test {
     message(TEST BUILD)
