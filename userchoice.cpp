@@ -4,6 +4,11 @@
 #include "ui_mainwindow.h"
 #include <QtDebug>
 
+UserChoice::UserChoice(Card *card) : UserChoice()
+{
+    this->card = card;
+}
+
 UserChoice::UserChoice()
 {
     selectedDrink = NO_DRINK;
@@ -28,32 +33,63 @@ bool UserChoice::payDrink()
     }
 }
 
-DrinkType UserChoice::setSelectedDrink(DrinkType drink)
+void UserChoice::setSelectedDrink(DrinkType selectedDrink)
 {
-    selectedDrink = drink;
-    qDebug() << "Drink is set: " << selectedDrink;
+    this->selectedDrink = selectedDrink;
+    QString str = printSelectedDrink();
+    qDebug() << "SETTER: Selected Drink is set: " << str;
+}
+
+DrinkType UserChoice::getSelectedDrink()
+{
+    QString str = printSelectedDrink();
+    qDebug() << "GETTER: Selected Drink is: " << str;
     return selectedDrink;
 }
 
-void UserChoice::setExtraSugar(int sugar)
+void UserChoice::setCard(Card *card)
 {
-    extraSugar = sugar;
-    qDebug() << "Extra sugar is set: " << extraSugar;
+    this->card = card;
 }
 
-void UserChoice::setMilkQuantity(int milkQuantity)
+Card *UserChoice::getCard()
 {
-    extraMilk = milkQuantity;
-    qDebug() << "Extra milk is set: " << extraMilk;
+    return card;
 }
 
+
+void UserChoice::setExtraSugar(int extraSugar)
+{
+    this->extraSugar = extraSugar;
+}
+
+int UserChoice::getExtraSugar()
+{
+    return extraSugar;
+}
+
+void UserChoice::setExtraMilk(int extraMilk)
+{
+    this->extraMilk = extraMilk;
+}
+
+int UserChoice::getExtraMilk()
+{
+    return extraMilk;
+}
+
+// setter
 void UserChoice::toggleBigPortion()
 {
     isBigPortion = !isBigPortion;
-    qDebug() << "Big Portion is set: " << isBigPortion;
 }
 
-double UserChoice::setPrice()
+bool UserChoice::getBigPortion()
+{
+    return isBigPortion;
+}
+
+double UserChoice::getPrice()
 {
     if (selectedDrink == COFFEE)
     {
@@ -82,8 +118,43 @@ double UserChoice::setPrice()
     else if (selectedDrink == NO_DRINK)
     {
         price = 0;
+    } 
+    else
+    {
+        price = 0;
+    }
+    QString str = printSelectedDrink();
+    qDebug() << "Price for the drink " << str << "is " << price;
+    return price;
+}
+
+QString UserChoice::printSelectedDrink()
+{
+    QString str;
+    switch (selectedDrink) {
+    case NO_DRINK:
+            str = "NO_DRINK";
+            return str;
+    case COFFEE:
+            str = "COFFEE";
+            return str;
+    case CAPPUCCINO:
+            str = "CAPPUCCINO";
+            return str;
+    case ESPRESSO:
+            str = "ESPRESSO";
+            return str;
+    case LATTEMACCHIOTO:
+            str = "LATTEMACCHIOTO";
+            return str;
+    case CACAO:
+            str = "CACAO";
+            return str;
+    case HOTWATER:
+            str = "HOTWATER";
+            return str;
+    default:
+        break;
     }
 
-    qDebug() << "Price for the drink " << selectedDrink << "is " << price;
-    return price;
 }

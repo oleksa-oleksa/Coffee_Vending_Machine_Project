@@ -17,12 +17,20 @@ class UserChoice
 
     public:
         UserChoice();
+        UserChoice(Card *card);
         bool payDrink();
-        DrinkType setSelectedDrink(DrinkType drink);
-        void setExtraSugar(int sugar);
-        void setMilkQuantity(int milkQuantity);
-        void toggleBigPortion();
-        double setPrice();
+        void setSelectedDrink(DrinkType selectedDrink);
+        DrinkType getSelectedDrink();
+        void setCard(Card *card);
+        Card *getCard();
+        void setExtraSugar(int extraSugar);
+        int getExtraSugar();
+        void setExtraMilk(int extraMilk);
+        int getExtraMilk();
+        void toggleBigPortion(); // setter
+        bool getBigPortion();
+        double getPrice(); // price is predefined, no setter needed
+        QString printSelectedDrink();
 };
 
 #endif // USERCHOICE_H

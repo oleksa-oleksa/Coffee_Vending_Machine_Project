@@ -37,7 +37,6 @@ void CardTest::testActivateCard()
 
 void CardTest::testWithdraw()
 {
-
     Account ts_acc01;
     Person ts_per01;
 

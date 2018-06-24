@@ -125,7 +125,6 @@ SOURCES += \
     tools.cpp \
     personid.cpp \
     bankaccountid.cpp \
-    test/userchoicetest.cpp \
     defaultcoffeemachine.cpp \
 
 test {
@@ -145,12 +144,10 @@ test {
         test/accounttest.cpp \
         test/bankaccounttest.cpp \
         test/cardtest.cpp \
-        test/userchoicetest.cpp \
-
+        test/userchoicetest.cpp
 
     HEADERS -= \
         mainwindow.h \
-
 
     HEADERS += \
         test/mainwindow.h \
@@ -158,7 +155,7 @@ test {
         test/accounttest.h \
         test/bankaccounttest.h \
         test/cardtest.h \
-        test/userchoicetest.h \
+        test/userchoicetest.h
 
 } else {
     message(NORMAL BUILD)

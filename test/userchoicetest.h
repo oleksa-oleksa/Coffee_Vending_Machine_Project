@@ -7,14 +7,13 @@
 #include "account.h"
 #include "userchoice.h"
 
-class UserChoiceTest: public QObject
+class UserChoiceTest : public QObject
 {
     Q_OBJECT
     private slots:
-        //void testPayDrink();
-        //void testSetSelectedDrink();
-        //void testSetPrice();
-
+        void testPayDrink();
+        void testSetSelectedDrink();
+        void testGetPrice();
 };
 
 #endif // USERCHOICETEST_H

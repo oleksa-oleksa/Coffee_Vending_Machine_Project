@@ -31,13 +31,13 @@ void InteractionUnit::ButtonPollingRoutine()
     else if (addMilk.getSensorState())
     {
         int newMilk = addMilk.getValue();
-        choice->setMilkQuantity(newMilk);
+        choice->setExtraMilk(newMilk);
         qDebug() << "Selected: " << "Add more milk: " << newMilk;
     }
     else if (removeMilk.getSensorState())
     {
         int newMilk = removeMilk.getSensorState();
-        choice->setMilkQuantity(newMilk);
+        choice->setExtraMilk(newMilk);
         qDebug() << "Selected: " << "Remove milk: " << newMilk;
     }
     else if (coffee.getSensorState())
@@ -77,7 +77,7 @@ void InteractionUnit::ButtonPollingRoutine()
     }
     else if (start.getSensorState())
     {
-        choice->setPrice();
+        choice->getPrice();
         qDebug() << "Price is set";
         if (choice->payDrink())
         {

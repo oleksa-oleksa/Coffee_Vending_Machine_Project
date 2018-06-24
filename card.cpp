@@ -78,14 +78,14 @@ void Card::activateCard()
 Account *Card::getAccount()
 {
 
-    qDebug() << "Account is: " << account->getAccountID().toQstring();
+    qDebug() << "GETTER: Account is: " << account->getAccountID().toQstring();
     return account;
 }
 
 void Card::setAccount(Account *newAccount)
 {
     account = newAccount;
-    qDebug() << "Account is set: " << account->getAccountID().toQstring();
+    qDebug() << "SETTER: Account is set: " << account->getAccountID().toQstring();
 
 }
 
