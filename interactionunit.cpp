@@ -1,20 +1,18 @@
+// Created by Oleksandra Baga
 #include "interactionunit.h"
 #include <QtDebug>
 
 InteractionUnit::InteractionUnit()
 {
-    choice = new UserChoice();
+
 }
 
 InteractionUnit::~InteractionUnit()
 {
-    if (choice != NULL)
-    {
-        delete(choice);
-    }
+
 }
 
-void InteractionUnit::ButtonPollingRoutine()
+void InteractionUnit::buttonPollingRoutine()
 {
     if (addSugar.getSensorState())
     {

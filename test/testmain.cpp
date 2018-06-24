@@ -7,6 +7,7 @@
 #include "bankaccounttest.h"
 #include "cardtest.h"
 #include "userchoicetest.h"
+#include "interactionunittest.h"
 
 int main(int argc, char *argv[])
 {
@@ -32,8 +33,11 @@ int main(int argc, char *argv[])
 //    CardTest dbtst04;
 //    return QTest::qExec(&dbtst04, argc, argv);
 
-    UserChoiceTest dbtst05;
-    return QTest::qExec(&dbtst05, argc, argv);
+//    UserChoiceTest dbtst05;
+//    return QTest::qExec(&dbtst05, argc, argv);
+
+    InteractionUnitTest dbtst06;
+    return QTest::qExec(&dbtst06, argc, argv);
 
 
     return a.exec();

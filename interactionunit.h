@@ -9,23 +9,50 @@ class InteractionUnit
 {
     private:
         UserChoice *choice;
-        Button addSugar;
-        Button removeSugar;
-        Button addMilk;
-        Button removeMilk;
-        Button coffee;
-        Button cappuccino;
-        Button espresso;
-        Button latteMacchiato;
-        Button cacao;
-        Button hotWater;
-        Button bigPortion;
-        Button start;
+
+        Button *addSugar;
+        Button *removeSugar;
+        Button *addMilk;
+        Button *removeMilk;
+        Button *coffee;
+        Button *cappuccino;
+        Button *espresso;
+        Button *latteMacchiato;
+        Button *cacao;
+        Button *hotWater;
+        Button *bigPortion;
+        Button *start;
 
     public:
         InteractionUnit();
         ~InteractionUnit();
-        void ButtonPollingRoutine();
+        void setAddSugar(Button *addSugar);
+        void setRemoveSugar(Button *removeSugar);
+        void setAddMilk(Button *addMilk);
+        void setRemoveMilk(Button *removeMilk);
+        void setCoffee(Button *coffee);
+        void setCappuccino(Button *cappuccino);
+        void setEspresso(Button *espresso);
+        void setLatteMacchiato(Button *latteMacchiato);
+        void setCacao(Button *cacao);
+        void setHotWater(Button *hotWater);
+        void setBigPortio(Button *bigPortio);
+        void setStart(Button *start);
+
+        Button *getAddSugar();
+        Button *getRemoveSugar();
+        Button *getAddMilk();
+        Button *getRemoveMilk();
+        Button *getCoffee();
+        Button *getCappuccino();
+        Button *getEspresso();
+        Button *getLatteMacchiato();
+        Button *getCacao();
+        Button *getHotWater();
+        Button *getBigPortio();
+        Button *getStart();
+
+        void buttonPollingRoutine();
 };
 
 #endif // INTERACTIONUNIT_H

@@ -82,8 +82,7 @@ HEADERS += \
     tools.h \
     personid.h \
     bankaccountid.h \
-    test/userchoicetest.h \
-    defaultcoffeemachine.h \
+    defaultcoffeemachine.h
 
 SOURCES += \
     account.cpp \
@@ -125,7 +124,7 @@ SOURCES += \
     tools.cpp \
     personid.cpp \
     bankaccountid.cpp \
-    defaultcoffeemachine.cpp \
+    defaultcoffeemachine.cpp
 
 test {
     message(TEST BUILD)
@@ -135,7 +134,7 @@ test {
 
     SOURCES -= \
         main.cpp \
-        mainwindow.cpp \
+        mainwindow.cpp
 
     SOURCES += \
         test/testmain.cpp \
@@ -144,10 +143,12 @@ test {
         test/accounttest.cpp \
         test/bankaccounttest.cpp \
         test/cardtest.cpp \
-        test/userchoicetest.cpp
+        test/userchoicetest.cpp \
+        test/interactionunittest.cpp
+
 
     HEADERS -= \
-        mainwindow.h \
+        mainwindow.h
 
     HEADERS += \
         test/mainwindow.h \
@@ -155,7 +156,8 @@ test {
         test/accounttest.h \
         test/bankaccounttest.h \
         test/cardtest.h \
-        test/userchoicetest.h
+        test/userchoicetest.h \
+        test/interactionunittest.h
 
 } else {
     message(NORMAL BUILD)

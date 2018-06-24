@@ -1,3 +1,4 @@
+// Created by Oleksandra Baga
 #include "accounttest.h"
 #include "person.h"
 
