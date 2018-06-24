@@ -2,10 +2,13 @@
 #define COFFEE_H
 
 #include "drink.h"
+#include "ingredient.h"
 
-class Coffee : public Drink
+class Coffee : public Drink, Ingredient
 {
    private:
+
+
    public:
 };
 

@@ -29,7 +29,7 @@ class Drink
       Drink();
       ~Drink();
       Drink getinstance(DrinkType type);
-      void brewDrink(int extraSugar, int extraMilk);
+          void brewDrink(int extraSugar, int extraMilk);
 };
 
 #endif

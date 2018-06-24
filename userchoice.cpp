@@ -4,6 +4,32 @@
 #include "ui_mainwindow.h"
 #include <QtDebug>
 
+// ===============================================================
+
+struct DrinkPreset {
+    int milk;
+    int sugar;
+    float price;
+
+    DrinkPreset() : milk(-1), sugar(-1), price(0.0) {}
+    DrinkPreset(int m, int s, float p) : milk(m), sugar(s), price(p) {}
+};
+
+
+// Offset in this array MUST correspond to values of
+// the DrinkType enum
+DrinkPreset g_DrinkPresets[] = {
+    DrinkPreset(),          // NO_DRINK
+    DrinkPreset(0, 1, 0.8), // COFFEE
+    DrinkPreset(2, 1, 1),   // CAPPUCCINO
+    DrinkPreset(0, 0, 0.7), // ESPRESSO
+    DrinkPreset(3, 2, 0.9), // LATTEMACCHIOTO
+    DrinkPreset(2, 0, 0.5), // CACAO
+    DrinkPreset(0, 0, 0.3)  // HOTWATER
+};
+
+// ===============================================================
+
 UserChoice::UserChoice(Card *card) : UserChoice()
 {
     this->card = card;
@@ -87,7 +113,7 @@ bool UserChoice::getBigPortion()
 
 double UserChoice::getPrice()
 {
-    if (selectedDrink == COFFEE)
+/*    if (selectedDrink == COFFEE)
     {
         price = 0.80;
     }
@@ -118,7 +144,9 @@ double UserChoice::getPrice()
     else
     {
         price = 0;
-    }
+    } */
+
+
     QString str = printSelectedDrink();
     qDebug() << "Price for the drink " << str << "is " << price;
     return price;
