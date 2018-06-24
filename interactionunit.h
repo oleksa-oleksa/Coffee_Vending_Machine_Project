@@ -21,6 +21,7 @@ class InteractionUnit
         Button *cacao;
         Button *hotWater;
         Button *bigPortion;
+        Button *cancel;
         Button *start;
 
     public:
@@ -29,6 +30,7 @@ class InteractionUnit
 
         void buttonPollingRoutine();
         UserChoice *initUserChoice(Card *card);
+        bool abortSession();
 
         void setAddSugar(Button *addSugar);
         void setRemoveSugar(Button *removeSugar);

@@ -5,6 +5,12 @@
 #include "userchoice.h"
 #include "card.h"
 
+// FOR TEST PURPOSE TO AVOID EXTRA LOC
+#define TRIGGER_BUTTON(button) ({button.setSensorstate(PRESSED); \
+                          iunit.buttonPollingRoutine();\
+                          button.setSensorstate(RELEASED);})
+
+
 void InteractionUnitTest::testInitUserChoice()
 {
     Card card;
@@ -22,9 +28,6 @@ void InteractionUnitTest::testInitUserChoice()
 }
 
 
-#define TRIGGER(button) ({button.setSensorstate(PRESSED); \
-                          iunit.buttonPollingRoutine();\
-                          button.setSensorstate(RELEASED);})
 
 void InteractionUnitTest::testButtonPollingRoutine()
 {
@@ -49,15 +52,14 @@ void InteractionUnitTest::testButtonPollingRoutine()
 
     userChoice = iunit.initUserChoice(&test_card);
 
+    // SIMULATION
+    // COFFEF WITH 1 ADDITIONAL SUGAR
+    // NO MILK AT ALL
+    // BIG PORTION
+
+
     // Simulate "add sugar" click
-
-    //    addSugar.setSensorstate(PRESSED);
-    //    iunit.buttonPollingRoutine();
-    //    addSugar.setSensorstate(RELEASED);
-
-    //    triggerButton(iunit, addSugar);
-
-    TRIGGER(addSugar);
+    TRIGGER_BUTTON(addSugar);
 
     QCOMPARE(userChoice->getExtraSugar(), 1);
 

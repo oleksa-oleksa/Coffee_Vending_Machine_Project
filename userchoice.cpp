@@ -11,11 +11,7 @@ UserChoice::UserChoice(Card *card) : UserChoice()
 
 UserChoice::UserChoice()
 {
-    selectedDrink = NO_DRINK;
-    extraSugar = 0;
-    extraMilk = 0;
-    isBigPortion = false;
-    price = 0.0;
+    setDefaultChoice();
 }
 
 bool UserChoice::payDrink()
@@ -126,6 +122,15 @@ double UserChoice::getPrice()
     QString str = printSelectedDrink();
     qDebug() << "Price for the drink " << str << "is " << price;
     return price;
+}
+
+void UserChoice::setDefaultChoice()
+{
+    selectedDrink = NO_DRINK;
+    extraSugar = 0;
+    extraMilk = 0;
+    isBigPortion = false;
+    price = 0.0;
 }
 
 QString UserChoice::printSelectedDrink()

@@ -30,6 +30,7 @@ class UserChoice
         void toggleBigPortion(); // setter
         bool getBigPortion();
         double getPrice(); // price is predefined, no setter needed
+        void setDefaultChoice();
         QString printSelectedDrink();
 };
 

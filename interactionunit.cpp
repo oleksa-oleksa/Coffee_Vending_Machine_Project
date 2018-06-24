@@ -124,8 +124,56 @@ void InteractionUnit::buttonPollingRoutine()
         return;
     }
 
-    if (addSugar->getSensorState()) {
-        choice->setExtraSugar(choice->getExtraSugar()+1);
+    if (addSugar && addSugar->getButtonValue()) {
+        choice->setExtraSugar(choice->getExtraSugar() + 1);
+    }
+
+    if (removeSugar && removeSugar->getButtonValue()) {
+        choice->setExtraSugar(choice->getExtraSugar() - 1);
+    }
+
+    if (addMilk && addMilk->getButtonValue()) {
+        choice->setExtraMilk(choice->getExtraMilk() + 1);
+    }
+
+    if (removeMilk && removeMilk->getButtonValue()) {
+        choice->setExtraMilk(choice->getExtraMilk() - 1);
+    }
+
+    if (coffee && coffee->getButtonValue()) {
+        choice->setSelectedDrink(COFFEE);
+    }
+
+    if (cappuccino && cappuccino->getButtonValue()) {
+        choice->setSelectedDrink(CAPPUCCINO);
+    }
+
+    if (espresso && espresso->getButtonValue()) {
+        choice->setSelectedDrink(ESPRESSO);
+    }
+
+    if (latteMacchiato && latteMacchiato->getButtonValue()) {
+        choice->setSelectedDrink(LATTEMACCHIOTO);
+    }
+
+    if (cacao && cacao->getButtonValue()) {
+        choice->setSelectedDrink(CACAO);
+    }
+
+    if (hotWater && hotWater->getButtonValue()) {
+        choice->setSelectedDrink(HOTWATER);
+    }
+
+    if (bigPortion && bigPortion->getButtonValue()) {
+        choice->toggleBigPortion();
+    }
+
+    if (cancel && cancel->getButtonValue()) {
+        choice->setDefaultChoice();
+    }
+
+    if (start && start->getButtonValue()) {
+        choice->payDrink();
     }
 
 }
