@@ -14,7 +14,8 @@ class Admin : public Person
         void deleteCard(Card *c);
         Account *createAccount(Person *Employee, BankAccount *Ba);
         void deleteAccount(Account *account);
-
+       // Person *createPerson();
+       // void deletePerson(Person *person);
 };
 
 #endif // ADMIN_H

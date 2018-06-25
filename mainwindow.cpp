@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "adminwindow.h"
 
 #include <QtDebug>
 
@@ -116,4 +117,13 @@ void MainWindow::on_buttonPlaceCard_clicked()
         isDown++;
         qDebug() << "Place Card Button is up";
     }
+}
+
+void MainWindow::on_buttonAdmin_clicked()
+{
+    // Modal approach to show a second window
+    // It is impossible to access the first window during the session in the second window
+    AdminWindow adminWindow;
+    adminWindow.setModal(true);
+    adminWindow.exec();
 }

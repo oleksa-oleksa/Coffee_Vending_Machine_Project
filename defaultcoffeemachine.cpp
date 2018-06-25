@@ -6,7 +6,6 @@
 #include "bankaccount.h"
 
 // Database for all Records: Person, Account, BankAccount, Card
-// Once opened could be accessed all the time
 Database coffeeMachine_DB;
 
 DefaultCoffeeMachine::DefaultCoffeeMachine()

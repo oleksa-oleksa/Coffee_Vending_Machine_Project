@@ -44,6 +44,8 @@ private slots:
 
     void on_buttonPlaceCard_clicked();
 
+    void on_buttonAdmin_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

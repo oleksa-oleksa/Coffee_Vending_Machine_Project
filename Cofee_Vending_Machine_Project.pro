@@ -27,7 +27,8 @@ SUBDIRS += \
     Cofee_Vending_Machine_Project.pro
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    adminwindow.ui
 
 DISTFILES += \
     Cofee_Vending_Machine_Project.pro.user \
@@ -82,7 +83,8 @@ HEADERS += \
     tools.h \
     personid.h \
     bankaccountid.h \
-    defaultcoffeemachine.h
+    defaultcoffeemachine.h \
+    adminwindow.h
 
 SOURCES += \
     account.cpp \
@@ -125,7 +127,8 @@ SOURCES += \
     personid.cpp \
     bankaccountid.cpp \
     defaultcoffeemachine.cpp \
-    coffee.cpp
+    coffee.cpp \
+    adminwindow.cpp
 
 test {
     message(TEST BUILD)
