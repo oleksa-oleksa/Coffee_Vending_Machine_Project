@@ -47,7 +47,7 @@ std::string const & Person::getName() const
 
 std::string const & Person::getSurname() const
 {
-    qDebug() << "Surname is: " << name.c_str();
+    qDebug() << "Surname is: " << surname.c_str();
     return surname;
 }
 

@@ -6,80 +6,109 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>639</width>
-    <height>493</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QTableView" name="tableView">
+  <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>161</y>
-     <width>581</width>
-     <height>281</height>
+     <y>250</y>
+     <width>731</width>
+     <height>331</height>
     </rect>
    </property>
-  </widget>
-  <widget class="QPushButton" name="buttonPersonTable">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>110</y>
-     <width>140</width>
-     <height>41</height>
-    </rect>
+   <property name="tabPosition">
+    <enum>QTabWidget::North</enum>
    </property>
-   <property name="text">
-    <string>Persons</string>
+   <property name="tabShape">
+    <enum>QTabWidget::Rounded</enum>
    </property>
-   <property name="checkable">
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <property name="usesScrollButtons">
     <bool>false</bool>
    </property>
-   <property name="flat">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="buttonBankAccountTable">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>110</y>
-     <width>140</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Bank Accounts</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="buttonAccountTable">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>110</y>
-     <width>140</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Accounts</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="buttonCardTable">
-   <property name="geometry">
-    <rect>
-     <x>470</x>
-     <y>110</y>
-     <width>140</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Cards</string>
-   </property>
+   <widget class="QWidget" name="tabPerson">
+    <attribute name="title">
+     <string>Person</string>
+    </attribute>
+    <widget class="QTableWidget" name="tableWidgetPerson">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>691</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>true</bool>
+     </attribute>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabBankAccount">
+    <attribute name="title">
+     <string>BankAccount</string>
+    </attribute>
+    <widget class="QTableWidget" name="tableWidgetBankAccount">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>691</width>
+       <height>261</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabAccount">
+    <attribute name="title">
+     <string>Account</string>
+    </attribute>
+    <widget class="QTableWidget" name="tableWidgetAccount">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>691</width>
+       <height>261</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabCard">
+    <attribute name="title">
+     <string>Card</string>
+    </attribute>
+    <widget class="QTableWidget" name="tableWidgetCard">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>691</width>
+       <height>261</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources/>

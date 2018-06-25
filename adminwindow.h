@@ -17,13 +17,7 @@ public:
     ~AdminWindow();
 
 private slots:
-    void on_buttonPersonTable_clicked();
 
-    void on_buttonBankAccountTable_clicked();
-
-    void on_buttonAccountTable_clicked();
-
-    void on_buttonCardTable_clicked();
 
 private:
     Ui::AdminWindow *ui;
