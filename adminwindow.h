@@ -16,8 +16,22 @@ public:
     explicit AdminWindow(QWidget *parent = 0);
     ~AdminWindow();
 
+    void loadPersonTableWidget();
+    void loadBankAccountTableWidget();
+    void loadAccountTableWidget();
+    void loadCardTableWidget();
+
+
 private slots:
 
+
+    void on_buttonReloadCardTable_clicked();
+
+    void on_buttonReloadAccountTable_clicked();
+
+    void on_buttonReloadPersonTable_clicked();
+
+    void on_buttonReloadBankAccountTable_clicked();
 
 private:
     Ui::AdminWindow *ui;

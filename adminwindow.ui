@@ -17,9 +17,9 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>250</y>
+     <y>180</y>
      <width>731</width>
-     <height>331</height>
+     <height>391</height>
     </rect>
    </property>
    <property name="tabPosition">
@@ -29,7 +29,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <property name="usesScrollButtons">
     <bool>false</bool>
@@ -60,8 +60,21 @@
       <enum>QAbstractItemView::SelectRows</enum>
      </property>
      <attribute name="horizontalHeaderVisible">
-      <bool>true</bool>
+      <bool>false</bool>
      </attribute>
+    </widget>
+    <widget class="QPushButton" name="buttonReloadPersonTable">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>300</y>
+       <width>211</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Reload Table</string>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tabBankAccount">
@@ -76,6 +89,19 @@
        <width>691</width>
        <height>261</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonReloadBankAccountTable">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>300</y>
+       <width>211</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Reload Table</string>
      </property>
     </widget>
    </widget>
@@ -93,6 +119,19 @@
       </rect>
      </property>
     </widget>
+    <widget class="QPushButton" name="buttonReloadAccountTable">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>300</y>
+       <width>211</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Reload Table</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tabCard">
     <attribute name="title">
@@ -106,6 +145,19 @@
        <width>691</width>
        <height>261</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonReloadCardTable">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>300</y>
+       <width>211</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Reload Table</string>
      </property>
     </widget>
    </widget>

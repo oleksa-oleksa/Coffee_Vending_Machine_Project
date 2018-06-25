@@ -11,7 +11,6 @@ AdminWindow::AdminWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AdminWindow)
 {
-
     ui->setupUi(this);
 
     const QStringList labelsPerson = {"PersonID", "Name", "Surname", "Address", "isEmployed", "isAdmin", "isStaff"};
@@ -24,7 +23,45 @@ AdminWindow::AdminWindow(QWidget *parent) :
     ui->tableWidgetPerson->setColumnCount(7);
     ui->tableWidgetPerson->setHorizontalHeaderLabels(labelsPerson);
 
-    // Items
+    loadPersonTableWidget();
+
+    //============================================================================
+    // Bank Account Table
+    ui->tableWidgetBankAccount->setRowCount(BankAccount::AllBankAccounts.size());
+    ui->tableWidgetBankAccount->setColumnCount(5);
+    ui->tableWidgetBankAccount->setHorizontalHeaderLabels(labelsBankAccount);
+    ui->tableWidgetBankAccount->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    loadBankAccountTableWidget();
+
+    //============================================================================
+    // Account Table
+    ui->tableWidgetAccount->setRowCount(Account::AllAccounts.size());
+    ui->tableWidgetAccount->setColumnCount(5);
+    ui->tableWidgetAccount->setHorizontalHeaderLabels(labelsAccount);
+    ui->tableWidgetAccount->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    loadAccountTableWidget();
+
+    //============================================================================
+    // Card Table
+
+    ui->tableWidgetCard->setRowCount(Card::AllCards.size());
+    ui->tableWidgetCard->setColumnCount(4);
+    ui->tableWidgetCard->setHorizontalHeaderLabels(labelsCard);
+    ui->tableWidgetCard->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    loadCardTableWidget();
+}
+
+AdminWindow::~AdminWindow()
+{
+    delete ui;
+}
+
+void AdminWindow::loadPersonTableWidget()
+{
+     // Items
     for (size_t row = 0; row < Person::AllEmployee.size(); row++)
     {
         ui->tableWidgetPerson->setItem(row, 0, new QTableWidgetItem(Person::AllEmployee[row].getID().toQstring()));
@@ -35,13 +72,10 @@ AdminWindow::AdminWindow(QWidget *parent) :
         ui->tableWidgetPerson->setItem(row, 5, new QTableWidgetItem(Person::AllEmployee[row].getAdmin() ? "true" : "false"));
         ui->tableWidgetPerson->setItem(row, 6, new QTableWidgetItem(Person::AllEmployee[row].getStaff() ? "true" : "false"));
     }
+}
 
-    //============================================================================
-    // Bank Account Table
-    ui->tableWidgetBankAccount->setRowCount(BankAccount::AllBankAccounts.size());
-    ui->tableWidgetBankAccount->setColumnCount(5);
-    ui->tableWidgetBankAccount->setHorizontalHeaderLabels(labelsBankAccount);
-
+void AdminWindow::loadBankAccountTableWidget()
+{
     // Items
     for (size_t row = 0; row < BankAccount::AllBankAccounts.size(); row++)
     {
@@ -51,13 +85,10 @@ AdminWindow::AdminWindow(QWidget *parent) :
         ui->tableWidgetBankAccount->setItem(row, 3, new QTableWidgetItem(BankAccount::AllBankAccounts[row].getAccountID().toQstring()));
         ui->tableWidgetBankAccount->setItem(row, 4, new QTableWidgetItem(QString::number(BankAccount::AllBankAccounts[row].getTaxClass())));
     }
+}
 
-    //============================================================================
-    // Account Table
-    ui->tableWidgetAccount->setRowCount(Account::AllAccounts.size());
-    ui->tableWidgetAccount->setColumnCount(5);
-    ui->tableWidgetAccount->setHorizontalHeaderLabels(labelsAccount);
-
+void AdminWindow::loadAccountTableWidget()
+{
     // Items
     for (size_t row = 0; row < Account::AllAccounts.size(); row++)
     {
@@ -67,13 +98,10 @@ AdminWindow::AdminWindow(QWidget *parent) :
         ui->tableWidgetAccount->setItem(row, 3, new QTableWidgetItem(QString::number(Account::AllAccounts[row].getAccountCredit())));
         ui->tableWidgetAccount->setItem(row, 4, new QTableWidgetItem(Account::AllAccounts[row].printAccountStatus()));
     }
+}
 
-    //============================================================================
-    // Card Table
-
-    ui->tableWidgetCard->setRowCount(Card::AllCards.size());
-    ui->tableWidgetCard->setColumnCount(4);
-    ui->tableWidgetCard->setHorizontalHeaderLabels(labelsCard);
+void AdminWindow::loadCardTableWidget()
+{
     for (size_t row = 0; row < Account::AllAccounts.size(); row++)
     {
         ui->tableWidgetCard->setItem(row, 0, new QTableWidgetItem(Person::AllEmployee[row].getName().c_str()));
@@ -81,11 +109,24 @@ AdminWindow::AdminWindow(QWidget *parent) :
         ui->tableWidgetCard->setItem(row, 2, new QTableWidgetItem(Card::AllCards[row].getCardID().toQstring()));
         ui->tableWidgetCard->setItem(row, 3, new QTableWidgetItem(Card::AllCards[row].printCardStatus()));
     }
-
-
 }
 
-AdminWindow::~AdminWindow()
+void AdminWindow::on_buttonReloadPersonTable_clicked()
 {
-    delete ui;
+    loadPersonTableWidget();
+}
+
+void AdminWindow::on_buttonReloadBankAccountTable_clicked()
+{
+    loadBankAccountTableWidget();
+}
+
+void AdminWindow::on_buttonReloadAccountTable_clicked()
+{
+    loadAccountTableWidget();
+}
+
+void AdminWindow::on_buttonReloadCardTable_clicked()
+{
+    loadCardTableWidget();
 }
