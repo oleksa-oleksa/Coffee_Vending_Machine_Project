@@ -3,6 +3,10 @@
 #define ADMINWINDOW_H
 
 #include <QDialog>
+#include "person.h"
+#include "bankaccount.h"
+#include "account.h"
+#include "card.h"
 
 namespace Ui {
 class AdminWindow;
@@ -36,8 +40,16 @@ private slots:
 
     void on_buttonAddNewEmployee_clicked();
 
+    void on_buttonSaveNewPerson_clicked();
+
 private:
     Ui::AdminWindow *ui;
 };
+
+extern Person activeAdmin;
+extern Person newPerson;
+extern BankAccount newBankAccount;
+extern Account newAccount;
+extern Card newCard;
 
 #endif // ADMINWINDOW_H

@@ -41,6 +41,7 @@ class Person
       PersonID getID() const;
       void setName(std::string name);
       void setSurname(std::string surname);
+      void setAddress(std::string address);
       void setID(PersonID ID);
       bool getEmployed();
       void setEmployed(bool isEmployed);
@@ -50,6 +51,8 @@ class Person
       void setStaff(bool isStaff);
 };
 
+extern Person activeAdmin;
+extern Person newPerson;
 typedef std::vector<Person> People;
 
 #endif

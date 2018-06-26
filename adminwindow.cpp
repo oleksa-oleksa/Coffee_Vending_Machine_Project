@@ -6,58 +6,34 @@
 #include "account.h"
 #include "card.h"
 #include "database.h"
+#include <QtDebug>
+#include <string>
+
+Person activeAdmin;
+Person newPerson;
+BankAccount newBankAccount;
+Account newAccount;
+Card newCard;
 
 AdminWindow::AdminWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AdminWindow)
 {
-
-    Person activeAdmin = Person::AllEmployee[0];
-
     ui->setupUi(this);
     this->setWindowTitle("Admin Window");
+
+    activeAdmin =  Person::AllEmployee[0];
     ui->labelAdminName->setText(activeAdmin.getName().c_str());
 
     setAdminControlButtonsStyle();
 
-    // Loading
-    const QStringList labelsPerson = {"PersonID", "Name", "Surname", "Address", "isEmployed", "isAdmin", "isStaff"};
-    const QStringList labelsBankAccount = {"Name", "Surname", "IBAN", "AccountID", "Tax Class"};
-    const QStringList labelsAccount = {"Name", "Surname", "AccountID", "Credit", "State"};
-    const QStringList labelsCard = {"Name", "Surname", "CardID", "Card Status"};
-
-    // Person UI Table
-    ui->tableWidgetPerson->setRowCount(Person::AllEmployee.size());
-    ui->tableWidgetPerson->setColumnCount(7);
-    ui->tableWidgetPerson->setHorizontalHeaderLabels(labelsPerson);
+    // Loading Data Arrays: Person, Bank Account, Account, Card
 
     loadPersonTableWidget();
 
-    //============================================================================
-    // Bank Account Table
-    ui->tableWidgetBankAccount->setRowCount(BankAccount::AllBankAccounts.size());
-    ui->tableWidgetBankAccount->setColumnCount(5);
-    ui->tableWidgetBankAccount->setHorizontalHeaderLabels(labelsBankAccount);
-    ui->tableWidgetBankAccount->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
     loadBankAccountTableWidget();
 
-    //============================================================================
-    // Account Table
-    ui->tableWidgetAccount->setRowCount(Account::AllAccounts.size());
-    ui->tableWidgetAccount->setColumnCount(5);
-    ui->tableWidgetAccount->setHorizontalHeaderLabels(labelsAccount);
-    ui->tableWidgetAccount->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
     loadAccountTableWidget();
-
-    //============================================================================
-    // Card Table
-
-    ui->tableWidgetCard->setRowCount(Card::AllCards.size());
-    ui->tableWidgetCard->setColumnCount(4);
-    ui->tableWidgetCard->setHorizontalHeaderLabels(labelsCard);
-    ui->tableWidgetCard->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     loadCardTableWidget();
 }
@@ -69,7 +45,14 @@ AdminWindow::~AdminWindow()
 
 void AdminWindow::loadPersonTableWidget()
 {
-     // Items
+    const QStringList labelsPerson = {"PersonID", "Name", "Surname", "Address", "isEmployed", "isAdmin", "isStaff"};
+
+    // Person UI Table
+    ui->tableWidgetPerson->setRowCount(Person::AllEmployee.size());
+    ui->tableWidgetPerson->setColumnCount(7);
+    ui->tableWidgetPerson->setHorizontalHeaderLabels(labelsPerson);
+
+    // Items
     for (size_t row = 0; row < Person::AllEmployee.size(); row++)
     {
         ui->tableWidgetPerson->setItem(row, 0, new QTableWidgetItem(Person::AllEmployee[row].getID().toQstring()));
@@ -84,6 +67,14 @@ void AdminWindow::loadPersonTableWidget()
 
 void AdminWindow::loadBankAccountTableWidget()
 {
+    const QStringList labelsBankAccount = {"Name", "Surname", "IBAN", "AccountID", "Tax Class"};
+
+    // Bank Account Table
+    ui->tableWidgetBankAccount->setRowCount(BankAccount::AllBankAccounts.size());
+    ui->tableWidgetBankAccount->setColumnCount(5);
+    ui->tableWidgetBankAccount->setHorizontalHeaderLabels(labelsBankAccount);
+    ui->tableWidgetBankAccount->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
     // Items
     for (size_t row = 0; row < BankAccount::AllBankAccounts.size(); row++)
     {
@@ -97,6 +88,14 @@ void AdminWindow::loadBankAccountTableWidget()
 
 void AdminWindow::loadAccountTableWidget()
 {
+    const QStringList labelsAccount = {"Name", "Surname", "AccountID", "Credit", "State"};
+
+    // Account Table
+    ui->tableWidgetAccount->setRowCount(Account::AllAccounts.size());
+    ui->tableWidgetAccount->setColumnCount(5);
+    ui->tableWidgetAccount->setHorizontalHeaderLabels(labelsAccount);
+    ui->tableWidgetAccount->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
     // Items
     for (size_t row = 0; row < Account::AllAccounts.size(); row++)
     {
@@ -110,6 +109,15 @@ void AdminWindow::loadAccountTableWidget()
 
 void AdminWindow::loadCardTableWidget()
 {
+    const QStringList labelsCard = {"Name", "Surname", "CardID", "Card Status"};
+
+    // Card Table
+    ui->tableWidgetCard->setRowCount(Card::AllCards.size());
+    ui->tableWidgetCard->setColumnCount(4);
+    ui->tableWidgetCard->setHorizontalHeaderLabels(labelsCard);
+    ui->tableWidgetCard->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    // Items
     for (size_t row = 0; row < Account::AllAccounts.size(); row++)
     {
         ui->tableWidgetCard->setItem(row, 0, new QTableWidgetItem(Person::AllEmployee[row].getName().c_str()));
@@ -168,3 +176,30 @@ void AdminWindow::on_buttonAddNewEmployee_clicked()
 {
 
 }
+
+
+
+void AdminWindow::on_buttonSaveNewPerson_clicked()
+{
+    std::string newPersonName = ui->lineNameForm->text().toUtf8().constData();
+    newPerson.setName(newPersonName);
+
+    std::string newPersonSurname = ui->lineSurnameForm->text().toUtf8().constData();
+    newPerson.setSurname(newPersonSurname);
+
+    std::string newPersonAddress = ui->lineAddressForm->text().toUtf8().constData();
+    newPerson.setAddress(newPersonAddress);
+
+    newPerson.setEmployed(true);
+
+    int isAdmin = (ui->comboBoxAdmin->currentIndex() == 0 ? true : false);
+    newPerson.setAdmin(isAdmin);
+
+    int isStaff = (ui->comboBoxStaff->currentIndex() == 0 ? true : false);
+    newPerson.setStaff(isStaff);
+
+    Person::AllEmployee.push_back(newPerson);
+    qDebug() << "New Person added into AllEmployee";
+
+}
+

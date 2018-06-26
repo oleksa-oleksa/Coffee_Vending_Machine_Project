@@ -64,20 +64,32 @@ PersonID Person::getID() const
 
 void Person::setName(std::string name)
 {
-    if ( name == "" )
-        qDebug() << "Name cannot be an empty String!";
-    else
-        this->name = name;
-        qDebug() << "Name is set: " << this->name.c_str();
+    if (name == "") {
+        qDebug() << "Name is empty";
+        name = "NO_SURNAME";
+    }
+    this->name = name;
+    qDebug() << "Name is set: " << this->name.c_str();
 }
 
 void Person::setSurname(std::string surname)
 {
-    if ( surname == "" )
-        qDebug() << "Name cannot be an empty String!";
-    else
-        this->surname = surname;
-        qDebug() << "Surname is set: " << this->surname.c_str();
+    if (surname == "") {
+        qDebug() << "Surname is empty";
+        surname = "NO_SURNAME";
+    }
+    this->surname = surname;
+    qDebug() << "Surname is set: " << this->surname.c_str();
+}
+
+void Person::setAddress(std::string address)
+{
+    if (address == "") {
+        qDebug() << "Address is empty";
+        address = "NOT_EXISITING";
+    }
+    this->address = address;
+    qDebug() << "Address is set: " << this->address.c_str();
 }
 
 void Person::setID(PersonID personID)
