@@ -60,12 +60,15 @@ private slots:
 
 private:
     Ui::AdminWindow *ui;
+
+    Person *activeAdmin;
+    Person *newPerson;
+    BankAccount *newBankAccount;
+    Account *newAccount;
+    Card *newCard;
+
+    void instantiateNewObjects();
 };
 
-extern Person activeAdmin;
-extern Person newPerson;
-extern BankAccount newBankAccount;
-extern Account newAccount;
-extern Card newCard;
 
 #endif // ADMINWINDOW_H

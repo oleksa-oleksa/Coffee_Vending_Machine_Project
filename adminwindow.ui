@@ -90,6 +90,9 @@
        <height>231</height>
       </rect>
      </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
     </widget>
     <widget class="QPushButton" name="buttonReloadBankAccountTable">
      <property name="geometry">
@@ -118,6 +121,9 @@
        <height>231</height>
       </rect>
      </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
     </widget>
     <widget class="QPushButton" name="buttonReloadAccountTable">
      <property name="geometry">
@@ -145,6 +151,9 @@
        <width>691</width>
        <height>231</height>
       </rect>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
      </property>
     </widget>
     <widget class="QPushButton" name="buttonReloadCardTable">

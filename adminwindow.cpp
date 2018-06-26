@@ -13,24 +13,22 @@ AdminWindow::AdminWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AdminWindow)
 {
-    Person activeAdmin;
-    Person newPerson;
-    BankAccount newBankAccount;
-    Account newAccount;
-    Card newCard;
 
     ui->setupUi(this);
     this->setWindowTitle("Admin Window");
 
-    activeAdmin =  Person::AllEmployee[0];
-    ui->labelAdminName->setText(activeAdmin.getName().c_str());
+    activeAdmin = &Person::AllEmployee[0];
+    ui->labelAdminName->setText(activeAdmin->getName().c_str());
 
     ui->widgetAddNewEmployee->hide();
 
     setAdminControlButtonsStyle();
 
     // Loading Data Arrays: Person, Bank Account, Account, Card
-
+    newPerson = NULL;
+    newBankAccount = NULL;
+    newAccount = NULL;
+    newCard = NULL;
     loadPersonTableWidget();
     loadBankAccountTableWidget();
     loadAccountTableWidget();
@@ -173,80 +171,107 @@ void AdminWindow::setAdminControlButtonsStyle()
 
 void AdminWindow::on_buttonSaveNewPerson_clicked()
 {
+
     std::string newPersonName = ui->lineNameForm->text().toUtf8().constData();
-    newPerson.setName(newPersonName);
+    newPerson->setName(newPersonName);
 
     std::string newPersonSurname = ui->lineSurnameForm->text().toUtf8().constData();
-    newPerson.setSurname(newPersonSurname);
+    newPerson->setSurname(newPersonSurname);
 
     std::string newPersonAddress = ui->lineAddressForm->text().toUtf8().constData();
-    newPerson.setAddress(newPersonAddress);
+    newPerson->setAddress(newPersonAddress);
 
-    newPerson.setEmployed(true);
+    newPerson->setEmployed(true);
 
-    int isAdmin = (ui->comboBoxAdmin->currentIndex() == 0 ? true : false);
-    newPerson.setAdmin(isAdmin);
+    int isAdmin = (ui->comboBoxAdmin->currentIndex() == 0);
+    newPerson->setAdmin(isAdmin);
 
-    int isStaff = (ui->comboBoxStaff->currentIndex() == 0 ? true : false);
-    newPerson.setStaff(isStaff);
+    int isStaff = (ui->comboBoxStaff->currentIndex() == 0);
+    newPerson->setStaff(isStaff);
 
-    Person::AllEmployee.push_back(newPerson);
+    Person::AllEmployee.push_back(*newPerson);
+    delete newPerson; newPerson = NULL;
+
     qDebug() << "New Person added into AllEmployee";
 
     //=====================================================================
 
-    newBankAccount.setAccountID(newAccount.getAccountID());
+    newBankAccount->setAccountID(newAccount->getAccountID());
 
     int taxClass = ui->comboBoxTaxClass->currentIndex() + 1;
-    newBankAccount.setTaxClass(taxClass);
+    newBankAccount->setTaxClass(taxClass);
+    BankAccount::AllBankAccounts.push_back(*newBankAccount);
 
-    BankAccount::AllBankAccounts.push_back(newBankAccount);
+    delete newBankAccount; newBankAccount = NULL;
+    BankAccount &lastBankAccount = BankAccount::AllBankAccounts.back();
+
     qDebug() << "New depending Bank Account added into AllBankAccounts";
 
     //=====================================================================
     // Account accountID, credit and state are predefined by constructor
 
-    newAccount.setOwner(&newPerson);
-    newAccount.setBankAccount(&newBankAccount);
+    // newAccount->setOwner(newPerson);
+    // newAccount->setBankAccount(newBankAccount);
 
-    Account::AllAccounts.back().setBankAccount(&BankAccount::AllBankAccounts.back());
-    BankAccount::AllBankAccounts.back().setAccount(&Account::AllAccounts.back());
+    Account::AllAccounts.push_back(*newAccount);
+    Account &lastAccount = Account::AllAccounts.back();
+    delete newAccount; newAccount = NULL;
+
+    lastAccount.setBankAccount(&lastBankAccount);
+    lastBankAccount.setAccount(&Account::AllAccounts.back());
     qDebug() << "New depending Account added into AllAccounts";
 
     //=====================================================================
     // CardID and CardStatus are predefined by constructor
 
-    Card::AllCards.push_back(newCard);
-    Card::AllCards.back().setAccount(&Account::AllAccounts.back());
+    Card::AllCards.push_back(*newCard);
+    Card::AllCards.back().setAccount(&lastAccount);
+    delete newCard; newCard = NULL;
     qDebug() << "New depending Card added into AllAccounts";
+}
 
+void AdminWindow::instantiateNewObjects()
+{
+    if (!newPerson)
+        newPerson = new Person();
 
+    if (!newBankAccount)
+        newBankAccount = new BankAccount();
 
+    if (!newAccount)
+        newAccount = new Account();
+
+    if (!newCard)
+        newCard = new Card();
 }
 
 void AdminWindow::on_buttonAddNewEmployee_clicked()
 {
+    foreach(QLineEdit *widget, this->findChildren<QLineEdit*>()) {
+        widget->clear();
+    }
+
+    instantiateNewObjects();
+
     ui->widgetAddNewEmployee->show();
     QString colorSaveNewPerson  = QString("background-color: #739900; color: #ffffff;");
     ui->buttonSaveNewPerson->setStyleSheet(colorSaveNewPerson);
     QString colorCancelNewPerson  = QString("background-color: #e6e6e6; color: #000000;");
     ui->buttonCancelNewPerson->setStyleSheet(colorCancelNewPerson);
 
-    ui->labelPersonIDForm->setText(newPerson.getID().toQstring());
-    ui->labelAccountIDForm->setText(newAccount.getAccountID().toQstring());
-    ui->labelCardIDForm->setText(newCard.getCardID().toQstring());
+    ui->labelPersonIDForm->setText(newPerson->getID().toQstring());
+    ui->labelAccountIDForm->setText(newAccount->getAccountID().toQstring());
+    ui->labelCardIDForm->setText(newCard->getCardID().toQstring());
 }
 
 void AdminWindow::on_buttonEditEmployee_clicked()
 {
     ui->widgetAddNewEmployee->hide();
-
 }
 
 void AdminWindow::on_buttonEditDrinks_clicked()
 {
     ui->widgetAddNewEmployee->hide();
-
 }
 
 void AdminWindow::on_buttonIngredientStatus_clicked()
@@ -259,13 +284,17 @@ void AdminWindow::on_buttonIngredientStatus_clicked()
 void AdminWindow::on_buttonCancelNewPerson_clicked()
 {
     ui->widgetAddNewEmployee->hide();
+    delete newCard; newCard = NULL;
+    delete newAccount; newAccount = NULL;
+    delete newBankAccount; newBankAccount = NULL;
+    delete newPerson; newPerson = NULL;
+
 }
 
 void AdminWindow::on_buttonSaveNewPerson_pressed()
 {
     QString colorSaveNewPerson  = QString("background-color: #4d6600; color: #ffffff;");
     ui->buttonSaveNewPerson->setStyleSheet(colorSaveNewPerson);
-
 }
 
 void AdminWindow::on_buttonSaveNewPerson_released()
