@@ -9,21 +9,23 @@
 #include <QtDebug>
 #include <string>
 
-Person activeAdmin;
-Person newPerson;
-BankAccount newBankAccount;
-Account newAccount;
-Card newCard;
-
 AdminWindow::AdminWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AdminWindow)
 {
+    Person activeAdmin;
+    Person newPerson;
+    BankAccount newBankAccount;
+    Account newAccount;
+    Card newCard;
+
     ui->setupUi(this);
     this->setWindowTitle("Admin Window");
 
     activeAdmin =  Person::AllEmployee[0];
     ui->labelAdminName->setText(activeAdmin.getName().c_str());
+
+    ui->widgetAddNewEmployee->hide();
 
     setAdminControlButtonsStyle();
 
@@ -168,10 +170,6 @@ void AdminWindow::setAdminControlButtonsStyle()
     ui->buttonReloadCardTable->setStyleSheet(colorReloadTable);
 }
 
-void AdminWindow::on_buttonAddNewEmployee_clicked()
-{
-
-}
 
 void AdminWindow::on_buttonSaveNewPerson_clicked()
 {
@@ -202,8 +200,6 @@ void AdminWindow::on_buttonSaveNewPerson_clicked()
     int taxClass = ui->comboBoxTaxClass->currentIndex() + 1;
     newBankAccount.setTaxClass(taxClass);
 
-    newBankAccount.setAccount(&newAccount);
-
     BankAccount::AllBankAccounts.push_back(newBankAccount);
     qDebug() << "New depending Bank Account added into AllBankAccounts";
 
@@ -213,14 +209,80 @@ void AdminWindow::on_buttonSaveNewPerson_clicked()
     newAccount.setOwner(&newPerson);
     newAccount.setBankAccount(&newBankAccount);
 
-    Account::AllAccounts.push_back(newAccount);
+    Account::AllAccounts.back().setBankAccount(&BankAccount::AllBankAccounts.back());
+    BankAccount::AllBankAccounts.back().setAccount(&Account::AllAccounts.back());
     qDebug() << "New depending Account added into AllAccounts";
 
     //=====================================================================
     // CardID and CardStatus are predefined by constructor
-    newCard.setAccount(&newAccount);
 
     Card::AllCards.push_back(newCard);
+    Card::AllCards.back().setAccount(&Account::AllAccounts.back());
     qDebug() << "New depending Card added into AllAccounts";
+
+
+
 }
 
+void AdminWindow::on_buttonAddNewEmployee_clicked()
+{
+    ui->widgetAddNewEmployee->show();
+    QString colorSaveNewPerson  = QString("background-color: #739900; color: #ffffff;");
+    ui->buttonSaveNewPerson->setStyleSheet(colorSaveNewPerson);
+    QString colorCancelNewPerson  = QString("background-color: #e6e6e6; color: #000000;");
+    ui->buttonCancelNewPerson->setStyleSheet(colorCancelNewPerson);
+
+    ui->labelPersonIDForm->setText(newPerson.getID().toQstring());
+    ui->labelAccountIDForm->setText(newAccount.getAccountID().toQstring());
+    ui->labelCardIDForm->setText(newCard.getCardID().toQstring());
+}
+
+void AdminWindow::on_buttonEditEmployee_clicked()
+{
+    ui->widgetAddNewEmployee->hide();
+
+}
+
+void AdminWindow::on_buttonEditDrinks_clicked()
+{
+    ui->widgetAddNewEmployee->hide();
+
+}
+
+void AdminWindow::on_buttonIngredientStatus_clicked()
+{
+    ui->widgetAddNewEmployee->hide();
+
+}
+
+
+void AdminWindow::on_buttonCancelNewPerson_clicked()
+{
+    ui->widgetAddNewEmployee->hide();
+}
+
+void AdminWindow::on_buttonSaveNewPerson_pressed()
+{
+    QString colorSaveNewPerson  = QString("background-color: #4d6600; color: #ffffff;");
+    ui->buttonSaveNewPerson->setStyleSheet(colorSaveNewPerson);
+
+}
+
+void AdminWindow::on_buttonSaveNewPerson_released()
+{
+    QString colorSaveNewPerson  = QString("background-color: #739900; color: #ffffff;");
+    ui->buttonSaveNewPerson->setStyleSheet(colorSaveNewPerson);
+    ui->widgetAddNewEmployee->hide();
+}
+
+void AdminWindow::on_buttonCancelNewPerson_pressed()
+{
+    QString colorCancelNewPerson  = QString("background-color: #cccccc; color: #000000;");
+    ui->buttonCancelNewPerson->setStyleSheet(colorCancelNewPerson);
+}
+
+void AdminWindow::on_buttonCancelNewPerson_released()
+{
+    QString colorCancelNewPerson  = QString("background-color: #e6e6e6; color: #000000;");
+    ui->buttonCancelNewPerson->setStyleSheet(colorCancelNewPerson);
+}

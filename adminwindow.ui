@@ -166,7 +166,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>200</y>
+     <y>220</y>
      <width>131</width>
      <height>20</height>
     </rect>
@@ -189,10 +189,10 @@
   <widget class="QPushButton" name="buttonAddNewEmployee">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>30</x>
      <y>10</y>
-     <width>171</width>
-     <height>50</height>
+     <width>191</width>
+     <height>40</height>
     </rect>
    </property>
    <property name="text">
@@ -202,10 +202,10 @@
   <widget class="QPushButton" name="buttonEditEmployee">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>219</x>
      <y>10</y>
-     <width>140</width>
-     <height>50</height>
+     <width>201</width>
+     <height>40</height>
     </rect>
    </property>
    <property name="text">
@@ -216,7 +216,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>60</y>
+     <y>80</y>
      <width>128</width>
      <height>128</height>
     </rect>
@@ -234,10 +234,10 @@
   <widget class="QPushButton" name="buttonEditDrinks">
    <property name="geometry">
     <rect>
-     <x>480</x>
+     <x>409</x>
      <y>10</y>
-     <width>140</width>
-     <height>50</height>
+     <width>201</width>
+     <height>40</height>
     </rect>
    </property>
    <property name="text">
@@ -247,10 +247,10 @@
   <widget class="QPushButton" name="buttonIngredientStatus">
    <property name="geometry">
     <rect>
-     <x>620</x>
+     <x>599</x>
      <y>10</y>
-     <width>140</width>
-     <height>50</height>
+     <width>161</width>
+     <height>40</height>
     </rect>
    </property>
    <property name="text">
@@ -593,9 +593,9 @@ border-color: rgb(218, 218, 218);</string>
    <widget class="QPushButton" name="buttonCancelNewPerson">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>330</x>
       <y>130</y>
-      <width>91</width>
+      <width>101</width>
       <height>32</height>
      </rect>
     </property>
@@ -606,9 +606,9 @@ border-color: rgb(218, 218, 218);</string>
    <widget class="QPushButton" name="buttonSaveNewPerson">
     <property name="geometry">
      <rect>
-      <x>480</x>
+      <x>440</x>
       <y>130</y>
-      <width>91</width>
+      <width>131</width>
       <height>32</height>
      </rect>
     </property>
@@ -617,11 +617,11 @@ border-color: rgb(218, 218, 218);</string>
     </property>
    </widget>
   </widget>
-  <widget class="QLabel" name="labelAdminName_2">
+  <widget class="QLabel" name="labelAdminPosition">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>230</y>
+     <y>240</y>
      <width>131</width>
      <height>20</height>
     </rect>
