@@ -51,8 +51,6 @@ class Person
       void setStaff(bool isStaff);
 };
 
-extern Person activeAdmin;
-extern Person newPerson;
 typedef std::vector<Person> People;
 
 #endif

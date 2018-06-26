@@ -30,11 +30,8 @@ AdminWindow::AdminWindow(QWidget *parent) :
     // Loading Data Arrays: Person, Bank Account, Account, Card
 
     loadPersonTableWidget();
-
     loadBankAccountTableWidget();
-
     loadAccountTableWidget();
-
     loadCardTableWidget();
 }
 
@@ -169,15 +166,12 @@ void AdminWindow::setAdminControlButtonsStyle()
     ui->buttonReloadBankAccountTable->setStyleSheet(colorReloadTable);
     ui->buttonReloadAccountTable->setStyleSheet(colorReloadTable);
     ui->buttonReloadCardTable->setStyleSheet(colorReloadTable);
-
 }
 
 void AdminWindow::on_buttonAddNewEmployee_clicked()
 {
 
 }
-
-
 
 void AdminWindow::on_buttonSaveNewPerson_clicked()
 {
@@ -201,5 +195,32 @@ void AdminWindow::on_buttonSaveNewPerson_clicked()
     Person::AllEmployee.push_back(newPerson);
     qDebug() << "New Person added into AllEmployee";
 
+    //=====================================================================
+
+    newBankAccount.setAccountID(newAccount.getAccountID());
+
+    int taxClass = ui->comboBoxTaxClass->currentIndex() + 1;
+    newBankAccount.setTaxClass(taxClass);
+
+    newBankAccount.setAccount(&newAccount);
+
+    BankAccount::AllBankAccounts.push_back(newBankAccount);
+    qDebug() << "New depending Bank Account added into AllBankAccounts";
+
+    //=====================================================================
+    // Account accountID, credit and state are predefined by constructor
+
+    newAccount.setOwner(&newPerson);
+    newAccount.setBankAccount(&newBankAccount);
+
+    Account::AllAccounts.push_back(newAccount);
+    qDebug() << "New depending Account added into AllAccounts";
+
+    //=====================================================================
+    // CardID and CardStatus are predefined by constructor
+    newCard.setAccount(&newAccount);
+
+    Card::AllCards.push_back(newCard);
+    qDebug() << "New depending Card added into AllAccounts";
 }
 

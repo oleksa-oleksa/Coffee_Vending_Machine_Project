@@ -66,7 +66,7 @@ void Person::setName(std::string name)
 {
     if (name == "") {
         qDebug() << "Name is empty";
-        name = "NO_SURNAME";
+        name = "NO_NAME";
     }
     this->name = name;
     qDebug() << "Name is set: " << this->name.c_str();
