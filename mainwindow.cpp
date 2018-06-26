@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Coffee Machine Drinks Window");
+
 }
 
 MainWindow::~MainWindow()

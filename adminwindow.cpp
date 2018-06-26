@@ -11,8 +11,16 @@ AdminWindow::AdminWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AdminWindow)
 {
-    ui->setupUi(this);
 
+    Person activeAdmin = Person::AllEmployee[0];
+
+    ui->setupUi(this);
+    this->setWindowTitle("Admin Window");
+    ui->labelAdminName->setText(activeAdmin.getName().c_str());
+    QString colorAddNewEmployee  = QString("background-color:#669900");
+    ui->buttonAddNewEmployee->setStyleSheet(colorAddNewEmployee);
+
+    // Loading
     const QStringList labelsPerson = {"PersonID", "Name", "Surname", "Address", "isEmployed", "isAdmin", "isStaff"};
     const QStringList labelsBankAccount = {"Name", "Surname", "IBAN", "AccountID", "Tax Class"};
     const QStringList labelsAccount = {"Name", "Surname", "AccountID", "Credit", "State"};

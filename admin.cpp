@@ -10,24 +10,24 @@ Admin::Admin()
 }
 
 // creates new active card with random id
-Card *Admin::createCard(Account *account)
-{
-    Card *newRandomCard = new Card(account);
-    return newRandomCard;
-}
+//Card *Admin::createCard(Account *account)
+//{
+//    Card *newRandomCard = new Card(account);
+//    return newRandomCard;
+//}
 
-void Admin::deleteCard(Card *c)
-{
-    delete c;
-}
+//void Admin::deleteCard(Card *c)
+//{
+//    delete c;
+//}
 
-Account *Admin:: createAccount(Person *Employee, BankAccount *Ba)
-{
-    Account *newAccount = new Account(Employee, Ba);
-    return newAccount;
-}
+//Account *Admin:: createAccount(Person *Employee, BankAccount *Ba)
+//{
+//    Account *newAccount = new Account(Employee, Ba);
+//    return newAccount;
+//}
 
-void Admin::deleteAccount(Account *a)
-{
-    delete a;
-}
+//void Admin::deleteAccount(Account *a)
+//{
+//    delete a;
+//}

@@ -167,3 +167,6 @@ test {
     message(NORMAL BUILD)
 }
 
+RESOURCES += \
+    images.qrc
+
