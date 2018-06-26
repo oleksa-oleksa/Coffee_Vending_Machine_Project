@@ -21,6 +21,7 @@ public:
     void loadAccountTableWidget();
     void loadCardTableWidget();
 
+    void setAdminControlButtonsStyle();
 
 private slots:
 
@@ -32,6 +33,8 @@ private slots:
     void on_buttonReloadPersonTable_clicked();
 
     void on_buttonReloadBankAccountTable_clicked();
+
+    void on_buttonAddNewEmployee_clicked();
 
 private:
     Ui::AdminWindow *ui;

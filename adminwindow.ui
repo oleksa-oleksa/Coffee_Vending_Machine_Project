@@ -17,9 +17,9 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>220</y>
+     <y>270</y>
      <width>731</width>
-     <height>391</height>
+     <height>341</height>
     </rect>
    </property>
    <property name="tabPosition">
@@ -42,9 +42,9 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>20</y>
+       <y>10</y>
        <width>691</width>
-       <height>261</height>
+       <height>231</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -67,7 +67,7 @@
      <property name="geometry">
       <rect>
        <x>280</x>
-       <y>300</y>
+       <y>260</y>
        <width>211</width>
        <height>51</height>
       </rect>
@@ -85,9 +85,9 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>20</y>
+       <y>10</y>
        <width>691</width>
-       <height>261</height>
+       <height>231</height>
       </rect>
      </property>
     </widget>
@@ -95,7 +95,7 @@
      <property name="geometry">
       <rect>
        <x>280</x>
-       <y>300</y>
+       <y>260</y>
        <width>211</width>
        <height>51</height>
       </rect>
@@ -113,9 +113,9 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>20</y>
+       <y>10</y>
        <width>691</width>
-       <height>261</height>
+       <height>231</height>
       </rect>
      </property>
     </widget>
@@ -123,7 +123,7 @@
      <property name="geometry">
       <rect>
        <x>280</x>
-       <y>300</y>
+       <y>260</y>
        <width>211</width>
        <height>51</height>
       </rect>
@@ -141,9 +141,9 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>20</y>
+       <y>10</y>
        <width>691</width>
-       <height>261</height>
+       <height>231</height>
       </rect>
      </property>
     </widget>
@@ -151,7 +151,7 @@
      <property name="geometry">
       <rect>
        <x>280</x>
-       <y>300</y>
+       <y>260</y>
        <width>211</width>
        <height>51</height>
       </rect>
@@ -189,7 +189,7 @@
   <widget class="QPushButton" name="buttonAddNewEmployee">
    <property name="geometry">
     <rect>
-     <x>159</x>
+     <x>170</x>
      <y>10</y>
      <width>171</width>
      <height>50</height>
@@ -202,7 +202,7 @@
   <widget class="QPushButton" name="buttonEditEmployee">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>340</x>
      <y>10</y>
      <width>140</width>
      <height>50</height>
@@ -234,7 +234,7 @@
   <widget class="QPushButton" name="buttonEditDrinks">
    <property name="geometry">
     <rect>
-     <x>470</x>
+     <x>480</x>
      <y>10</y>
      <width>140</width>
      <height>50</height>
@@ -247,7 +247,7 @@
   <widget class="QPushButton" name="buttonIngredientStatus">
    <property name="geometry">
     <rect>
-     <x>610</x>
+     <x>620</x>
      <y>10</y>
      <width>140</width>
      <height>50</height>
@@ -256,6 +256,127 @@
    <property name="text">
     <string>Ingredients</string>
    </property>
+  </widget>
+  <widget class="QWidget" name="widgetAddNewEmployee" native="true">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>70</y>
+     <width>590</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border: 2px solid;
+border-color: rgb(218, 218, 218);</string>
+   </property>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>40</y>
+      <width>201</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelPersonIDTitle">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PersonID:</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelPersonIDTitle_2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>10</y>
+      <width>201</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelPersonIDTitle_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Name:</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>70</y>
+      <width>201</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelPersonIDTitle_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>70</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Surname:</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelPersonIDTitle_5">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>100</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Address:</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_3">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>100</y>
+      <width>201</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources>

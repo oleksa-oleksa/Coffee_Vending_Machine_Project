@@ -17,8 +17,8 @@ AdminWindow::AdminWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Admin Window");
     ui->labelAdminName->setText(activeAdmin.getName().c_str());
-    QString colorAddNewEmployee  = QString("background-color:#669900");
-    ui->buttonAddNewEmployee->setStyleSheet(colorAddNewEmployee);
+
+    setAdminControlButtonsStyle();
 
     // Loading
     const QStringList labelsPerson = {"PersonID", "Name", "Surname", "Address", "isEmployed", "isAdmin", "isStaff"};
@@ -137,4 +137,34 @@ void AdminWindow::on_buttonReloadAccountTable_clicked()
 void AdminWindow::on_buttonReloadCardTable_clicked()
 {
     loadCardTableWidget();
+}
+
+
+void AdminWindow::setAdminControlButtonsStyle()
+{
+
+    // Admin buttons preset
+    QString colorAddNewEmployee  = QString("background-color: #0059b3; color: #ffffff;");
+    ui->buttonAddNewEmployee->setStyleSheet(colorAddNewEmployee);
+
+    QString colorEditEmployee  = QString("background-color: #0066cc; color: #ffffff;");
+    ui->buttonEditEmployee->setStyleSheet(colorEditEmployee);
+
+    QString colorEditDrinks  = QString("background-color: #0073e6; color: #ffffff;");
+    ui->buttonEditDrinks->setStyleSheet(colorEditDrinks);
+
+    QString colorIngredientStatus  = QString("background-color: #0080ff; color: #ffffff;");
+    ui->buttonIngredientStatus->setStyleSheet(colorIngredientStatus);
+
+    QString colorReloadTable  = QString("background-color: #ff6600; color: #ffffff;");
+    ui->buttonReloadPersonTable->setStyleSheet(colorReloadTable);
+    ui->buttonReloadBankAccountTable->setStyleSheet(colorReloadTable);
+    ui->buttonReloadAccountTable->setStyleSheet(colorReloadTable);
+    ui->buttonReloadCardTable->setStyleSheet(colorReloadTable);
+
+}
+
+void AdminWindow::on_buttonAddNewEmployee_clicked()
+{
+
 }
