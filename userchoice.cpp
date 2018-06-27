@@ -4,6 +4,11 @@
 #include "ui_mainwindow.h"
 #include <QtDebug>
 #include "coffee.h"
+#include "cappuccino.h"
+#include "espresso.h"
+#include "lattemacchiato.h"
+#include "cacao.h"
+#include "hotwater.h"
 
 UserChoice::UserChoice(Card *card) : UserChoice()
 {
@@ -13,6 +18,18 @@ UserChoice::UserChoice(Card *card) : UserChoice()
 UserChoice::UserChoice()
 {
     setDefaultChoice();
+}
+
+void UserChoice::setDefaultChoice()
+{
+    selectedDrink = NO_DRINK;
+    sugarAmount = 0;
+    milkAmount = 0;
+    isBigPortion = false;
+    hotWaterAmount = 0;
+    recipeTemperature = 0;
+    specificRecipeComponent = 0;
+    price = 0.0;
 }
 
 bool UserChoice::payDrink()
@@ -34,18 +51,87 @@ void UserChoice::setSelectedDrink(DrinkType selectedDrink)
 {
     this->selectedDrink = selectedDrink;
 
-    //Drink d = DrinkRecipes[selectedDrink];
-
-    //setExtraMilk(d.getMilkAmount());
-    //setExtraSugar(d.getSugarAmount());
-
     if (selectedDrink == COFFEE)
     {
         Coffee drink;
-        extraSugar = drink.getSugarAmount();
-        extraMilk = drink.getMilkAmount();
+        sugarAmount = drink.getSugarAmount();
+        milkAmount = drink.getMilkAmount();
+        hotWaterAmount = drink.getHotWaterAmount();
+        recipeTemperature = drink.getRecipeTemperature();
+        specificRecipeComponent = drink.getRecipeIngredient();
         price = drink.getPrice();
     }
+
+    else if (selectedDrink == CAPPUCCINO)
+    {
+        Cappuccino drink;
+        sugarAmount = drink.getSugarAmount();
+        milkAmount = drink.getMilkAmount();
+        hotWaterAmount = drink.getHotWaterAmount();
+        recipeTemperature = drink.getRecipeTemperature();
+        specificRecipeComponent = drink.getRecipeIngredient();
+        price = drink.getPrice();
+    }
+    else if (selectedDrink == ESPRESSO)
+    {
+        Espresso drink;
+        sugarAmount = drink.getSugarAmount();
+        milkAmount = drink.getMilkAmount();
+        hotWaterAmount = drink.getHotWaterAmount();
+        recipeTemperature = drink.getRecipeTemperature();
+        specificRecipeComponent = drink.getRecipeIngredient();
+        price = drink.getPrice();
+    }
+    else if (selectedDrink == LATTEMACCHIOTO)
+    {
+        LatteMacchiato drink;
+        sugarAmount = drink.getSugarAmount();
+        milkAmount = drink.getMilkAmount();
+        hotWaterAmount = drink.getHotWaterAmount();
+        recipeTemperature = drink.getRecipeTemperature();
+        specificRecipeComponent = drink.getRecipeIngredient();
+        price = drink.getPrice();
+    }
+    else if (selectedDrink == CACAO)
+    {
+        Cacao drink;
+        sugarAmount = drink.getSugarAmount();
+        milkAmount = drink.getMilkAmount();
+        hotWaterAmount = drink.getHotWaterAmount();
+        recipeTemperature = drink.getRecipeTemperature();
+        specificRecipeComponent = drink.getRecipeIngredient();
+        price = drink.getPrice();
+    }
+    else if (selectedDrink == HOTWATER)
+    {
+        HotWater drink;
+        sugarAmount = drink.getSugarAmount();
+        milkAmount = drink.getMilkAmount();
+        hotWaterAmount = drink.getHotWaterAmount();
+        recipeTemperature = drink.getRecipeTemperature();
+        specificRecipeComponent = drink.getRecipeIngredient();
+        price = drink.getPrice();
+    }
+    else if (selectedDrink == NO_DRINK)
+    {
+        sugarAmount = 0;
+        milkAmount = 0;
+        hotWaterAmount = 0;
+        recipeTemperature = 0;
+        specificRecipeComponent = 0;
+        price = 0.0;
+    }
+    else
+    {
+        sugarAmount = 0;
+        milkAmount = 0;
+        hotWaterAmount = 0;
+        recipeTemperature = 0;
+        specificRecipeComponent = 0;
+        price = 0.0;
+    }
+
+
 
     QString str = printSelectedDrink();
     qDebug() << "SETTER: Selected Drink is set: " << str;
@@ -69,24 +155,24 @@ Card *UserChoice::getCard()
 }
 
 
-void UserChoice::setExtraSugar(int extraSugar)
+void UserChoice::setSugarAmount(int sugarAmount)
 {
-    this->extraSugar = extraSugar;
+    this->sugarAmount = sugarAmount;
 }
 
-int UserChoice::getExtraSugar()
+int UserChoice::getSugarAmount()
 {
-    return extraSugar;
+    return sugarAmount;
 }
 
-void UserChoice::setExtraMilk(int extraMilk)
+void UserChoice::setMilkAmount(int milkAmount)
 {
-    this->extraMilk = extraMilk;
+    this->milkAmount = milkAmount;
 }
 
-int UserChoice::getExtraMilk()
+int UserChoice::getMilkAmount()
 {
-    return extraMilk;
+    return milkAmount;
 }
 
 // setter
@@ -100,55 +186,6 @@ bool UserChoice::getBigPortion()
     return isBigPortion;
 }
 
-double UserChoice::getPrice()
-{
-    if (selectedDrink == COFFEE)
-    {
-        price = 0.90;
-    }
-    else if (selectedDrink == CAPPUCCINO)
-    {
-        price = 0.90;
-    }
-    else if (selectedDrink == ESPRESSO)
-    {
-        price = 1.20;
-    }
-    else if (selectedDrink == LATTEMACCHIOTO)
-    {
-        price = 1.40;
-    }
-    else if (selectedDrink == CACAO)
-    {
-        price = 1.40;
-    }
-    else if (selectedDrink == HOTWATER)
-    {
-        price = 0.20;
-    }
-    else if (selectedDrink == NO_DRINK)
-    {
-        price = 0;
-    } 
-    else
-    {
-        price = 0;
-    }
-
-
-    QString str = printSelectedDrink();
-    qDebug() << "Price for the drink " << str << "is " << price;
-    return price;
-}
-
-void UserChoice::setDefaultChoice()
-{
-    selectedDrink = NO_DRINK;
-    extraSugar = 0;
-    extraMilk = 0;
-    isBigPortion = false;
-    price = 0.0;
-}
 
 QString UserChoice::printSelectedDrink()
 {

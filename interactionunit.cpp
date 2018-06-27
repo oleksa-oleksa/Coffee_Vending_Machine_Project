@@ -120,24 +120,24 @@ void InteractionUnit::buttonPollingRoutine()
 {
     if (choice == NULL)
     {
-        qDebug() << "LED: Please insert valid card";
+        qDebug() << "LCD: Please insert valid card";
         return;
     }
 
     if (addSugar && addSugar->getButtonValue()) {
-        choice->setExtraSugar(choice->getExtraSugar() + 1);
+        choice->setSugarAmount(choice->getSugarAmount() + 1);
     }
 
     if (removeSugar && removeSugar->getButtonValue()) {
-        choice->setExtraSugar(choice->getExtraSugar() - 1);
+        choice->setSugarAmount(choice->getSugarAmount() - 1);
     }
 
     if (addMilk && addMilk->getButtonValue()) {
-        choice->setExtraMilk(choice->getExtraMilk() + 1);
+        choice->setMilkAmount(choice->getMilkAmount() + 1);
     }
 
     if (removeMilk && removeMilk->getButtonValue()) {
-        choice->setExtraMilk(choice->getExtraMilk() - 1);
+        choice->setMilkAmount(choice->getMilkAmount() - 1);
     }
 
     if (coffee && coffee->getButtonValue()) {

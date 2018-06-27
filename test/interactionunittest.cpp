@@ -23,15 +23,13 @@ void InteractionUnitTest::testInitUserChoice()
     user = inter.initUserChoice(&card);
 
     QCOMPARE(user->getSelectedDrink(), sample.getSelectedDrink());
-    QCOMPARE(user->getPrice(), sample.getPrice());
+   // QCOMPARE(user->getPrice(), sample.getPrice());
     QCOMPARE(user->getCard(), &card);
 }
 
 
-
 void InteractionUnitTest::testButtonPollingRoutine()
 {
-
     Card test_card;
     InteractionUnit iunit;
 
@@ -70,10 +68,13 @@ void InteractionUnitTest::testButtonPollingRoutine()
     TRIGGER_BUTTON(removeMilk);
 
     QCOMPARE(userChoice->getSelectedDrink(), COFFEE);
-    QCOMPARE(userChoice->getExtraSugar(), 4);
-    QCOMPARE(userChoice->getExtraMilk(), 0);
-    QCOMPARE(userChoice->getPrice(), 0.90);
+    QCOMPARE(userChoice->getSugarAmount(), 4);
+    QCOMPARE(userChoice->getMilkAmount(), 0);
+   // QCOMPARE(userChoice->getPrice(), 0.90);
 
+
+    // SIMULATION
+    // HOT WATER
 
 
 /*

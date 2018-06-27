@@ -23,17 +23,17 @@ void UserChoiceTest::testPayDrink()
     DrinkType dt03 = NO_DRINK;
     qDebug() << "01:";
     choice01.setSelectedDrink(dt01);
-    choice01.getPrice();
+    //choice01.getPrice();
     QCOMPARE(choice01.payDrink(), true);
 
     qDebug() << "02:";
     choice01.setSelectedDrink(dt02);
-    choice01.getPrice();
+    //choice01.getPrice();
     QCOMPARE(choice01.payDrink(), true);
 
     qDebug() << "03:";
     choice01.setSelectedDrink(dt03);
-    choice01.getPrice();
+    //choice01.getPrice();
     QCOMPARE(choice01.payDrink(), false);
 }
 
@@ -92,15 +92,15 @@ void UserChoiceTest::testGetPrice()
     UserChoice choice01(&test01);
 
     qDebug() << "Price after object creation";
-    choice01.getPrice();
+    //choice01.getPrice();
 
     qDebug() << "01:";
     choice01.setSelectedDrink(dt01);
-    choice01.getPrice();
+    //choice01.getPrice();
     qDebug() << "02:";
-    choice01.setSelectedDrink(dt02);
-    choice01.getPrice();
+    //choice01.setSelectedDrink(dt02);
+    //choice01.getPrice();
     qDebug() << "03:";
     choice01.setSelectedDrink(dt03);
-    choice01.getPrice();
+    //choice01.getPrice();
 }

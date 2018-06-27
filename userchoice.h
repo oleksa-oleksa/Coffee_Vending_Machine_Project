@@ -10,9 +10,12 @@ class UserChoice
     private:
         DrinkType selectedDrink;
         Card *card;
-        int extraSugar;
-        int extraMilk;
+        int sugarAmount;
+        int milkAmount;
         bool isBigPortion;
+        int hotWaterAmount;
+        int recipeTemperature;
+        int specificRecipeComponent;
         double price;
 
     public:
@@ -23,13 +26,12 @@ class UserChoice
         DrinkType getSelectedDrink();
         void setCard(Card *card);
         Card *getCard();
-        void setExtraSugar(int extraSugar);
-        int getExtraSugar();
-        void setExtraMilk(int extraMilk);
-        int getExtraMilk();
+        void setSugarAmount(int sugarAmount);
+        int getSugarAmount();
+        void setMilkAmount(int milkAmount);
+        int getMilkAmount();
         void toggleBigPortion(); // setter
         bool getBigPortion();
-        double getPrice(); // price is predefined, no setter needed
         void setDefaultChoice();
         QString printSelectedDrink();
 };

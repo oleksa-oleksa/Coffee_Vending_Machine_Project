@@ -12,12 +12,16 @@
 #include "rfid_scanner.h"
 #include "card.h"
 #include <QDebug>
+#include "userchoice.h"
 
 #define NO_CUP_PROXIMITY 100
 
 class ControlUnit
 {
     private:
+        UserChoice *selectedDrink; // obtain components
+                                   // from this pointer
+                                    // sugar milk temperature...
         OpticalSensor fillevel[4];
         ProximitySensor cupsensor;
         DC_Motor motor[4];
@@ -35,6 +39,8 @@ class ControlUnit
         bool checkIngredients();
         bool checkCup();
         bool checkCard( Card& );
+        // prepare drink with actuators and sensors!
+        bool prepareSelectedDrink(UserChoice *selectedDrink);
 
         ControlUnit();
         ControlUnit(ControlUnit const&);              // Don't Implement.
