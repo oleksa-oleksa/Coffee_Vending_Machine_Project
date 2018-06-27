@@ -1,8 +1,15 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "adminwindow.h"
+#include "person.h"
+#include "rfid_scanner.h"
 
 #include <QtDebug>
+
+Person *activePerson = NULL;
+Card *card = NULL;
+Account *activeAccount = NULL;
+RFID_Scanner RFID_s;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,6 +17,15 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Coffee Machine Drinks Window");
+
+    // select active Person
+    activeAccount = &Account::AllAccounts[0];
+
+    activePerson = activeAccount->getOwner();
+    // get linked Card
+
+
+
 
     setMainWindowControlButtonsStyle();
 
@@ -38,8 +54,10 @@ void MainWindow::setMainWindowControlButtonsStyle()
     QString colorAdmin  = QString("background-color: #0059b3; color: #ffffff;");
     ui->buttonAdmin->setStyleSheet(colorAdmin);
 
-    QString colorService = QString("background-color: #993366; color: #ffffff;");
-    ui->buttonService->setStyleSheet(colorService);
+    ui->buttonService->setStyleSheet(colorAdmin);
+
+    QString colorCard = QString("background-color: #669900; color: #ffffff;");
+    ui->buttonCard->setStyleSheet(colorCard);
 
 }
 
@@ -57,3 +75,19 @@ void MainWindow::on_buttonAdmin_released()
     ui->buttonAdmin->setStyleSheet(colorAdmin);
 }
 
+
+void MainWindow::on_buttonCard_clicked()
+{
+
+    if (ui->labelCard->isHidden())
+    {
+        ui->labelCard->show();
+        RFID_s.getRfidValidation(card);
+
+    }
+
+    else
+    {
+        ui->labelCard->hide();
+    }
+}

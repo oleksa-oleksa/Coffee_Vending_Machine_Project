@@ -6,53 +6,28 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>540</width>
-    <height>500</height>
+    <width>756</width>
+    <height>567</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="buttonPlaceCard">
-    <property name="geometry">
-     <rect>
-      <x>409</x>
-      <y>170</y>
-      <width>111</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Place Card</string>
-    </property>
-    <property name="checkable">
-     <bool>true</bool>
-    </property>
-    <property name="checked">
-     <bool>false</bool>
-    </property>
-    <property name="default">
-     <bool>false</bool>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
-   </widget>
    <widget class="QWidget" name="widgetDisplay" native="true">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>120</y>
-      <width>241</width>
-      <height>101</height>
+      <y>90</y>
+      <width>301</width>
+      <height>111</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">border: 2px solid;
 border-color: rgb(218, 218, 218);</string>
     </property>
-    <widget class="QLabel" name="labelYourChoice">
+    <widget class="QLabel" name="labelLCD">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -68,35 +43,12 @@ border-color: rgb(218, 218, 218);</string>
       <string>Your choice</string>
      </property>
     </widget>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>181</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_8">
-      <item>
-       <widget class="QLabel" name="labelDrink">
-        <property name="styleSheet">
-         <string notr="true">border: 0px;
-</string>
-        </property>
-        <property name="text">
-         <string>Coffee</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
     <widget class="QLabel" name="labelPrice">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>230</x>
        <y>40</y>
-       <width>85</width>
+       <width>51</width>
        <height>39</height>
       </rect>
      </property>
@@ -105,19 +57,49 @@ border-color: rgb(218, 218, 218);</string>
 </string>
      </property>
      <property name="text">
-      <string>0.80€</string>
+      <string>0.00€</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelDrink">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>161</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <italic>false</italic>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: 0px;</string>
+     </property>
+     <property name="text">
+      <string>Please insert card</string>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
    <widget class="QWidget" name="widgetControlPanel" native="true">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>230</y>
-      <width>510</width>
+      <x>0</x>
+      <y>290</y>
+      <width>471</width>
       <height>210</height>
      </rect>
     </property>
@@ -347,178 +329,25 @@ border-color: rgb(218, 218, 218);</string>
        <height>100</height>
       </rect>
      </property>
-     <widget class="QRadioButton" name="coffeeButton">
+     <widget class="QPushButton" name="buttonStart">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>120</width>
-        <height>30</height>
+        <x>310</x>
+        <y>50</y>
+        <width>91</width>
+        <height>50</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>120</width>
+        <width>60</width>
         <height>0</height>
        </size>
       </property>
-      <property name="maximumSize">
-       <size>
-        <width>120</width>
-        <height>16777215</height>
-       </size>
-      </property>
       <property name="text">
-       <string>Coffee</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
+       <string>Start</string>
       </property>
      </widget>
-     <widget class="QRadioButton" name="cappuccinoButton">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>60</y>
-        <width>120</width>
-        <height>30</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>120</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>120</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Cappuccino</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="espressoButton">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>10</y>
-        <width>120</width>
-        <height>30</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>120</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>120</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Espresso</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="cacaoButton">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>60</y>
-        <width>120</width>
-        <height>30</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>120</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>120</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Cacao</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="latteMacchiatoButton">
-      <property name="geometry">
-       <rect>
-        <x>290</x>
-        <y>10</y>
-        <width>120</width>
-        <height>30</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>120</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>120</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Latte Macchiato</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="hotWaterButton">
-      <property name="geometry">
-       <rect>
-        <x>290</x>
-        <y>60</y>
-        <width>120</width>
-        <height>30</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>120</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>120</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Hot Water</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QPushButton" name="buttonStart">
-     <property name="geometry">
-      <rect>
-       <x>409</x>
-       <y>150</y>
-       <width>91</width>
-       <height>50</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>60</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Start</string>
-     </property>
     </widget>
     <widget class="QPushButton" name="buttonBigCup">
      <property name="geometry">
@@ -551,75 +380,106 @@ border-color: rgb(218, 218, 218);</string>
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>111</width>
+      <width>128</width>
       <height>41</height>
      </rect>
     </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>80</width>
-      <height>0</height>
-     </size>
-    </property>
     <property name="text">
      <string>Admin</string>
-    </property>
-    <property name="checkable">
-     <bool>true</bool>
-    </property>
-    <property name="checked">
-     <bool>false</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="buttonService">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>590</x>
       <y>10</y>
-      <width>111</width>
+      <width>128</width>
       <height>41</height>
      </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>80</width>
-      <height>0</height>
-     </size>
     </property>
     <property name="text">
      <string>Service</string>
     </property>
-    <property name="checkable">
-     <bool>true</bool>
+   </widget>
+   <widget class="QPushButton" name="buttonCard">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>190</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
     </property>
-    <property name="checked">
-     <bool>false</bool>
+    <property name="text">
+     <string>Insert Card</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>80</y>
+      <width>141</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelCard">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>80</y>
+      <width>128</width>
+      <height>128</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="images.qrc">:/icons/images/card.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frameCard">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>90</y>
+      <width>151</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #f2f2f2</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
+   <zorder>frameCard</zorder>
+   <zorder>labelCard</zorder>
    <zorder>widgetControlPanel</zorder>
-   <zorder>buttonPlaceCard</zorder>
    <zorder>widgetDisplay</zorder>
    <zorder>buttonAdmin</zorder>
    <zorder>buttonService</zorder>
+   <zorder>buttonCard</zorder>
+   <zorder>label</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>540</width>
+     <width>756</width>
      <height>22</height>
     </rect>
    </property>
@@ -635,6 +495,8 @@ border-color: rgb(218, 218, 218);</string>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>

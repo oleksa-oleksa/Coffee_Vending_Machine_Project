@@ -29,7 +29,7 @@ RFID_Scanner::~RFID_Scanner()
 
 }
 
-bool RFID_Scanner::getRfidValidation( Card usercard )
+bool RFID_Scanner::getRfidValidation(Card *card)
 {
 //   if ( cardsDatabase.find(usercard) == cardsDatabase.end())
         qDebug() << "Error: Not yet implemented!";

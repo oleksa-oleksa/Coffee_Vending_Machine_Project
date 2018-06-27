@@ -42,7 +42,7 @@ bool ControlUnit::checkIngredients()
 
 bool ControlUnit::checkCard( Card& usercard )
 {
-    return rfid.getRfidValidation(usercard);
+    //return rfid.getRfidValidation(usercard);
 }
 
 void ControlUnit::maintenanceRoutine()
