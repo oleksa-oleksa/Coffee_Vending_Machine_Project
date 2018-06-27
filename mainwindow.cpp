@@ -11,6 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Coffee Machine Drinks Window");
 
+    setMainWindowControlButtonsStyle();
+
+
 }
 
 MainWindow::~MainWindow()
@@ -129,3 +132,28 @@ void MainWindow::on_buttonAdmin_clicked()
     adminWindow.setModal(true);
     adminWindow.exec();
 }
+
+
+
+void MainWindow::setMainWindowControlButtonsStyle()
+{
+    //Main Window buttons preset
+    QString colorAdmin  = QString("background-color: #0059b3; color: #ffffff;");
+    ui->buttonAdmin->setStyleSheet(colorAdmin);
+
+}
+
+void MainWindow::on_buttonAdmin_pressed()
+{
+    QString colorAdmin  = QString("background-color: #004080; color: #ffffff;");
+    ui->buttonAdmin->setStyleSheet(colorAdmin);
+}
+
+
+
+void MainWindow::on_buttonAdmin_released()
+{
+    QString colorAdmin  = QString("background-color: #0059b3; color: #ffffff;");
+    ui->buttonAdmin->setStyleSheet(colorAdmin);
+}
+

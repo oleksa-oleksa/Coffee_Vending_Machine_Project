@@ -16,6 +16,8 @@ public:
     ~MainWindow();
 
 private slots:
+    void setMainWindowControlButtonsStyle();
+
     void on_coffeeButton_clicked();
 
     void on_cappuccinoButton_clicked();
@@ -45,6 +47,10 @@ private slots:
     void on_buttonPlaceCard_clicked();
 
     void on_buttonAdmin_clicked();
+
+    void on_buttonAdmin_pressed();
+
+    void on_buttonAdmin_released();
 
 private:
     Ui::MainWindow *ui;

@@ -14,8 +14,8 @@ class Cacao : public Drink
         // RECIPE CANNOT BE SET, ONLY GET
         Cacao()
         {
-            sugarAmount = 4;
-            milkAmount = 4;
+            sugarAmount = 2;
+            milkAmount = 0;
             hotWaterAmount = 220;
             recipeTemperature = 90;
             price = 1.20;

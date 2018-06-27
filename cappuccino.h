@@ -15,8 +15,8 @@ class Cappuccino : public Drink
         // RECIPE CANNOT BE SET, ONLY GET
         Cappuccino()
         {
-            sugarAmount = 3;
-            milkAmount = 5;
+            sugarAmount = 2;
+            milkAmount = 2;
             hotWaterAmount = 220;
             recipeTemperature = 100;
             price = 1.00;

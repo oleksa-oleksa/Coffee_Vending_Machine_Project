@@ -81,20 +81,3 @@ void UserChoiceTest::testSetSelectedDrink()
     choice01.getSelectedDrink();
 }
 
-void UserChoiceTest::testSetSugarAmount(int sugarAmount)
-{
-
-}
-
-int UserChoiceTest::testGetSugarAmount()
-{
-
-}
-void UserChoiceTest::testSetMilkAmount(int milkAmount)
-{
-
-}
-int UserChoiceTest::testGetMilkAmount()
-{
-
-}

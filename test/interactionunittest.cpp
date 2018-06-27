@@ -31,15 +31,15 @@ void InteractionUnitTest::testButtonPollingRoutine()
     Card test_card;
     InteractionUnit iunit;
 
-    Button addSugar, removeSugar, addMilk,
-           removeMilk, coffee, cappuccino,
+    Button moreSugar, lessSugar, moreMilk,
+           lessMilk, coffee, cappuccino,
            espresso, latteMacchiato, cacao,
            hotWater, bigPortion, start;
 
-    iunit.setAddSugar(&addSugar);
-    iunit.setRemoveSugar(&removeSugar);
-    iunit.setAddMilk(&addMilk);
-    iunit.setRemoveMilk(&removeMilk);
+    iunit.setMoreSugar(&moreSugar);
+    iunit.setLessSugar(&lessSugar);
+    iunit.setMoreMilk(&moreMilk);
+    iunit.setLessMilk(&lessMilk);
 
     // At this point no user choice was initialized
     // Calling buttonPoillingRoutine must quit without an effect
@@ -54,19 +54,18 @@ void InteractionUnitTest::testButtonPollingRoutine()
     // NO MILK AT ALL
     // BIG PORTION
 
-    // Simulate "coffee" click: sugar 3, milk 3
+    // Simulate "coffee" click: sugar 1, milk 0
     userChoice01->setSelectedDrink(COFFEE);
 
-    // Simulate "add sugar" click: sugar 4
-    TRIGGER_BUTTON(addSugar);
+    // Simulate "add sugar" click: sugar 2
+    TRIGGER_BUTTON(moreSugar);
 
-    // simulate milk 3 => milk 0
-    TRIGGER_BUTTON(removeMilk);
-    TRIGGER_BUTTON(removeMilk);
-    TRIGGER_BUTTON(removeMilk);
+    // simulate milk 0 => milk 0
+    TRIGGER_BUTTON(moreMilk);
+    TRIGGER_BUTTON(lessMilk);
 
     QCOMPARE(userChoice01->getSelectedDrink(), COFFEE);
-    QCOMPARE(userChoice01->getSugarAmount(), 4);
+    QCOMPARE(userChoice01->getSugarAmount(), 2);
     QCOMPARE(userChoice01->getMilkAmount(), 0);
     delete userChoice01;
 
@@ -78,10 +77,12 @@ void InteractionUnitTest::testButtonPollingRoutine()
     userChoice02-> setSelectedDrink(HOTWATER);
 
     // Simulate "add sugar" click: sugar cannot be added, remains 0
-    TRIGGER_BUTTON(addSugar);
+    TRIGGER_BUTTON(moreSugar);
+    TRIGGER_BUTTON(moreSugar);
 
     // simulate milk: cannot be modified, remains 0
-    TRIGGER_BUTTON(removeMilk);
+    TRIGGER_BUTTON(lessMilk);
+    TRIGGER_BUTTON(lessMilk);
 
     QCOMPARE(userChoice02->getSelectedDrink(), HOTWATER);
     QCOMPARE(userChoice02->getSugarAmount(), 0);

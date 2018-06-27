@@ -12,7 +12,6 @@ class InteractionUnitTest : public QObject
 
     void testInitUserChoice();
     void testButtonPollingRoutine();
-
 };
 
 #endif // INTERACTIONUNITTEST_H

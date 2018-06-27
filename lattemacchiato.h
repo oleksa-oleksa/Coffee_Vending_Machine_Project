@@ -15,8 +15,8 @@ class LatteMacchiato : public Drink
         // RECIPE CANNOT BE SET, ONLY GET
         LatteMacchiato()
         {
-            sugarAmount = 2;
-            milkAmount = 5;
+            sugarAmount = 1;
+            milkAmount = 3;
             hotWaterAmount = 250;
             recipeTemperature = 90;
             price = 1.4;

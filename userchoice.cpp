@@ -157,7 +157,17 @@ Card *UserChoice::getCard()
 
 void UserChoice::setSugarAmount(int sugarAmount)
 {
-    this->sugarAmount = sugarAmount;
+    if (selectedDrink == HOTWATER)
+    {
+        this->sugarAmount = 0;
+        return;
+    }
+
+    if (sugarAmount >= 0 && sugarAmount < 5)
+    {
+        this->sugarAmount = sugarAmount;
+        return;
+    }
 }
 
 int UserChoice::getSugarAmount()
@@ -167,7 +177,19 @@ int UserChoice::getSugarAmount()
 
 void UserChoice::setMilkAmount(int milkAmount)
 {
-    this->milkAmount = milkAmount;
+    // sugar amount if these drinks can not be modified
+    if (selectedDrink == CACAO || selectedDrink == LATTEMACCHIOTO
+        || selectedDrink == ESPRESSO || selectedDrink == HOTWATER)
+    {
+        this->milkAmount = this->milkAmount;
+        return;
+    }
+
+    if (milkAmount >= 0 && milkAmount < 5)
+    {
+        this->milkAmount = milkAmount;
+        return;
+    }
 }
 
 int UserChoice::getMilkAmount()

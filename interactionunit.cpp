@@ -6,10 +6,10 @@ InteractionUnit::InteractionUnit()
 {
     choice = NULL;
 
-    addSugar = NULL;
-    removeSugar = NULL;
-    addMilk = NULL;
-    removeMilk = NULL;
+    moreSugar = NULL;
+    lessSugar = NULL;
+    moreMilk = NULL;
+    lessMilk = NULL;
     coffee = NULL;
     cappuccino = NULL;
     espresso = NULL;
@@ -26,21 +26,21 @@ InteractionUnit::~InteractionUnit()
 
 }
 
-void InteractionUnit::setAddSugar(Button *addSugar)
+void InteractionUnit::setMoreSugar(Button *moreSugar)
 {
-    this->addSugar = addSugar;
+    this->moreSugar = moreSugar;
 }
-void InteractionUnit::setRemoveSugar(Button *removeSugar)
+void InteractionUnit::setLessSugar(Button *lessSugar)
 {
-    this->removeSugar = removeSugar;
+    this->lessSugar = lessSugar;
 }
-void InteractionUnit::setAddMilk(Button *addMilk)
+void InteractionUnit::setMoreMilk(Button *moreMilk)
 {
-    this->addMilk = addMilk;
+    this->moreMilk = moreMilk;
 }
-void InteractionUnit::setRemoveMilk(Button *removeMilk)
+void InteractionUnit::setLessMilk(Button *lessMilk)
 {
-    this->removeMilk = removeMilk;
+    this->lessMilk = lessMilk;
 }
 void InteractionUnit::setCoffee(Button *coffee)
 {
@@ -75,21 +75,21 @@ void InteractionUnit::setStart(Button *start)
     this->start = start;
 }
 
-Button *InteractionUnit::getAddSugar()
+Button *InteractionUnit::getMoreSugar()
 {
-    return addSugar;
+    return moreSugar;
 }
-Button *InteractionUnit::getRemoveSugar()
+Button *InteractionUnit::getLessSugar()
 {
-    return removeSugar;
+    return lessSugar;
 }
-Button *InteractionUnit::getAddMilk()
+Button *InteractionUnit::getMoreMilk()
 {
-    return addMilk;
+    return moreMilk;
 }
-Button *InteractionUnit::getRemoveMilk()
+Button *InteractionUnit::getLessMilk()
 {
-    return removeMilk;
+    return lessMilk;
 }
 Button *InteractionUnit::getCoffee()
 {
@@ -138,19 +138,19 @@ void InteractionUnit::buttonPollingRoutine()
         return;
     }
 
-    if (addSugar && addSugar->getButtonValue()) {
+    if (moreSugar && moreSugar->getButtonValue()) {
         choice->setSugarAmount(choice->getSugarAmount() + 1);
     }
 
-    if (removeSugar && removeSugar->getButtonValue()) {
+    if (lessSugar && lessSugar->getButtonValue()) {
         choice->setSugarAmount(choice->getSugarAmount() - 1);
     }
 
-    if (addMilk && addMilk->getButtonValue()) {
+    if (moreMilk && moreMilk->getButtonValue()) {
         choice->setMilkAmount(choice->getMilkAmount() + 1);
     }
 
-    if (removeMilk && removeMilk->getButtonValue()) {
+    if (lessMilk && lessMilk->getButtonValue()) {
         choice->setMilkAmount(choice->getMilkAmount() - 1);
     }
 

@@ -75,7 +75,7 @@
      <rect>
       <x>20</x>
       <y>120</y>
-      <width>211</width>
+      <width>241</width>
       <height>101</height>
      </rect>
     </property>
@@ -120,21 +120,27 @@ border-color: rgb(218, 218, 218);</string>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QLabel" name="labelPrice">
-        <property name="styleSheet">
-         <string notr="true">border: 0px;
-</string>
-        </property>
-        <property name="text">
-         <string>0.80€</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
      </layout>
+    </widget>
+    <widget class="QLabel" name="labelPrice">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>40</y>
+       <width>85</width>
+       <height>39</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: 0px;
+</string>
+     </property>
+     <property name="text">
+      <string>0.80€</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="widgetControlPanel" native="true">

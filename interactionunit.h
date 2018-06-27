@@ -10,10 +10,10 @@ class InteractionUnit
     private:
         UserChoice *choice;
 
-        Button *addSugar;
-        Button *removeSugar;
-        Button *addMilk;
-        Button *removeMilk;
+        Button *moreSugar;
+        Button *lessSugar;
+        Button *moreMilk;
+        Button *lessMilk;
         Button *coffee;
         Button *cappuccino;
         Button *espresso;
@@ -32,10 +32,10 @@ class InteractionUnit
         UserChoice *initUserChoice(Card *card);
         bool abortSession();
 
-        void setAddSugar(Button *addSugar);
-        void setRemoveSugar(Button *removeSugar);
-        void setAddMilk(Button *addMilk);
-        void setRemoveMilk(Button *removeMilk);
+        void setMoreSugar(Button *moreSugar);
+        void setLessSugar(Button *lessSugar);
+        void setMoreMilk(Button *addMilk);
+        void setLessMilk(Button *lessMilk);
         void setCoffee(Button *coffee);
         void setCappuccino(Button *cappuccino);
         void setEspresso(Button *espresso);
@@ -45,10 +45,10 @@ class InteractionUnit
         void setBigPortion(Button *bigPortio);
         void setStart(Button *start);
 
-        Button *getAddSugar();
-        Button *getRemoveSugar();
-        Button *getAddMilk();
-        Button *getRemoveMilk();
+        Button *getMoreSugar();
+        Button *getLessSugar();
+        Button *getMoreMilk();
+        Button *getLessMilk();
         Button *getCoffee();
         Button *getCappuccino();
         Button *getEspresso();
