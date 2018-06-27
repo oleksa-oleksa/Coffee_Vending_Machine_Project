@@ -14,37 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="buttonService">
-    <property name="geometry">
-     <rect>
-      <x>409</x>
-      <y>10</y>
-      <width>111</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>80</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Service</string>
-    </property>
-    <property name="checkable">
-     <bool>true</bool>
-    </property>
-    <property name="checked">
-     <bool>false</bool>
-    </property>
-   </widget>
    <widget class="QPushButton" name="buttonPlaceCard">
     <property name="geometry">
      <rect>
@@ -608,11 +577,42 @@ border-color: rgb(218, 218, 218);</string>
      <bool>false</bool>
     </property>
    </widget>
+   <widget class="QPushButton" name="buttonService">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>10</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>80</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Service</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
    <zorder>widgetControlPanel</zorder>
-   <zorder>buttonService</zorder>
    <zorder>buttonPlaceCard</zorder>
    <zorder>widgetDisplay</zorder>
    <zorder>buttonAdmin</zorder>
+   <zorder>buttonService</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
