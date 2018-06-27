@@ -14,8 +14,6 @@
 void InteractionUnitTest::testInitUserChoice()
 {
     Card card;
-
-    // Sample is a UserChoice instance initialized with a default constructor
     UserChoice sample;
     UserChoice *user; // this object will be created inside InteractionUnit
 
@@ -23,8 +21,8 @@ void InteractionUnitTest::testInitUserChoice()
     user = inter.initUserChoice(&card);
 
     QCOMPARE(user->getSelectedDrink(), sample.getSelectedDrink());
-   // QCOMPARE(user->getPrice(), sample.getPrice());
     QCOMPARE(user->getCard(), &card);
+
 }
 
 
@@ -48,8 +46,8 @@ void InteractionUnitTest::testButtonPollingRoutine()
     iunit.buttonPollingRoutine();
 
     // UserChoise is now initialised, drink can be modified
-    UserChoice *userChoice;
-    userChoice = iunit.initUserChoice(&test_card);
+    UserChoice *userChoice01;
+    userChoice01 = iunit.initUserChoice(&test_card);
 
     // SIMULATION
     // COFFEF WITH 4 ADDITIONAL SUGAR
@@ -57,7 +55,7 @@ void InteractionUnitTest::testButtonPollingRoutine()
     // BIG PORTION
 
     // Simulate "coffee" click: sugar 3, milk 3
-    userChoice->setSelectedDrink(COFFEE);
+    userChoice01->setSelectedDrink(COFFEE);
 
     // Simulate "add sugar" click: sugar 4
     TRIGGER_BUTTON(addSugar);
@@ -67,18 +65,27 @@ void InteractionUnitTest::testButtonPollingRoutine()
     TRIGGER_BUTTON(removeMilk);
     TRIGGER_BUTTON(removeMilk);
 
-    QCOMPARE(userChoice->getSelectedDrink(), COFFEE);
-    QCOMPARE(userChoice->getSugarAmount(), 4);
-    QCOMPARE(userChoice->getMilkAmount(), 0);
-   // QCOMPARE(userChoice->getPrice(), 0.90);
-
+    QCOMPARE(userChoice01->getSelectedDrink(), COFFEE);
+    QCOMPARE(userChoice01->getSugarAmount(), 4);
+    QCOMPARE(userChoice01->getMilkAmount(), 0);
+    delete userChoice01;
 
     // SIMULATION
     // HOT WATER
 
+    UserChoice *userChoice02;
+    userChoice02 = iunit.initUserChoice(&test_card);
+    userChoice02-> setSelectedDrink(HOTWATER);
 
-/*
-    UserChoice *choce02; // Just hot water
+    // Simulate "add sugar" click: sugar cannot be added, remains 0
+    TRIGGER_BUTTON(addSugar);
 
-*/
+    // simulate milk: cannot be modified, remains 0
+    TRIGGER_BUTTON(removeMilk);
+
+    QCOMPARE(userChoice02->getSelectedDrink(), HOTWATER);
+    QCOMPARE(userChoice02->getSugarAmount(), 0);
+    QCOMPARE(userChoice02->getMilkAmount(), 0);
+    delete userChoice02;
+
 }

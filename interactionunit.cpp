@@ -4,7 +4,21 @@
 
 InteractionUnit::InteractionUnit()
 {
+    choice = NULL;
 
+    addSugar = NULL;
+    removeSugar = NULL;
+    addMilk = NULL;
+    removeMilk = NULL;
+    coffee = NULL;
+    cappuccino = NULL;
+    espresso = NULL;
+    latteMacchiato = NULL;
+    cacao = NULL;
+    hotWater = NULL;
+    bigPortion = NULL;
+    cancel = NULL;
+    start = NULL;
 }
 
 InteractionUnit::~InteractionUnit()

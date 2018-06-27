@@ -116,7 +116,7 @@ void UserChoice::setSelectedDrink(DrinkType selectedDrink)
     {
         sugarAmount = 0;
         milkAmount = 0;
-        hotWaterAmount = 0;
+        hotWaterAmount = 100;
         recipeTemperature = 0;
         specificRecipeComponent = 0;
         price = 0.0;
@@ -184,6 +184,11 @@ void UserChoice::toggleBigPortion()
 bool UserChoice::getBigPortion()
 {
     return isBigPortion;
+}
+
+double UserChoice::getPrice()
+{
+    return price;
 }
 
 

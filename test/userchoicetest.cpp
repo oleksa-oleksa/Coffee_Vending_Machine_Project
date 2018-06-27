@@ -2,6 +2,16 @@
 #include "userchoicetest.h"
 #include "drinktype.h"
 
+void UserChoiceTest::testSetDefaultChoice() {
+    UserChoice choice01;
+
+    //QCOMPARE(choice01.getSelectedDrink(), NO_DRINK);
+    QCOMPARE(choice01.getMilkAmount(), 0);
+    QCOMPARE(choice01.getPrice(), 0);
+    QCOMPARE(choice01.getBigPortion(), false);
+}
+
+
 void UserChoiceTest::testPayDrink()
 {
     // All Object and dependencies
@@ -71,36 +81,20 @@ void UserChoiceTest::testSetSelectedDrink()
     choice01.getSelectedDrink();
 }
 
-void UserChoiceTest::testGetPrice()
+void UserChoiceTest::testSetSugarAmount(int sugarAmount)
 {
-    DrinkType dt01 = CAPPUCCINO;
-    DrinkType dt02 = HOTWATER;
-    DrinkType dt03 = NO_DRINK;
 
-    // All Object and dependencies
-    // THE RIGHT ORDER TO GET ACCESS FOR PAYMENT
-    Account ts_acc01;
-    Person ts_per01;
-    AccountID ts_acid01;
-    ts_acc01.setAccountID(ts_acid01);
-    ts_acc01.setOwner(&ts_per01);
-    Account::AllAccounts.push_back(ts_acc01);
+}
 
-    Card test01(&ts_acc01);
-    test01.linkAccount(ts_acid01);
+int UserChoiceTest::testGetSugarAmount()
+{
 
-    UserChoice choice01(&test01);
+}
+void UserChoiceTest::testSetMilkAmount(int milkAmount)
+{
 
-    qDebug() << "Price after object creation";
-    //choice01.getPrice();
+}
+int UserChoiceTest::testGetMilkAmount()
+{
 
-    qDebug() << "01:";
-    choice01.setSelectedDrink(dt01);
-    //choice01.getPrice();
-    qDebug() << "02:";
-    //choice01.setSelectedDrink(dt02);
-    //choice01.getPrice();
-    qDebug() << "03:";
-    choice01.setSelectedDrink(dt03);
-    //choice01.getPrice();
 }

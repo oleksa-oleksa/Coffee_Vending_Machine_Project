@@ -33,6 +33,7 @@ class UserChoice
         void toggleBigPortion(); // setter
         bool getBigPortion();
         void setDefaultChoice();
+        double getPrice();
         QString printSelectedDrink();
 };
 
