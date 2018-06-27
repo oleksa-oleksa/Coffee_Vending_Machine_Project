@@ -128,7 +128,11 @@ SOURCES += \
     bankaccountid.cpp \
     defaultcoffeemachine.cpp \
     coffee.cpp \
-    adminwindow.cpp
+    adminwindow.cpp \
+    cacao.cpp \
+    cappuccino.cpp \
+    lattemacchiato.cpp \
+    hotwater.cpp
 
 test {
     message(TEST BUILD)

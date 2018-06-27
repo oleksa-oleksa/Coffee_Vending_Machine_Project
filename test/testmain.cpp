@@ -39,7 +39,6 @@ int main(int argc, char *argv[])
     InteractionUnitTest dbtst06;
     return QTest::qExec(&dbtst06, argc, argv);
 
-
     return a.exec();
 }
 

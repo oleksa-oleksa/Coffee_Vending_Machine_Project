@@ -41,11 +41,11 @@ bool DefaultCoffeeMachine::createDefaulDB(std::string db_name)
     // 2 Employees
     // All employees can buy drink if their account is not blocked
     // 1 unemloyed person for test purpose
-    ret = ret && assert(coffeeMachine_DB.insertPerson("Oleksandra", "Baga", "Beuthstr. 14, 12163 Berlin", 1, 1, 0) == true, "Insert Person01 failed");
+    ret = ret && assert(coffeeMachine_DB.insertPerson("Oleksandra", "Baga", "Beuthstr. 14, 12163 Berlin", 1, 1, 1) == true, "Insert Person01 failed");
     ret = ret && assert(coffeeMachine_DB.insertPerson("Christian", "Spiegel", "Kaiserin-Augusta-Allee 77, 10589 Berlin", 1, 0, 0) == true, "Insert Person02 failed");
     ret = ret && assert(coffeeMachine_DB.insertPerson("Daniel", "Hoffmann", "Beusselstr. 22, 10567 Berlin", 1, 0, 0) == true, "Insert Person03 failed");
-    ret = ret && assert(coffeeMachine_DB.insertPerson("Katharina", "Falten", "Klarenbachstr. 43, 10270 Berlin", 1, 0, 1) == true, "Insert Person04 failed");
-    ret = ret && assert(coffeeMachine_DB.insertPerson("Mathias", "Schulz", "Quedlinburger Str. 54, 10340 Berlin", 1, 1, 1) == true, "Insert Person05 failed");
+    ret = ret && assert(coffeeMachine_DB.insertPerson("Katharina", "Falten", "Klarenbachstr. 43, 10270 Berlin", 1, 1, 0) == true, "Insert Person04 failed");
+    ret = ret && assert(coffeeMachine_DB.insertPerson("Mathias", "Schulz", "Quedlinburger Str. 54, 10340 Berlin", 1, 0, 1) == true, "Insert Person05 failed");
     ret = ret && assert(coffeeMachine_DB.insertPerson("Tobias", "Testermann", "Neues Ufer 18, 10490 Berlin", 0, 1, 1) == true, "Insert Person06 failed");
 
     // Depended Tables

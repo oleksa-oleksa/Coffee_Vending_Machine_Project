@@ -25,9 +25,13 @@ class Coffee : public Drink
 
         int getSugarAmount();
         int getMilkAmount();
+        int getHotWaterAmount();
+        int getRecipeTemperature();
         double getPrice();
 
-};
+        // the specific recipe ingredient. coffeePowderAmount for Coffee drink
+        int getRecipeIngredient();
 
+};
 
 #endif

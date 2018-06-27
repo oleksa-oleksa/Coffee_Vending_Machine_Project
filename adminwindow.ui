@@ -29,7 +29,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>3</number>
    </property>
    <property name="usesScrollButtons">
     <bool>false</bool>
@@ -60,14 +60,14 @@
       <enum>QAbstractItemView::SelectRows</enum>
      </property>
      <attribute name="horizontalHeaderVisible">
-      <bool>true</bool>
+      <bool>false</bool>
      </attribute>
     </widget>
     <widget class="QPushButton" name="buttonReloadPersonTable">
      <property name="geometry">
       <rect>
        <x>280</x>
-       <y>260</y>
+       <y>250</y>
        <width>211</width>
        <height>51</height>
       </rect>
@@ -98,7 +98,7 @@
      <property name="geometry">
       <rect>
        <x>280</x>
-       <y>260</y>
+       <y>250</y>
        <width>211</width>
        <height>51</height>
       </rect>
@@ -129,7 +129,7 @@
      <property name="geometry">
       <rect>
        <x>280</x>
-       <y>260</y>
+       <y>250</y>
        <width>211</width>
        <height>51</height>
       </rect>
@@ -160,7 +160,7 @@
      <property name="geometry">
       <rect>
        <x>280</x>
-       <y>260</y>
+       <y>250</y>
        <width>211</width>
        <height>51</height>
       </rect>
@@ -200,7 +200,7 @@
     <rect>
      <x>30</x>
      <y>10</y>
-     <width>191</width>
+     <width>201</width>
      <height>40</height>
     </rect>
    </property>

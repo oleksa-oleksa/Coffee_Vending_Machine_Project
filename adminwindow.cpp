@@ -191,6 +191,7 @@ void AdminWindow::on_buttonSaveNewPerson_clicked()
 
     Person::AllEmployee.push_back(*newPerson);
     delete newPerson; newPerson = NULL;
+    Person &lastPerson = Person::AllEmployee.back();
 
     qDebug() << "New Person added into AllEmployee";
 
@@ -210,8 +211,8 @@ void AdminWindow::on_buttonSaveNewPerson_clicked()
     //=====================================================================
     // Account accountID, credit and state are predefined by constructor
 
-    // newAccount->setOwner(newPerson);
-    // newAccount->setBankAccount(newBankAccount);
+    newAccount->setOwner(&lastPerson);
+    newAccount->setBankAccount(&lastBankAccount);
 
     Account::AllAccounts.push_back(*newAccount);
     Account &lastAccount = Account::AllAccounts.back();
