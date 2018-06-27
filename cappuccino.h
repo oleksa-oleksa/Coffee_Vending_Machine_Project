@@ -13,7 +13,7 @@ class Cappuccino : public Drink
     public:
         // CAPPUCCINO DEFAULT CONSTRUCTOR
         // RECIPE CANNOT BE SET, ONLY GET
-        Coffee()
+        Cappuccino()
         {
             sugarAmount = 3;
             milkAmount = 5;
@@ -25,12 +25,13 @@ class Cappuccino : public Drink
 
         int getSugarAmount();
         int getMilkAmount();
+        int getHotWaterAmount();
+        int getRecipeTemperature();
         double getPrice();
 
         // the specific recipe ingredient. coffeePowderAmount for Coffee drink
         int getRecipeIngredient();
 
 };
-
 
 #endif

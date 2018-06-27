@@ -132,7 +132,8 @@ SOURCES += \
     cacao.cpp \
     cappuccino.cpp \
     lattemacchiato.cpp \
-    hotwater.cpp
+    hotwater.cpp \
+    espresso.cpp
 
 test {
     message(TEST BUILD)

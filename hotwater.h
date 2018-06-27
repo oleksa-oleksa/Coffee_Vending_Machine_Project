@@ -15,7 +15,7 @@ class HotWater : public Drink
     public:
         // HOTWATER DEFAULT CONSTRUCTOR
         // RECIPE CANNOT BE SET, ONLY GET
-        Coffee()
+        HotWater()
         {
             sugarAmount = 0;
             milkAmount = 0;
@@ -27,6 +27,8 @@ class HotWater : public Drink
 
         int getSugarAmount();
         int getMilkAmount();
+        int getHotWaterAmount();
+        int getRecipeTemperature();
         double getPrice();
 
         // the specific recipe ingredient. coffeePowderAmount for Coffee drink

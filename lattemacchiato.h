@@ -13,7 +13,7 @@ class LatteMacchiato : public Drink
     public:
         // LATTEMACCHIATO DEFAULT CONSTRUCTOR
         // RECIPE CANNOT BE SET, ONLY GET
-        Coffee()
+        LatteMacchiato()
         {
             sugarAmount = 2;
             milkAmount = 5;
@@ -25,9 +25,13 @@ class LatteMacchiato : public Drink
 
         int getSugarAmount();
         int getMilkAmount();
+        int getHotWaterAmount();
+        int getRecipeTemperature();
         double getPrice();
 
         // the specific recipe ingredient. coffeePowderAmount for Coffee drink
         int getRecipeIngredient();
 
 };
+
+#endif

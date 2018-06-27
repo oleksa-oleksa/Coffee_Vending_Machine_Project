@@ -12,7 +12,7 @@ class Cacao : public Drink
     public:
         // CACAO DEFAULT CONSTRUCTOR
         // RECIPE CANNOT BE SET, ONLY GET
-        Coffee()
+        Cacao()
         {
             sugarAmount = 4;
             milkAmount = 4;
@@ -24,6 +24,8 @@ class Cacao : public Drink
 
         int getSugarAmount();
         int getMilkAmount();
+        int getHotWaterAmount();
+        int getRecipeTemperature();
         double getPrice();
 
         // the specific recipe ingredient. CacaoPowder for Cacao drink
