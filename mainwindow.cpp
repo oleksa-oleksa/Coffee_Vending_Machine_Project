@@ -10,6 +10,10 @@
 #include "userchoice.h"
 #include "button.h"
 
+#define TRIGGER_BUTTON(button) ({button.setSensorstate(PRESSED); \
+                          iunit.buttonPollingRoutine();\
+                          button.setSensorstate(RELEASED);})
+
 Person *activePerson = NULL;
 Card *card = NULL;
 Account *activeAccount = NULL;
@@ -98,7 +102,6 @@ void MainWindow::on_buttonAdmin_clicked()
 }
 
 
-
 void MainWindow::setMainWindowControlButtonsStyle()
 {
     ui->labelCard->hide();
@@ -113,8 +116,34 @@ void MainWindow::setMainWindowControlButtonsStyle()
     ui->buttonAdmin->setStyleSheet(colorTopButtons);
     ui->buttonService->setStyleSheet(colorTopButtons);
 
-    QString colorCard = QString("background-color: #669900; color: #ffffff;");
-    ui->buttonCard->setStyleSheet(colorCard);
+    ui->buttonCard->setStyleSheet("background-color: #e67300; color: #ffffff;");
+
+    QString colorDrinks = QString("background-color: #663300; color: #ffffff;");
+    ui->buttonLessSugar->setStyleSheet(colorDrinks);
+    ui->buttonMoreSugar->setStyleSheet(colorDrinks);
+    ui->buttonLessMilk->setStyleSheet(colorDrinks);
+    ui->buttonMoreMilk->setStyleSheet(colorDrinks);
+
+    ui->progressBarSugar->setStyleSheet("QProgressBar::chunk {background-color: #a58a73; width: 3px; margin: 1px;}");
+    ui->progressBarSugar->setTextVisible(false);
+    styleSugarProgressBar();
+
+    ui->progressBarMilk->setStyleSheet("QProgressBar::chunk {background-color: #a58a73; width: 3px; margin: 1px;}");
+    ui->progressBarMilk->setTextVisible(false);
+    styleMilkProgressBar();
+
+    ui->buttonCoffee->setStyleSheet("background-color: #663300; color: #ffffff;");
+    ui->buttonCappuccino->setStyleSheet("background-color: #663300; color: #ffffff;");
+    ui->buttonEspresso->setStyleSheet("background-color: #663300; color: #ffffff;");
+    ui->buttonLatteMacchiato->setStyleSheet("background-color: #663300; color: #ffffff;");
+    ui->buttonCacao->setStyleSheet("background-color: #663300; color: #ffffff;");
+    ui->buttonHotwater->setStyleSheet("background-color: #663300; color: #ffffff;");
+    ui->buttonStart->setStyleSheet("background-color: #808000; color: #ffffff;");
+    ui->buttonCancel->setStyleSheet("background-color: #4d0000; color: #ffffff;");
+    ui->buttonBigPortion->setStyleSheet("background-color: #e67300; color: #ffffff;");
+
+
+
 
 }
 
@@ -161,9 +190,11 @@ void MainWindow::on_buttonCard_clicked()
         if (ret)
         {
             QString name = activeAccount->getOwner()->getName().c_str();
-            ui->labelLCD->setStyleSheet("color: #ffa31a; border: 0px;");
+            ui->labelLCD->setStyleSheet("color: #ffb366; border: 0px;");
             ui->labelLCD->setText("Nice to see you again " + name + "!");
 
+            styleSugarProgressBar();
+            styleMilkProgressBar();
         }
 
         // if card is not valid, it will ba automaticaly ejected (simulation)
@@ -196,4 +227,117 @@ void MainWindow::restartLCD()
           ui->labelSelectedDrink->setStyleSheet("color: #ffffff; border: 0px;");
           ui->labelPrice->setStyleSheet("color: #ffffff; border: 0px;");
           ui->labelLCD->show();
+
+          styleSugarProgressBar();
+          styleMilkProgressBar();
+}
+
+void MainWindow::on_buttonLessSugar_clicked()
+{
+    TRIGGER_BUTTON(lessSugar);
+    styleSugarProgressBar();
+}
+
+void MainWindow::on_buttonMoreSugar_clicked()
+{
+    TRIGGER_BUTTON(moreSugar);
+    styleSugarProgressBar();
+
+}
+
+void MainWindow::on_buttonLessMilk_clicked()
+{
+    TRIGGER_BUTTON(lessMilk);
+    styleMilkProgressBar();
+}
+
+void MainWindow::on_buttonMoreMilk_clicked()
+{
+    TRIGGER_BUTTON(moreMilk);
+    styleMilkProgressBar();
+}
+
+
+
+void MainWindow::styleMilkProgressBar()
+{
+    ui->progressBarMilk->setValue(activeUserChoice->getMilkAmount());
+    QString num = QString::number(activeUserChoice->getMilkAmount());
+    ui->labelMilkAmount->setText(num);
+    qDebug() << "Milk is:" << activeUserChoice->getMilkAmount();
+}
+
+void MainWindow::styleSugarProgressBar()
+{
+    ui->progressBarSugar->setValue(activeUserChoice->getSugarAmount());
+    QString num = QString::number(activeUserChoice->getSugarAmount());
+    ui->labelSugarAmount->setText(num);
+    qDebug() << "Sugar is:" << activeUserChoice->getSugarAmount();
+}
+
+void MainWindow::styleLCDInformation()
+{
+    ui->labelLCD->setStyleSheet("color: #ffffff; border: 0px;");
+    ui->labelLCD->setText("Your choice:");
+
+    ui->labelSelectedDrink->setStyleSheet("color: #ffffff; border: 0px;");
+    ui->labelSelectedDrink->setText(activeUserChoice->printSelectedDrink());
+
+    QString num = QString::number(activeUserChoice->getPrice(), 'f', 2);
+    ui->labelPrice->setStyleSheet("color: #ffffff; border: 0px;");
+    ui->labelPrice->setText(num);
+}
+
+void MainWindow::on_buttonCoffee_clicked()
+{
+    activeUserChoice->setSelectedDrink(COFFEE);
+    styleMilkProgressBar();
+    styleSugarProgressBar();
+    styleLCDInformation();
+}
+
+void MainWindow::on_buttonCappuccino_clicked()
+{
+    activeUserChoice->setSelectedDrink(CAPPUCCINO);
+    styleMilkProgressBar();
+    styleSugarProgressBar();
+    styleLCDInformation();
+}
+
+void MainWindow::on_buttonEspresso_clicked()
+{
+    activeUserChoice->setSelectedDrink(ESPRESSO);
+    styleMilkProgressBar();
+    styleSugarProgressBar();
+    styleLCDInformation();
+}
+
+void MainWindow::on_buttonLatteMacchiato_clicked()
+{
+    activeUserChoice->setSelectedDrink(LATTEMACCHIOTO);
+    styleMilkProgressBar();
+    styleSugarProgressBar();
+    styleLCDInformation();
+}
+
+void MainWindow::on_buttonCacao_clicked()
+{
+    activeUserChoice->setSelectedDrink(CACAO);
+    styleMilkProgressBar();
+    styleSugarProgressBar();
+    styleLCDInformation();
+}
+
+void MainWindow::on_buttonHotwater_clicked()
+{
+    activeUserChoice->setSelectedDrink(HOTWATER);
+    styleMilkProgressBar();
+    styleSugarProgressBar();
+    styleLCDInformation();
+}
+
+void MainWindow::on_buttonBigPortion_clicked()
+{
+    TRIGGER_BUTTON(bigPortion);
+    styleLCDInformation();
 }

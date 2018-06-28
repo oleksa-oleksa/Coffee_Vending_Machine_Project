@@ -1,10 +1,10 @@
 <RCC>
     <qresource prefix="/icons">
         <file>images/admin.png</file>
-        <file>images/card.png</file>
         <file>images/coffee-back.png</file>
         <file>images/coffee-Mainback.png</file>
         <file>images/less.png</file>
         <file>images/more.png</file>
+        <file>images/card.png</file>
     </qresource>
 </RCC>

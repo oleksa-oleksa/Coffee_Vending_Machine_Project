@@ -7,121 +7,31 @@
     <x>0</x>
     <y>0</y>
     <width>756</width>
-    <height>567</height>
+    <height>643</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="widgetDisplay" native="true">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>140</y>
-      <width>471</width>
-      <height>171</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: #331a00; border: 1px solid; border-color: #4d2600;</string>
-    </property>
-    <widget class="QLabel" name="labelLCD">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>20</y>
-       <width>421</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>14</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border: 0px;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="labelPrice">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>128</y>
-       <width>100</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>16</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border: 0px;
-</string>
-     </property>
-     <property name="text">
-      <string>0.00€</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QLabel" name="labelSelectedDrink">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>90</y>
-       <width>100</width>
-       <height>39</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>16</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border: 0px;
-</string>
-     </property>
-     <property name="text">
-      <string>Coffee</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </widget>
    <widget class="QWidget" name="widgetControlPanel" native="true">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>350</y>
       <width>761</width>
-      <height>221</height>
+      <height>301</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(204, 204, 204);</string>
+     <string notr="true">background-color: #d7cbc1</string>
     </property>
     <widget class="QPushButton" name="buttonStart">
      <property name="geometry">
       <rect>
-       <x>230</x>
-       <y>151</y>
-       <width>271</width>
+       <x>210</x>
+       <y>231</y>
+       <width>341</width>
        <height>51</height>
       </rect>
      </property>
@@ -133,8 +43,8 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>150</y>
-       <width>161</width>
+       <y>230</y>
+       <width>171</width>
        <height>51</height>
       </rect>
      </property>
@@ -169,7 +79,7 @@
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>60</y>
+       <y>50</y>
        <width>32</width>
        <height>32</height>
       </rect>
@@ -186,7 +96,7 @@
      <property name="geometry">
       <rect>
        <x>160</x>
-       <y>60</y>
+       <y>50</y>
        <width>32</width>
        <height>32</height>
       </rect>
@@ -203,7 +113,7 @@
      <property name="geometry">
       <rect>
        <x>90</x>
-       <y>60</y>
+       <y>50</y>
        <width>60</width>
        <height>16</height>
       </rect>
@@ -226,23 +136,26 @@
      <property name="geometry">
       <rect>
        <x>90</x>
-       <y>80</y>
+       <y>70</y>
        <width>61</width>
        <height>23</height>
       </rect>
      </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="maximum">
       <number>4</number>
-     </property>
-     <property name="value">
-      <number>3</number>
      </property>
     </widget>
     <widget class="QPushButton" name="buttonMoreMilk">
      <property name="geometry">
       <rect>
-       <x>350</x>
-       <y>60</y>
+       <x>340</x>
+       <y>50</y>
        <width>32</width>
        <height>32</height>
       </rect>
@@ -258,8 +171,8 @@
     <widget class="QProgressBar" name="progressBarMilk">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>80</y>
+       <x>270</x>
+       <y>70</y>
        <width>61</width>
        <height>23</height>
       </rect>
@@ -274,8 +187,8 @@
     <widget class="QPushButton" name="buttonLessMilk">
      <property name="geometry">
       <rect>
-       <x>240</x>
-       <y>60</y>
+       <x>230</x>
+       <y>50</y>
        <width>32</width>
        <height>32</height>
       </rect>
@@ -291,8 +204,8 @@
     <widget class="QLabel" name="labelMilkAmount">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>60</y>
+       <x>270</x>
+       <y>50</y>
        <width>60</width>
        <height>16</height>
       </rect>
@@ -314,7 +227,7 @@
     <widget class="QLabel" name="labelMilkTitle">
      <property name="geometry">
       <rect>
-       <x>270</x>
+       <x>260</x>
        <y>20</y>
        <width>81</width>
        <height>16</height>
@@ -332,6 +245,101 @@
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonCoffee">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>110</y>
+       <width>170</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>COFFEE</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonCappuccino">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>110</y>
+       <width>170</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>CAPPUCCINO</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonEspresso">
+     <property name="geometry">
+      <rect>
+       <x>380</x>
+       <y>110</y>
+       <width>170</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ESPRESSO</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonLatteMacchiato">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>160</y>
+       <width>170</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>LATTEMACCHIOTO</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonCacao">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>160</y>
+       <width>170</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>CACAO</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonHotwater">
+     <property name="geometry">
+      <rect>
+       <x>380</x>
+       <y>160</y>
+       <width>170</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>HOTWATER</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonBigPortion">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>50</y>
+       <width>141</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Big Portion</string>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/icons/images/more.png</normaloff>:/icons/images/more.png</iconset>
      </property>
     </widget>
    </widget>
@@ -365,7 +373,7 @@
     <property name="geometry">
      <rect>
       <x>560</x>
-      <y>260</y>
+      <y>240</y>
       <width>151</width>
       <height>41</height>
      </rect>
@@ -378,7 +386,7 @@
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>140</y>
+      <y>120</y>
       <width>128</width>
       <height>128</height>
      </rect>
@@ -394,7 +402,7 @@
     <property name="geometry">
      <rect>
       <x>550</x>
-      <y>140</y>
+      <y>120</y>
       <width>171</width>
       <height>171</height>
      </rect>
@@ -403,7 +411,9 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #331a00; border: 1px solid; border-color: #4d2600;</string>
+     <string notr="true">background-color: rgba(137, 83, 16, 50); border-width: 1px;
+    border-style: solid;
+    border-color: #89663b;</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -428,14 +438,115 @@
      <pixmap resource="images.qrc">:/icons/images/coffee-Mainback.png</pixmap>
     </property>
    </widget>
+   <widget class="QLabel" name="labelLCD">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>140</y>
+      <width>421</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 0px;</string>
+    </property>
+    <property name="text">
+     <string>Insert Card</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelSelectedDrink">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>180</y>
+      <width>231</width>
+      <height>39</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 0px;
+</string>
+    </property>
+    <property name="text">
+     <string>Coffee</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelPrice">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>230</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>36</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 0px;
+</string>
+    </property>
+    <property name="text">
+     <string>0.00€</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>120</y>
+      <width>491</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(215, 203, 193, 30); border-width: 1px;
+    border-style: solid;
+    border-color: #89663b;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>labelBackground</zorder>
+   <zorder>label</zorder>
    <zorder>frameCard</zorder>
    <zorder>labelCard</zorder>
    <zorder>widgetControlPanel</zorder>
-   <zorder>widgetDisplay</zorder>
    <zorder>buttonAdmin</zorder>
    <zorder>buttonService</zorder>
    <zorder>buttonCard</zorder>
+   <zorder>labelLCD</zorder>
+   <zorder>labelSelectedDrink</zorder>
+   <zorder>labelPrice</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

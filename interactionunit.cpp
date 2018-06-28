@@ -176,55 +176,60 @@ void InteractionUnit::buttonPollingRoutine()
         return;
     }
 
-    if (moreSugar && moreSugar->getButtonValue()) {
+    if (choice->getSelectedDrink() == NO_DRINK)
+    {
+        return;
+    }
+
+    if (choice && moreSugar && moreSugar->getButtonValue()) {
         choice->setSugarAmount(choice->getSugarAmount() + 1);
     }
 
-    if (lessSugar && lessSugar->getButtonValue()) {
+    if (choice && lessSugar && lessSugar->getButtonValue()) {
         choice->setSugarAmount(choice->getSugarAmount() - 1);
     }
 
-    if (moreMilk && moreMilk->getButtonValue()) {
+    if (choice && moreMilk && moreMilk->getButtonValue()) {
         choice->setMilkAmount(choice->getMilkAmount() + 1);
     }
 
-    if (lessMilk && lessMilk->getButtonValue()) {
+    if (choice && lessMilk && lessMilk->getButtonValue()) {
         choice->setMilkAmount(choice->getMilkAmount() - 1);
     }
 
-    if (coffee && coffee->getButtonValue()) {
+    if (choice && coffee && coffee->getButtonValue()) {
         choice->setSelectedDrink(COFFEE);
     }
 
-    if (cappuccino && cappuccino->getButtonValue()) {
+    if (choice && cappuccino && cappuccino->getButtonValue()) {
         choice->setSelectedDrink(CAPPUCCINO);
     }
 
-    if (espresso && espresso->getButtonValue()) {
+    if (choice && espresso && espresso->getButtonValue()) {
         choice->setSelectedDrink(ESPRESSO);
     }
 
-    if (latteMacchiato && latteMacchiato->getButtonValue()) {
+    if (choice && latteMacchiato && latteMacchiato->getButtonValue()) {
         choice->setSelectedDrink(LATTEMACCHIOTO);
     }
 
-    if (cacao && cacao->getButtonValue()) {
+    if (choice && cacao && cacao->getButtonValue()) {
         choice->setSelectedDrink(CACAO);
     }
 
-    if (hotWater && hotWater->getButtonValue()) {
+    if (choice && hotWater && hotWater->getButtonValue()) {
         choice->setSelectedDrink(HOTWATER);
     }
 
-    if (bigPortion && bigPortion->getButtonValue()) {
+    if (choice && bigPortion && bigPortion->getButtonValue()) {
         choice->toggleBigPortion();
     }
 
-    if (cancel && cancel->getButtonValue()) {
+    if (choice && cancel && cancel->getButtonValue()) {
         choice->setDefaultChoice();
     }
 
-    if (start && start->getButtonValue()) {
+    if (choice && start && start->getButtonValue()) {
         choice->payDrink();
     }
 
