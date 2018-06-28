@@ -78,11 +78,22 @@ void MainWindow::on_buttonAdmin_released()
 
 void MainWindow::on_buttonCard_clicked()
 {
+    bool ret;
 
     if (ui->labelCard->isHidden())
     {
         ui->labelCard->show();
-        RFID_s.getRfidValidation(card);
+        ret = RFID_s.getRfidValidation(card);
+
+        if (ret)
+        {
+
+        }
+
+        else
+        {
+
+        }
 
     }
 

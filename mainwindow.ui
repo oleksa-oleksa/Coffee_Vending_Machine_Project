@@ -19,8 +19,8 @@
      <rect>
       <x>20</x>
       <y>90</y>
-      <width>301</width>
-      <height>111</height>
+      <width>511</width>
+      <height>171</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -414,19 +414,6 @@ border-color: rgb(218, 218, 218);</string>
      <string>Insert Card</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>80</y>
-      <width>141</width>
-      <height>101</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="labelCard">
     <property name="geometry">
      <rect>
@@ -472,7 +459,6 @@ border-color: rgb(218, 218, 218);</string>
    <zorder>buttonAdmin</zorder>
    <zorder>buttonService</zorder>
    <zorder>buttonCard</zorder>
-   <zorder>label</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

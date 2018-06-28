@@ -31,10 +31,48 @@ RFID_Scanner::~RFID_Scanner()
 
 bool RFID_Scanner::getRfidValidation(Card *card)
 {
-//   if ( cardsDatabase.find(usercard) == cardsDatabase.end())
-        qDebug() << "Error: Not yet implemented!";
+    bool ret = false;
 
-// return cardsDatabase[usercard];
+    // CardID Validation
+    for (size_t i = 0; i < Card::AllCards.size(); i++)
+    {
+        if ( Card::AllCards[i].getCardID().toQstring() == card->getCardID().toQstring())
+        ret = true;
+    }
+
+    // Card Status Validation
+    if (card->getCardStatus() == ACTIVE)
+    {
+        ret = true;
+    }
+    else
+    {
+        ret = false;
+        return ret;
+    }
+
+    // Account Status Validation
+    if (card->getAccount()->getAccountStatus() == ACTIVE_OK)
+    {
+        ret = true;
+    }
+    else
+    {
+        ret = false;
+        return ret;
+    }
+
+    // isEmployed Validation
+    if (card->getAccount()->getOwner()->getEmployed())
+    {
+        ret = true;
+    }
+    else
+    {
+        ret = false;
+        return ret;
+    }
+    return ret;
 }
 
 void RFID_Scanner::registerNewCard( Card& newCard )
