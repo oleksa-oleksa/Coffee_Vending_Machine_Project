@@ -1,3 +1,4 @@
+// Created by Oleksandra Baga
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "adminwindow.h"
@@ -5,11 +6,31 @@
 #include "rfid_scanner.h"
 #include "QTimer"
 #include <QtDebug>
+#include "interactionunit.h"
+#include "userchoice.h"
+#include "button.h"
 
 Person *activePerson = NULL;
 Card *card = NULL;
 Account *activeAccount = NULL;
 BankAccount *bankAccount = NULL;
+InteractionUnit iunit;
+UserChoice *activeUserChoice = NULL;
+
+Button moreSugar;
+Button lessSugar;
+Button moreMilk;
+Button lessMilk;
+Button coffee;
+Button cappuccino;
+Button espresso;
+Button latteMacchiato;
+Button cacao;
+Button hotWater;
+Button bigPortion;
+Button cancel;
+Button start;
+
 RFID_Scanner RFID_s;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -35,6 +56,28 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // and which bank account is connected to the card for withdrawing process
     bankAccount = card->getAccount()->getBankAccount();
+
+    //======================================================================
+    // and finaly: UserChoice initialisation in InteractionUnit in order
+    // to track all interactions with buttons
+    // This solution based on UML Diagramm created for the University Course
+    iunit.setMoreSugar(&moreSugar);
+    iunit.setLessSugar(&lessSugar);
+    iunit.setMoreMilk(&moreMilk);
+    iunit.setLessMilk(&lessMilk);
+    iunit.setCoffee(&coffee);
+    iunit.setCappuccino(&cappuccino);
+    iunit.setEspresso(&espresso);
+    iunit.setLatteMacchiato(&latteMacchiato);
+    iunit.setCacao(&cacao);
+    iunit.setHotWater(&hotWater);
+    iunit.setBigPortion(&bigPortion);
+    iunit.setCancel(&cancel);
+    iunit.setStart(&start);
+
+    // activeUserChoice has the selected drink with  price and recipe
+    // the information for preparation will be transfered to ControlUnit with "Start" button
+    activeUserChoice = iunit.initUserChoice(card);
 
     // Now we can design the Main Window
     setMainWindowControlButtonsStyle();
@@ -154,5 +197,3 @@ void MainWindow::restartLCD()
           ui->labelPrice->setStyleSheet("color: #ffffff; border: 0px;");
           ui->labelLCD->show();
 }
-
-

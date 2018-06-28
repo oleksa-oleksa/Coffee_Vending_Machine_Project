@@ -4,5 +4,7 @@
         <file>images/card.png</file>
         <file>images/coffee-back.png</file>
         <file>images/coffee-Mainback.png</file>
+        <file>images/less.png</file>
+        <file>images/more.png</file>
     </qresource>
 </RCC>

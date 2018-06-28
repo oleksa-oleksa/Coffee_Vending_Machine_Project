@@ -22,6 +22,12 @@ UserChoice::UserChoice()
 
 void UserChoice::setDefaultChoice()
 {
+   // debug
+//    if (card != NULL)
+//    {
+//        this->card = this->card;
+//    }
+
     selectedDrink = NO_DRINK;
     sugarAmount = 0;
     milkAmount = 0;
@@ -181,7 +187,6 @@ void UserChoice::setMilkAmount(int milkAmount)
     if (selectedDrink == CACAO || selectedDrink == LATTEMACCHIOTO
         || selectedDrink == ESPRESSO || selectedDrink == HOTWATER)
     {
-        this->milkAmount = this->milkAmount;
         return;
     }
 
@@ -242,5 +247,5 @@ QString UserChoice::printSelectedDrink()
     default:
         break;
     }
-
+    return "NO_DRINK";
 }

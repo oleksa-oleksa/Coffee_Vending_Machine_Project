@@ -26,6 +26,45 @@ InteractionUnit::~InteractionUnit()
 
 }
 
+InteractionUnit *InteractionUnit::initInteractionUnit(Button *moreSugar,
+                                                      Button *lessSugar,
+                                                      Button *moreMilk,
+                                                      Button *lessMilk,
+                                                      Button *coffee,
+                                                      Button *cappuccino,
+                                                      Button *espresso,
+                                                      Button *latteMacchiato,
+                                                      Button *cacao,
+                                                      Button *hotWater,
+                                                      Button *bigPortion,
+                                                      Button *cancel,
+                                                      Button *start)
+{
+    InteractionUnit *unt_unit;
+
+    unt_unit->moreSugar = moreSugar;
+    unt_unit->lessSugar = lessSugar;
+    unt_unit->moreMilk = moreMilk;
+    unt_unit->lessMilk = lessMilk;
+    unt_unit->coffee = coffee;
+    unt_unit->cappuccino = cappuccino;
+    unt_unit->espresso = espresso;
+    unt_unit->latteMacchiato = latteMacchiato;
+    unt_unit->cacao = cacao;
+    unt_unit->hotWater = hotWater;
+    unt_unit->bigPortion = bigPortion;
+    unt_unit->cancel = cancel;
+    unt_unit->start = start;
+
+    return unt_unit;
+}
+
+UserChoice *InteractionUnit::initUserChoice(Card *card)
+{
+    choice = new UserChoice(card);
+    return choice;
+}
+
 void InteractionUnit::setMoreSugar(Button *moreSugar)
 {
     this->moreSugar = moreSugar;
@@ -75,6 +114,11 @@ void InteractionUnit::setStart(Button *start)
     this->start = start;
 }
 
+void InteractionUnit::setCancel(Button *cancel)
+{
+    this->cancel = cancel;
+}
+
 Button *InteractionUnit::getMoreSugar()
 {
     return moreSugar;
@@ -122,12 +166,6 @@ Button *InteractionUnit::getBigPortion()
 Button *InteractionUnit::getStart()
 {
     return start;
-}
-
-UserChoice *InteractionUnit::initUserChoice(Card *card)
-{
-    choice = new UserChoice(card);
-    return choice;
 }
 
 void InteractionUnit::buttonPollingRoutine()

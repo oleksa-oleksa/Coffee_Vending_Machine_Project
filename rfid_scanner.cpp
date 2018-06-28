@@ -41,36 +41,21 @@ bool RFID_Scanner::getRfidValidation(Card *card)
     }
 
     // Card Status Validation
-    if (card->getCardStatus() == ACTIVE)
+    if (card->getCardStatus() != ACTIVE)
     {
-        ret = true;
-    }
-    else
-    {
-        ret = false;
-        return ret;
+        return false;
     }
 
     // Account Status Validation
-    if (card->getAccount()->getAccountStatus() == ACTIVE_OK)
+    if (card->getAccount()->getAccountStatus() != ACTIVE_OK)
     {
-        ret = true;
-    }
-    else
-    {
-        ret = false;
-        return ret;
+        return false;
     }
 
     // isEmployed Validation
-    if (card->getAccount()->getOwner()->getEmployed())
+    if (!card->getAccount()->getOwner()->getEmployed())
     {
-        ret = true;
-    }
-    else
-    {
-        ret = false;
-        return ret;
+        return false;
     }
     return ret;
 }

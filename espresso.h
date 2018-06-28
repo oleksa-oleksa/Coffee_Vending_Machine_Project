@@ -31,7 +31,6 @@ class Espresso : public Drink
 
         // the specific recipe ingredient. coffeePowderAmount for Coffee drink
         int getRecipeIngredient();
-
 };
 
 #endif

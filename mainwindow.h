@@ -1,9 +1,12 @@
+// Created by Oleksandra Baga
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
 #include "person.h"
 #include "card.h"
+#include "interactionunit.h"
+#include "userchoice.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,11 +27,8 @@ private slots:
     void on_buttonAdmin_clicked();
     void on_buttonAdmin_pressed();
     void on_buttonAdmin_released();
-
     void on_buttonCard_clicked();
-
     void on_buttonService_pressed();
-
     void on_buttonService_released();
 
 private:
@@ -39,6 +39,8 @@ extern Person *activePerson;
 extern Account *activeAccount;
 extern Card *card;
 extern BankAccount *bankAccount;
+extern InteractionUnit iunit;
+extern UserChoice *activeUserChoice;
 
 
 
