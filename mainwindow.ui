@@ -17,40 +17,53 @@
    <widget class="QWidget" name="widgetDisplay" native="true">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>90</y>
-      <width>511</width>
+      <x>40</x>
+      <y>140</y>
+      <width>471</width>
       <height>171</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-color: rgb(218, 218, 218);</string>
+     <string notr="true">background-color: #331a00; border: 1px solid; border-color: #4d2600;</string>
     </property>
     <widget class="QLabel" name="labelLCD">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>71</width>
-       <height>16</height>
+       <x>30</x>
+       <y>20</y>
+       <width>421</width>
+       <height>21</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">border: 0px;</string>
      </property>
      <property name="text">
-      <string>Your choice</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="labelPrice">
      <property name="geometry">
       <rect>
-       <x>230</x>
-       <y>40</y>
-       <width>51</width>
-       <height>39</height>
+       <x>30</x>
+       <y>128</y>
+       <width>100</width>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">border: 0px;
@@ -60,37 +73,34 @@ border-color: rgb(218, 218, 218);</string>
       <string>0.00€</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="labelDrink">
+    <widget class="QLabel" name="labelSelectedDrink">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>161</width>
-       <height>51</height>
+       <x>30</x>
+       <y>90</y>
+       <width>100</width>
+       <height>39</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <italic>false</italic>
+       <pointsize>16</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 0px;</string>
+      <string notr="true">border: 0px;
+</string>
      </property>
      <property name="text">
-      <string>Please insert card</string>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
+      <string>Coffee</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>
@@ -98,9 +108,9 @@ border-color: rgb(218, 218, 218);</string>
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>290</y>
-      <width>471</width>
-      <height>210</height>
+      <y>350</y>
+      <width>761</width>
+      <height>221</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -332,10 +342,10 @@ border-color: rgb(218, 218, 218);</string>
      <widget class="QPushButton" name="buttonStart">
       <property name="geometry">
        <rect>
-        <x>310</x>
-        <y>50</y>
-        <width>91</width>
-        <height>50</height>
+        <x>0</x>
+        <y>20</y>
+        <width>441</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="minimumSize">
@@ -378,8 +388,8 @@ border-color: rgb(218, 218, 218);</string>
    <widget class="QPushButton" name="buttonAdmin">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>10</y>
+      <x>30</x>
+      <y>30</y>
       <width>128</width>
       <height>41</height>
      </rect>
@@ -392,7 +402,7 @@ border-color: rgb(218, 218, 218);</string>
     <property name="geometry">
      <rect>
       <x>590</x>
-      <y>10</y>
+      <y>30</y>
       <width>128</width>
       <height>41</height>
      </rect>
@@ -404,8 +414,8 @@ border-color: rgb(218, 218, 218);</string>
    <widget class="QPushButton" name="buttonCard">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>190</y>
+      <x>560</x>
+      <y>260</y>
       <width>151</width>
       <height>41</height>
      </rect>
@@ -417,8 +427,8 @@ border-color: rgb(218, 218, 218);</string>
    <widget class="QLabel" name="labelCard">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>80</y>
+      <x>570</x>
+      <y>140</y>
       <width>128</width>
       <height>128</height>
      </rect>
@@ -433,17 +443,17 @@ border-color: rgb(218, 218, 218);</string>
    <widget class="QFrame" name="frameCard">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>90</y>
-      <width>151</width>
-      <height>141</height>
+      <x>550</x>
+      <y>140</y>
+      <width>171</width>
+      <height>171</height>
      </rect>
     </property>
     <property name="autoFillBackground">
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #f2f2f2</string>
+     <string notr="true">background-color: #331a00; border: 1px solid; border-color: #4d2600;</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -452,6 +462,23 @@ border-color: rgb(218, 218, 218);</string>
      <enum>QFrame::Raised</enum>
     </property>
    </widget>
+   <widget class="QLabel" name="labelBackground">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>761</width>
+      <height>571</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="images.qrc">:/icons/images/coffee-Mainback.png</pixmap>
+    </property>
+   </widget>
+   <zorder>labelBackground</zorder>
    <zorder>frameCard</zorder>
    <zorder>labelCard</zorder>
    <zorder>widgetControlPanel</zorder>
@@ -460,25 +487,6 @@ border-color: rgb(218, 218, 218);</string>
    <zorder>buttonService</zorder>
    <zorder>buttonCard</zorder>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>756</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>

@@ -19,12 +19,17 @@ public:
 
 private slots:
     void setMainWindowControlButtonsStyle();
+    void restartLCD();
 
     void on_buttonAdmin_clicked();
     void on_buttonAdmin_pressed();
     void on_buttonAdmin_released();
 
     void on_buttonCard_clicked();
+
+    void on_buttonService_pressed();
+
+    void on_buttonService_released();
 
 private:
     Ui::MainWindow *ui;
@@ -33,6 +38,8 @@ private:
 extern Person *activePerson;
 extern Account *activeAccount;
 extern Card *card;
+extern BankAccount *bankAccount;
+
 
 
 #endif // MAINWINDOW_H
