@@ -23,9 +23,15 @@ public:
 private slots:
     void setMainWindowControlButtonsStyle();
     void restartLCD();
+    void restartLCDCardEjected();
     void styleMilkProgressBar();
     void styleSugarProgressBar();
-    void styleLCDInformation();
+    void styleLCDChoiceInformation();
+    void styleLCDGreeting();
+    void styleInsertButton();
+    void styleEjectButton();
+    void styleDrinkButtons();
+    void styleLCDErrorCard();
 
     void on_buttonAdmin_clicked();
     void on_buttonAdmin_pressed();

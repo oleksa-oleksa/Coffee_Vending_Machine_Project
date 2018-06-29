@@ -104,19 +104,16 @@ void MainWindow::on_buttonAdmin_clicked()
 
 void MainWindow::setMainWindowControlButtonsStyle()
 {
-    ui->labelCard->hide();
+    restartLCD();
 
-    ui->labelLCD->setStyleSheet("color: #ffffff; border: 0px;");
-    ui->labelLCD->setText("Please insert card");
-    ui->labelSelectedDrink->setStyleSheet("color: #ffffff; border: 0px;");
-    ui->labelPrice->setStyleSheet("color: #ffffff; border: 0px;");
+    ui->labelCard->hide();
+    styleInsertButton();
 
     //Main Window buttons preset
     QString colorTopButtons  = QString("background-color: #4d2600; color: #ffffff;");
     ui->buttonAdmin->setStyleSheet(colorTopButtons);
     ui->buttonService->setStyleSheet(colorTopButtons);
 
-    ui->buttonCard->setStyleSheet("background-color: #e67300; color: #ffffff;");
 
     QString colorDrinks = QString("background-color: #663300; color: #ffffff;");
     ui->buttonLessSugar->setStyleSheet(colorDrinks);
@@ -132,18 +129,7 @@ void MainWindow::setMainWindowControlButtonsStyle()
     ui->progressBarMilk->setTextVisible(false);
     styleMilkProgressBar();
 
-    ui->buttonCoffee->setStyleSheet("background-color: #663300; color: #ffffff;");
-    ui->buttonCappuccino->setStyleSheet("background-color: #663300; color: #ffffff;");
-    ui->buttonEspresso->setStyleSheet("background-color: #663300; color: #ffffff;");
-    ui->buttonLatteMacchiato->setStyleSheet("background-color: #663300; color: #ffffff;");
-    ui->buttonCacao->setStyleSheet("background-color: #663300; color: #ffffff;");
-    ui->buttonHotwater->setStyleSheet("background-color: #663300; color: #ffffff;");
-    ui->buttonStart->setStyleSheet("background-color: #808000; color: #ffffff;");
-    ui->buttonCancel->setStyleSheet("background-color: #4d0000; color: #ffffff;");
-    ui->buttonBigPortion->setStyleSheet("background-color: #e67300; color: #ffffff;");
-
-
-
+    styleDrinkButtons();
 
 }
 
@@ -177,48 +163,60 @@ void MainWindow::on_buttonService_released()
 
 void MainWindow::on_buttonCard_clicked()
 {
-    bool ret;
-
-    // if not card in RFID, card simulated
-    if (ui->labelCard->isHidden())
+    // if NO card in RFID
+    if (!RFID_s.getIsCardInside())
     {
         ui->labelCard->show();
-        ret = RFID_s.getRfidValidation(card);
 
         // if card is valid, user can purchase a drink
-        // basicaly here starts the main interaction with GUI after card validation
-        if (ret)
-        {
-            QString name = activeAccount->getOwner()->getName().c_str();
-            ui->labelLCD->setStyleSheet("color: #ffb366; border: 0px;");
-            ui->labelLCD->setText("Nice to see you again " + name + "!");
+        // here starts the main interaction with GUI after card validation
 
+        // After card was inserted, the RFID Scanner provides verification
+        // without instructions outside
+        // modifies private attribute isChoiceAllowed for InteractionUnit
+        if (RFID_s.insertCard(card))
+        {
+            styleLCDGreeting();
+            styleEjectButton();
             styleSugarProgressBar();
             styleMilkProgressBar();
         }
 
-        // if card is not valid, it will ba automaticaly ejected (simulation)
+        // if card is not valid, it will ba automaticaly ejected (simulation in Design)
         // and the purschasing will be ended
         // the next card can be inserted in RFID
         else
         {
-            ui->labelCard->hide();
-            // Design red text
-            ui->labelLCD->setStyleSheet("color: #ff1a1a; border: 0px;");
-            ui->labelLCD->setText("Not a valid card! Aborted...");
+            styleLCDErrorCard();
+            QTimer::singleShot(3000, this, &MainWindow::restartLCDCardEjected);
 
-            QTimer::singleShot(3000, this, &MainWindow::restartLCD);
+            ui->labelCard->hide();
+            RFID_s.ejectCard();
+            styleInsertButton();
         }
     }
 
+    // if there IS A CARD
     else
     {
         ui->labelCard->hide();
+        RFID_s.ejectCard();
+        styleInsertButton();
+        styleMilkProgressBar();
+        styleDrinkButtons();
         restartLCD();
     }
 }
 
 void MainWindow::restartLCD()
+{
+    ui->labelLCD->setStyleSheet("color: #ffffff; border: 0px;");
+    ui->labelLCD->setText("Please insert card");
+    ui->labelSelectedDrink->setStyleSheet("color: #ffffff; border: 0px;");
+    ui->labelPrice->setStyleSheet("color: #ffffff; border: 0px;");
+}
+
+void MainWindow::restartLCDCardEjected()
 {
           ui->labelLCD->setStyleSheet("color: #ffffff; border: 0px;");
           ui->labelLCD->setText("Please insert card");
@@ -258,7 +256,6 @@ void MainWindow::on_buttonMoreMilk_clicked()
 }
 
 
-
 void MainWindow::styleMilkProgressBar()
 {
     ui->progressBarMilk->setValue(activeUserChoice->getMilkAmount());
@@ -275,7 +272,7 @@ void MainWindow::styleSugarProgressBar()
     qDebug() << "Sugar is:" << activeUserChoice->getSugarAmount();
 }
 
-void MainWindow::styleLCDInformation()
+void MainWindow::styleLCDChoiceInformation()
 {
     ui->labelLCD->setStyleSheet("color: #ffffff; border: 0px;");
     ui->labelLCD->setText("Your choice:");
@@ -288,12 +285,52 @@ void MainWindow::styleLCDInformation()
     ui->labelPrice->setText(num);
 }
 
+void MainWindow::styleLCDGreeting()
+{
+    QString name = activeAccount->getOwner()->getName().c_str();
+    ui->labelLCD->setStyleSheet("color: #ffb366; border: 0px;");
+    ui->labelLCD->setText("Nice to see you again " + name + "!");
+
+}
+
+void MainWindow::styleLCDErrorCard()
+{
+    ui->labelLCD->setStyleSheet("color: #ff1a1a; border: 0px;");
+    ui->labelLCD->setText("Not a valid card! Aborted...");
+}
+
+void MainWindow::styleEjectButton()
+{
+    ui->buttonCard->setStyleSheet("background-color: #e67300; color: #ffffff;");
+    ui->buttonCard->setText("Eject card");
+}
+
+void MainWindow::styleInsertButton()
+{
+    ui->buttonCard->setStyleSheet("background-color: #e67300; color: #ffffff;");
+    ui->buttonCard->setText("Insert card");
+}
+
+void MainWindow::styleDrinkButtons()
+{
+    ui->buttonCoffee->setStyleSheet("background-color: #663300; color: #ffffff;");
+    ui->buttonCappuccino->setStyleSheet("background-color: #663300; color: #ffffff;");
+    ui->buttonEspresso->setStyleSheet("background-color: #663300; color: #ffffff;");
+    ui->buttonLatteMacchiato->setStyleSheet("background-color: #663300; color: #ffffff;");
+    ui->buttonCacao->setStyleSheet("background-color: #663300; color: #ffffff;");
+    ui->buttonHotwater->setStyleSheet("background-color: #663300; color: #ffffff;");
+    ui->buttonStart->setStyleSheet("background-color: #808000; color: #ffffff;");
+    ui->buttonCancel->setStyleSheet("background-color: #4d0000; color: #ffffff;");
+    ui->buttonBigPortion->setStyleSheet("background-color: #e67300; color: #ffffff;");
+
+}
+
 void MainWindow::on_buttonCoffee_clicked()
 {
     activeUserChoice->setSelectedDrink(COFFEE);
     styleMilkProgressBar();
     styleSugarProgressBar();
-    styleLCDInformation();
+    styleLCDChoiceInformation();
 }
 
 void MainWindow::on_buttonCappuccino_clicked()
@@ -301,7 +338,7 @@ void MainWindow::on_buttonCappuccino_clicked()
     activeUserChoice->setSelectedDrink(CAPPUCCINO);
     styleMilkProgressBar();
     styleSugarProgressBar();
-    styleLCDInformation();
+    styleLCDChoiceInformation();
 }
 
 void MainWindow::on_buttonEspresso_clicked()
@@ -309,7 +346,7 @@ void MainWindow::on_buttonEspresso_clicked()
     activeUserChoice->setSelectedDrink(ESPRESSO);
     styleMilkProgressBar();
     styleSugarProgressBar();
-    styleLCDInformation();
+    styleLCDChoiceInformation();
 }
 
 void MainWindow::on_buttonLatteMacchiato_clicked()
@@ -317,7 +354,7 @@ void MainWindow::on_buttonLatteMacchiato_clicked()
     activeUserChoice->setSelectedDrink(LATTEMACCHIOTO);
     styleMilkProgressBar();
     styleSugarProgressBar();
-    styleLCDInformation();
+    styleLCDChoiceInformation();
 }
 
 void MainWindow::on_buttonCacao_clicked()
@@ -325,7 +362,7 @@ void MainWindow::on_buttonCacao_clicked()
     activeUserChoice->setSelectedDrink(CACAO);
     styleMilkProgressBar();
     styleSugarProgressBar();
-    styleLCDInformation();
+    styleLCDChoiceInformation();
 }
 
 void MainWindow::on_buttonHotwater_clicked()
@@ -333,11 +370,11 @@ void MainWindow::on_buttonHotwater_clicked()
     activeUserChoice->setSelectedDrink(HOTWATER);
     styleMilkProgressBar();
     styleSugarProgressBar();
-    styleLCDInformation();
+    styleLCDChoiceInformation();
 }
 
 void MainWindow::on_buttonBigPortion_clicked()
 {
     TRIGGER_BUTTON(bigPortion);
-    styleLCDInformation();
+    styleLCDChoiceInformation();
 }

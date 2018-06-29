@@ -8,18 +8,19 @@
 class RFID_Scanner : public Sensor
 {
     private:
+        bool isCardInside;
+        bool isChoiceAllowed;
         std::map<Card, bool> cardsDatabase;
 
     public:
-// TODO: Implement as Singleton Class
         RFID_Scanner();
-/* TODO: Read database from file:
- * RFID_Scanner( FILE* );
- */
         virtual ~RFID_Scanner();
 
-        bool getRfidValidation(Card *card);
-        void registerNewCard ( Card& );
+        bool setIsCardInside(bool isCardInside);
+        bool getIsCardInside();
+        bool getRfidValidation(Card *userCard);
+        void ejectCard();
+        bool insertCard(Card *userCard);
 
 };
 
