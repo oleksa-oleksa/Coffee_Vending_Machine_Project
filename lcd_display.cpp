@@ -50,22 +50,47 @@ void LCD_Display::setPrice(double price)
 
 void LCD_Display::writeDefaultText(UserChoice *activeUserChoice)
 {
-    setDrinkName(activeUserChoice->printSelectedDrink());
-    setPrice(activeUserChoice->getPrice());
     setTitle("Please insert card");
+    if (activeUserChoice->printSelectedDrink() == "NO_DRINK")
+    {
+        setDrinkName("");
+        setPrice(0.0);
+    }
+    else
+    {
+        setDrinkName(activeUserChoice->printSelectedDrink());
+        setPrice(activeUserChoice->getPrice());
+    }
+
 }
 
 void LCD_Display::writeGreetingText(UserChoice *activeUserChoice)
 {
-    setDrinkName(activeUserChoice->printSelectedDrink());
-    setPrice(activeUserChoice->getPrice());
     QString str = activeUserChoice->getCard()->getAccount()->getOwner()->getName().c_str();
     setTitle("Nice to see you again, " + str);
+    setDrinkName(activeUserChoice->printSelectedDrink());
+    setPrice(activeUserChoice->getPrice());
+
 }
 
-void LCD_Display::writeErrorText(UserChoice *activeUserChoice)
+void LCD_Display::writeErrorText()
 {
+    setTitle("Not a valid card! Aborted...");
     setDrinkName("NO_DRINK");
     setPrice(0.0);
-    setTitle("Not a valid card! Aborted...");
+}
+
+void LCD_Display::writeUserChoiceText(UserChoice *activeUserChoice)
+{
+    if (activeUserChoice->getBigPortion())
+    {
+        setTitle("Your choice is big portion");
+    }
+    else
+    {
+        setTitle("Your choice is regular portion");
+    }
+    setDrinkName(activeUserChoice->printSelectedDrink());
+    setPrice(activeUserChoice->getPrice());
+
 }

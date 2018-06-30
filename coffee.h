@@ -15,8 +15,8 @@ class Coffee : public Drink
         // RECIPE CANNOT BE SET, ONLY GET
         Coffee()
         {
-            sugarAmount = 1;
-            milkAmount = 0;
+            sugarAmount = 2;
+            milkAmount = 3;
             hotWaterAmount = 180;
             recipeTemperature = 100;
             price = 0.9;

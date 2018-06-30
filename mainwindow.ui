@@ -337,10 +337,6 @@
      <property name="text">
       <string>Big Portion</string>
      </property>
-     <property name="icon">
-      <iconset resource="images.qrc">
-       <normaloff>:/icons/images/more.png</normaloff>:/icons/images/more.png</iconset>
-     </property>
     </widget>
    </widget>
    <widget class="QPushButton" name="buttonAdmin">

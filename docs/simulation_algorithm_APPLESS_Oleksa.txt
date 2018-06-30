@@ -72,4 +72,46 @@ RFID_s.getIsCardInside();
 
 // Now we can design the Main Window
 // Simulate LCD:
+display.writeDefaultText(activeUserChoice);
+
+
+//=============================================================
+// Simulate insert card
+// Now there is no card and this code should set isCardInside = true and isChoiceAllowed = true 
+    // if NO card in RFID
+    if (!RFID_s.getIsCardInside())
+    {
+
+        // if card is valid, user can purchase a drink
+        if (RFID_s.insertCard(card))
+        {
+	    display.writeGreetingText(activeUserChoice);
+        }
+
+        // if card is not valid, it will ba automaticaly ejected (simulation in Design)
+        // and the purschasing will be ended
+        // the next card can be inserted in RFID
+        else
+        {
+            display.writeErrorText();
+            RFID_s.ejectCard();
+        }
+    }
+
+    // if there IS A CARD
+    else
+    {
+ 
+        RFID_s.ejectCard();
+        delete(activeUserChoice);
+        activeUserChoice = iunit.initUserChoice(card);
+        display.writeDefaultText(activeUserChoice);
+    }
+}
+
+//=============================================================
+// Simulated: Card is inserted, name and greeting
+// no price and no selected drink name
+
+// Sumulation: Select "Coffee"
 

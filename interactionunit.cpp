@@ -222,7 +222,14 @@ void InteractionUnit::buttonPollingRoutine()
     }
 
     if (choice && bigPortion && bigPortion->getButtonValue()) {
-        choice->toggleBigPortion();
+        if (choice->getBigPortion())
+        {
+            choice->setDisabledBigPortion();
+        }
+        else
+        {
+            choice->setEnabledBigPortion();
+        }
     }
 
     if (choice && cancel && cancel->getButtonValue()) {

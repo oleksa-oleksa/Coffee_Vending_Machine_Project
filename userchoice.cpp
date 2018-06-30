@@ -10,6 +10,9 @@
 #include "cacao.h"
 #include "hotwater.h"
 
+#define BIG_PORTION_OVERPRICE 0.4
+#define BIG_HOTWATER_OVERPRICE 0.1
+
 UserChoice::UserChoice(Card *card) : UserChoice()
 {
     this->card = card;
@@ -22,12 +25,6 @@ UserChoice::UserChoice()
 
 void UserChoice::setDefaultChoice()
 {
-   // debug
-//    if (card != NULL)
-//    {
-//        this->card = this->card;
-//    }
-
     selectedDrink = NO_DRINK;
     sugarAmount = 0;
     milkAmount = 0;
@@ -200,10 +197,15 @@ int UserChoice::getMilkAmount()
     return milkAmount;
 }
 
-// setter
-void UserChoice::toggleBigPortion()
+
+void UserChoice::setEnabledBigPortion()
 {
-    isBigPortion = !isBigPortion;
+    isBigPortion = true;
+}
+
+void UserChoice::setDisabledBigPortion()
+{
+    isBigPortion = false;
 }
 
 bool UserChoice::getBigPortion()
@@ -213,7 +215,24 @@ bool UserChoice::getBigPortion()
 
 double UserChoice::getPrice()
 {
-    return price;
+    if (selectedDrink == NO_DRINK)
+    {
+        return 0.0;
+    }
+
+    if (isBigPortion && selectedDrink == HOTWATER)
+    {
+        return price + BIG_HOTWATER_OVERPRICE;
+    }
+    else if (isBigPortion )
+    {
+        return price + BIG_PORTION_OVERPRICE;
+    }
+    else
+    {
+        return price;
+    }
+
 }
 
 

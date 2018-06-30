@@ -30,7 +30,8 @@ class UserChoice
         int getSugarAmount();
         void setMilkAmount(int milkAmount);
         int getMilkAmount();
-        void toggleBigPortion(); // setter
+        void setEnabledBigPortion();
+        void setDisabledBigPortion();
         bool getBigPortion();
         void setDefaultChoice();
         double getPrice();

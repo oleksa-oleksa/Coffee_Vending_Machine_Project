@@ -1,6 +1,6 @@
 // Create by Oleksandra Baga
 #include "drink.h"
-#include "hotwater.h".h"
+#include "hotwater.h"
 
 int HotWater::getSugarAmount()
 {

@@ -96,8 +96,10 @@ MainWindow::MainWindow(QWidget *parent) :
     RFID_s.getIsCardInside();
 
     // Now we can design the Main Window
+
     // MODEL
     display.writeDefaultText(activeUserChoice);
+
     // VIEW
     restartLCD();
     setMainWindowControlButtonsStyle();
@@ -121,7 +123,6 @@ void MainWindow::on_buttonAdmin_clicked()
 
 void MainWindow::setMainWindowControlButtonsStyle()
 {
-
     ui->labelCard->hide();
     styleInsertButton();
 
@@ -130,12 +131,16 @@ void MainWindow::setMainWindowControlButtonsStyle()
     ui->buttonAdmin->setStyleSheet(colorTopButtons);
     ui->buttonService->setStyleSheet(colorTopButtons);
 
+    ui->buttonBigPortion->setCheckable(true);
+    ui->buttonBigPortion->setChecked(false);
 
     QString colorDrinks = QString("background-color: #663300; color: #ffffff;");
     ui->buttonLessSugar->setStyleSheet(colorDrinks);
     ui->buttonMoreSugar->setStyleSheet(colorDrinks);
     ui->buttonLessMilk->setStyleSheet(colorDrinks);
     ui->buttonMoreMilk->setStyleSheet(colorDrinks);
+
+    disableControlButtons();
 
     ui->progressBarSugar->setStyleSheet("QProgressBar::chunk {background-color: #a58a73; width: 3px; margin: 1px;}");
     ui->progressBarSugar->setTextVisible(false);
@@ -172,7 +177,6 @@ void MainWindow::on_buttonCard_clicked()
             styleSugarProgressBar();
             styleMilkProgressBar();
             styleEjectButton();
-
         }
 
         // if card is not valid, it will ba automaticaly ejected (simulation in Design)
@@ -181,7 +185,7 @@ void MainWindow::on_buttonCard_clicked()
         else
         {
             // MODEL
-            display.writeErrorText(activeUserChoice);
+            display.writeErrorText();
             RFID_s.ejectCard();
 
             // VIEW
@@ -189,6 +193,7 @@ void MainWindow::on_buttonCard_clicked()
             QTimer::singleShot(3000, this, &MainWindow::restartLCDCardEjected);
             ui->labelCard->hide();
             styleInsertButton();
+            disableControlButtons();
         }
     }
 
@@ -208,6 +213,8 @@ void MainWindow::on_buttonCard_clicked()
         styleMilkProgressBar();
         styleSugarProgressBar();
         styleDrinkButtons();
+        disableControlButtons();
+        ui->buttonBigPortion->setChecked(false);
     }
 }
 
@@ -390,7 +397,12 @@ void MainWindow::on_buttonCoffee_clicked()
 {
     if (RFID_s.isValidCardInside())
     {
+        // MODEL
         activeUserChoice->setSelectedDrink(COFFEE);
+        display.writeUserChoiceText(activeUserChoice);
+
+        // VIEW
+        enableControlButtons();
         styleMilkProgressBar();
         styleSugarProgressBar();
         styleLCDChoiceInformation();
@@ -401,7 +413,12 @@ void MainWindow::on_buttonCappuccino_clicked()
 {
     if (RFID_s.isValidCardInside())
     {
+        // MODEL
         activeUserChoice->setSelectedDrink(CAPPUCCINO);
+        display.writeUserChoiceText(activeUserChoice);
+
+        // VIEW
+        enableControlButtons();
         styleMilkProgressBar();
         styleSugarProgressBar();
         styleLCDChoiceInformation();
@@ -412,7 +429,12 @@ void MainWindow::on_buttonEspresso_clicked()
 {
     if (RFID_s.isValidCardInside())
     {
+        // MODEL
         activeUserChoice->setSelectedDrink(ESPRESSO);
+        display.writeUserChoiceText(activeUserChoice);
+
+        // VIEW
+        enableControlButtons();
         styleMilkProgressBar();
         styleSugarProgressBar();
         styleLCDChoiceInformation();
@@ -423,7 +445,12 @@ void MainWindow::on_buttonLatteMacchiato_clicked()
 {
     if (RFID_s.isValidCardInside())
     {
+        // MODEL
         activeUserChoice->setSelectedDrink(LATTEMACCHIOTO);
+        display.writeUserChoiceText(activeUserChoice);
+
+        // VIEW
+        enableControlButtons();
         styleMilkProgressBar();
         styleSugarProgressBar();
         styleLCDChoiceInformation();
@@ -434,7 +461,12 @@ void MainWindow::on_buttonCacao_clicked()
 {
     if (RFID_s.isValidCardInside())
     {
+        // MODEL
         activeUserChoice->setSelectedDrink(CACAO);
+        display.writeUserChoiceText(activeUserChoice);
+
+        // VIEW
+        enableControlButtons();
         styleMilkProgressBar();
         styleSugarProgressBar();
         styleLCDChoiceInformation();
@@ -445,7 +477,12 @@ void MainWindow::on_buttonHotwater_clicked()
 {
     if (RFID_s.isValidCardInside())
     {
+        // MODEL
         activeUserChoice->setSelectedDrink(HOTWATER);
+        display.writeUserChoiceText(activeUserChoice);
+
+        // VIEW
+        enableControlButtons();
         styleMilkProgressBar();
         styleSugarProgressBar();
         styleLCDChoiceInformation();
@@ -454,9 +491,35 @@ void MainWindow::on_buttonHotwater_clicked()
 
 void MainWindow::on_buttonBigPortion_clicked()
 {
-    if (RFID_s.isValidCardInside())
-    {
-        TRIGGER_BUTTON(bigPortion);
-        styleLCDChoiceInformation();
+    if (!RFID_s.isValidCardInside())
+        return;
+
+    if (activeUserChoice->getBigPortion()) {
+        activeUserChoice->setDisabledBigPortion();
+    } else {
+        activeUserChoice->setEnabledBigPortion();
     }
+
+    display.writeUserChoiceText(activeUserChoice);
+    styleLCDChoiceInformation();
 }
+
+void MainWindow::enableControlButtons()
+{
+    ui->buttonBigPortion->setEnabled(true);
+    ui->buttonMoreMilk->setEnabled(true);
+    ui->buttonLessMilk->setEnabled(true);
+    ui->buttonMoreSugar->setEnabled(true);
+    ui->buttonLessSugar->setEnabled(true);
+}
+
+void MainWindow::disableControlButtons()
+{
+    ui->buttonBigPortion->setEnabled(false);
+    ui->buttonMoreMilk->setEnabled(false);
+    ui->buttonLessMilk->setEnabled(false);
+    ui->buttonMoreSugar->setEnabled(false);
+    ui->buttonLessSugar->setEnabled(false);
+}
+
+

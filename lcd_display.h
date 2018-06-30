@@ -28,7 +28,9 @@ class LCD_Display : public Actuator
 
         void writeDefaultText(UserChoice *activeUserChoice);
         void writeGreetingText(UserChoice *activeUserChoice);
-        void writeErrorText(UserChoice *activeUserChoice);
+        void writeErrorText();
+        void writeUserChoiceText(UserChoice *activeUserChoice);
+
 
 
 

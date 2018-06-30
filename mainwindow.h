@@ -47,6 +47,11 @@ private slots:
     void on_buttonLatteMacchiato_clicked();
     void on_buttonCacao_clicked();
     void on_buttonHotwater_clicked();
+    // void on_buttonBigPortion_pressed();
+    // void on_buttonBigPortion_released();
+    void enableControlButtons();
+    void disableControlButtons();
+
     void on_buttonBigPortion_clicked();
 
 private:
