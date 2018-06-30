@@ -10,6 +10,8 @@
 #include "userchoice.h"
 #include "button.h"
 #include "lcd_display.h"
+#include "opticalsensor.h"
+#include "flowmeter.h"
 
 Person *activePerson = NULL;
 Card *card = NULL;
@@ -34,6 +36,8 @@ Button start;
 
 RFID_Scanner RFID_s;
 LCD_Display display;
+OpticalSensor opticalSensor;
+Flowmeter flow;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -119,8 +123,7 @@ void MainWindow::on_buttonAdmin_clicked()
 
 void MainWindow::setMainWindowControlButtonsStyle()
 {
-    ui->labelCard->hide();
-    styleInsertButton();
+    checkSensorsOnStart();
 
     //Main Window buttons preset
     QString colorTopButtons  = QString("background-color: #4d2600; color: #ffffff;");
@@ -152,6 +155,8 @@ void MainWindow::setMainWindowControlButtonsStyle()
 
 void MainWindow::on_buttonCard_clicked()
 {
+    // this code works with RFID Scanner Simulation
+
     // if NO card in RFID
     if (!RFID_s.getIsCardInside())
     {
@@ -554,4 +559,107 @@ void MainWindow::on_buttonCancel_clicked()
 void MainWindow::on_buttonStart_clicked()
 {
     // first sensor
+}
+
+void MainWindow::styleEmptyCupHolder()
+{
+    ui->buttonCup->setStyleSheet("background-color: #e67300; color: #ffffff;");
+    ui->buttonCup->setText("Place cup");
+
+    ui->labelCupEmpty->hide();
+    ui->labelCupFull->hide();
+}
+
+void MainWindow::styleCupPlacedEmplty()
+{
+    ui->buttonCup->setStyleSheet("background-color: #e67300; color: #ffffff;");
+    ui->buttonCup->setText("Take cup");
+
+    ui->labelCupEmpty->show();
+    ui->labelCupFull->hide();
+}
+
+void MainWindow::styleCupWithDrink()
+{
+    ui->buttonCup->setStyleSheet("background-color: #e67300; color: #ffffff;");
+    ui->buttonCup->setText("Take drink");
+
+    ui->labelCupEmpty->hide();
+    ui->labelCupFull->show();
+}
+
+void MainWindow::on_buttonCup_clicked()
+{
+    // this code works with Optical Sensor Simulation
+
+    // the cup is placed.
+    //Is a cup empty or a drink was prepared?
+    if (opticalSensor.getOpticalValue())
+    {
+        // Drink was prepared
+        if (flow.getHasPreparedDrink())
+        {
+            // assumed milk foam affects measurements
+            opticalSensor.setDistanceToObject(2);
+            opticalSensor.getOpticalValue();
+
+            styleCupWithDrink();
+        }
+
+        // only cup stays and no drink was prepared
+        else
+        {
+            opticalSensor.setDistanceToObject(3);
+            opticalSensor.getOpticalValue();
+
+            styleCupPlacedEmplty();
+        }
+    }
+    // there is not cup and no drink
+    // => place a cup and set the distance
+    else
+    {
+        //MODEL
+        opticalSensor.setDistanceToObject(2);
+        opticalSensor.getOpticalValue();
+
+        // VIEW
+        styleCupPlacedEmplty();
+    }
+
+}
+
+void MainWindow::checkSensorsOnStart()
+{
+    if (RFID_s.isValidCardInside())
+    {
+        ui->labelCard->show();
+        styleEjectButton();
+    }
+    else
+    {
+        ui->labelCard->hide();
+        styleInsertButton();
+    }
+
+    // if cup detected
+    if (opticalSensor.getOpticalValue())
+    {
+        // and a drink was prepared
+        if (flow.getHasPreparedDrink())
+        {
+            styleCupWithDrink();
+        }
+
+        // only cup stays and no drink was prepared
+        else
+        {
+            styleCupPlacedEmplty();
+        }
+    }
+    // there is not cup and no drink
+    else
+    {
+        styleEmptyCupHolder();
+    }
 }

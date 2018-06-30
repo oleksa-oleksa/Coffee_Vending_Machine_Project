@@ -32,11 +32,8 @@ private slots:
     void styleEjectButton();
     void styleDrinkButtons();
     void styleLCDErrorCard();
-
     void on_buttonAdmin_clicked();
     void on_buttonCard_clicked();
-
-
     void on_buttonLessSugar_clicked();
     void on_buttonMoreSugar_clicked();
     void on_buttonLessMilk_clicked();
@@ -47,16 +44,16 @@ private slots:
     void on_buttonLatteMacchiato_clicked();
     void on_buttonCacao_clicked();
     void on_buttonHotwater_clicked();
-    // void on_buttonBigPortion_pressed();
-    // void on_buttonBigPortion_released();
     void enableControlButtons();
     void disableControlButtons();
-
     void on_buttonBigPortion_clicked();
-
     void on_buttonCancel_clicked();
-
     void on_buttonStart_clicked();
+    void on_buttonCup_clicked();
+    void styleEmptyCupHolder();
+    void styleCupPlacedEmplty();
+    void styleCupWithDrink();
+    void checkSensorsOnStart();
 
 private:
     Ui::MainWindow *ui;

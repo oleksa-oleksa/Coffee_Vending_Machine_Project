@@ -18,10 +18,13 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>350</y>
-      <width>761</width>
+      <y>340</y>
+      <width>531</width>
       <height>301</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: #d7cbc1</string>
@@ -31,7 +34,7 @@
       <rect>
        <x>210</x>
        <y>231</y>
-       <width>341</width>
+       <width>291</width>
        <height>51</height>
       </rect>
      </property>
@@ -252,7 +255,7 @@
       <rect>
        <x>40</x>
        <y>110</y>
-       <width>170</width>
+       <width>160</width>
        <height>51</height>
       </rect>
      </property>
@@ -263,9 +266,9 @@
     <widget class="QPushButton" name="buttonCappuccino">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>190</x>
        <y>110</y>
-       <width>170</width>
+       <width>160</width>
        <height>51</height>
       </rect>
      </property>
@@ -276,9 +279,9 @@
     <widget class="QPushButton" name="buttonEspresso">
      <property name="geometry">
       <rect>
-       <x>380</x>
+       <x>340</x>
        <y>110</y>
-       <width>170</width>
+       <width>160</width>
        <height>51</height>
       </rect>
      </property>
@@ -291,7 +294,7 @@
       <rect>
        <x>40</x>
        <y>160</y>
-       <width>170</width>
+       <width>160</width>
        <height>51</height>
       </rect>
      </property>
@@ -302,9 +305,9 @@
     <widget class="QPushButton" name="buttonCacao">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>190</x>
        <y>160</y>
-       <width>170</width>
+       <width>160</width>
        <height>51</height>
       </rect>
      </property>
@@ -315,9 +318,9 @@
     <widget class="QPushButton" name="buttonHotwater">
      <property name="geometry">
       <rect>
-       <x>380</x>
+       <x>340</x>
        <y>160</y>
-       <width>170</width>
+       <width>160</width>
        <height>51</height>
       </rect>
      </property>
@@ -330,7 +333,7 @@
       <rect>
        <x>400</x>
        <y>50</y>
-       <width>141</width>
+       <width>101</width>
        <height>32</height>
       </rect>
      </property>
@@ -532,7 +535,148 @@
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="labelCupEmpty">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>350</y>
+      <width>128</width>
+      <height>128</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="images.qrc">:/icons/images/cup_empty.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelCupHolderImage">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>360</y>
+      <width>171</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="images.qrc">:/icons/images/cup_holder_transparent.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelCupBackground">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>340</y>
+      <width>171</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(137, 83, 16, 50); border-width: 1px;
+    border-style: solid;
+    border-color: #89663b;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelProgressBackground">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>570</y>
+      <width>231</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #4d2600</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QProgressBar" name="progressBarDrinkPreparation">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>600</y>
+      <width>171</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>4</number>
+    </property>
+    <property name="value">
+     <number>3</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelDrinkPreparation">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>580</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #ffffff</string>
+    </property>
+    <property name="text">
+     <string>Sugar</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonCup">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>510</y>
+      <width>171</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Place Cup</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelCupFull">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>350</y>
+      <width>128</width>
+      <height>128</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="images.qrc">:/icons/images/cup_full.png</pixmap>
+    </property>
+   </widget>
    <zorder>labelBackground</zorder>
+   <zorder>labelCupBackground</zorder>
    <zorder>label</zorder>
    <zorder>frameCard</zorder>
    <zorder>labelCard</zorder>
@@ -543,6 +687,13 @@
    <zorder>labelLCD</zorder>
    <zorder>labelSelectedDrink</zorder>
    <zorder>labelPrice</zorder>
+   <zorder>labelCupHolderImage</zorder>
+   <zorder>labelCupEmpty</zorder>
+   <zorder>labelProgressBackground</zorder>
+   <zorder>progressBarDrinkPreparation</zorder>
+   <zorder>labelDrinkPreparation</zorder>
+   <zorder>buttonCup</zorder>
+   <zorder>labelCupFull</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

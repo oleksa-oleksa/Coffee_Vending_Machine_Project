@@ -19,7 +19,7 @@
 class ControlUnit
 {
     private:
-        UserChoice *selectedDrink; // obtain components
+        UserChoice *activeUserChoice; // obtain components
                                    // from this pointer
                                     // sugar milk temperature...
         OpticalSensor fillevel[4];
@@ -31,10 +31,6 @@ class ControlUnit
         Brewgroup brew;
         Milkmaker milk;
         RFID_Scanner rfid;
-/* For testing:
-        RFID_Scanner testRfidScanner;
-        RFID_Scanner& rfid = testRfidScanner;
-*/
 
         bool checkIngredients();
         bool checkCup();

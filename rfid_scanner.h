@@ -1,3 +1,4 @@
+// Exisiting file implemented for project by Oleksandra Baga
 #ifndef RFID_SCANNER_H
 #define RFID_SCANNER_H
 

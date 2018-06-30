@@ -35,6 +35,9 @@ class UserChoice
         bool getBigPortion();
         void setDefaultChoice();
         double getPrice();
+        int getHotWaterAmount();
+        int getRecipeTemperature();
+        int getSpecificRecipeComponent();
         QString printSelectedDrink();
 };
 

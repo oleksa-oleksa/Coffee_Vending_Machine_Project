@@ -1,3 +1,4 @@
+// Exisiting file implemented for project by Oleksandra Baga
 #include "rfid_scanner.h"
 #include <utility>
 #include <QDebug>
@@ -29,6 +30,11 @@ bool RFID_Scanner::getIsCardInside()
 
 bool RFID_Scanner::getRfidValidation(Card *userCard)
 {
+    if (userCard == NULL)
+    {
+        return false;
+    }
+
     // CardID Validation
     for (size_t i = 0; i < Card::AllCards.size(); i++)
     {
@@ -59,6 +65,7 @@ bool RFID_Scanner::getRfidValidation(Card *userCard)
 
 void RFID_Scanner::ejectCard()
 {
+    qDebug() << "RFID SCANNER: Card ejected";
     isCardInside = false;
     isChoiceAllowed = false;
 }

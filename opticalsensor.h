@@ -1,3 +1,4 @@
+// Exisiting file implemented for project by Oleksandra Baga
 #ifndef OPTICALSENSOR_H
 #define OPTICALSENSOR_H
 #include "sensor.h"
@@ -5,7 +6,8 @@
 class OpticalSensor : public Sensor
 {
     private:
-        bool isFree;
+        bool isObjectDetected;
+        int distanceToObject;
 
     public:
         OpticalSensor();
@@ -13,8 +15,8 @@ class OpticalSensor : public Sensor
         ~OpticalSensor();
 
         bool getOpticalValue();
-
-
+        int getDistanceToObject();
+        void setDistanceToObject(int distanceToObject);
 };
 
 #endif // OPTICALSENSOR_H

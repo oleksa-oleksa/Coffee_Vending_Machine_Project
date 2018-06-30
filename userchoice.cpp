@@ -277,3 +277,16 @@ QString UserChoice::printSelectedDrink()
     }
     return "NO_DRINK";
 }
+
+int UserChoice::getHotWaterAmount()
+{
+    return hotWaterAmount;
+}
+int UserChoice::getRecipeTemperature()
+{
+    return recipeTemperature;
+}
+int UserChoice::getSpecificRecipeComponent()
+{
+    return specificRecipeComponent;
+}
