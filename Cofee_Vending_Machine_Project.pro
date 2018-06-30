@@ -43,7 +43,6 @@ HEADERS += \
     card.h \
     dc_motor.h \
     flowmeter.h \
-    led.h \
     milkmaker.h \
     opticalsensor.h \
     pressuresensor.h \
@@ -59,7 +58,6 @@ HEADERS += \
     controlunit.h \
     drink.h \
     drinktype.h \
-    indicationunit.h \
     interactionunit.h \
     person.h \
     sensortype.h \
@@ -94,7 +92,6 @@ SOURCES += \
     card.cpp \
     controlunit.cpp \
     drink.cpp \
-    indicationunit.cpp \
     interactionunit.cpp \
     person.cpp \
     sensortype.cpp \
@@ -108,7 +105,6 @@ SOURCES += \
     flowmeter.cpp \
     ingredient.cpp \
     lcd_display.cpp \
-    led.cpp \
     milkmaker.cpp \
     opticalsensor.cpp \
     pressuresensor.cpp \
