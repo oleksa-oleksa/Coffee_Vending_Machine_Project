@@ -54,6 +54,10 @@ private slots:
 
     void on_buttonBigPortion_clicked();
 
+    void on_buttonCancel_clicked();
+
+    void on_buttonStart_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -51,9 +51,9 @@ void LCD_Display::setPrice(double price)
 void LCD_Display::writeDefaultText(UserChoice *activeUserChoice)
 {
     setTitle("Please insert card");
-    if (activeUserChoice->printSelectedDrink() == "NO_DRINK")
+    if (activeUserChoice->getSelectedDrink() == NO_DRINK)
     {
-        setDrinkName("");
+        setDrinkName("Nothing");
         setPrice(0.0);
     }
     else
@@ -68,7 +68,7 @@ void LCD_Display::writeGreetingText(UserChoice *activeUserChoice)
 {
     QString str = activeUserChoice->getCard()->getAccount()->getOwner()->getName().c_str();
     setTitle("Nice to see you again, " + str);
-    setDrinkName(activeUserChoice->printSelectedDrink());
+    setDrinkName("Nothing");
     setPrice(activeUserChoice->getPrice());
 
 }
@@ -90,7 +90,16 @@ void LCD_Display::writeUserChoiceText(UserChoice *activeUserChoice)
     {
         setTitle("Your choice is regular portion");
     }
-    setDrinkName(activeUserChoice->printSelectedDrink());
+
+    if (activeUserChoice->getSelectedDrink() != NO_DRINK)
+    {
+        setDrinkName(activeUserChoice->printSelectedDrink());
+    }
+    else
+    {
+        setDrinkName("No drink selected");
+    }
+
     setPrice(activeUserChoice->getPrice());
 
 }

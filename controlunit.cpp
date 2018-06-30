@@ -53,22 +53,22 @@ void ControlUnit::maintenanceRoutine()
     for (int i=0; i<3; i++)
     {
         if (fillevel[i].getSensorState() == UNDEFINED)
-            fillevel[i].setSensorstate(OK);
+            fillevel[i].setSensorState(OK);
         //if (motor[i].getActuatorState() == UNDEFINED)
           //  motor[i].setActuatorState(OK);
     }
 
     if (cupsensor.getSensorState() == UNDEFINED)
-        cupsensor.setSensorstate(OK);
+        cupsensor.setSensorState(OK);
 
     if (temp.getSensorState() == UNDEFINED)
-        temp.setSensorstate(OK);
+        temp.setSensorState(OK);
 
     if (flow.getSensorState() == UNDEFINED)
-        flow.setSensorstate(OK);
+        flow.setSensorState(OK);
 
     if (rfid.getSensorState() == UNDEFINED)
-        rfid.setSensorstate(OK);
+        rfid.setSensorState(OK);
 
     //if (heater.getActuatorState() == UNDEFINED)
     //    heater.setActuatorState(OK);

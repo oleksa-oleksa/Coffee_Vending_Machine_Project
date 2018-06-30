@@ -28,7 +28,7 @@ void Sensor::setSensorType(SensorType newType)
         sensorType = newType;
 }
 
-void Sensor::setSensorstate(State newState)
+void Sensor::setSensorState(State newState)
 {
     if (sensorState != NULL)
         sensorState = newState;

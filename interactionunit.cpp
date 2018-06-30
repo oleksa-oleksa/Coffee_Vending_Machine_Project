@@ -176,27 +176,6 @@ void InteractionUnit::buttonPollingRoutine()
         return;
     }
 
-    if (choice->getSelectedDrink() == NO_DRINK)
-    {
-        return;
-    }
-
-    if (choice && moreSugar && moreSugar->getButtonValue()) {
-        choice->setSugarAmount(choice->getSugarAmount() + 1);
-    }
-
-    if (choice && lessSugar && lessSugar->getButtonValue()) {
-        choice->setSugarAmount(choice->getSugarAmount() - 1);
-    }
-
-    if (choice && moreMilk && moreMilk->getButtonValue()) {
-        choice->setMilkAmount(choice->getMilkAmount() + 1);
-    }
-
-    if (choice && lessMilk && lessMilk->getButtonValue()) {
-        choice->setMilkAmount(choice->getMilkAmount() - 1);
-    }
-
     if (choice && coffee && coffee->getButtonValue()) {
         choice->setSelectedDrink(COFFEE);
     }
@@ -219,6 +198,27 @@ void InteractionUnit::buttonPollingRoutine()
 
     if (choice && hotWater && hotWater->getButtonValue()) {
         choice->setSelectedDrink(HOTWATER);
+    }
+
+    if (choice->getSelectedDrink() == NO_DRINK)
+    {
+        return;
+    }
+
+    if (choice && moreSugar && moreSugar->getButtonValue()) {
+        choice->setSugarAmount(choice->getSugarAmount() + 1);
+    }
+
+    if (choice && lessSugar && lessSugar->getButtonValue()) {
+        choice->setSugarAmount(choice->getSugarAmount() - 1);
+    }
+
+    if (choice && moreMilk && moreMilk->getButtonValue()) {
+        choice->setMilkAmount(choice->getMilkAmount() + 1);
+    }
+
+    if (choice && lessMilk && lessMilk->getButtonValue()) {
+        choice->setMilkAmount(choice->getMilkAmount() - 1);
     }
 
     if (choice && bigPortion && bigPortion->getButtonValue()) {

@@ -24,7 +24,7 @@ void Button::toggleButton()
     this->isPushed = !(this->isPushed);
 }
 
-void Button::setSensorstate(State newState)
+void Button::setSensorState(State newState)
 {
    if (newState == PRESSED)
    {

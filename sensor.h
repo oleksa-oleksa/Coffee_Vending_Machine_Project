@@ -19,7 +19,7 @@ class Sensor
         virtual SensorType getSensorType();
         virtual State getSensorState();
         virtual void setSensorType(SensorType);
-        virtual void setSensorstate(State);
+        virtual void setSensorState(State);
 
 
 };

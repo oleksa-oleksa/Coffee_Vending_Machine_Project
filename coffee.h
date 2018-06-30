@@ -16,7 +16,7 @@ class Coffee : public Drink
         Coffee()
         {
             sugarAmount = 2;
-            milkAmount = 3;
+            milkAmount = 0;
             hotWaterAmount = 180;
             recipeTemperature = 100;
             price = 0.9;

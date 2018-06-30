@@ -114,4 +114,9 @@ display.writeDefaultText(activeUserChoice);
 // no price and no selected drink name
 
 // Sumulation: Select "Coffee"
+coffee.setSensorstate(PRESSED);
+iunit.buttonPollingRoutine();
+coffee.setSensorstate(RELEASED);
 
+// Decrease default sugar amount by 1
+ 

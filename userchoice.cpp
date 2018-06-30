@@ -140,8 +140,6 @@ void UserChoice::setSelectedDrink(DrinkType selectedDrink)
 
 DrinkType UserChoice::getSelectedDrink()
 {
-    QString str = printSelectedDrink();
-    qDebug() << "GETTER: Selected Drink is: " << str;
     return selectedDrink;
 }
 
@@ -160,6 +158,7 @@ void UserChoice::setSugarAmount(int sugarAmount)
 {
     if (selectedDrink == HOTWATER)
     {
+        qDebug() << "No sugar for hot water";
         this->sugarAmount = 0;
         return;
     }
@@ -167,6 +166,12 @@ void UserChoice::setSugarAmount(int sugarAmount)
     if (sugarAmount >= 0 && sugarAmount < 5)
     {
         this->sugarAmount = sugarAmount;
+        qDebug() << "Sugar is: " << this->sugarAmount;
+        return;
+    }
+    else
+    {
+        qDebug() << "This is not allowed for sugar";
         return;
     }
 }
@@ -178,16 +183,22 @@ int UserChoice::getSugarAmount()
 
 void UserChoice::setMilkAmount(int milkAmount)
 {
-    // sugar amount if these drinks can not be modified
-    if (selectedDrink == CACAO || selectedDrink == LATTEMACCHIOTO
-        || selectedDrink == ESPRESSO || selectedDrink == HOTWATER)
+    // milk amount if these drinks can not be modified
+    if (selectedDrink == CACAO  || selectedDrink == ESPRESSO || selectedDrink == HOTWATER)
     {
+        qDebug() << "Predefined milk can not be changed";
         return;
     }
 
     if (milkAmount >= 0 && milkAmount < 5)
     {
         this->milkAmount = milkAmount;
+        qDebug() << "Milk is: " << this->milkAmount;
+        return;
+    }    
+    else
+    {
+        qDebug() << "This is not allowed for milk";
         return;
     }
 }

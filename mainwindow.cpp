@@ -11,10 +11,6 @@
 #include "button.h"
 #include "lcd_display.h"
 
-#define TRIGGER_BUTTON(button) ({button.setSensorstate(PRESSED); \
-                          iunit.buttonPollingRoutine();\
-                          button.setSensorstate(RELEASED);})
-
 Person *activePerson = NULL;
 Card *card = NULL;
 Account *activeAccount = NULL;
@@ -257,7 +253,10 @@ void MainWindow::on_buttonLessSugar_clicked()
 {
     if (RFID_s.isValidCardInside())
     {
-        TRIGGER_BUTTON(lessSugar);
+        lessSugar.setSensorState(PRESSED);
+        iunit.buttonPollingRoutine();
+        lessSugar.setSensorState(RELEASED);
+
         styleSugarProgressBar();
     }
 }
@@ -266,7 +265,10 @@ void MainWindow::on_buttonMoreSugar_clicked()
 {
     if (RFID_s.isValidCardInside())
     {
-        TRIGGER_BUTTON(moreSugar);
+        moreSugar.setSensorState(PRESSED);
+        iunit.buttonPollingRoutine();
+        moreSugar.setSensorState(RELEASED);
+
         styleSugarProgressBar();
     }
 }
@@ -275,7 +277,10 @@ void MainWindow::on_buttonLessMilk_clicked()
 {
     if (RFID_s.isValidCardInside())
     {
-        TRIGGER_BUTTON(lessMilk);
+        lessMilk.setSensorState(PRESSED);
+        iunit.buttonPollingRoutine();
+        lessMilk.setSensorState(RELEASED);
+
         styleMilkProgressBar();
     }
 }
@@ -284,7 +289,10 @@ void MainWindow::on_buttonMoreMilk_clicked()
 {
     if (RFID_s.isValidCardInside())
     {
-        TRIGGER_BUTTON(moreMilk);
+        moreMilk.setSensorState(PRESSED);
+        iunit.buttonPollingRoutine();
+        moreMilk.setSensorState(RELEASED);
+
         styleMilkProgressBar();
     }
 }
@@ -297,14 +305,11 @@ void MainWindow::styleMilkProgressBar()
         ui->progressBarMilk->setValue(activeUserChoice->getMilkAmount());
         QString num = QString::number(activeUserChoice->getMilkAmount());
         ui->labelMilkAmount->setText(num);
-        qDebug() << "Milk is:" << activeUserChoice->getMilkAmount();
     }
    else
    {
        ui->progressBarMilk->setValue(0);
        ui->labelMilkAmount->setText(0);
-       qDebug() << "No Milk for " << activeUserChoice->printSelectedDrink();
-       qDebug() << "activeUserChoice is: " << RFID_s.isValidCardInside();
    }
 }
 
@@ -315,13 +320,10 @@ void MainWindow::styleSugarProgressBar()
         ui->progressBarSugar->setValue(activeUserChoice->getSugarAmount());
         QString num = QString::number(activeUserChoice->getSugarAmount());
         ui->labelSugarAmount->setText(num);
-        qDebug() << "Sugar is:" << activeUserChoice->getSugarAmount();
     }
     else {
         ui->progressBarSugar->setValue(0);
         ui->labelSugarAmount->setText(0);
-        qDebug() << "No Sugar for " << activeUserChoice->printSelectedDrink();
-        qDebug() << "activeUserChoice is: " << RFID_s.isValidCardInside();
     }
 }
 
@@ -331,7 +333,7 @@ void MainWindow::styleLCDChoiceInformation()
     ui->labelLCD->setText("Your choice:");
 
     ui->labelSelectedDrink->setStyleSheet("color: #ffffff; border: 0px;");
-    ui->labelSelectedDrink->setText(activeUserChoice->printSelectedDrink());
+    ui->labelSelectedDrink->setText(display.getDrinkName());
 
     QString num = QString::number(activeUserChoice->getPrice(), 'f', 2);
     ui->labelPrice->setStyleSheet("color: #ffffff; border: 0px;");
@@ -342,7 +344,7 @@ void MainWindow::styleLCDGreeting()
 {   
     ui->labelLCD->setStyleSheet("color: #ffb366; border: 0px;");
 
-    if (activeUserChoice->printSelectedDrink() == "NO_DRINK")
+    if (activeUserChoice->getSelectedDrink() == NO_DRINK)
     {
         ui->labelLCD->setText(display.getTitle());
         ui->labelSelectedDrink->setText("");
@@ -398,7 +400,9 @@ void MainWindow::on_buttonCoffee_clicked()
     if (RFID_s.isValidCardInside())
     {
         // MODEL
-        activeUserChoice->setSelectedDrink(COFFEE);
+        coffee.setSensorState(PRESSED);
+        iunit.buttonPollingRoutine();
+        coffee.setSensorState(RELEASED);
         display.writeUserChoiceText(activeUserChoice);
 
         // VIEW
@@ -414,7 +418,9 @@ void MainWindow::on_buttonCappuccino_clicked()
     if (RFID_s.isValidCardInside())
     {
         // MODEL
-        activeUserChoice->setSelectedDrink(CAPPUCCINO);
+        cappuccino.setSensorState(PRESSED);
+        iunit.buttonPollingRoutine();
+        cappuccino.setSensorState(RELEASED);
         display.writeUserChoiceText(activeUserChoice);
 
         // VIEW
@@ -430,7 +436,9 @@ void MainWindow::on_buttonEspresso_clicked()
     if (RFID_s.isValidCardInside())
     {
         // MODEL
-        activeUserChoice->setSelectedDrink(ESPRESSO);
+        espresso.setSensorState(PRESSED);
+        iunit.buttonPollingRoutine();
+        espresso.setSensorState(RELEASED);
         display.writeUserChoiceText(activeUserChoice);
 
         // VIEW
@@ -446,7 +454,9 @@ void MainWindow::on_buttonLatteMacchiato_clicked()
     if (RFID_s.isValidCardInside())
     {
         // MODEL
-        activeUserChoice->setSelectedDrink(LATTEMACCHIOTO);
+        latteMacchiato.setSensorState(PRESSED);
+        iunit.buttonPollingRoutine();
+        latteMacchiato.setSensorState(RELEASED);
         display.writeUserChoiceText(activeUserChoice);
 
         // VIEW
@@ -462,7 +472,9 @@ void MainWindow::on_buttonCacao_clicked()
     if (RFID_s.isValidCardInside())
     {
         // MODEL
-        activeUserChoice->setSelectedDrink(CACAO);
+        cacao.setSensorState(PRESSED);
+        iunit.buttonPollingRoutine();
+        cacao.setSensorState(RELEASED);
         display.writeUserChoiceText(activeUserChoice);
 
         // VIEW
@@ -478,7 +490,9 @@ void MainWindow::on_buttonHotwater_clicked()
     if (RFID_s.isValidCardInside())
     {
         // MODEL
-        activeUserChoice->setSelectedDrink(HOTWATER);
+        hotWater.setSensorState(PRESSED);
+        iunit.buttonPollingRoutine();
+        hotWater.setSensorState(RELEASED);
         display.writeUserChoiceText(activeUserChoice);
 
         // VIEW
@@ -491,17 +505,16 @@ void MainWindow::on_buttonHotwater_clicked()
 
 void MainWindow::on_buttonBigPortion_clicked()
 {
-    if (!RFID_s.isValidCardInside())
-        return;
+    if (RFID_s.isValidCardInside())
+    {
 
-    if (activeUserChoice->getBigPortion()) {
-        activeUserChoice->setDisabledBigPortion();
-    } else {
-        activeUserChoice->setEnabledBigPortion();
+        bigPortion.setSensorState(PRESSED);
+        iunit.buttonPollingRoutine();
+        bigPortion.setSensorState(RELEASED);
+        display.writeUserChoiceText(activeUserChoice);
+
+        styleLCDChoiceInformation();
     }
-
-    display.writeUserChoiceText(activeUserChoice);
-    styleLCDChoiceInformation();
 }
 
 void MainWindow::enableControlButtons()
@@ -523,3 +536,22 @@ void MainWindow::disableControlButtons()
 }
 
 
+
+void MainWindow::on_buttonCancel_clicked()
+{
+    // MODEL
+    activeUserChoice->setDefaultChoice();
+    display.writeUserChoiceText(activeUserChoice);
+
+    // VIEW
+    disableControlButtons();
+    styleMilkProgressBar();
+    styleSugarProgressBar();
+    styleLCDChoiceInformation();
+}
+
+
+void MainWindow::on_buttonStart_clicked()
+{
+    // first sensor
+}
