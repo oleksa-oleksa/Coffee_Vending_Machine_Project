@@ -2,33 +2,36 @@
 #define LCD_DISPLAY_H
 #include <string>
 #include "actuator.h"
+#include "QString"
+#include "userchoice.h"
+
 using namespace std;
 
 class LCD_Display : public Actuator
 {
-public:
-    LCD_Display();
-    virtual ~LCD_Display();
-    unsigned int getXScreenPos() const;
-    unsigned int getYscreenPos() const;
-    string getTitle() const;
-    string getDescription() const;
-    string getErrorMessage() const;
-    double getPrice() const;
-    void setTitle(string title);
-    void setDescription(string description);
-    void setXScreenPos(unsigned int xSreenPos);
-    void setYScreenPos(unsigned int yScreenPos);
-    void setPrice(double price);
-    void setErrorMessage(string errorMessage);
+    private:
 
-private:
-    unsigned int xScreenPos = 0;
-    unsigned int yScreenPos = 0;
-    double price; //for what?
-    string title;
-    string description;
-    string errorMessage;
+        QString title;
+        QString drinkName;
+        double price;
+
+    public:
+        LCD_Display();
+        virtual ~LCD_Display();
+
+        QString getTitle();
+        void setTitle(QString title);
+        QString getDrinkName();
+        void setDrinkName(QString drinkName);
+        double getPrice();
+        void setPrice(double price);
+
+        void writeDefaultText(UserChoice *activeUserChoice);
+        void writeGreetingText(UserChoice *activeUserChoice);
+        void writeErrorText(UserChoice *activeUserChoice);
+
+
+
 };
 
 #endif // LCD_DISPLAY_H

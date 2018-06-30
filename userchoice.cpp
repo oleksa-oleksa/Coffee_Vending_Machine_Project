@@ -137,8 +137,6 @@ void UserChoice::setSelectedDrink(DrinkType selectedDrink)
         price = 0.0;
     }
 
-
-
     QString str = printSelectedDrink();
     qDebug() << "SETTER: Selected Drink is set: " << str;
 }

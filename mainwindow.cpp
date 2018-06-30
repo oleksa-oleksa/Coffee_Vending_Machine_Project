@@ -9,6 +9,7 @@
 #include "interactionunit.h"
 #include "userchoice.h"
 #include "button.h"
+#include "lcd_display.h"
 
 #define TRIGGER_BUTTON(button) ({button.setSensorstate(PRESSED); \
                           iunit.buttonPollingRoutine();\
@@ -36,6 +37,7 @@ Button cancel;
 Button start;
 
 RFID_Scanner RFID_s;
+LCD_Display display;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -94,6 +96,9 @@ MainWindow::MainWindow(QWidget *parent) :
     RFID_s.getIsCardInside();
 
     // Now we can design the Main Window
+    // MODEL
+    display.writeDefaultText(activeUserChoice);
+    // VIEW
     restartLCD();
     setMainWindowControlButtonsStyle();
 
@@ -159,10 +164,15 @@ void MainWindow::on_buttonCard_clicked()
         // modifies private attribute isChoiceAllowed for InteractionUnit
         if (RFID_s.insertCard(card))
         {
+            // MODEL
+            display.writeGreetingText(activeUserChoice);
+
+            // VIEW
             styleLCDGreeting();
-            styleEjectButton();
             styleSugarProgressBar();
             styleMilkProgressBar();
+            styleEjectButton();
+
         }
 
         // if card is not valid, it will ba automaticaly ejected (simulation in Design)
@@ -170,12 +180,14 @@ void MainWindow::on_buttonCard_clicked()
         // the next card can be inserted in RFID
         else
         {
-            styleLCDErrorCard();
+            // MODEL
+            display.writeErrorText(activeUserChoice);
+            RFID_s.ejectCard();
 
+            // VIEW
+            styleLCDErrorCard();
             QTimer::singleShot(3000, this, &MainWindow::restartLCDCardEjected);
             ui->labelCard->hide();
-
-            RFID_s.ejectCard();
             styleInsertButton();
         }
     }
@@ -183,47 +195,64 @@ void MainWindow::on_buttonCard_clicked()
     // if there IS A CARD
     else
     {
-        ui->labelCard->hide();
-
+        // MODEL
         RFID_s.ejectCard();
+        delete(activeUserChoice);
+        activeUserChoice = iunit.initUserChoice(card);
+        display.writeDefaultText(activeUserChoice);
+
+        // VIEW
+        ui->labelCard->hide();
+        restartLCD();
         styleInsertButton();
         styleMilkProgressBar();
+        styleSugarProgressBar();
         styleDrinkButtons();
-        restartLCD();
     }
 }
 
 void MainWindow::restartLCD()
 {
+    // VIEW
     ui->labelLCD->setStyleSheet("color: #ffffff; border: 0px;");
-    ui->labelLCD->setText("Please insert card");
+    ui->labelLCD->setText(display.getTitle());
     ui->labelSelectedDrink->setStyleSheet("color: #ffffff; border: 0px;");
     ui->labelPrice->setStyleSheet("color: #ffffff; border: 0px;");
     ui->labelSelectedDrink->setText("");
     ui->labelPrice->setText("");
 
 
+
 }
 
 void MainWindow::restartLCDCardEjected()
 {
-          ui->labelLCD->setStyleSheet("color: #ffffff; border: 0px;");
-          ui->labelLCD->setText("Please insert card");
-          ui->labelLCD->show();
+    // MODEL
+    display.writeDefaultText(activeUserChoice);
 
-          ui->labelSelectedDrink->setStyleSheet("color: #ffffff; border: 0px;");
-          ui->labelPrice->setStyleSheet("color: #ffffff; border: 0px;");
-          ui->labelLCD->show();
+    // VIEW
+    ui->labelLCD->setStyleSheet("color: #ffffff; border: 0px;");
+    ui->labelLCD->setText("Please insert card");
+    ui->labelLCD->show();
 
-          styleSugarProgressBar();
-          styleMilkProgressBar();
+    ui->labelSelectedDrink->setStyleSheet("color: #ffffff; border: 0px;");
+    ui->labelPrice->setStyleSheet("color: #ffffff; border: 0px;");
+    ui->labelLCD->show();
+
+    styleSugarProgressBar();
+    styleMilkProgressBar();
+
+
+
 }
 
 void MainWindow::on_buttonLessSugar_clicked()
 {
-
-    TRIGGER_BUTTON(lessSugar);
-    styleSugarProgressBar();
+    if (RFID_s.isValidCardInside())
+    {
+        TRIGGER_BUTTON(lessSugar);
+        styleSugarProgressBar();
+    }
 }
 
 void MainWindow::on_buttonMoreSugar_clicked()
@@ -233,7 +262,6 @@ void MainWindow::on_buttonMoreSugar_clicked()
         TRIGGER_BUTTON(moreSugar);
         styleSugarProgressBar();
     }
-
 }
 
 void MainWindow::on_buttonLessMilk_clicked()
@@ -304,22 +332,32 @@ void MainWindow::styleLCDChoiceInformation()
 }
 
 void MainWindow::styleLCDGreeting()
-{
-    QString name = activeAccount->getOwner()->getName().c_str();
+{   
     ui->labelLCD->setStyleSheet("color: #ffb366; border: 0px;");
-    ui->labelLCD->setText("Nice to see you again " + name + "!");
-    ui->labelSelectedDrink->setText("Select drink");
-    ui->labelPrice->setText("");
+
+    if (activeUserChoice->printSelectedDrink() == "NO_DRINK")
+    {
+        ui->labelLCD->setText(display.getTitle());
+        ui->labelSelectedDrink->setText("");
+        ui->labelPrice->setText("");
+    }
+    else
+    {
+        ui->labelLCD->setText(display.getTitle());
+        ui->labelSelectedDrink->setText(display.getDrinkName());
+        ui->labelPrice->setText(QString::number(display.getPrice()));
+    }
 
 }
 
 void MainWindow::styleLCDErrorCard()
 {
     ui->labelLCD->setStyleSheet("color: #ff1a1a; border: 0px;");
-    ui->labelLCD->setText("Not a valid card! Aborted...");
+
+    ui->labelLCD->setText(display.getTitle());
+
     ui->labelSelectedDrink->setText("");
     ui->labelPrice->setText("");
-
 }
 
 void MainWindow::styleEjectButton()

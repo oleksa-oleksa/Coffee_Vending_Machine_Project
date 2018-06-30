@@ -14,62 +14,58 @@ LCD_Display::~LCD_Display()
 }
 
 
-unsigned int LCD_Display:: getXScreenPos() const
-{
-    return xScreenPos;
-}
-
-unsigned int LCD_Display::getYscreenPos() const
-{
-    return yScreenPos;
-}
-
-string LCD_Display::getTitle() const
+QString LCD_Display::getTitle()
 {
     return title;
 }
 
-string LCD_Display::getDescription() const
-{
-    return description;
-}
-
-string LCD_Display::getErrorMessage() const
-{
-    return errorMessage;
-}
-
-double LCD_Display::getPrice() const
-{
-    return price;
-}
-
-void LCD_Display::setTitle(string title)
+void LCD_Display::setTitle(QString title)
 {
     this->title = title;
+    qDebug() << "LCD: " << title;
 }
 
-void LCD_Display::setDescription(string description)
+QString LCD_Display::getDrinkName()
 {
-    this->description = description;
+    return drinkName;
 }
 
-void LCD_Display::setXScreenPos(unsigned int xScreenPos)
+void LCD_Display::setDrinkName(QString drinkName)
 {
-    this->xScreenPos = xScreenPos;
+    this->drinkName = drinkName;
+    qDebug() << "LCD: You have selected: " <<  this->drinkName;
+
 }
 
-void LCD_Display::setYScreenPos(unsigned int yScreenPos)
+double LCD_Display::getPrice()
 {
-    this->yScreenPos = yScreenPos;
+    return price;
 }
 
 void LCD_Display::setPrice(double price)
 {
     this->price = price;
+    qDebug() << "LCD: You have to pay " << price << "for your drink!";
 }
 
-void LCD_Display::setErrorMessage(string errorMessage)
+void LCD_Display::writeDefaultText(UserChoice *activeUserChoice)
 {
-    this->errorMessage = errorMessage;
+    setDrinkName(activeUserChoice->printSelectedDrink());
+    setPrice(activeUserChoice->getPrice());
+    setTitle("Please insert card");
+}
+
+void LCD_Display::writeGreetingText(UserChoice *activeUserChoice)
+{
+    setDrinkName(activeUserChoice->printSelectedDrink());
+    setPrice(activeUserChoice->getPrice());
+    QString str = activeUserChoice->getCard()->getAccount()->getOwner()->getName().c_str();
+    setTitle("Nice to see you again, " + str);
+}
+
+void LCD_Display::writeErrorText(UserChoice *activeUserChoice)
+{
+    setDrinkName("NO_DRINK");
+    setPrice(0.0);
+    setTitle("Not a valid card! Aborted...");
 }

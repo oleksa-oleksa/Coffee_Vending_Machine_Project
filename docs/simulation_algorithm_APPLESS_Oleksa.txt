@@ -1,0 +1,75 @@
+// global sensors and actuators 
+RFID_Scanner RFID_s
+LCD_Display display;
+
+// global pointers:
+Person *activePerson = NULL;
+Card *card = NULL;
+Account *activeAccount = NULL;
+BankAccount *bankAccount = NULL;
+InteractionUnit iunit;
+UserChoice *activeUserChoice = NULL;
+
+// global buttons:
+Button moreSugar;
+Button lessSugar;
+Button moreMilk;
+Button lessMilk;
+Button coffee;
+Button cappuccino;
+Button espresso;
+Button latteMacchiato;
+Button cacao;
+Button hotWater;
+Button bigPortion;
+Button cancel;
+Button start;
+
+// Firstly, we will start with a card provided by user into RFID
+card = &Card::AllCards[0];
+
+// Thus we can find out which account belongs to the card
+activeAccount = card->getAccount();
+
+// and what the person interacts with Vending Machine
+activePerson = card->getAccount()->getOwner();
+
+// and which bank account is connected to the card for withdrawing process
+bankAccount = card->getAccount()->getBankAccount();
+
+
+// Note: to simulate invalid card
+// 1: Comment all card, ba, acc and person lins
+// 2. create a new random Card *card
+// 3. run program
+
+//======================================================================
+// and finaly: UserChoice initialisation in InteractionUnit in order
+// to track all interactions with buttons
+// This solution based on UML Diagramm created for the University Course
+iunit.setMoreSugar(&moreSugar);
+iunit.setLessSugar(&lessSugar);
+iunit.setMoreMilk(&moreMilk);
+iunit.setLessMilk(&lessMilk);
+iunit.setCoffee(&coffee);
+iunit.setCappuccino(&cappuccino);
+iunit.setEspresso(&espresso);
+iunit.setLatteMacchiato(&latteMacchiato);
+iunit.setCacao(&cacao);
+iunit.setHotWater(&hotWater);
+iunit.setBigPortion(&bigPortion);
+iunit.setCancel(&cancel);
+iunit.setStart(&start);
+
+
+// activeUserChoice has the selected drink with  price and recipe
+// the information for preparation will be transfered to ControlUnit with "Start" button
+activeUserChoice = iunit.initUserChoice(card);
+
+// block the possibility to change drinks settins
+// without a valid card inside
+RFID_s.getIsCardInside();
+
+// Now we can design the Main Window
+// Simulate LCD:
+

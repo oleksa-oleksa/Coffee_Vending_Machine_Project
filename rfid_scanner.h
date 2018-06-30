@@ -10,7 +10,6 @@ class RFID_Scanner : public Sensor
     private:
         bool isCardInside;
         bool isChoiceAllowed;
-        std::map<Card, bool> cardsDatabase;
 
     public:
         RFID_Scanner();
@@ -24,5 +23,7 @@ class RFID_Scanner : public Sensor
         bool isValidCardInside();
 
 };
+
+extern RFID_Scanner RFID_s;
 
 #endif // RFID_SCANNER_H

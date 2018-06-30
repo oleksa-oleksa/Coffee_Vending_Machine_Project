@@ -55,7 +55,6 @@ void Account::setAccountStatus(AccountStatus state)
 {
     this->state = state;
     QString str = printAccountStatus();
-    qDebug() << "SETTER: Account status is now: " << str;
 }
 
 bool Account::checkCreditLimit(double amount)
@@ -89,39 +88,21 @@ bool Account::checkCreditLimit(double amount)
 
 double Account::getAccountCredit()
 {
-    qDebug() << "GETTER: Credit is: " << credit;
     return credit;
 }
 
 Person *Account::getOwner()
 {
-    if (owner != NULL)
-    {
-        qDebug() << "GETTER: Account owner is: " << owner->getID().toQstring();
-    } else
-    {
-        qDebug() << "GETTER: Account owner is set to NULL";
-    }
     return owner;
 }
 
 void Account::setOwner(Person *owner)
 {
     this->owner = owner;
-    qDebug() << "SETTER: Account owner is: " << this->owner->getID().toQstring();
 }
 
 BankAccount *Account::getBankAccount()
 {
-    if (ba != NULL)
-    {
-        qDebug() << "GETTER: Associated bank account is: " << ba->getIBAN().toQstring();
-    }
-    else
-    {
-        qDebug() << "GETTER: Associated bank account is NULL";
-
-    }
     return ba;
 }
 
@@ -205,7 +186,7 @@ bool Account::linkOwner(PersonID personID)
        if (Person::AllEmployee[i].getID().toQstring() == personID.toQstring())
        {
           setOwner(&Person::AllEmployee[i]);
-          qDebug() << "LINK: Owner is set to PersonID:" << Person::AllEmployee[i].getID().toQstring();
+          qDebug() << "LINK TO ACCOUNT: OWNER is set to PersonID:" << Person::AllEmployee[i].getID().toQstring();
           ret = true;
        }
     }
@@ -221,7 +202,7 @@ bool Account::linkBankAccount(BankAccountID iban)
        if (BankAccount::AllBankAccounts[i].getIBAN().toQstring() == iban.toQstring())
        {
           setBankAccount(&BankAccount::AllBankAccounts[i]);
-          qDebug() << "LINK: Bank account is set to IBAN:" << BankAccount::AllBankAccounts[i].getIBAN().toQstring();
+          qDebug() << "LINK TO ACCOUNT: BANK ACCOUNT is set to IBAN:" << BankAccount::AllBankAccounts[i].getIBAN().toQstring();
           ret = true;
        }
     }

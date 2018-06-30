@@ -8,7 +8,7 @@ Actuator::Actuator()
 
 Actuator::~Actuator()
 {
-     qDebug() << "This Actuator is deleted ";
+
 }
 
 void Actuator:: setActuatorState(State actuatorState)

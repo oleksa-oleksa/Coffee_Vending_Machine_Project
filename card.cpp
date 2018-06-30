@@ -77,16 +77,12 @@ void Card::activateCard()
 
 Account *Card::getAccount()
 {
-
-    qDebug() << "GETTER: Account is: " << account->getAccountID().toQstring();
     return account;
 }
 
 void Card::setAccount(Account *newAccount)
 {
     account = newAccount;
-    qDebug() << "SETTER: Account is set: " << account->getAccountID().toQstring();
-
 }
 
 bool Card::withdraw(double price)
@@ -119,7 +115,7 @@ bool Card::linkAccount(AccountID accountID)
        if (Account::AllAccounts[i].getAccountID().toQstring() == accountID.toQstring())
        {
           setAccount(&Account::AllAccounts[i]);
-          qDebug() << "Account is set to AccountID:" << Account::AllAccounts[i].getAccountID().toQstring();
+          qDebug() << "LINK TO CARD: Account is set to AccountID:" << Account::AllAccounts[i].getAccountID().toQstring();
           ret = true;
        }
     }

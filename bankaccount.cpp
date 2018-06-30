@@ -77,7 +77,7 @@ bool BankAccount::linkAccount()
        if (Account::AllAccounts[i].getAccountID().toQstring() == accountID.toQstring())
        {
           setAccount(&Account::AllAccounts[i]);
-          qDebug() << "Account is set to AccountID:" << Account::AllAccounts[i].getAccountID().toQstring();
+          qDebug() << "LINK ACCOUNT TO BANK: Account is set to AccountID:" << Account::AllAccounts[i].getAccountID().toQstring();
           ret = true;
        }
     }
@@ -93,7 +93,7 @@ bool BankAccount::linkProvidedAccount(AccountID accountID)
        if (Account::AllAccounts[i].getAccountID().toQstring() == accountID.toQstring())
        {
           setAccount(&Account::AllAccounts[i]);
-          qDebug() << "LINK: Account is set to AccountID:" << Account::AllAccounts[i].getAccountID().toQstring();
+          qDebug() << "LINK ACCOUNT TO BANK: Account is set to AccountID:" << Account::AllAccounts[i].getAccountID().toQstring();
           ret = true;
        }
     }
