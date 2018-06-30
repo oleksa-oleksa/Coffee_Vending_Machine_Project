@@ -34,32 +34,19 @@ private slots:
     void styleLCDErrorCard();
 
     void on_buttonAdmin_clicked();
-    void on_buttonAdmin_pressed();
-    void on_buttonAdmin_released();
     void on_buttonCard_clicked();
-    void on_buttonService_pressed();
-    void on_buttonService_released();
+
 
     void on_buttonLessSugar_clicked();
-
     void on_buttonMoreSugar_clicked();
-
     void on_buttonLessMilk_clicked();
-
     void on_buttonMoreMilk_clicked();
-
     void on_buttonCoffee_clicked();
-
     void on_buttonCappuccino_clicked();
-
     void on_buttonEspresso_clicked();
-
     void on_buttonLatteMacchiato_clicked();
-
     void on_buttonCacao_clicked();
-
     void on_buttonHotwater_clicked();
-
     void on_buttonBigPortion_clicked();
 
 private:

@@ -74,10 +74,14 @@ bool RFID_Scanner::insertCard(Card *userCard)
     qDebug() << "RFID SCANNER insertCard(): CardID is: " << userCard->getCardID().toQstring() << ", owner is " << userCard->getAccount()->getOwner()->getName().c_str();
 
     // After card was inserted, the RFID Scanner provides verification
-    // without instructions outside
+    // without any additional calls from outside
     // modifies isChoiceAllowed for InteractionUnit
     return (getRfidValidation(userCard));
+}
 
+bool RFID_Scanner::isValidCardInside()
+{
+    return isCardInside && isChoiceAllowed;
 }
 
 

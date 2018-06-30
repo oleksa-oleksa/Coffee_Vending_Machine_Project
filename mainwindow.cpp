@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Coffee Machine Drinks Window");
 
+    // MODEL
     // Creating dependencies for simulation
     // there is always an active person interacting with Vending Machine
     // To change the game characher the drop list should be used
@@ -60,6 +61,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // and which bank account is connected to the card for withdrawing process
     bankAccount = card->getAccount()->getBankAccount();
+
+    // Note: to simulate invalid card
+    // 1: Comment all card, ba, acc and person lins
+    // 2. create a new random Card *card
+    // 3. run programm
 
     //======================================================================
     // and finaly: UserChoice initialisation in InteractionUnit in order
@@ -83,8 +89,14 @@ MainWindow::MainWindow(QWidget *parent) :
     // the information for preparation will be transfered to ControlUnit with "Start" button
     activeUserChoice = iunit.initUserChoice(card);
 
+    // block the possibility to change drinks settins
+    // without a valid card inside
+    RFID_s.getIsCardInside();
+
     // Now we can design the Main Window
+    restartLCD();
     setMainWindowControlButtonsStyle();
+
 }
 
 MainWindow::~MainWindow()
@@ -104,7 +116,6 @@ void MainWindow::on_buttonAdmin_clicked()
 
 void MainWindow::setMainWindowControlButtonsStyle()
 {
-    restartLCD();
 
     ui->labelCard->hide();
     styleInsertButton();
@@ -133,34 +144,6 @@ void MainWindow::setMainWindowControlButtonsStyle()
 
 }
 
-void MainWindow::on_buttonAdmin_pressed()
-{
-    QString colorTopButtons  = QString("background-color: #994d00; color: #ffffff;");
-    ui->buttonAdmin->setStyleSheet(colorTopButtons);
-}
-
-
-
-void MainWindow::on_buttonAdmin_released()
-{
-    QString colorTopButtons  = QString("background-color: #4d2600; color: #ffffff;");
-    ui->buttonAdmin->setStyleSheet(colorTopButtons);
-}
-
-void MainWindow::on_buttonService_pressed()
-{
-    QString colorTopButtons  = QString("background-color: #994d00; color: #ffffff;");
-    ui->buttonService->setStyleSheet(colorTopButtons);
-}
-
-
-void MainWindow::on_buttonService_released()
-{
-    QString colorTopButtons  = QString("background-color: #4d2600; color: #ffffff;");
-    ui->buttonService->setStyleSheet(colorTopButtons);
-}
-
-
 void MainWindow::on_buttonCard_clicked()
 {
     // if NO card in RFID
@@ -188,9 +171,10 @@ void MainWindow::on_buttonCard_clicked()
         else
         {
             styleLCDErrorCard();
-            QTimer::singleShot(3000, this, &MainWindow::restartLCDCardEjected);
 
+            QTimer::singleShot(3000, this, &MainWindow::restartLCDCardEjected);
             ui->labelCard->hide();
+
             RFID_s.ejectCard();
             styleInsertButton();
         }
@@ -200,6 +184,7 @@ void MainWindow::on_buttonCard_clicked()
     else
     {
         ui->labelCard->hide();
+
         RFID_s.ejectCard();
         styleInsertButton();
         styleMilkProgressBar();
@@ -214,6 +199,10 @@ void MainWindow::restartLCD()
     ui->labelLCD->setText("Please insert card");
     ui->labelSelectedDrink->setStyleSheet("color: #ffffff; border: 0px;");
     ui->labelPrice->setStyleSheet("color: #ffffff; border: 0px;");
+    ui->labelSelectedDrink->setText("");
+    ui->labelPrice->setText("");
+
+
 }
 
 void MainWindow::restartLCDCardEjected()
@@ -232,44 +221,73 @@ void MainWindow::restartLCDCardEjected()
 
 void MainWindow::on_buttonLessSugar_clicked()
 {
+
     TRIGGER_BUTTON(lessSugar);
     styleSugarProgressBar();
 }
 
 void MainWindow::on_buttonMoreSugar_clicked()
 {
-    TRIGGER_BUTTON(moreSugar);
-    styleSugarProgressBar();
+    if (RFID_s.isValidCardInside())
+    {
+        TRIGGER_BUTTON(moreSugar);
+        styleSugarProgressBar();
+    }
 
 }
 
 void MainWindow::on_buttonLessMilk_clicked()
 {
-    TRIGGER_BUTTON(lessMilk);
-    styleMilkProgressBar();
+    if (RFID_s.isValidCardInside())
+    {
+        TRIGGER_BUTTON(lessMilk);
+        styleMilkProgressBar();
+    }
 }
 
 void MainWindow::on_buttonMoreMilk_clicked()
 {
-    TRIGGER_BUTTON(moreMilk);
-    styleMilkProgressBar();
+    if (RFID_s.isValidCardInside())
+    {
+        TRIGGER_BUTTON(moreMilk);
+        styleMilkProgressBar();
+    }
 }
 
 
 void MainWindow::styleMilkProgressBar()
 {
-    ui->progressBarMilk->setValue(activeUserChoice->getMilkAmount());
-    QString num = QString::number(activeUserChoice->getMilkAmount());
-    ui->labelMilkAmount->setText(num);
-    qDebug() << "Milk is:" << activeUserChoice->getMilkAmount();
+   if (RFID_s.isValidCardInside())
+    {
+        ui->progressBarMilk->setValue(activeUserChoice->getMilkAmount());
+        QString num = QString::number(activeUserChoice->getMilkAmount());
+        ui->labelMilkAmount->setText(num);
+        qDebug() << "Milk is:" << activeUserChoice->getMilkAmount();
+    }
+   else
+   {
+       ui->progressBarMilk->setValue(0);
+       ui->labelMilkAmount->setText(0);
+       qDebug() << "No Milk for " << activeUserChoice->printSelectedDrink();
+       qDebug() << "activeUserChoice is: " << RFID_s.isValidCardInside();
+   }
 }
 
 void MainWindow::styleSugarProgressBar()
 {
-    ui->progressBarSugar->setValue(activeUserChoice->getSugarAmount());
-    QString num = QString::number(activeUserChoice->getSugarAmount());
-    ui->labelSugarAmount->setText(num);
-    qDebug() << "Sugar is:" << activeUserChoice->getSugarAmount();
+    if (RFID_s.isValidCardInside())
+    {
+        ui->progressBarSugar->setValue(activeUserChoice->getSugarAmount());
+        QString num = QString::number(activeUserChoice->getSugarAmount());
+        ui->labelSugarAmount->setText(num);
+        qDebug() << "Sugar is:" << activeUserChoice->getSugarAmount();
+    }
+    else {
+        ui->progressBarSugar->setValue(0);
+        ui->labelSugarAmount->setText(0);
+        qDebug() << "No Sugar for " << activeUserChoice->printSelectedDrink();
+        qDebug() << "activeUserChoice is: " << RFID_s.isValidCardInside();
+    }
 }
 
 void MainWindow::styleLCDChoiceInformation()
@@ -290,6 +308,8 @@ void MainWindow::styleLCDGreeting()
     QString name = activeAccount->getOwner()->getName().c_str();
     ui->labelLCD->setStyleSheet("color: #ffb366; border: 0px;");
     ui->labelLCD->setText("Nice to see you again " + name + "!");
+    ui->labelSelectedDrink->setText("Select drink");
+    ui->labelPrice->setText("");
 
 }
 
@@ -297,6 +317,9 @@ void MainWindow::styleLCDErrorCard()
 {
     ui->labelLCD->setStyleSheet("color: #ff1a1a; border: 0px;");
     ui->labelLCD->setText("Not a valid card! Aborted...");
+    ui->labelSelectedDrink->setText("");
+    ui->labelPrice->setText("");
+
 }
 
 void MainWindow::styleEjectButton()
@@ -327,54 +350,75 @@ void MainWindow::styleDrinkButtons()
 
 void MainWindow::on_buttonCoffee_clicked()
 {
-    activeUserChoice->setSelectedDrink(COFFEE);
-    styleMilkProgressBar();
-    styleSugarProgressBar();
-    styleLCDChoiceInformation();
+    if (RFID_s.isValidCardInside())
+    {
+        activeUserChoice->setSelectedDrink(COFFEE);
+        styleMilkProgressBar();
+        styleSugarProgressBar();
+        styleLCDChoiceInformation();
+    }
 }
 
 void MainWindow::on_buttonCappuccino_clicked()
 {
-    activeUserChoice->setSelectedDrink(CAPPUCCINO);
-    styleMilkProgressBar();
-    styleSugarProgressBar();
-    styleLCDChoiceInformation();
+    if (RFID_s.isValidCardInside())
+    {
+        activeUserChoice->setSelectedDrink(CAPPUCCINO);
+        styleMilkProgressBar();
+        styleSugarProgressBar();
+        styleLCDChoiceInformation();
+    }
 }
 
 void MainWindow::on_buttonEspresso_clicked()
 {
-    activeUserChoice->setSelectedDrink(ESPRESSO);
-    styleMilkProgressBar();
-    styleSugarProgressBar();
-    styleLCDChoiceInformation();
+    if (RFID_s.isValidCardInside())
+    {
+        activeUserChoice->setSelectedDrink(ESPRESSO);
+        styleMilkProgressBar();
+        styleSugarProgressBar();
+        styleLCDChoiceInformation();
+    }
 }
 
 void MainWindow::on_buttonLatteMacchiato_clicked()
 {
-    activeUserChoice->setSelectedDrink(LATTEMACCHIOTO);
-    styleMilkProgressBar();
-    styleSugarProgressBar();
-    styleLCDChoiceInformation();
+    if (RFID_s.isValidCardInside())
+    {
+        activeUserChoice->setSelectedDrink(LATTEMACCHIOTO);
+        styleMilkProgressBar();
+        styleSugarProgressBar();
+        styleLCDChoiceInformation();
+    }
 }
 
 void MainWindow::on_buttonCacao_clicked()
 {
-    activeUserChoice->setSelectedDrink(CACAO);
-    styleMilkProgressBar();
-    styleSugarProgressBar();
-    styleLCDChoiceInformation();
+    if (RFID_s.isValidCardInside())
+    {
+        activeUserChoice->setSelectedDrink(CACAO);
+        styleMilkProgressBar();
+        styleSugarProgressBar();
+        styleLCDChoiceInformation();
+    }
 }
 
 void MainWindow::on_buttonHotwater_clicked()
 {
-    activeUserChoice->setSelectedDrink(HOTWATER);
-    styleMilkProgressBar();
-    styleSugarProgressBar();
-    styleLCDChoiceInformation();
+    if (RFID_s.isValidCardInside())
+    {
+        activeUserChoice->setSelectedDrink(HOTWATER);
+        styleMilkProgressBar();
+        styleSugarProgressBar();
+        styleLCDChoiceInformation();
+    }
 }
 
 void MainWindow::on_buttonBigPortion_clicked()
 {
-    TRIGGER_BUTTON(bigPortion);
-    styleLCDChoiceInformation();
+    if (RFID_s.isValidCardInside())
+    {
+        TRIGGER_BUTTON(bigPortion);
+        styleLCDChoiceInformation();
+    }
 }
