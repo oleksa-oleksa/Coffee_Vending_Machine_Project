@@ -29,6 +29,7 @@ class RFID_Scanner : public Sensor
         void ejectCard();
         bool insertCard(Card *userCard);
         bool isValidCardInside();
+        CardHolderState InitRFID();
 
 };
 

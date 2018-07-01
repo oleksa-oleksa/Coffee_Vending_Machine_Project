@@ -104,8 +104,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // VIEW
     restartLCD();
+    opticalSensor.setDistanceToObject(10);
+    opticalSensor.getOpticalFlowSensorsMeasurements();
     setMainWindowControlButtonsStyle();
-
 }
 
 MainWindow::~MainWindow()
@@ -125,7 +126,7 @@ void MainWindow::on_buttonAdmin_clicked()
 
 void MainWindow::setMainWindowControlButtonsStyle()
 {
-    getRFIDMeasuremenets();
+    styleCardHolder();
     styleEmptyCupHolder();
 
     //Main Window buttons preset
@@ -532,6 +533,8 @@ void MainWindow::enableControlButtons()
     ui->buttonLessMilk->setEnabled(true);
     ui->buttonMoreSugar->setEnabled(true);
     ui->buttonLessSugar->setEnabled(true);
+    ui->buttonStart->setEnabled(true);
+    ui->buttonCancel->setEnabled(true);
 }
 
 void MainWindow::disableControlButtons()
@@ -541,6 +544,8 @@ void MainWindow::disableControlButtons()
     ui->buttonLessMilk->setEnabled(false);
     ui->buttonMoreSugar->setEnabled(false);
     ui->buttonLessSugar->setEnabled(false);
+    ui->buttonStart->setEnabled(false);
+    ui->buttonCancel->setEnabled(false);
 }
 
 
@@ -561,7 +566,53 @@ void MainWindow::on_buttonCancel_clicked()
 
 void MainWindow::on_buttonStart_clicked()
 {
-    // first sensor
+    // get Optical Sensor Measurements
+    if (opticalSensor.getOpticalFlowSensorsMeasurements() == NO_CUP) {
+        qDebug() << "Place your cup first!";
+        return;
+    }
+    else if (opticalSensor.getOpticalFlowSensorsMeasurements() == FULL_CUP) {
+        qDebug() << "Take your cup with prepared drink before order a new one! :)";
+        return;
+    }
+
+    else if (opticalSensor.getOpticalFlowSensorsMeasurements() == EMPTY_CUP) {
+        // PASSED
+        qDebug() << "Cup is OK, liquid can flow!";
+    }
+
+    // check if drink is preselected
+    if (activeUserChoice->getSelectedDrink() == NO_DRINK) {
+        qDebug() << "Select drink first!";
+        return;
+    }
+
+    // check if card is still in the card holder
+    if (RFID_s.isValidCardInside() != VALID_CARD_INSIDE)
+    {
+        qDebug() << "Card missed, please return your card back!";
+        return;
+    }
+
+    // if it is possible to get here, the payment process could start
+    if (activeUserChoice->payDrink())
+    {
+        qDebug() << "We can start prepare drink! Yahoo!";
+        qDebug() << "You can purchase next drink after this one will be prepared!";
+        //control.prepareDrink();
+    }
+    else
+    {
+        qDebug() << "Payment error!";
+        qDebug() << "The card is ejected automatically, take your card!";
+
+        // here eject card
+        RFID_s.ejectCard();
+        delete(activeUserChoice);
+        activeUserChoice = iunit.initUserChoice(card);
+        display.writeDefaultText(activeUserChoice);
+        return;
+    }
 }
 
 void MainWindow::styleEmptyCupHolder()
@@ -607,19 +658,20 @@ void MainWindow::styleCupWithDrink()
 }
 
 
-CardHolderState MainWindow::getRFIDMeasuremenets()
+void MainWindow::styleCardHolder()
 {
-    if (RFID_s.isValidCardInside())
-    {
-        ui->labelCard->show();
-        styleEjectButton();
-        return VALID_CARD_INSIDE;
-    }
-    else
-    {
-        ui->labelCard->hide();
-        styleInsertButton();
-        return NO_CARD;
+
+    switch (RFID_s.InitRFID()) {
+    case VALID_CARD_INSIDE:
+                    ui->labelCard->show();
+                    styleEjectButton();
+                    break;
+    case NO_CARD:
+                    ui->labelCard->hide();
+                    styleInsertButton();
+                    break;
+    case NONVALID_CARD_INSIDE:
+                    break;
     }
 }
 

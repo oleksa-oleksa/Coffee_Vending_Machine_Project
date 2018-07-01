@@ -42,6 +42,6 @@ bool Flowmeter::mainFlowmeterRoutine()
 
 bool Flowmeter::getHasPreparedDrink()
 {
-    qDebug() << "A drink just have been prepared: " << hasPreparedDrink;
+    qDebug() << "FLOWMETER: A drink just have been prepared: " << hasPreparedDrink;
     return hasPreparedDrink;
 }

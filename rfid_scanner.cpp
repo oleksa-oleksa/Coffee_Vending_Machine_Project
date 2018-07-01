@@ -91,4 +91,17 @@ bool RFID_Scanner::isValidCardInside()
     return isCardInside && isChoiceAllowed;
 }
 
-
+// On start init function
+CardHolderState RFID_Scanner::InitRFID()
+{
+    if (RFID_s.isValidCardInside())
+    {
+        qDebug() << "RFID SCANNER: Valid card inside";
+        return VALID_CARD_INSIDE;
+    }
+    else
+    {
+        qDebug() << "RFID SCANNER: No card detected";
+        return NO_CARD;
+    }
+}

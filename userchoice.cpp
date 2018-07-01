@@ -45,8 +45,9 @@ bool UserChoice::payDrink()
     else
     {
         // Paying
-        return (card->withdraw(price));
-        qDebug() << "payDrink() finished.";
+        bool ret = card->withdraw(price);
+        qDebug() << "payDrink() finished with exit code " << ret;
+        return ret;
     }
 }
 

@@ -54,10 +54,9 @@ private slots:
     void styleEmptyCupHolder();
     void styleCupPlacedEmplty();
     void styleCupWithDrink();
-    CardHolderState getRFIDMeasuremenets();
     void on_buttonCupTakeDrink_clicked();
     void on_buttonCupPlaceEmpty_clicked();
-
+    void styleCardHolder();
     void on_buttonCupTakeCupBack_clicked();
 
 private:
