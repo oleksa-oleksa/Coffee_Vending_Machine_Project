@@ -80,40 +80,16 @@ RFID_s.getIsCardInside();
 // Simulate LCD:
 display.writeDefaultText(activeUserChoice);
 
+// Check sensors on start
+getRFIDMeasuremenets();
+getOpticalSensorMeasurements();
+
 
 //=============================================================
 // Simulate insert card
 // Now there is no card and this code should set isCardInside = true and isChoiceAllowed = true 
-    // if NO card in RFID
-    if (!RFID_s.getIsCardInside())
-    {
 
-        // if card is valid, user can purchase a drink
-        if (RFID_s.insertCard(card))
-        {
-	    display.writeGreetingText(activeUserChoice);
-        }
 
-        // if card is not valid, it will ba automaticaly ejected (simulation in Design)
-        // and the purschasing will be ended
-        // the next card can be inserted in RFID
-        else
-        {
-            display.writeErrorText();
-            RFID_s.ejectCard();
-        }
-    }
-
-    // if there IS A CARD
-    else
-    {
- 
-        RFID_s.ejectCard();
-        delete(activeUserChoice);
-        activeUserChoice = iunit.initUserChoice(card);
-        display.writeDefaultText(activeUserChoice);
-    }
-}
 
 //=============================================================
 // Simulated: Card is inserted, name and greeting
@@ -162,4 +138,88 @@ display.writeUserChoiceText(activeUserChoice);
 // User has selected a drink and pushes the Start Button:
 // But he has forgot to place a cup!
 
+
+
+
+
+
+
+//==============================================
+// FUNCTIONS (for DRY)
+
+// !!!! Set return values for tests !!!!
+
+void simulateCardButton()
+{
+       // if NO card in RFID
+    if (!RFID_s.getIsCardInside())
+    {
+
+        // if card is valid, user can purchase a drink
+        if (RFID_s.insertCard(card))
+        {
+        display.writeGreetingText(activeUserChoice);
+        }
+
+        // if card is not valid, it will ba automaticaly ejected (simulation in Design)
+        // and the purschasing will be ended
+        // the next card can be inserted in RFID
+        else
+        {
+            display.writeErrorText();
+            RFID_s.ejectCard();
+        }
+    }
+
+    // if there IS A CARD
+    else
+    {
+ 
+        RFID_s.ejectCard();
+        delete(activeUserChoice);
+        activeUserChoice = iunit.initUserChoice(card);
+        display.writeDefaultText(activeUserChoice);
+    }
+}
+
+
+void getRFIDMeasuremenets()
+{
+    if (RFID_s.isValidCardInside())
+    {
+        
+       qDebud() << "There is a card detected. You can eject your card or purchase a drink";
+    }
+    else
+    {
+      
+      qDebud() << "There is no card detected. Please insert your card";
+    }
+}
+
+
+void getOpticalSensorMeasurements()
+{
+
+    // if cup detected
+    if (opticalSensor.getOpticalValue())
+    {
+        // and a drink was prepared
+        if (flow.getHasPreparedDrink())
+        {
+            qDebud() << "There is a cup full of liquid, take your cup!";
+        }
+
+        // only cup stays and no drink was prepared
+        else
+        {
+            qDebud() << "There is an empty cup";
+        }
+    }
+    // there is not cup and no drink
+    else
+    {
+        qDebud() << "There is no cup detected in cup holder!";
+    }
+}
 

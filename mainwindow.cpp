@@ -123,7 +123,8 @@ void MainWindow::on_buttonAdmin_clicked()
 
 void MainWindow::setMainWindowControlButtonsStyle()
 {
-    checkSensorsOnStart();
+    getRFIDMeasuremenets();
+    getOpticalSensorMeasurements();
 
     //Main Window buttons preset
     QString colorTopButtons  = QString("background-color: #4d2600; color: #ffffff;");
@@ -563,8 +564,12 @@ void MainWindow::on_buttonStart_clicked()
 
 void MainWindow::styleEmptyCupHolder()
 {
-    ui->buttonCup->setStyleSheet("background-color: #e67300; color: #ffffff;");
-    ui->buttonCup->setText("Place cup");
+    ui->buttonCupPlaceEmpty->setStyleSheet("background-color: #e67300; color: #ffffff;");
+    ui->buttonCupPlaceEmpty->setText("Place cup");
+
+    ui->buttonCupTakeCupBack->hide();
+
+    ui->buttonCupTakeDrink->hide();
 
     ui->labelCupEmpty->hide();
     ui->labelCupFull->hide();
@@ -572,8 +577,12 @@ void MainWindow::styleEmptyCupHolder()
 
 void MainWindow::styleCupPlacedEmplty()
 {
-    ui->buttonCup->setStyleSheet("background-color: #e67300; color: #ffffff;");
-    ui->buttonCup->setText("Take cup");
+    ui->buttonCupPlaceEmpty->hide();
+
+    ui->buttonCupTakeCupBack->setStyleSheet("background-color: #e67300; color: #ffffff;");
+    ui->buttonCupTakeCupBack->setText("Take cup");
+
+    ui->buttonCupTakeDrink->hide();
 
     ui->labelCupEmpty->show();
     ui->labelCupFull->hide();
@@ -581,11 +590,13 @@ void MainWindow::styleCupPlacedEmplty()
 
 void MainWindow::styleCupWithDrink()
 {
-    ui->buttonCup->setStyleSheet("background-color: #e67300; color: #ffffff;");
-    ui->buttonCup->setText("Take drink");
+    ui->buttonCupPlaceEmpty->hide();
+    ui->buttonCupTakeCupBack->hide();
 
-    ui->labelCupEmpty->hide();
-    ui->labelCupFull->show();
+    ui->buttonCupTakeDrink->setStyleSheet("background-color: #e67300; color: #ffffff;");
+    ui->buttonCupTakeDrink->setText("Take drink");
+
+
 }
 
 void MainWindow::on_buttonCup_clicked()
@@ -629,7 +640,7 @@ void MainWindow::on_buttonCup_clicked()
 
 }
 
-void MainWindow::checkSensorsOnStart()
+void MainWindow::getRFIDMeasuremenets()
 {
     if (RFID_s.isValidCardInside())
     {
@@ -641,6 +652,10 @@ void MainWindow::checkSensorsOnStart()
         ui->labelCard->hide();
         styleInsertButton();
     }
+}
+
+void MainWindow::getOpticalSensorMeasurements()
+{
 
     // if cup detected
     if (opticalSensor.getOpticalValue())
@@ -662,4 +677,9 @@ void MainWindow::checkSensorsOnStart()
     {
         styleEmptyCupHolder();
     }
+}
+
+void MainWindow::on_buttonCupTakeDrink_clicked()
+{
+
 }

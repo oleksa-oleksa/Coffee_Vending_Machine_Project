@@ -646,7 +646,7 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="buttonCup">
+   <widget class="QPushButton" name="buttonCupPlaceEmpty">
     <property name="geometry">
      <rect>
       <x>550</x>
@@ -675,6 +675,32 @@
      <pixmap resource="images.qrc">:/icons/images/cup_full.png</pixmap>
     </property>
    </widget>
+   <widget class="QPushButton" name="buttonCupTakeCupBack">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>510</y>
+      <width>171</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Place Cup</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonCupTakeDrink">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>510</y>
+      <width>171</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Place Cup</string>
+    </property>
+   </widget>
    <zorder>labelBackground</zorder>
    <zorder>labelCupBackground</zorder>
    <zorder>label</zorder>
@@ -692,8 +718,10 @@
    <zorder>labelProgressBackground</zorder>
    <zorder>progressBarDrinkPreparation</zorder>
    <zorder>labelDrinkPreparation</zorder>
-   <zorder>buttonCup</zorder>
+   <zorder>buttonCupPlaceEmpty</zorder>
    <zorder>labelCupFull</zorder>
+   <zorder>buttonCupTakeCupBack</zorder>
+   <zorder>buttonCupTakeDrink</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

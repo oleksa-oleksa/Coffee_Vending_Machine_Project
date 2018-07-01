@@ -53,7 +53,9 @@ private slots:
     void styleEmptyCupHolder();
     void styleCupPlacedEmplty();
     void styleCupWithDrink();
-    void checkSensorsOnStart();
+    void getRFIDMeasuremenets();
+    void getOpticalSensorMeasurements();
+    void on_buttonCupTakeDrink_clicked();
 
 private:
     Ui::MainWindow *ui;
