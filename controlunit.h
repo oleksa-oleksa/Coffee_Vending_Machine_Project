@@ -16,6 +16,13 @@
 
 #define NO_CUP_PROXIMITY 100
 
+enum BrewStatus {
+    NOT_STARTED_FREE,
+    IN_PROGRESS,
+    BREW_ERROR,
+    BREW_DONE
+};
+
 class ControlUnit
 {
     private:

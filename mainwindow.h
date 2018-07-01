@@ -7,6 +7,8 @@
 #include "card.h"
 #include "interactionunit.h"
 #include "userchoice.h"
+#include "opticalsensor.h"
+#include "rfid_scanner.h"
 
 namespace Ui {
 class MainWindow;
@@ -49,13 +51,14 @@ private slots:
     void on_buttonBigPortion_clicked();
     void on_buttonCancel_clicked();
     void on_buttonStart_clicked();
-    void on_buttonCup_clicked();
     void styleEmptyCupHolder();
     void styleCupPlacedEmplty();
     void styleCupWithDrink();
-    void getRFIDMeasuremenets();
-    void getOpticalSensorMeasurements();
+    CardHolderState getRFIDMeasuremenets();
     void on_buttonCupTakeDrink_clicked();
+    void on_buttonCupPlaceEmpty_clicked();
+
+    void on_buttonCupTakeCupBack_clicked();
 
 private:
     Ui::MainWindow *ui;

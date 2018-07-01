@@ -1,11 +1,16 @@
 // Created by Oleksandra Baga
 // System Test for Coffee Vending Machine Project
 
+// Header
+// Define all global variables that not in mainwindow.h and enum
+
+// cpp - file
+
 // global sensors and actuators 
 RFID_Scanner RFID_s
 LCD_Display display;
-OpticalSensor OpticalSensor;
 Flowmeter flow;
+OpticalSensor opticalSensor(&flow);
 
 
 // global pointers:
@@ -89,6 +94,7 @@ getOpticalSensorMeasurements();
 // Simulate insert card
 // Now there is no card and this code should set isCardInside = true and isChoiceAllowed = true 
 
+simulateCardButtonPush();
 
 
 //=============================================================
@@ -149,7 +155,7 @@ display.writeUserChoiceText(activeUserChoice);
 
 // !!!! Set return values for tests !!!!
 
-void simulateCardButton()
+void simulateCardButtonPush()
 {
        // if NO card in RFID
     if (!RFID_s.getIsCardInside())
@@ -198,7 +204,7 @@ void getRFIDMeasuremenets()
 }
 
 
-void getOpticalSensorMeasurements()
+CupHolderState getOpticalSensorMeasurements()
 {
 
     // if cup detected
@@ -208,18 +214,23 @@ void getOpticalSensorMeasurements()
         if (flow.getHasPreparedDrink())
         {
             qDebud() << "There is a cup full of liquid, take your cup!";
+            return FULL_CUP;
+
         }
 
         // only cup stays and no drink was prepared
         else
         {
             qDebud() << "There is an empty cup";
+            return EMPTY_CUP;
+
         }
     }
     // there is not cup and no drink
     else
     {
         qDebud() << "There is no cup detected in cup holder!";
+        return NO_CUP;
     }
 }
 
