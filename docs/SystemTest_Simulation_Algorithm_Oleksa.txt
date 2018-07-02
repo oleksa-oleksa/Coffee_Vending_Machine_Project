@@ -6,13 +6,6 @@
 
 // cpp - file
 
-// global sensors and actuators 
-RFID_Scanner RFID_s
-LCD_Display display;
-Flowmeter flow;
-OpticalSensor opticalSensor(&flow);
-
-
 // global pointers:
 Person *activePerson = NULL;
 Card *card = NULL;
@@ -36,6 +29,24 @@ Button bigPortion;
 Button cancel;
 Button start;
 
+// global sensors and actuators 
+ControlUnit control;
+
+RFID_Scanner cardScanner;
+Flowmeter flow;
+OpticalSensor opticalSensor(&flow);
+PressureSensor pressureSensor;
+TemperaturSensor temperatureSensor;
+BrightnessSensor brightSensor;
+
+LCD_Display display;
+DC_Motor motor[4];
+Waterheater heater;
+Milkmaker milkMaker;
+
+Brewgroup brew;
+
+
 // Firstly, we will start with a card provided by user into RFID
 card = &Card::AllCards[0];
 
@@ -50,7 +61,7 @@ bankAccount = card->getAccount()->getBankAccount();
 
 
 // Note: to simulate invalid card
-// 1: Comment all card, ba, acc and person lins
+// 1: Comment all card, ba, acc and person lines
 // 2. create a new random Card *card
 // 3. run program
 
@@ -77,25 +88,51 @@ iunit.setStart(&start);
 // the information for preparation will be transfered to ControlUnit with "Start" button
 activeUserChoice = iunit.initUserChoice(card);
 
-// block the possibility to change drinks settins
-// without a valid card inside
-RFID_s.getIsCardInside();
+// links to ControlUnit
+control.linkUserChoice(activeUserChoice);
+control.linkInteractionUnit(&iunit);
 
-// Now we can design the Main Window
+// Connect the sensors
+control.connectRFID(&cardScanner);
+control.connectFlow(&flow);
+control.connectOptical(&opticalSensor);
+control.connectPressure(&pressureSensor);
+control.connectTemperatur(&temperatureSensor);
+control.connectBrightnessSensor(&brightSensor);
+
+// connect the actuators
+control.connectLCD(&display);
+//control.connectMotor(&motor, 4);
+control.connectHeater(&heater);
+control.connectMilkMaker(&milkMaker);
+control.connectBrewGroup(&brew);
+
+// check sensors and actuators
+control.maintenanceRoutine();
+
+// block the possibility to change drinks settins
+// without a valid card inside (set the variable isCardInside)
+if (!control.checkCardReader()) {
+     activeUserChoice->setSelectedDrink(NO_DRINK);
+}
+
+//=============================================================
+// Now we can simulate the Main Window
+
 // Simulate LCD:
 display.writeDefaultText(activeUserChoice);
 
-// Check sensors on start
-getRFIDMeasuremenets();
-getOpticalSensorMeasurements();
+// Sumulate no cup in holder
+opticalSensor.setDistanceToObject(10);
+// test cup absence simulation
+opticalSensor.getOpticalFlowSensorsMeasurements();
 
 
 //=============================================================
-// Simulate insert card
+// Simulate INSERT CARD
 // Now there is no card and this code should set isCardInside = true and isChoiceAllowed = true 
 
-simulateCardButtonPush();
-
+control.insertCard(card); // compare to VALID_CARD
 
 //=============================================================
 // Simulated: Card is inserted, name and greeting
@@ -115,7 +152,7 @@ lessSugar.setSensorstate(RELEASED);
 display.writeUserChoiceText(activeUserChoice);
 
 
-// Increase default sugar amount by 2
+// Increase default milk amount by 1 + 1
 // First
 moreMilk.setSensorstate(PRESSED);
 iunit.buttonPollingRoutine();
@@ -145,92 +182,4 @@ display.writeUserChoiceText(activeUserChoice);
 // But he has forgot to place a cup!
 
 
-
-
-
-
-
-//==============================================
-// FUNCTIONS (for DRY)
-
-// !!!! Set return values for tests !!!!
-
-void simulateCardButtonPush()
-{
-       // if NO card in RFID
-    if (!RFID_s.getIsCardInside())
-    {
-
-        // if card is valid, user can purchase a drink
-        if (RFID_s.insertCard(card))
-        {
-        display.writeGreetingText(activeUserChoice);
-        }
-
-        // if card is not valid, it will ba automaticaly ejected (simulation in Design)
-        // and the purschasing will be ended
-        // the next card can be inserted in RFID
-        else
-        {
-            display.writeErrorText();
-            RFID_s.ejectCard();
-        }
-    }
-
-    // if there IS A CARD
-    else
-    {
- 
-        RFID_s.ejectCard();
-        delete(activeUserChoice);
-        activeUserChoice = iunit.initUserChoice(card);
-        display.writeDefaultText(activeUserChoice);
-    }
-}
-
-
-void getRFIDMeasuremenets()
-{
-    if (RFID_s.isValidCardInside())
-    {
-        
-       qDebud() << "There is a card detected. You can eject your card or purchase a drink";
-    }
-    else
-    {
-      
-      qDebud() << "There is no card detected. Please insert your card";
-    }
-}
-
-
-CupHolderState getOpticalSensorMeasurements()
-{
-
-    // if cup detected
-    if (opticalSensor.getOpticalValue())
-    {
-        // and a drink was prepared
-        if (flow.getHasPreparedDrink())
-        {
-            qDebud() << "There is a cup full of liquid, take your cup!";
-            return FULL_CUP;
-
-        }
-
-        // only cup stays and no drink was prepared
-        else
-        {
-            qDebud() << "There is an empty cup";
-            return EMPTY_CUP;
-
-        }
-    }
-    // there is not cup and no drink
-    else
-    {
-        qDebud() << "There is no cup detected in cup holder!";
-        return NO_CUP;
-    }
-}
 

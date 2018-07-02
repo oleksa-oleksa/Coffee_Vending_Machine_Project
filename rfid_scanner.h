@@ -10,7 +10,7 @@ enum CardHolderState
 {
     NO_CARD,
     VALID_CARD_INSIDE,
-    NONVALID_CARD_INSIDE
+    NONVALID_CARD_INSIDE,
 };
 
 class RFID_Scanner : public Sensor

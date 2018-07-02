@@ -3,6 +3,7 @@
 #include <utility>
 #include <QDebug>
 
+
 using namespace std;
 
 RFID_Scanner::RFID_Scanner()
@@ -94,7 +95,7 @@ bool RFID_Scanner::isValidCardInside()
 // On start init function
 CardHolderState RFID_Scanner::InitRFID()
 {
-    if (RFID_s.isValidCardInside())
+    if (isValidCardInside())
     {
         qDebug() << "RFID SCANNER: Valid card inside";
         return VALID_CARD_INSIDE;

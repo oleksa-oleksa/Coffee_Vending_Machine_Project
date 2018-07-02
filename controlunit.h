@@ -18,6 +18,7 @@
 #include "lcd_display.h"
 #include "card.h"
 #include "brightnesssensor.h"
+#include "interactionunit.h"
 
 #define AMOUNT_OF_MOTORS 4
 
@@ -32,6 +33,7 @@ class ControlUnit
 {
     private:
         UserChoice *activeUserChoice;
+        InteractionUnit *iunit;
 
         RFID_Scanner *cardScanner;
         Flowmeter *flow;
@@ -52,6 +54,8 @@ class ControlUnit
         ControlUnit();
 
         void linkUserChoice(UserChoice *activeUserChoice);
+        void linkInteractionUnit(InteractionUnit *iunit);
+
         void connectRFID(RFID_Scanner *sensor);
         void connectFlow(Flowmeter *sensor);
         void connectOptical(OpticalSensor *sensor);
@@ -64,6 +68,11 @@ class ControlUnit
         void connectHeater(Waterheater *actuator);
         void connectMilkMaker(Milkmaker *actuator);
         void connectBrewGroup(Brewgroup *actuator);
+
+        bool checkCardReader();
+        bool checkCard();
+        CardHolderState insertCard(Card *card);
+
 
         void maintenanceRoutine();
         bool checkIngredients();

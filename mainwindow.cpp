@@ -37,7 +37,7 @@ Button start;
 
 ControlUnit control;
 
-RFID_Scanner RFID_s;
+RFID_Scanner cardScanner;
 Flowmeter flow;
 OpticalSensor opticalSensor(&flow);
 PressureSensor pressureSensor;
@@ -50,8 +50,6 @@ Waterheater heater;
 Milkmaker milkMaker;
 
 Brewgroup brew;
-
-//ControlUnit control;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -105,11 +103,12 @@ MainWindow::MainWindow(QWidget *parent) :
     // the information for preparation will be transfered to ControlUnit with "Start" button
     activeUserChoice = iunit.initUserChoice(card);
 
-    // link UserChoice to ControlUnit
+    // links to ControlUnit
     control.linkUserChoice(activeUserChoice);
+    control.linkInteractionUnit(&iunit);
 
     // Connect the sensors
-    control.connectRFID(&RFID_s);
+    control.connectRFID(&cardScanner);
     control.connectFlow(&flow);
     control.connectOptical(&opticalSensor);
     control.connectPressure(&pressureSensor);
@@ -127,9 +126,10 @@ MainWindow::MainWindow(QWidget *parent) :
     control.maintenanceRoutine();
 
     // block the possibility to change drinks settins
-    // without a valid card inside
-
-    RFID_s.getIsCardInside();
+    // without a valid card inside (set the variable isCardInside)
+    if (!control.checkCardReader()) {
+        activeUserChoice->setSelectedDrink(NO_DRINK);
+    }
 
     // Now we can design the Main Window
 
@@ -193,59 +193,24 @@ void MainWindow::setMainWindowControlButtonsStyle()
 
 void MainWindow::on_buttonCard_clicked()
 {
-    // this code works with RFID Scanner Simulation
 
-    // if NO card in RFID
-    if (!RFID_s.getIsCardInside())
-    {
+    switch (control.insertCard(card)) {
+    case (VALID_CARD_INSIDE):
         ui->labelCard->show();
-
-        // if card is valid, user can purchase a drink
-        // here starts the main interaction with GUI after card validation
-
-        // After card was inserted, the RFID Scanner provides verification
-        // without instructions outside
-        // modifies private attribute isChoiceAllowed for InteractionUnit
-        if (RFID_s.insertCard(card))
-        {
-            // MODEL
-            display.writeGreetingText(activeUserChoice);
-
-            // VIEW
-            styleLCDGreeting();
-            styleSugarProgressBar();
-            styleMilkProgressBar();
-            styleEjectButton();
-        }
-
-        // if card is not valid, it will ba automaticaly ejected (simulation in Design)
-        // and the purschasing will be ended
-        // the next card can be inserted in RFID
-        else
-        {
-            // MODEL
-            display.writeErrorText();
-            RFID_s.ejectCard();
-
-            // VIEW
-            styleLCDErrorCard();
-            QTimer::singleShot(3000, this, &MainWindow::restartLCDCardEjected);
-            ui->labelCard->hide();
-            styleInsertButton();
-            disableControlButtons();
-        }
-    }
-
-    // if there IS A CARD
-    else
-    {
-        // MODEL
-        RFID_s.ejectCard();
-        delete(activeUserChoice);
-        activeUserChoice = iunit.initUserChoice(card);
-        display.writeDefaultText(activeUserChoice);
-
-        // VIEW
+        styleLCDGreeting();
+        styleSugarProgressBar();
+        styleMilkProgressBar();
+        styleEjectButton();
+        break;
+    case (NONVALID_CARD_INSIDE):
+        ui->labelCard->show();
+        styleLCDErrorCard();
+        QTimer::singleShot(3000, this, &MainWindow::restartLCDCardEjected);
+        ui->labelCard->hide();
+        styleInsertButton();
+        disableControlButtons();
+        break;
+    case (NO_CARD):
         ui->labelCard->hide();
         restartLCD();
         styleInsertButton();
@@ -254,8 +219,76 @@ void MainWindow::on_buttonCard_clicked()
         styleDrinkButtons();
         disableControlButtons();
         ui->buttonBigPortion->setChecked(false);
+        break;
     }
 }
+
+
+//void MainWindow::on_buttonCard_clicked()
+//{
+//    // this code works with RFID Scanner Simulation
+
+//    // if NO card in RFID
+//    if (!control.checkCardReader())
+//    {
+//        ui->labelCard->show();
+
+//        // if card is valid, user can purchase a drink
+//        // here starts the main interaction with GUI after card validation
+
+//        // After card was inserted, the RFID Scanner provides verification
+//        // without instructions outside
+//        // modifies private attribute isChoiceAllowed for InteractionUnit
+//        if (cardScanner.insertCard(card))
+//        {
+//            // MODEL
+//            display.writeGreetingText(activeUserChoice);
+
+//            // VIEW
+//            styleLCDGreeting();
+//            styleSugarProgressBar();
+//            styleMilkProgressBar();
+//            styleEjectButton();
+//        }
+
+//        // if card is not valid, it will ba automaticaly ejected (simulation in Design)
+//        // and the purschasing will be ended
+//        // the next card can be inserted in RFID
+//        else
+//        {
+//            // MODEL
+//            display.writeErrorText();
+//            cardScanner.ejectCard();
+
+//            // VIEW
+//            styleLCDErrorCard();
+//            QTimer::singleShot(3000, this, &MainWindow::restartLCDCardEjected);
+//            ui->labelCard->hide();
+//            styleInsertButton();
+//            disableControlButtons();
+//        }
+//    }
+
+//    // if there IS A CARD
+//    else
+//    {
+//        // MODEL
+//        cardScanner.ejectCard();
+//        delete(activeUserChoice);
+//        activeUserChoice = iunit.initUserChoice(card);
+//        display.writeDefaultText(activeUserChoice);
+
+//        // VIEW
+//        ui->labelCard->hide();
+//        restartLCD();
+//        styleInsertButton();
+//        styleMilkProgressBar();
+//        styleSugarProgressBar();
+//        styleDrinkButtons();
+//        disableControlButtons();
+//        ui->buttonBigPortion->setChecked(false);
+//    }
+//}
 
 void MainWindow::restartLCD()
 {
@@ -294,7 +327,7 @@ void MainWindow::restartLCDCardEjected()
 
 void MainWindow::on_buttonLessSugar_clicked()
 {
-    if (RFID_s.isValidCardInside())
+    if (control.checkCard())
     {
         lessSugar.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
@@ -306,7 +339,7 @@ void MainWindow::on_buttonLessSugar_clicked()
 
 void MainWindow::on_buttonMoreSugar_clicked()
 {
-    if (RFID_s.isValidCardInside())
+    if (control.checkCard())
     {
         moreSugar.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
@@ -318,7 +351,7 @@ void MainWindow::on_buttonMoreSugar_clicked()
 
 void MainWindow::on_buttonLessMilk_clicked()
 {
-    if (RFID_s.isValidCardInside())
+    if (control.checkCard())
     {
         lessMilk.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
@@ -330,7 +363,7 @@ void MainWindow::on_buttonLessMilk_clicked()
 
 void MainWindow::on_buttonMoreMilk_clicked()
 {
-    if (RFID_s.isValidCardInside())
+    if (control.checkCard())
     {
         moreMilk.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
@@ -343,7 +376,7 @@ void MainWindow::on_buttonMoreMilk_clicked()
 
 void MainWindow::styleMilkProgressBar()
 {
-   if (RFID_s.isValidCardInside())
+   if (control.checkCard())
     {
         ui->progressBarMilk->setValue(activeUserChoice->getMilkAmount());
         QString num = QString::number(activeUserChoice->getMilkAmount());
@@ -358,7 +391,7 @@ void MainWindow::styleMilkProgressBar()
 
 void MainWindow::styleSugarProgressBar()
 {
-    if (RFID_s.isValidCardInside())
+    if (control.checkCard())
     {
         ui->progressBarSugar->setValue(activeUserChoice->getSugarAmount());
         QString num = QString::number(activeUserChoice->getSugarAmount());
@@ -440,7 +473,7 @@ void MainWindow::styleDrinkButtons()
 
 void MainWindow::on_buttonCoffee_clicked()
 {
-    if (RFID_s.isValidCardInside())
+    if (control.checkCard())
     {
         // MODEL
         coffee.setSensorState(PRESSED);
@@ -458,7 +491,7 @@ void MainWindow::on_buttonCoffee_clicked()
 
 void MainWindow::on_buttonCappuccino_clicked()
 {
-    if (RFID_s.isValidCardInside())
+    if (control.checkCard())
     {
         // MODEL
         cappuccino.setSensorState(PRESSED);
@@ -476,7 +509,7 @@ void MainWindow::on_buttonCappuccino_clicked()
 
 void MainWindow::on_buttonEspresso_clicked()
 {
-    if (RFID_s.isValidCardInside())
+    if (control.checkCard())
     {
         // MODEL
         espresso.setSensorState(PRESSED);
@@ -494,7 +527,7 @@ void MainWindow::on_buttonEspresso_clicked()
 
 void MainWindow::on_buttonLatteMacchiato_clicked()
 {
-    if (RFID_s.isValidCardInside())
+    if (control.checkCard())
     {
         // MODEL
         latteMacchiato.setSensorState(PRESSED);
@@ -512,7 +545,7 @@ void MainWindow::on_buttonLatteMacchiato_clicked()
 
 void MainWindow::on_buttonCacao_clicked()
 {
-    if (RFID_s.isValidCardInside())
+    if (control.checkCard())
     {
         // MODEL
         cacao.setSensorState(PRESSED);
@@ -530,7 +563,7 @@ void MainWindow::on_buttonCacao_clicked()
 
 void MainWindow::on_buttonHotwater_clicked()
 {
-    if (RFID_s.isValidCardInside())
+    if (control.checkCard())
     {
         // MODEL
         hotWater.setSensorState(PRESSED);
@@ -548,7 +581,7 @@ void MainWindow::on_buttonHotwater_clicked()
 
 void MainWindow::on_buttonBigPortion_clicked()
 {
-    if (RFID_s.isValidCardInside())
+    if (control.checkCard())
     {
 
         bigPortion.setSensorState(PRESSED);
@@ -649,7 +682,7 @@ void MainWindow::styleCupWithDrink()
 void MainWindow::styleCardHolder()
 {
 
-    switch (RFID_s.InitRFID()) {
+    switch (cardScanner.InitRFID()) {
     case VALID_CARD_INSIDE:
                     ui->labelCard->show();
                     styleEjectButton();

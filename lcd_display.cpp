@@ -53,7 +53,7 @@ void LCD_Display::writeDefaultText(UserChoice *activeUserChoice)
     setTitle("Please insert card");
     if (activeUserChoice->getSelectedDrink() == NO_DRINK)
     {
-        setDrinkName("Nothing");
+        setDrinkName("NO_DRINK");
         setPrice(0.0);
     }
     else
