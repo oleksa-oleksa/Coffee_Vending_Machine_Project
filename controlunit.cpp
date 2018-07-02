@@ -6,12 +6,6 @@ ControlUnit::ControlUnit()
     activeUserChoice = NULL;
 }
 
-void ControlUnit::linkUserChoice(UserChoice *activeUserChoice)
-{
-    qDebug() << "CONTROL_UNIT: UserChoice linked";
-    this->activeUserChoice = activeUserChoice;
-}
-
 void ControlUnit::linkInteractionUnit(InteractionUnit *iunit)
 {
     qDebug() << "CONTROL_UNIT: InteractionUnit linked";
@@ -66,7 +60,6 @@ CardHolderState ControlUnit::insertCard(Card *card)
         // modifies private attribute isChoiceAllowed for InteractionUnit
         if (cardScanner->insertCard(card))
         {
-            // MODEL
             display->writeGreetingText(activeUserChoice);
 
             return VALID_CARD_INSIDE;
@@ -77,7 +70,6 @@ CardHolderState ControlUnit::insertCard(Card *card)
         // the next card can be inserted in RFID
         else
         {
-            // MODEL
             display->writeErrorText();
             cardScanner->ejectCard();
 
@@ -88,14 +80,11 @@ CardHolderState ControlUnit::insertCard(Card *card)
     // if there IS A CARD
     else
     {
-        // MODEL
         cardScanner->ejectCard();
-        delete(::activeUserChoice);
-        ::activeUserChoice = iunit->initUserChoice(card);
-        linkUserChoice(activeUserChoice);
-        ::activeUserChoice->setDefaultChoice();
-        display->writeDefaultText(::activeUserChoice);
-        this->activeUserChoice = ::activeUserChoice;
+        delete(activeUserChoice);
+        activeUserChoice = iunit->initUserChoice(card);
+        activeUserChoice->setDefaultChoice();
+        display->writeDefaultText(activeUserChoice);
 
         return NO_CARD;
     }
@@ -255,6 +244,10 @@ bool ControlUnit::checkStartConditions()
     }
 }
 
+void ControlUnit::prepareSelectedDrink()
+{
+    //while (motor[0]->isRotating() && motor[1]->isRotating())
+}
 
 
 void ControlUnit::connectRFID(RFID_Scanner *sensor)
@@ -287,10 +280,10 @@ void ControlUnit::connectLCD(LCD_Display *actuator)
 {
     display = actuator;
 }
-void ControlUnit::connectMotor(DC_Motor *actuator[], int numOfActuators)
+void ControlUnit::connectMotor(DC_Motor *actuator, int numOfActuators)
 {
   for(int i = 0; i < numOfActuators; i++) {
-      motor[i] = actuator[i];
+      motor[i] = &actuator[i];
   }
 }
 

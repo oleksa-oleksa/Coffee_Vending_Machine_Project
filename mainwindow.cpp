@@ -105,7 +105,6 @@ MainWindow::MainWindow(QWidget *parent) :
     activeUserChoice = iunit.initUserChoice(card);
 
     // links to ControlUnit
-    control.linkUserChoice(activeUserChoice);
     control.linkInteractionUnit(&iunit);
 
     // Connect the sensors
@@ -118,7 +117,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // connect the actuators
     control.connectLCD(&display);
-    //control.connectMotor(&motor, 4);
+    control.connectMotor(&motor[0], 4);
     control.connectHeater(&heater);
     control.connectMilkMaker(&milkMaker);
     control.connectBrewGroup(&brew);

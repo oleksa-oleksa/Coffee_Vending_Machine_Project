@@ -32,7 +32,6 @@ enum BrewStatus {
 class ControlUnit
 {
     private:
-        UserChoice *activeUserChoice;
         InteractionUnit *iunit;
 
         RFID_Scanner *cardScanner;
@@ -53,7 +52,6 @@ class ControlUnit
 
         ControlUnit();
 
-        void linkUserChoice(UserChoice *activeUserChoice);
         void linkInteractionUnit(InteractionUnit *iunit);
 
         void setDisplayBacklight();
@@ -80,7 +78,7 @@ class ControlUnit
         void connectBrightnessSensor(BrightnessSensor *sensor);
 
         void connectLCD(LCD_Display *actuator);
-        void connectMotor(DC_Motor *actuator[], int numOfActuators);
+        void connectMotor(DC_Motor *actuator, int numOfActuators);
         void connectHeater(Waterheater *actuator);
         void connectMilkMaker(Milkmaker *actuator);
         void connectBrewGroup(Brewgroup *actuator);

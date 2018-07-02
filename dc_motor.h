@@ -1,8 +1,10 @@
 #ifndef DC_MOTOR_H
 #define DC_MOTOR_H
 #include "actuator.h"
+#include "ingredient.h"
+#include <ctime>
 
-enum Motors {
+enum MotorType {
     MOTOR_SUGAR,
     MOTOR_MILK,
     MOTOR_COFFEE,
@@ -11,10 +13,14 @@ enum Motors {
 
 class DC_Motor : public Actuator
 {
-public:
-    DC_Motor();
-    virtual ~DC_Motor();
-    //bool rotate(DC_Motor motor);
+    private:
+        time_t stopRotationAt;
+
+    public:
+        DC_Motor();
+        virtual ~DC_Motor();
+        void rotate(int miliseconds);
+        bool isRotating();
 };
 
 #endif // DC_MOTOR_H
