@@ -35,10 +35,20 @@ Button bigPortion;
 Button cancel;
 Button start;
 
+ControlUnit control;
+
 RFID_Scanner RFID_s;
-LCD_Display display;
 Flowmeter flow;
 OpticalSensor opticalSensor(&flow);
+TemperaturSensor temperatureSensor;
+
+LCD_Display display;
+DC_Motor motor[4];
+Waterheater heater;
+Milkmaker milkMaker;
+
+Brewgroup brew;
+
 //ControlUnit control;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -67,7 +77,7 @@ MainWindow::MainWindow(QWidget *parent) :
     bankAccount = card->getAccount()->getBankAccount();
 
     // Note: to simulate invalid card
-    // 1: Comment all card, ba, acc and person lins
+    // 1: Comment all card, ba, acc and person lines
     // 2. create a new random Card *card
     // 3. run programm
 
@@ -92,6 +102,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // activeUserChoice has the selected drink with  price and recipe
     // the information for preparation will be transfered to ControlUnit with "Start" button
     activeUserChoice = iunit.initUserChoice(card);
+
+    // link UserChoice to ControlUnit
+    control.linkUserChoice(activeUserChoice);
 
     // block the possibility to change drinks settins
     // without a valid card inside

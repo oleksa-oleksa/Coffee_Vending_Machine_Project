@@ -1,46 +1,70 @@
+// Implemented by Oleksandra Baga
 #include "controlunit.h"
 
 ControlUnit::ControlUnit()
 {
-
+    activeUserChoice = NULL;
 }
 
-bool ControlUnit::checkCup()
+void ControlUnit::linkUserChoice(UserChoice *activeUserChoice)
 {
-    if ( cupsensor.getProximity() < NO_CUP_PROXIMITY )
-    {
-        qDebug() << "Cup detected";
-        return true;
-    }
-    else
-    {
-        qDebug() << "No Cup detected";
-        return false;
-    }
+    qDebug() << "CONTROL_UNIT: UserChoice linked";
+    this->activeUserChoice = activeUserChoice;
+}
+void ControlUnit::connectRFID(RFID_Scanner *sensor)
+{
+    RFID_s = sensor;
+}
+void ControlUnit::connectOptical(OpticalSensor *sensor)
+{
+    opticalSensor = sensor;
+}
+void ControlUnit::connectPressure(PressureSensor *sensor)
+{
+    pressureSensor = sensor;
+}
+void ControlUnit::connectTemperatur(TemperaturSensor *sensor)
+{
+    temperatureSensor = sensor;
+}
+
+void ControlUnit::connectFlow(Flowmeter *sensor)
+{
+    flow = sensor;
+}
+
+void ControlUnit::connectLCD(LCD_Display *actuator)
+{
+    display = actuator;
+}
+void ControlUnit::connectMotor(DC_Motor *actuator[4])
+{
+    motor[0] = actuator[0];
+    motor[1] = actuator[1];
+    motor[2] = actuator[2];
+    motor[3] = actuator[3];
+}
+void ControlUnit::connectHeater(Waterheater *actuator)
+{
+    heater = actuator;
+}
+void ControlUnit::connectTemperatur(Milkmaker *actuator)
+{
+    milkMaker = actuator;
+}
+
+
+bool ControlUnit::checkCupHolder()
+{
+
 }
 
 bool ControlUnit::checkIngredients()
 {
-// Get fillevels for Debug
-    if ( fillevel[0].getOpticalValue() )
-        qDebug() << "Sugar empty";
-     if ( fillevel[1].getOpticalValue() )
-        qDebug() << "Milk empty";
-    if ( fillevel[2].getOpticalValue() )
-        qDebug() << "Coffee empty: ";
-    if ( fillevel[3].getOpticalValue() )
-        qDebug() << "Cacao empty:  ";
-
-// Return false if one is empty
-    for (int i=0; i<3; i++)
-    {
-        if (fillevel[i].getOpticalValue())
-            return false;
-    }
 
 }
 
-bool ControlUnit::checkCard( Card& usercard )
+bool ControlUnit::checkCardHolder()
 {
     //return rfid.getRfidValidation(usercard);
 }
@@ -50,34 +74,27 @@ void ControlUnit::maintenanceRoutine()
     checkIngredients();
 
 // Set sensor and actuator states OK if UNDEFINED
-    for (int i=0; i<3; i++)
-    {
-        if (fillevel[i].getSensorState() == UNDEFINED)
-            fillevel[i].setSensorState(OK);
-        //if (motor[i].getActuatorState() == UNDEFINED)
-          //  motor[i].setActuatorState(OK);
-    }
 
-    if (cupsensor.getSensorState() == UNDEFINED)
-        cupsensor.setSensorState(OK);
+    if (opticalSensor->getSensorState() == UNDEFINED)
+        opticalSensor->setSensorState(OK);
 
-    if (temp.getSensorState() == UNDEFINED)
-        temp.setSensorState(OK);
+    if (temperatureSensor->getSensorState() == UNDEFINED)
+        temperatureSensor->setSensorState(OK);
 
-    if (flow.getSensorState() == UNDEFINED)
-        flow.setSensorState(OK);
+    if (flow->getSensorState() == UNDEFINED)
+        flow->setSensorState(OK);
 
-    if (rfid.getSensorState() == UNDEFINED)
-        rfid.setSensorState(OK);
+    if (RFID_s->getSensorState() == UNDEFINED)
+        RFID_s->setSensorState(OK);
 
-    //if (heater.getActuatorState() == UNDEFINED)
-    //    heater.setActuatorState(OK);
+    if (heater->getActuatorState() == UNDEFINED)
+        heater->setActuatorState(OK);
 
-   // if (brew.getActuatorState() == UNDEFINED)
-   //     brew.setActuatorState(OK);
+    if (brew->getActuatorState() == UNDEFINED)
+        brew->setActuatorState(OK);
 
-   // if (milk.getActuatorState() == UNDEFINED)
-   //     milk.setActuatorState(OK);
+    if (milkMaker->getActuatorState() == UNDEFINED)
+        milkMaker->setActuatorState(OK);
 
     qDebug() << "ControlUnit: Checking ingredients and state done.";
 }

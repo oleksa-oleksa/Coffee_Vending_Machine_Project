@@ -33,3 +33,12 @@ void Sensor::setSensorState(State newState)
     if (sensorState != NULL)
         sensorState = newState;
 }
+
+void Sensor::connetToControlUnit(SensorType sensor)
+{
+    switch (sensor) {
+
+    //case (RFID):
+
+    }
+}

@@ -41,4 +41,6 @@ class UserChoice
         QString printSelectedDrink();
 };
 
+extern UserChoice *activeUserChoice;
+
 #endif // USERCHOICE_H

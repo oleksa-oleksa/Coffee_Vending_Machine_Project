@@ -1,8 +1,8 @@
+// Implemented by Oleksandra Baga
 #ifndef CONTROLUNIT_H
 #define CONTROLUNIT_H
 
 #include "opticalsensor.h"
-#include "proximitysensor.h"
 #include "dc_motor.h"
 #include "temperatursensor.h"
 #include "waterheater.h"
@@ -13,6 +13,9 @@
 #include "card.h"
 #include <QDebug>
 #include "userchoice.h"
+#include "ingredient.h"
+#include "pressuresensor.h"
+#include "lcd_display.h"
 
 #define NO_CUP_PROXIMITY 100
 
@@ -26,38 +29,52 @@ enum BrewStatus {
 class ControlUnit
 {
     private:
-        UserChoice *activeUserChoice; // obtain components
-                                   // from this pointer
-                                    // sugar milk temperature...
-        OpticalSensor fillevel[4];
-        ProximitySensor cupsensor;
-        DC_Motor motor[4];
-        TemperaturSensor temp;
-        Waterheater heater;
-        Flowmeter flow;
-        Brewgroup brew;
-        Milkmaker milk;
-        RFID_Scanner rfid;
+        UserChoice *activeUserChoice;
 
-        bool checkIngredients();
-        bool checkCup();
-        bool checkCard( Card& );
-        // prepare drink with actuators and sensors!
-        bool prepareSelectedDrink(UserChoice *selectedDrink);
+        RFID_Scanner *RFID_s;
+        OpticalSensor *opticalSensor;
+        PressureSensor *pressureSensor;
+        TemperaturSensor *temperatureSensor;
+        Flowmeter *flow;
 
-        ControlUnit();
-        ControlUnit(ControlUnit const&);              // Don't Implement.
-        ControlUnit& operator=(ControlUnit const&); // Don't implement
+        LCD_Display *display;
+        DC_Motor *motor[4];
+        Waterheater *heater;
+        Milkmaker *milkMaker;
+
+        Brewgroup *brew;
 
     public:
 
-        static ControlUnit& getInstance()
-        {
-            static ControlUnit instance;
-            return instance;
-        }
+        ControlUnit();
+
+        void linkUserChoice(UserChoice *activeUserChoice);
+        void connectRFID(RFID_Scanner *sensor);
+        void connectOptical(OpticalSensor *sensor);
+        void connectPressure(PressureSensor *sensor);
+        void connectTemperatur(TemperaturSensor *sensor);
+        void connectFlow(Flowmeter *sensor);
+
+        void connectLCD(LCD_Display *actuator);
+        void connectMotor(DC_Motor *actuator[4]);
+        void connectHeater(Waterheater *actuator);
+        void connectTemperatur(Milkmaker *actuator);
+
+
+        bool checkCupHolder();
+        bool checkCardHolder();
 
         void maintenanceRoutine();
+        bool checkIngredients();
+        void blockCapHolder();
+        void abortPreparation();
+        void prepareSelectedDrink();
+        void unblockCupHolder();
+        void writeFinalMessage();
+        void writePreparationMessage();
+
+
 };
+extern ControlUnit control;
 
 #endif // CONTROLUNIT_H

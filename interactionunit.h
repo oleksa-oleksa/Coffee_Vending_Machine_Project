@@ -72,4 +72,6 @@ class InteractionUnit
         Button *getStart();
 };
 
+extern InteractionUnit iunit;
+
 #endif // INTERACTIONUNIT_H

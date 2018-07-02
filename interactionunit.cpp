@@ -62,6 +62,7 @@ InteractionUnit *InteractionUnit::initInteractionUnit(Button *moreSugar,
 UserChoice *InteractionUnit::initUserChoice(Card *card)
 {
     choice = new UserChoice(card);
+    qDebug() << "INTERACTION_UNIT: UserChoice created";
     return choice;
 }
 

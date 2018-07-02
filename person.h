@@ -52,5 +52,6 @@ class Person
 };
 
 typedef std::vector<Person> People;
+extern Person *activePerson;
 
 #endif

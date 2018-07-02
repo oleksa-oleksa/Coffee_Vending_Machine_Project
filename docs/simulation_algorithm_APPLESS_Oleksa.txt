@@ -50,7 +50,7 @@ bankAccount = card->getAccount()->getBankAccount();
 
 
 // Note: to simulate invalid card
-// 1: Comment all card, ba, acc and person lins
+// 1: Comment all card, ba, acc and person lines
 // 2. create a new random Card *card
 // 3. run program
 

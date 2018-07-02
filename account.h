@@ -54,5 +54,6 @@ class Account
 };
 
 typedef std::vector<Account> Accounts;
+extern Account *activeAccount;
 
 #endif // ACCOUNT_H

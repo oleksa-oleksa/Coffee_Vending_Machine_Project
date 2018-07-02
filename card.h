@@ -42,4 +42,6 @@ class Card
 
 typedef std::vector<Card> Cards;
 
+extern Card *card;
+
 #endif // CARD_H

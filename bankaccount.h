@@ -43,6 +43,6 @@ class BankAccount
 };
 
 typedef std::vector<BankAccount> BAccounts;
-
+extern BankAccount *bankAccount;
 
 #endif // BANKACCOUNT_H

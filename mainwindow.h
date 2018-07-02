@@ -63,11 +63,5 @@ private:
     Ui::MainWindow *ui;
 };
 
-extern Person *activePerson;
-extern Account *activeAccount;
-extern Card *card;
-extern BankAccount *bankAccount;
-extern InteractionUnit iunit;
-extern UserChoice *activeUserChoice;
 
 #endif // MAINWINDOW_H
