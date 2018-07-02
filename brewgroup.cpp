@@ -3,10 +3,9 @@
 
 Brewgroup::Brewgroup()
 {
-    actuatorType = BREWGROUP;
     actuatorState = UNDEFINED;
-    //actuatorduration =
-    isOn = false;
+    actuatorType = BREWGROUP;
+
 }
 
 Brewgroup::Brewgroup(bool isOn)

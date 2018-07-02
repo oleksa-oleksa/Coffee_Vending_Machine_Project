@@ -3,6 +3,7 @@
 #include <string>
 #include "state.h"
 #include "actuatortype.h"
+#include <QString>
 
 class Actuator
 {
@@ -20,6 +21,8 @@ class Actuator
         virtual void setActuatorState(State actuatorState);
         virtual void setActuatorDuration(unsigned int actuatorDuration);
         virtual void setActuatorType(ActuatorType actuatorType);
+        QString printActuatorState();
+        QString printActuatorType();
 };
 
 #endif // ACTUATOR_H

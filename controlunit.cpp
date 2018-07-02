@@ -13,7 +13,7 @@ void ControlUnit::linkUserChoice(UserChoice *activeUserChoice)
 }
 void ControlUnit::connectRFID(RFID_Scanner *sensor)
 {
-    RFID_s = sensor;
+    cardScanner = sensor;
 }
 void ControlUnit::connectOptical(OpticalSensor *sensor)
 {
@@ -28,6 +28,10 @@ void ControlUnit::connectTemperatur(TemperaturSensor *sensor)
     temperatureSensor = sensor;
 }
 
+void ControlUnit::connectBrightnessSensor(BrightnessSensor *sensor)
+{
+    brightSensor = sensor;
+}
 void ControlUnit::connectFlow(Flowmeter *sensor)
 {
     flow = sensor;
@@ -37,36 +41,76 @@ void ControlUnit::connectLCD(LCD_Display *actuator)
 {
     display = actuator;
 }
-void ControlUnit::connectMotor(DC_Motor *actuator[4])
+void ControlUnit::connectMotor(DC_Motor *actuator[], int numOfActuators)
 {
-    motor[0] = actuator[0];
-    motor[1] = actuator[1];
-    motor[2] = actuator[2];
-    motor[3] = actuator[3];
+  for(int i = 0; i < numOfActuators; i++) {
+      motor[i] = actuator[i];
+  }
 }
+
 void ControlUnit::connectHeater(Waterheater *actuator)
 {
     heater = actuator;
 }
-void ControlUnit::connectTemperatur(Milkmaker *actuator)
+void ControlUnit::connectMilkMaker(Milkmaker *actuator)
 {
     milkMaker = actuator;
 }
 
-
-bool ControlUnit::checkCupHolder()
+void ControlUnit::connectBrewGroup(Brewgroup *actuator)
 {
-
+    brew = actuator;
 }
+
 
 bool ControlUnit::checkIngredients()
 {
 
 }
 
-bool ControlUnit::checkCardHolder()
+bool ControlUnit::checkStartConditions()
 {
-    //return rfid.getRfidValidation(usercard);
+    // get Optical Sensor Measurements
+    if (opticalSensor->getOpticalFlowSensorsMeasurements() == NO_CUP) {
+        qDebug() << "Place your cup first!";
+        return false;
+    }
+    else if (opticalSensor->getOpticalFlowSensorsMeasurements() == FULL_CUP) {
+        qDebug() << "Take your cup with prepared drink before order a new one! :)";
+        return false;
+    }
+
+    else if (opticalSensor->getOpticalFlowSensorsMeasurements() == EMPTY_CUP) {
+        // PASSED
+        qDebug() << "Cup is OK, liquid can flow!";
+    }
+
+    // check if drink is preselected
+    if (activeUserChoice->getSelectedDrink() == NO_DRINK) {
+        qDebug() << "Select drink first!";
+        return false;
+    }
+
+    // check if card is still in the card holder
+    if (cardScanner->isValidCardInside() != VALID_CARD_INSIDE)
+    {
+        qDebug() << "Card missed, please return your card back!";
+        return false;
+    }
+
+    // if it is possible to get here, the payment process could start
+    if (activeUserChoice->payDrink())
+    {
+        qDebug() << "We can start prepare drink! Yahoo!";
+        qDebug() << "You can purchase next drink after this one will be prepared!";
+        return true;
+    }
+    else
+    {
+        qDebug() << "Payment error!";
+        qDebug() << "Take your card!";
+        return false;
+    }
 }
 
 void ControlUnit::maintenanceRoutine()
@@ -75,17 +119,32 @@ void ControlUnit::maintenanceRoutine()
 
 // Set sensor and actuator states OK if UNDEFINED
 
-    if (opticalSensor->getSensorState() == UNDEFINED)
-        opticalSensor->setSensorState(OK);
-
-    if (temperatureSensor->getSensorState() == UNDEFINED)
-        temperatureSensor->setSensorState(OK);
+    if (cardScanner->getSensorState() == UNDEFINED)
+        cardScanner->setSensorState(OK);
 
     if (flow->getSensorState() == UNDEFINED)
         flow->setSensorState(OK);
 
-    if (RFID_s->getSensorState() == UNDEFINED)
-        RFID_s->setSensorState(OK);
+    if (opticalSensor->getSensorState() == UNDEFINED)
+        opticalSensor->setSensorState(OK);
+
+    if (pressureSensor->getSensorState() == UNDEFINED)
+        pressureSensor->setSensorState(OK);
+
+    if (temperatureSensor->getSensorState() == UNDEFINED)
+        temperatureSensor->setSensorState(OK);
+
+    if (brightSensor->getSensorState() == UNDEFINED)
+        brightSensor->setSensorState(OK);
+
+    if (display->getActuatorState() == UNDEFINED)
+        display->setActuatorState(OK);
+
+//    for (int i = 0; i < AMOUNT_OF_MOTORS; i++)
+//    {
+//        if (motor[i]->getActuatorState() == UNDEFINED)
+//            motor[i]->setActuatorState(OK);
+//    }
 
     if (heater->getActuatorState() == UNDEFINED)
         heater->setActuatorState(OK);
@@ -96,5 +155,5 @@ void ControlUnit::maintenanceRoutine()
     if (milkMaker->getActuatorState() == UNDEFINED)
         milkMaker->setActuatorState(OK);
 
-    qDebug() << "ControlUnit: Checking ingredients and state done.";
+    qDebug() << "CONTROL_UNIT: Checking Sensors and Actuatots done. State is OK.";
 }

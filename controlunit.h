@@ -16,8 +16,10 @@
 #include "ingredient.h"
 #include "pressuresensor.h"
 #include "lcd_display.h"
+#include "card.h"
+#include "brightnesssensor.h"
 
-#define NO_CUP_PROXIMITY 100
+#define AMOUNT_OF_MOTORS 4
 
 enum BrewStatus {
     BREW_NOT_STARTED,
@@ -31,11 +33,12 @@ class ControlUnit
     private:
         UserChoice *activeUserChoice;
 
-        RFID_Scanner *RFID_s;
+        RFID_Scanner *cardScanner;
+        Flowmeter *flow;
         OpticalSensor *opticalSensor;
         PressureSensor *pressureSensor;
         TemperaturSensor *temperatureSensor;
-        Flowmeter *flow;
+        BrightnessSensor *brightSensor;
 
         LCD_Display *display;
         DC_Motor *motor[4];
@@ -50,22 +53,21 @@ class ControlUnit
 
         void linkUserChoice(UserChoice *activeUserChoice);
         void connectRFID(RFID_Scanner *sensor);
+        void connectFlow(Flowmeter *sensor);
         void connectOptical(OpticalSensor *sensor);
         void connectPressure(PressureSensor *sensor);
         void connectTemperatur(TemperaturSensor *sensor);
-        void connectFlow(Flowmeter *sensor);
+        void connectBrightnessSensor(BrightnessSensor *sensor);
 
         void connectLCD(LCD_Display *actuator);
-        void connectMotor(DC_Motor *actuator[4]);
+        void connectMotor(DC_Motor *actuator[], int numOfActuators);
         void connectHeater(Waterheater *actuator);
-        void connectTemperatur(Milkmaker *actuator);
-
-
-        bool checkCupHolder();
-        bool checkCardHolder();
+        void connectMilkMaker(Milkmaker *actuator);
+        void connectBrewGroup(Brewgroup *actuator);
 
         void maintenanceRoutine();
         bool checkIngredients();
+        bool checkStartConditions();
         void blockCapHolder();
         void abortPreparation();
         void prepareSelectedDrink();

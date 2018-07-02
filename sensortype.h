@@ -8,8 +8,8 @@ enum SensorType
     PRESSURE,
     TEMPERATURE,
     FLOW,
-    BUTTON,
     BRIGHTNESS,
+    BUTTON,
     PROXIMITY
 };
 

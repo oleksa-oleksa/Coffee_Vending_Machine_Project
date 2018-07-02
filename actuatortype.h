@@ -7,7 +7,6 @@ enum ActuatorType
     LCD,
     MILKMAKER,
     WATERHEATER,
-    Led,
     BREWGROUP
 };
 

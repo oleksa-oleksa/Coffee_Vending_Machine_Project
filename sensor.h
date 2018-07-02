@@ -21,8 +21,8 @@ class Sensor
         virtual void setSensorType(SensorType);
         virtual void setSensorState(State);
 
-        virtual void connetToControlUnit(SensorType sensor);
-
+        QString printSensorState();
+        QString printSensorType();
 
 };
 

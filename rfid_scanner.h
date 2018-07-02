@@ -23,7 +23,7 @@ class RFID_Scanner : public Sensor
         RFID_Scanner();
         virtual ~RFID_Scanner();
 
-        bool setIsCardInside(bool isCardInside);
+        void setIsCardInside(bool isCardInside);
         bool getIsCardInside();
         bool getRfidValidation(Card *userCard);
         void ejectCard();

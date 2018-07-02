@@ -18,7 +18,7 @@ RFID_Scanner::~RFID_Scanner()
 
 }
 
-bool RFID_Scanner::setIsCardInside(bool isCardInside)
+void RFID_Scanner::setIsCardInside(bool isCardInside)
 {
     this->isCardInside = isCardInside;
 }

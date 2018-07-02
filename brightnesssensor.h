@@ -15,4 +15,6 @@ class BrightnessSensor : public Sensor
         unsigned int getBrightness();
 };
 
+extern BrightnessSensor brightSensor;
+
 #endif // BRIGHTNESSSENSOR_H

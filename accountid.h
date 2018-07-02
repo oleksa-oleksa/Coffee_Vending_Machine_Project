@@ -14,6 +14,8 @@ class AccountID
         AccountID(std::string id);
         AccountID();
         QString toQstring();
+        QString printActuatorState();
+
 };
 
 #endif // ACCOUNTID_H

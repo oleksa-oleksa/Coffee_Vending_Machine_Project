@@ -40,7 +40,9 @@ ControlUnit control;
 RFID_Scanner RFID_s;
 Flowmeter flow;
 OpticalSensor opticalSensor(&flow);
+PressureSensor pressureSensor;
 TemperaturSensor temperatureSensor;
+BrightnessSensor brightSensor;
 
 LCD_Display display;
 DC_Motor motor[4];
@@ -106,8 +108,27 @@ MainWindow::MainWindow(QWidget *parent) :
     // link UserChoice to ControlUnit
     control.linkUserChoice(activeUserChoice);
 
+    // Connect the sensors
+    control.connectRFID(&RFID_s);
+    control.connectFlow(&flow);
+    control.connectOptical(&opticalSensor);
+    control.connectPressure(&pressureSensor);
+    control.connectTemperatur(&temperatureSensor);
+    control.connectBrightnessSensor(&brightSensor);
+
+    // connect the actuators
+    control.connectLCD(&display);
+    //control.connectMotor(&motor, 4);
+    control.connectHeater(&heater);
+    control.connectMilkMaker(&milkMaker);
+    control.connectBrewGroup(&brew);
+
+    // check sensors and actuators
+    control.maintenanceRoutine();
+
     // block the possibility to change drinks settins
     // without a valid card inside
+
     RFID_s.getIsCardInside();
 
     // Now we can design the Main Window
@@ -579,53 +600,7 @@ void MainWindow::on_buttonCancel_clicked()
 
 void MainWindow::on_buttonStart_clicked()
 {
-    // get Optical Sensor Measurements
-    if (opticalSensor.getOpticalFlowSensorsMeasurements() == NO_CUP) {
-        qDebug() << "Place your cup first!";
-        return;
-    }
-    else if (opticalSensor.getOpticalFlowSensorsMeasurements() == FULL_CUP) {
-        qDebug() << "Take your cup with prepared drink before order a new one! :)";
-        return;
-    }
-
-    else if (opticalSensor.getOpticalFlowSensorsMeasurements() == EMPTY_CUP) {
-        // PASSED
-        qDebug() << "Cup is OK, liquid can flow!";
-    }
-
-    // check if drink is preselected
-    if (activeUserChoice->getSelectedDrink() == NO_DRINK) {
-        qDebug() << "Select drink first!";
-        return;
-    }
-
-    // check if card is still in the card holder
-    if (RFID_s.isValidCardInside() != VALID_CARD_INSIDE)
-    {
-        qDebug() << "Card missed, please return your card back!";
-        return;
-    }
-
-    // if it is possible to get here, the payment process could start
-    if (activeUserChoice->payDrink())
-    {
-        qDebug() << "We can start prepare drink! Yahoo!";
-        qDebug() << "You can purchase next drink after this one will be prepared!";
-        //control.prepareDrink();
-    }
-    else
-    {
-        qDebug() << "Payment error!";
-        qDebug() << "The card is ejected automatically, take your card!";
-
-        // here eject card
-        RFID_s.ejectCard();
-        delete(activeUserChoice);
-        activeUserChoice = iunit.initUserChoice(card);
-        display.writeDefaultText(activeUserChoice);
-        return;
-    }
+    control.checkStartConditions();
 }
 
 void MainWindow::styleEmptyCupHolder()
