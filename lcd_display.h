@@ -7,6 +7,17 @@
 
 using namespace std;
 
+enum LCD_Message {
+    DEFAULT,
+    GREETING,
+    USER_CHOICE,
+    ERROR,
+    WAIT_PLEASE,
+    TAKE_YOUR_DRINK,
+    SYSTEM_ERROR
+};
+
+
 class LCD_Display : public Actuator
 {
     private:
@@ -14,6 +25,7 @@ class LCD_Display : public Actuator
         QString title;
         QString drinkName;
         double price;
+        bool isBacklit;
 
     public:
         LCD_Display();
@@ -25,6 +37,8 @@ class LCD_Display : public Actuator
         void setDrinkName(QString drinkName);
         double getPrice();
         void setPrice(double price);
+        void setBacklight(bool isBacklit);
+        bool getBacklight();
 
         void writeDefaultText(UserChoice *activeUserChoice);
         void writeGreetingText(UserChoice *activeUserChoice);

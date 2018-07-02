@@ -48,6 +48,16 @@ void LCD_Display::setPrice(double price)
     qDebug() << "LCD: You have to pay " << price << "for your drink!";
 }
 
+
+void LCD_Display::setBacklight(bool isBacklit)
+{
+    this->isBacklit = isBacklit;
+}
+bool LCD_Display::getBacklight()
+{
+    return isBacklit;
+}
+
 void LCD_Display::writeDefaultText(UserChoice *activeUserChoice)
 {
     setTitle("Please insert card");

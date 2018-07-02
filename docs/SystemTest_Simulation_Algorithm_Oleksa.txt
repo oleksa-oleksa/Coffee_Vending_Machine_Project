@@ -107,25 +107,13 @@ control.connectHeater(&heater);
 control.connectMilkMaker(&milkMaker);
 control.connectBrewGroup(&brew);
 
-// check sensors and actuators
+ // check sensors and actuators
 control.maintenanceRoutine();
+control.onStartInit();
 
-// block the possibility to change drinks settins
-// without a valid card inside (set the variable isCardInside)
-if (!control.checkCardReader()) {
-     activeUserChoice->setSelectedDrink(NO_DRINK);
-}
-
-//=============================================================
-// Now we can simulate the Main Window
-
+//============================================================
 // Simulate LCD:
 display.writeDefaultText(activeUserChoice);
-
-// Sumulate no cup in holder
-opticalSensor.setDistanceToObject(10);
-// test cup absence simulation
-opticalSensor.getOpticalFlowSensorsMeasurements();
 
 
 //=============================================================

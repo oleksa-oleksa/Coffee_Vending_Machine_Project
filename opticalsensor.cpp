@@ -81,4 +81,3 @@ CupHolderState OpticalSensor::getOpticalFlowSensorsMeasurements()
         return NO_CUP;
     }
 }
-

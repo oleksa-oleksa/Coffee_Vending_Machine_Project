@@ -56,6 +56,22 @@ class ControlUnit
         void linkUserChoice(UserChoice *activeUserChoice);
         void linkInteractionUnit(InteractionUnit *iunit);
 
+        void setDisplayBacklight();
+        void onStartInit();
+        bool checkCardReader();
+        bool checkCard();
+        CardHolderState insertCard(Card *card);
+        CupHolderState checkCupHolder();
+        void writeMessageLCD(LCD_Message message);
+
+        void maintenanceRoutine();
+        bool checkIngredients();
+        bool checkStartConditions();
+        void blockCapHolder();
+        void abortPreparation();
+        void prepareSelectedDrink();
+        void unblockCupHolder();
+
         void connectRFID(RFID_Scanner *sensor);
         void connectFlow(Flowmeter *sensor);
         void connectOptical(OpticalSensor *sensor);
@@ -69,20 +85,6 @@ class ControlUnit
         void connectMilkMaker(Milkmaker *actuator);
         void connectBrewGroup(Brewgroup *actuator);
 
-        bool checkCardReader();
-        bool checkCard();
-        CardHolderState insertCard(Card *card);
-
-
-        void maintenanceRoutine();
-        bool checkIngredients();
-        bool checkStartConditions();
-        void blockCapHolder();
-        void abortPreparation();
-        void prepareSelectedDrink();
-        void unblockCupHolder();
-        void writeFinalMessage();
-        void writePreparationMessage();
 
 
 };

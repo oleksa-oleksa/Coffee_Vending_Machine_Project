@@ -80,6 +80,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // 1: Comment all card, ba, acc and person lines
     // 2. create a new random Card *card
     // 3. run programm
+    //Card *card;
 
     //======================================================================
     // and finaly: UserChoice initialisation in InteractionUnit in order
@@ -124,22 +125,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // check sensors and actuators
     control.maintenanceRoutine();
-
-    // block the possibility to change drinks settins
-    // without a valid card inside (set the variable isCardInside)
-    if (!control.checkCardReader()) {
-        activeUserChoice->setSelectedDrink(NO_DRINK);
-    }
+    control.onStartInit();
 
     // Now we can design the Main Window
-
     // MODEL
-    display.writeDefaultText(activeUserChoice);
+    control.writeMessageLCD(DEFAULT);
 
     // VIEW
     restartLCD();
-    opticalSensor.setDistanceToObject(10);
-    opticalSensor.getOpticalFlowSensorsMeasurements();
     setMainWindowControlButtonsStyle();
 }
 
@@ -203,14 +196,19 @@ void MainWindow::on_buttonCard_clicked()
         styleEjectButton();
         break;
     case (NONVALID_CARD_INSIDE):
+        qDebug() << "We are here!";
         ui->labelCard->show();
+        control.writeMessageLCD(ERROR);
         styleLCDErrorCard();
         QTimer::singleShot(3000, this, &MainWindow::restartLCDCardEjected);
-        ui->labelCard->hide();
         styleInsertButton();
         disableControlButtons();
         break;
     case (NO_CARD):
+//        activeUserChoice = iunit.initUserChoice(card);
+//        control.linkUserChoice(activeUserChoice);
+//        control.writeMessageLCD(DEFAULT);
+
         ui->labelCard->hide();
         restartLCD();
         styleInsertButton();
@@ -222,73 +220,6 @@ void MainWindow::on_buttonCard_clicked()
         break;
     }
 }
-
-
-//void MainWindow::on_buttonCard_clicked()
-//{
-//    // this code works with RFID Scanner Simulation
-
-//    // if NO card in RFID
-//    if (!control.checkCardReader())
-//    {
-//        ui->labelCard->show();
-
-//        // if card is valid, user can purchase a drink
-//        // here starts the main interaction with GUI after card validation
-
-//        // After card was inserted, the RFID Scanner provides verification
-//        // without instructions outside
-//        // modifies private attribute isChoiceAllowed for InteractionUnit
-//        if (cardScanner.insertCard(card))
-//        {
-//            // MODEL
-//            display.writeGreetingText(activeUserChoice);
-
-//            // VIEW
-//            styleLCDGreeting();
-//            styleSugarProgressBar();
-//            styleMilkProgressBar();
-//            styleEjectButton();
-//        }
-
-//        // if card is not valid, it will ba automaticaly ejected (simulation in Design)
-//        // and the purschasing will be ended
-//        // the next card can be inserted in RFID
-//        else
-//        {
-//            // MODEL
-//            display.writeErrorText();
-//            cardScanner.ejectCard();
-
-//            // VIEW
-//            styleLCDErrorCard();
-//            QTimer::singleShot(3000, this, &MainWindow::restartLCDCardEjected);
-//            ui->labelCard->hide();
-//            styleInsertButton();
-//            disableControlButtons();
-//        }
-//    }
-
-//    // if there IS A CARD
-//    else
-//    {
-//        // MODEL
-//        cardScanner.ejectCard();
-//        delete(activeUserChoice);
-//        activeUserChoice = iunit.initUserChoice(card);
-//        display.writeDefaultText(activeUserChoice);
-
-//        // VIEW
-//        ui->labelCard->hide();
-//        restartLCD();
-//        styleInsertButton();
-//        styleMilkProgressBar();
-//        styleSugarProgressBar();
-//        styleDrinkButtons();
-//        disableControlButtons();
-//        ui->buttonBigPortion->setChecked(false);
-//    }
-//}
 
 void MainWindow::restartLCD()
 {
@@ -307,11 +238,13 @@ void MainWindow::restartLCD()
 void MainWindow::restartLCDCardEjected()
 {
     // MODEL
-    display.writeDefaultText(activeUserChoice);
+    control.writeMessageLCD(DEFAULT);
 
     // VIEW
+    ui->labelCard->hide();
+
     ui->labelLCD->setStyleSheet("color: #ffffff; border: 0px;");
-    ui->labelLCD->setText("Please insert card");
+    ui->labelLCD->setText(display.getTitle());
     ui->labelLCD->show();
 
     ui->labelSelectedDrink->setStyleSheet("color: #ffffff; border: 0px;");
@@ -438,7 +371,6 @@ void MainWindow::styleLCDGreeting()
 void MainWindow::styleLCDErrorCard()
 {
     ui->labelLCD->setStyleSheet("color: #ff1a1a; border: 0px;");
-
     ui->labelLCD->setText(display.getTitle());
 
     ui->labelSelectedDrink->setText("");
@@ -479,7 +411,7 @@ void MainWindow::on_buttonCoffee_clicked()
         coffee.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
         coffee.setSensorState(RELEASED);
-        display.writeUserChoiceText(activeUserChoice);
+        control.writeMessageLCD(USER_CHOICE);
 
         // VIEW
         enableControlButtons();
@@ -497,7 +429,7 @@ void MainWindow::on_buttonCappuccino_clicked()
         cappuccino.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
         cappuccino.setSensorState(RELEASED);
-        display.writeUserChoiceText(activeUserChoice);
+        control.writeMessageLCD(USER_CHOICE);
 
         // VIEW
         enableControlButtons();
@@ -515,7 +447,7 @@ void MainWindow::on_buttonEspresso_clicked()
         espresso.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
         espresso.setSensorState(RELEASED);
-        display.writeUserChoiceText(activeUserChoice);
+        control.writeMessageLCD(USER_CHOICE);
 
         // VIEW
         enableControlButtons();
@@ -533,7 +465,7 @@ void MainWindow::on_buttonLatteMacchiato_clicked()
         latteMacchiato.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
         latteMacchiato.setSensorState(RELEASED);
-        display.writeUserChoiceText(activeUserChoice);
+        control.writeMessageLCD(USER_CHOICE);
 
         // VIEW
         enableControlButtons();
@@ -551,7 +483,7 @@ void MainWindow::on_buttonCacao_clicked()
         cacao.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
         cacao.setSensorState(RELEASED);
-        display.writeUserChoiceText(activeUserChoice);
+        control.writeMessageLCD(USER_CHOICE);
 
         // VIEW
         enableControlButtons();
@@ -569,7 +501,7 @@ void MainWindow::on_buttonHotwater_clicked()
         hotWater.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
         hotWater.setSensorState(RELEASED);
-        display.writeUserChoiceText(activeUserChoice);
+        control.writeMessageLCD(USER_CHOICE);
 
         // VIEW
         enableControlButtons();
@@ -587,7 +519,7 @@ void MainWindow::on_buttonBigPortion_clicked()
         bigPortion.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
         bigPortion.setSensorState(RELEASED);
-        display.writeUserChoiceText(activeUserChoice);
+        control.writeMessageLCD(USER_CHOICE);
 
         styleLCDChoiceInformation();
     }
@@ -621,7 +553,7 @@ void MainWindow::on_buttonCancel_clicked()
 {
     // MODEL
     activeUserChoice->setDefaultChoice();
-    display.writeUserChoiceText(activeUserChoice);
+    control.writeMessageLCD(USER_CHOICE);
 
     // VIEW
     disableControlButtons();
@@ -699,12 +631,9 @@ void MainWindow::styleCardHolder()
 
 void MainWindow::on_buttonCupPlaceEmpty_clicked()
 {
-    switch (opticalSensor.getOpticalFlowSensorsMeasurements()) {
+    switch (control.checkCupHolder()) {
         case NO_CUP:
                     styleCupPlacedEmplty();
-                    opticalSensor.setDistanceToObject(2);
-                    opticalSensor.getOpticalFlowSensorsMeasurements();
-
                     break;
         default:
                     break;
@@ -714,11 +643,9 @@ void MainWindow::on_buttonCupPlaceEmpty_clicked()
 
 void MainWindow::on_buttonCupTakeCupBack_clicked()
 {
-    switch (opticalSensor.getOpticalFlowSensorsMeasurements()) {
+    switch (control.checkCupHolder()) {
         case EMPTY_CUP:
-                    opticalSensor.setDistanceToObject(10);
                     styleEmptyCupHolder();
-                    opticalSensor.getOpticalFlowSensorsMeasurements();
                     break;
         default:
                     break;
@@ -728,11 +655,9 @@ void MainWindow::on_buttonCupTakeCupBack_clicked()
 
 void MainWindow::on_buttonCupTakeDrink_clicked()
 {
-    switch (opticalSensor.getOpticalFlowSensorsMeasurements()) {
+    switch (control.checkCupHolder()) {
         case FULL_CUP:
-                    opticalSensor.setDistanceToObject(10);
                     styleEmptyCupHolder();
-                    opticalSensor.getOpticalFlowSensorsMeasurements();
                     break;
         default:
                     break;
