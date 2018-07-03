@@ -59,12 +59,10 @@ Account *BankAccount::getAccount()
 void BankAccount::setTaxClass(int taxClass)
 {
     this->taxClass = taxClass;
-    qDebug() << "SETTER: New tax class is set:" << this->taxClass;
 }
 
 int BankAccount::getTaxClass()
 {
-    qDebug() << "GETTER: Tax class is:" << taxClass;
     return taxClass;
 }
 

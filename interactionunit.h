@@ -28,19 +28,6 @@ class InteractionUnit
         ~InteractionUnit();
 
         void buttonPollingRoutine();
-        InteractionUnit *initInteractionUnit(Button *moreSugar,
-                                             Button *lessSugar,
-                                             Button *moreMilk,
-                                             Button *lessMilk,
-                                             Button *coffee,
-                                             Button *cappuccino,
-                                             Button *espresso,
-                                             Button *latteMacchiato,
-                                             Button *cacao,
-                                             Button *hotWater,
-                                             Button *bigPortion,
-                                             Button *cancel,
-                                             Button *start);
         UserChoice *initUserChoice(Card *card);
         bool abortSession();
 

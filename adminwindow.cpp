@@ -8,6 +8,14 @@
 #include "database.h"
 #include <QtDebug>
 #include <string>
+#include "admin.h"
+
+Admin *admin = NULL;
+Person *adminPerson;
+Person *newPerson;
+BankAccount *newBankAccount;
+Account *newAccount;
+Card *newCard;
 
 AdminWindow::AdminWindow(QWidget *parent) :
     QDialog(parent),
@@ -17,18 +25,21 @@ AdminWindow::AdminWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Admin Window");
 
-    activeAdmin = &Person::AllEmployee[0];
-    ui->labelAdminName->setText(activeAdmin->getName().c_str());
+    // The Person will be selected via Drop List on Main Window
+    // this version work with predifined Admin Person
+    adminPerson = &Person::AllEmployee[0];
+
+    // creating the Admin Unit
+    admin = new Admin(adminPerson);
+    ui->labelAdminName->setText(admin->getName().c_str());
+
+    // init the
 
     ui->widgetAddNewEmployee->hide();
 
     setAdminControlButtonsStyle();
 
     // Loading Data Arrays: Person, Bank Account, Account, Card
-    newPerson = NULL;
-    newBankAccount = NULL;
-    newAccount = NULL;
-    newCard = NULL;
     loadPersonTableWidget();
     loadBankAccountTableWidget();
     loadAccountTableWidget();
@@ -231,20 +242,6 @@ void AdminWindow::on_buttonSaveNewPerson_clicked()
     qDebug() << "New depending Card added into AllAccounts";
 }
 
-void AdminWindow::instantiateNewObjects()
-{
-    if (!newPerson)
-        newPerson = new Person();
-
-    if (!newBankAccount)
-        newBankAccount = new BankAccount();
-
-    if (!newAccount)
-        newAccount = new Account();
-
-    if (!newCard)
-        newCard = new Card();
-}
 
 void AdminWindow::on_buttonAddNewEmployee_clicked()
 {
@@ -252,7 +249,10 @@ void AdminWindow::on_buttonAddNewEmployee_clicked()
         widget->clear();
     }
 
-    instantiateNewObjects();
+    newPerson = admin->instantiateNewPerson(newPerson);
+    newBankAccount = admin->instantiateNewBankAccount(newBankAccount);
+    newAccount = admin->instantiateNewAccount(newAccount);
+    newCard = admin->instantiateNewCard(newCard);
 
     ui->widgetAddNewEmployee->show();
     QString colorSaveNewPerson  = QString("background-color: #739900; color: #ffffff;");
@@ -284,12 +284,11 @@ void AdminWindow::on_buttonIngredientStatus_clicked()
 
 void AdminWindow::on_buttonCancelNewPerson_clicked()
 {
+    admin->cancelPersonCreation(newPerson);
+    admin->cancelBankAccountCreation(newBankAccount);
+    admin->cancelAccountCreation(newAccount);
+    admin->cancelCardCreation(newCard);
     ui->widgetAddNewEmployee->hide();
-    delete newCard; newCard = NULL;
-    delete newAccount; newAccount = NULL;
-    delete newBankAccount; newBankAccount = NULL;
-    delete newPerson; newPerson = NULL;
-
 }
 
 void AdminWindow::on_buttonSaveNewPerson_pressed()

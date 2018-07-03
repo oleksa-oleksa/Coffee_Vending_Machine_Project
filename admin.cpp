@@ -9,25 +9,77 @@ Admin::Admin()
 
 }
 
-// creates new active card with random id
-//Card *Admin::createCard(Account *account)
-//{
-//    Card *newRandomCard = new Card(account);
-//    return newRandomCard;
-//}
+Admin::Admin(Person *activeAdminPerson)
+{
+    this->setID(activeAdminPerson->getID());
+    this->setName(activeAdminPerson->getName());
+    this->setSurname(activeAdminPerson->getSurname());
+    this->setAddress(activeAdminPerson->getAddress());
+    this->setEmployed(activeAdminPerson->getEmployed());
+    this->setAdmin(activeAdminPerson->getAdmin());
+    this->setStaff(activeAdminPerson->getStaff());
+}
 
-//void Admin::deleteCard(Card *c)
-//{
-//    delete c;
-//}
 
-//Account *Admin:: createAccount(Person *Employee, BankAccount *Ba)
-//{
-//    Account *newAccount = new Account(Employee, Ba);
-//    return newAccount;
-//}
+bool addEmployee()
+{
 
-//void Admin::deleteAccount(Account *a)
-//{
-//    delete a;
-//}
+}
+
+
+Person *Admin::instantiateNewPerson(Person *newPerson)
+{
+    if (!newPerson) {
+        newPerson = new Person();
+    }
+
+    return newPerson;
+}
+
+BankAccount *Admin::instantiateNewBankAccount(BankAccount *newBankAccount)
+{
+
+    if (!newBankAccount) {
+        newBankAccount = new BankAccount();
+    }
+
+    return newBankAccount;
+}
+
+Account *Admin::instantiateNewAccount(Account *newAccount)
+{
+
+    if (!newAccount) {
+        newAccount = new Account();
+    }
+    return newAccount;
+}
+
+Card *Admin::instantiateNewCard(Card *newCard)
+{
+    if (!newCard) {
+        newCard = new Card();
+    }
+    return newCard;
+}
+
+
+void Admin::cancelPersonCreation(Person *newPerson)
+{
+    delete newPerson;
+}
+
+void Admin::cancelBankAccountCreation(BankAccount *newBankAccount)
+{
+    delete newBankAccount;
+}
+
+void Admin::cancelAccountCreation(Account *newAccount)
+{
+    delete newAccount;
+}
+
+void Admin::cancelCardCreation(Card *newCard)
+{
+    delete newCard;
+}
