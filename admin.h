@@ -14,17 +14,17 @@ class Admin : public Person
          Admin(Person *activeAdminPerson);
         ~Admin();  
 
-         Person *instantiateNewPerson(Person *newPerson);
-         BankAccount *instantiateNewBankAccount(BankAccount *newBankAccount);
-         Account *instantiateNewAccount(Account *newAccount);
-         Card *instantiateNewCard(Card *newCard);
-
          void cancelPersonCreation(Person *newPerson);
          void cancelBankAccountCreation(BankAccount *newBankAccount);
          void cancelAccountCreation(Account *newAccount);
          void cancelCardCreation(Card *newCard);
+         void clearTemporaryPointers(Person *newPerson, BankAccount *newBankAccount, Account *newAccount, Card *newCard);
 
-         bool hireEmployee();
+         void addPerson(Person *newPerson, std::string newPersonName, std::string newPersonSurname,
+                        std::string newPersonAddress, int isAdmin, int isStaff);
+         void addBankAccount(BankAccount *newBankAccount, int taxClass);
+         void addAccount(Account *newAccount);
+         void addCard(Card *newCard);
 
 };
 

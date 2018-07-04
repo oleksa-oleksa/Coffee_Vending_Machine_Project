@@ -41,19 +41,16 @@ Person::Person(QSqlRecord &query)
 
 std::string const & Person::getName() const
 {
-    qDebug() << "Name is: " << name.c_str();
     return name;
 }
 
 std::string const & Person::getSurname() const
 {
-    qDebug() << "Surname is: " << surname.c_str();
     return surname;
 }
 
 std::string const & Person::getAddress() const
 {
-    qDebug() << "Adress is: " << address.c_str();
     return address;
 }
 
@@ -100,7 +97,6 @@ void Person::setID(PersonID personID)
 
 bool Person::getEmployed()
 {
-    qDebug() << "Employed flag is: " << isEmployed;
     return isEmployed;
 }
 
@@ -112,7 +108,6 @@ void Person::setEmployed(bool isEmployed)
 
 bool Person ::getAdmin()
 {
-    qDebug() << "Admin flag is: " << isAdmin;
     return isAdmin;
 }
 
@@ -124,7 +119,6 @@ void Person::setAdmin(bool isAdmin)
 
 bool Person::getStaff()
 {
-    qDebug() << "Staff flag is: " << isStaff;
     return isStaff;
 }
 

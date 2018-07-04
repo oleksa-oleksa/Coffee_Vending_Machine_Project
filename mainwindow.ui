@@ -701,6 +701,49 @@
      <string>Place Cup</string>
     </property>
    </widget>
+   <widget class="EmployeeComboBox" name="comboboxSelectPerson">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>30</y>
+      <width>291</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelSelectPerson">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>10</y>
+      <width>141</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #ffffff</string>
+    </property>
+    <property name="text">
+     <string>Select active person:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonRefreshUsers">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="images.qrc">
+      <normaloff>:/icons/images/reload.png</normaloff>:/icons/images/reload.png</iconset>
+    </property>
+   </widget>
    <zorder>labelBackground</zorder>
    <zorder>labelCupBackground</zorder>
    <zorder>label</zorder>
@@ -722,9 +765,19 @@
    <zorder>labelCupFull</zorder>
    <zorder>buttonCupTakeCupBack</zorder>
    <zorder>buttonCupTakeDrink</zorder>
+   <zorder>comboboxSelectPerson</zorder>
+   <zorder>labelSelectPerson</zorder>
+   <zorder>buttonRefreshUsers</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>EmployeeComboBox</class>
+   <extends>QComboBox</extends>
+   <header>employeecombobox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="images.qrc"/>
  </resources>

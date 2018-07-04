@@ -82,7 +82,9 @@ HEADERS += \
     personid.h \
     bankaccountid.h \
     defaultcoffeemachine.h \
-    adminwindow.h
+    adminwindow.h \
+    people_combo_box.h \
+    employeecombobox.h
 
 SOURCES += \
     account.cpp \
@@ -129,7 +131,8 @@ SOURCES += \
     cappuccino.cpp \
     lattemacchiato.cpp \
     hotwater.cpp \
-    espresso.cpp
+    espresso.cpp \
+    employeecombobox.cpp
 
 test {
     message(TEST BUILD)
