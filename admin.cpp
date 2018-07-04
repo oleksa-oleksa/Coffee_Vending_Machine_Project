@@ -3,6 +3,9 @@
 #include "card.h"
 #include "account.h"
 #include "cardstatus.h"
+#include <string>
+#include "QDebug"
+
 
 Admin::Admin()
 {
@@ -21,52 +24,11 @@ Admin::Admin(Person *activeAdminPerson)
 }
 
 
-bool addEmployee()
-{
-
-}
-
-
-Person *Admin::instantiateNewPerson(Person *newPerson)
-{
-    if (!newPerson) {
-        newPerson = new Person();
-    }
-
-    return newPerson;
-}
-
-BankAccount *Admin::instantiateNewBankAccount(BankAccount *newBankAccount)
-{
-
-    if (!newBankAccount) {
-        newBankAccount = new BankAccount();
-    }
-
-    return newBankAccount;
-}
-
-Account *Admin::instantiateNewAccount(Account *newAccount)
-{
-
-    if (!newAccount) {
-        newAccount = new Account();
-    }
-    return newAccount;
-}
-
-Card *Admin::instantiateNewCard(Card *newCard)
-{
-    if (!newCard) {
-        newCard = new Card();
-    }
-    return newCard;
-}
-
 
 void Admin::cancelPersonCreation(Person *newPerson)
 {
     delete newPerson;
+
 }
 
 void Admin::cancelBankAccountCreation(BankAccount *newBankAccount)
@@ -82,4 +44,89 @@ void Admin::cancelAccountCreation(Account *newAccount)
 void Admin::cancelCardCreation(Card *newCard)
 {
     delete newCard;
+}
+
+void Admin::clearTemporaryPointers(Person *newPerson, BankAccount *newBankAccount, Account *newAccount, Card *newCard)
+{
+    delete newPerson;
+    newPerson = NULL;
+
+    delete newBankAccount;
+    newBankAccount = NULL;
+
+    delete newAccount;
+    newAccount = NULL;
+
+    delete newCard;
+    newCard = NULL;
+
+}
+
+void Admin::addPerson(Person *newPerson, std::string newPersonName, std::string newPersonSurname,
+                      std::string newPersonAddress, int isAdmin, int isStaff)
+{
+    newPerson->setName(newPersonName);
+
+    newPerson->setSurname(newPersonSurname);
+
+    newPerson->setAddress(newPersonAddress);
+
+    newPerson->setEmployed(true);
+
+    newPerson->setAdmin(isAdmin);
+
+    newPerson->setStaff(isStaff);
+
+    Person::AllEmployee.push_back(*newPerson);
+    //delete newPerson; newPerson = NULL;
+    Person &lastPerson = Person::AllEmployee.back();
+
+    qDebug() << "ADMIN: New Person added into AllEmployee";
+}
+
+void Admin::addBankAccount(BankAccount *newBankAccount, int taxClass)
+{
+        newBankAccount->setAccountID(newAccount->getAccountID());
+
+        newBankAccount->setTaxClass(taxClass);
+        BankAccount::AllBankAccounts.push_back(*newBankAccount);
+
+        //delete newBankAccount; newBankAccount = NULL;
+        BankAccount &lastBankAccount = BankAccount::AllBankAccounts.back();
+
+        qDebug() << "ADMIN: New depending Bank Account added into AllBankAccounts";
+}
+
+void Admin::addAccount(Account *newAccount)
+{
+        // Account accountID, credit and state are predefined by constructor
+
+        Person &lastPerson = Person::AllEmployee.back();
+        newAccount->setOwner(&lastPerson);
+
+        BankAccount &lastBankAccount = BankAccount::AllBankAccounts.back();
+        newAccount->setBankAccount(&lastBankAccount);
+
+        Account::AllAccounts.push_back(*newAccount);
+        Account &lastAccount = Account::AllAccounts.back();
+        //delete newAccount; newAccount = NULL;
+
+        lastAccount.setBankAccount(&lastBankAccount);
+        lastBankAccount.setAccount(&Account::AllAccounts.back());
+        qDebug() << "New depending Account added into AllAccounts";
+
+}
+
+void Admin::addCard(Card *newCard)
+{
+        // CardID and CardStatus are predefined by constructor
+
+        Card::AllCards.push_back(*newCard);
+
+        Account &lastAccount = Account::AllAccounts.back();
+
+        //delete newCard; newCard = NULL;
+
+        Card::AllCards.back().setAccount(&lastAccount);
+        qDebug() << "New depending Card added into AllAccounts";
 }

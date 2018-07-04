@@ -15,11 +15,12 @@
 #include "controlunit.h"
 
 Person *activePerson = NULL;
-Card *card = NULL;
 Account *activeAccount = NULL;
 BankAccount *bankAccount = NULL;
 InteractionUnit iunit;
 UserChoice *activeUserChoice = NULL;
+Card *card = NULL;
+
 
 Button moreSugar;
 Button lessSugar;
@@ -55,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
     this->setWindowTitle("Coffee Machine Drinks Window");
 
@@ -63,25 +65,14 @@ MainWindow::MainWindow(QWidget *parent) :
     // there is always an active person interacting with Vending Machine
     // To change the game characher the drop list should be used
     // and new charachter will be loaded with button "load"
-
-    // Firstly, we will start with a card provided by user into RFID
-    card = &Card::AllCards[0];
-
-    // Thus we can find out which account belongs to the card
-    activeAccount = card->getAccount();
-
-    // and what the person interacts with Vending Machine
-    activePerson = card->getAccount()->getOwner();
-
-    // and which bank account is connected to the card for withdrawing process
-    bankAccount = card->getAccount()->getBankAccount();
-
     // Note: to simulate invalid card
     // 1: Comment all card, ba, acc and person lines
     // 2. create a new random Card *card
     // 3. run programm
     //Card *card;
 
+    resetActiveEntities(&Card::AllCards[0]);
+    resetServiceButtons();
     //======================================================================
     // and finaly: UserChoice initialisation in InteractionUnit in order
     // to track all interactions with buttons
@@ -102,7 +93,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // activeUserChoice has the selected drink with  price and recipe
     // the information for preparation will be transfered to ControlUnit with "Start" button
-    activeUserChoice = iunit.initUserChoice(card);
 
     // links to ControlUnit
     control.linkInteractionUnit(&iunit);
@@ -140,6 +130,41 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::resetActiveEntities(Card *c)
+{
+
+    // Firstly, we will start with a card provided by user into RFID
+    card = c;
+
+    // Thus we can find out which account belongs to the card
+    activeAccount = card->getAccount();
+
+    // and what the person interacts with Vending Machine
+    activePerson = card->getAccount()->getOwner();
+
+    // and which bank account is connected to the card for withdrawing process
+    bankAccount = card->getAccount()->getBankAccount();
+
+    if (activeUserChoice) {
+        delete activeUserChoice;
+    }
+
+    activeUserChoice = iunit.initUserChoice(card);
+
+}
+
+void MainWindow::resetServiceButtons()
+{
+    ui->buttonAdmin->setEnabled(activePerson->getAdmin());
+    ui->buttonService->setEnabled(activePerson->getStaff());
+}
+
+void MainWindow::disableServiceButtons()
+{
+    ui->buttonAdmin->setEnabled(false);
+    ui->buttonService->setEnabled(false);
+}
+
 void MainWindow::on_buttonAdmin_clicked()
 {
     // Modal approach to show a second window
@@ -154,6 +179,8 @@ void MainWindow::setMainWindowControlButtonsStyle()
 {
     styleCardHolder();
     styleEmptyCupHolder();
+
+    ui->buttonRefreshUsers->setStyleSheet("background-color: #e67300; color: #ffffff;");
 
     //Main Window buttons preset
     QString colorTopButtons  = QString("background-color: #4d2600; color: #ffffff;");
@@ -185,10 +212,10 @@ void MainWindow::setMainWindowControlButtonsStyle()
 
 void MainWindow::on_buttonCard_clicked()
 {
-
     switch (control.insertCard(card)) {
     case (VALID_CARD_INSIDE):
         ui->labelCard->show();
+        ui->comboboxSelectPerson->setEnabled(false);
         styleLCDGreeting();
         styleSugarProgressBar();
         styleMilkProgressBar();
@@ -197,6 +224,7 @@ void MainWindow::on_buttonCard_clicked()
     case (NONVALID_CARD_INSIDE):
         qDebug() << "We are here!";
         ui->labelCard->show();
+        ui->comboboxSelectPerson->setEnabled(true);
         control.writeMessageLCD(ERROR);
         styleLCDErrorCard();
         QTimer::singleShot(3000, this, &MainWindow::restartLCDCardEjected);
@@ -207,7 +235,7 @@ void MainWindow::on_buttonCard_clicked()
 //        activeUserChoice = iunit.initUserChoice(card);
 //        control.linkUserChoice(activeUserChoice);
 //        control.writeMessageLCD(DEFAULT);
-
+        ui->comboboxSelectPerson->setEnabled(true);
         ui->labelCard->hide();
         restartLCD();
         styleInsertButton();
@@ -216,6 +244,8 @@ void MainWindow::on_buttonCard_clicked()
         styleDrinkButtons();
         disableControlButtons();
         ui->buttonBigPortion->setChecked(false);
+        ui->buttonAdmin->setEnabled(false);
+
         break;
     }
 }
@@ -661,4 +691,22 @@ void MainWindow::on_buttonCupTakeDrink_clicked()
         default:
                     break;
     }
+}
+
+void MainWindow::on_comboboxSelectPerson_currentIndexChanged(int index)
+{
+    if (index < 0) {
+        card = NULL;
+        return;
+    }
+
+    resetActiveEntities(&Card::AllCards[index]);
+    resetServiceButtons();
+    qDebug() << "New current active person: " <<
+                QString::fromUtf8(activePerson->getSurname().c_str());
+}
+
+void MainWindow::on_buttonRefreshUsers_clicked()
+{
+    ui->comboboxSelectPerson->resetContent();
 }

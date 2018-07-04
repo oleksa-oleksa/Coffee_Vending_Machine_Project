@@ -10,5 +10,6 @@
         <file>images/cup_full.png</file>
         <file>images/cup_holder.png</file>
         <file>images/cup_holder_transparent.png</file>
+        <file>images/reload.png</file>
     </qresource>
 </RCC>

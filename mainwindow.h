@@ -59,8 +59,16 @@ private slots:
     void styleCardHolder();
     void on_buttonCupTakeCupBack_clicked();
 
+    void on_comboboxSelectPerson_currentIndexChanged(int index);
+
+    void on_buttonRefreshUsers_clicked();
+
 private:
     Ui::MainWindow *ui;
+
+    void resetActiveEntities(Card *c);
+    void resetServiceButtons();
+    void disableServiceButtons();
 };
 
 
