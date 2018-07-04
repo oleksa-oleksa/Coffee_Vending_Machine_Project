@@ -38,7 +38,6 @@ Person::Person(QSqlRecord &query)
     address = q_address.toUtf8().constData();
 }
 
-
 std::string const & Person::getName() const
 {
     return name;
