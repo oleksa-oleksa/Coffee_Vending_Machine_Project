@@ -1,6 +1,7 @@
 // Created by Oleksandra Baga
 #include "adminwindow.h"
 #include "ui_adminwindow.h"
+#include "drinkwindow.h"
 #include "person.h"
 #include "bankaccount.h"
 #include "account.h"
@@ -167,7 +168,7 @@ void AdminWindow::setAdminControlButtonsStyle()
     ui->buttonEditEmployee->setStyleSheet(colorEditEmployee);
 
     QString colorEditDrinks  = QString("background-color: #0073e6; color: #ffffff;");
-    ui->buttonEditDrinks->setStyleSheet(colorEditDrinks);
+    ui->buttonViewDrinksRecipe->setStyleSheet(colorEditDrinks);
 
     QString colorIngredientStatus  = QString("background-color: #0080ff; color: #ffffff;");
     ui->buttonIngredientStatus->setStyleSheet(colorIngredientStatus);
@@ -225,68 +226,6 @@ void AdminWindow::on_buttonSaveNewPerson_clicked()
 
 }
 
-//void AdminWindow::on_buttonSaveNewPerson_clicked()
-//{
-
-//    std::string newPersonName = ui->lineNameForm->text().toUtf8().constData();
-//    newPerson->setName(newPersonName);
-
-//    std::string newPersonSurname = ui->lineSurnameForm->text().toUtf8().constData();
-//    newPerson->setSurname(newPersonSurname);
-
-//    std::string newPersonAddress = ui->lineAddressForm->text().toUtf8().constData();
-//    newPerson->setAddress(newPersonAddress);
-
-//    newPerson->setEmployed(true);
-
-//    int isAdmin = (ui->comboBoxAdmin->currentIndex() == 0);
-//    newPerson->setAdmin(isAdmin);
-
-//    int isStaff = (ui->comboBoxStaff->currentIndex() == 0);
-//    newPerson->setStaff(isStaff);
-
-//    Person::AllEmployee.push_back(*newPerson);
-//    delete newPerson; newPerson = NULL;
-//    Person &lastPerson = Person::AllEmployee.back();
-
-//    qDebug() << "New Person added into AllEmployee";
-
-//    //=====================================================================
-
-//    newBankAccount->setAccountID(newAccount->getAccountID());
-
-//    int taxClass = ui->comboBoxTaxClass->currentIndex() + 1;
-//    newBankAccount->setTaxClass(taxClass);
-//    BankAccount::AllBankAccounts.push_back(*newBankAccount);
-
-//    delete newBankAccount; newBankAccount = NULL;
-//    BankAccount &lastBankAccount = BankAccount::AllBankAccounts.back();
-
-//    qDebug() << "New depending Bank Account added into AllBankAccounts";
-
-//    //=====================================================================
-//    // Account accountID, credit and state are predefined by constructor
-
-//    newAccount->setOwner(&lastPerson);
-//    newAccount->setBankAccount(&lastBankAccount);
-
-//    Account::AllAccounts.push_back(*newAccount);
-//    Account &lastAccount = Account::AllAccounts.back();
-//    delete newAccount; newAccount = NULL;
-
-//    lastAccount.setBankAccount(&lastBankAccount);
-//    lastBankAccount.setAccount(&Account::AllAccounts.back());
-//    qDebug() << "New depending Account added into AllAccounts";
-
-//    //=====================================================================
-//    // CardID and CardStatus are predefined by constructor
-
-//    Card::AllCards.push_back(*newCard);
-//    Card::AllCards.back().setAccount(&lastAccount);
-//    delete newCard; newCard = NULL;
-//    qDebug() << "New depending Card added into AllAccounts";
-//}
-
 void AdminWindow::on_buttonSaveNewPerson_pressed()
 {
     QString colorSaveNewPerson  = QString("background-color: #4d6600; color: #ffffff;");
@@ -327,10 +266,14 @@ void AdminWindow::on_buttonEditEmployee_clicked()
     ui->widgetAddNewEmployee->hide();
 }
 
-void AdminWindow::on_buttonEditDrinks_clicked()
+void AdminWindow::on_buttonViewDrinksRecipe_clicked()
 {
     ui->widgetAddNewEmployee->hide();
+    DrinkWindow drinkWindow;
+    drinkWindow.setModal(true);
+    drinkWindow.exec();
 }
+
 
 void AdminWindow::on_buttonIngredientStatus_clicked()
 {
@@ -359,4 +302,6 @@ void AdminWindow::on_buttonCancelNewPerson_released()
     QString colorCancelNewPerson  = QString("background-color: #e6e6e6; color: #000000;");
     ui->buttonCancelNewPerson->setStyleSheet(colorCancelNewPerson);
 }
+
+
 

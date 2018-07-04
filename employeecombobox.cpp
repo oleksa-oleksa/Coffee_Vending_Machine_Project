@@ -52,5 +52,4 @@ void EmployeeComboBox::populateContent()
 
         addItem(item_text, i);
     }
-
 }

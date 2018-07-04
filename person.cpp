@@ -91,7 +91,6 @@ void Person::setAddress(std::string address)
 void Person::setID(PersonID personID)
 {
     this->personID = personID;
-
 }
 
 bool Person::getEmployed()
