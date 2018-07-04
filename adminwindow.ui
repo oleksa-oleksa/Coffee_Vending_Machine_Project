@@ -29,7 +29,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <property name="usesScrollButtons">
     <bool>false</bool>
@@ -240,7 +240,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="buttonEditDrinks">
+  <widget class="QPushButton" name="buttonViewDrinksRecipe">
    <property name="geometry">
     <rect>
      <x>409</x>

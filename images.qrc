@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/icons">
-        <file>images/admin.png</file>
         <file>images/coffee-back.png</file>
         <file>images/coffee-Mainback.png</file>
         <file>images/less.png</file>
@@ -11,5 +10,13 @@
         <file>images/cup_holder.png</file>
         <file>images/cup_holder_transparent.png</file>
         <file>images/reload.png</file>
+        <file>images/admin.png</file>
+        <file>images/cacao.png</file>
+        <file>images/cappucciono.png</file>
+        <file>images/espresso.png</file>
+        <file>images/beuth-logo.png</file>
+        <file>images/water.png</file>
+        <file>images/coffee.png</file>
+        <file>images/lattemac.png</file>
     </qresource>
 </RCC>

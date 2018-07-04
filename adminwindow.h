@@ -44,8 +44,6 @@ private slots:
 
     void on_buttonEditEmployee_clicked();
 
-    void on_buttonEditDrinks_clicked();
-
     void on_buttonIngredientStatus_clicked();
 
     void on_buttonCancelNewPerson_clicked();
@@ -57,6 +55,8 @@ private slots:
     void on_buttonSaveNewPerson_released();
 
     void on_buttonCancelNewPerson_pressed();
+
+    void on_buttonViewDrinksRecipe_clicked();
 
 private:
     Ui::AdminWindow *ui;
