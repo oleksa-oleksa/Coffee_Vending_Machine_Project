@@ -6,9 +6,9 @@
 #include "card.h"
 
 // FOR TEST PURPOSE TO AVOID EXTRA LOC
-#define TRIGGER_BUTTON(button) ({button.setSensorstate(PRESSED); \
+#define TRIGGER_BUTTON(button) ({button.setSensorState(PRESSED); \
                           iunit.buttonPollingRoutine();\
-                          button.setSensorstate(RELEASED);})
+                          button.setSensorState(RELEASED);})
 
 
 void InteractionUnitTest::testInitUserChoice()
