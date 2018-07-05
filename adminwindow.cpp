@@ -34,8 +34,6 @@ AdminWindow::AdminWindow(QWidget *parent) :
     admin = new Admin(adminPerson);
     ui->labelAdminName->setText(admin->getName().c_str());
 
-    // init the
-
     ui->widgetAddNewEmployee->hide();
 
     setAdminControlButtonsStyle();
