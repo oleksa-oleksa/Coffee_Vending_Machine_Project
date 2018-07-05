@@ -14,14 +14,6 @@
 #include "flowmeter.h"
 #include "controlunit.h"
 
-Person *activePerson = NULL;
-Account *activeAccount = NULL;
-BankAccount *bankAccount = NULL;
-InteractionUnit iunit;
-UserChoice *activeUserChoice = NULL;
-Card *card = NULL;
-
-
 Button moreSugar;
 Button lessSugar;
 Button moreMilk;
@@ -709,4 +701,12 @@ void MainWindow::on_comboboxSelectPerson_currentIndexChanged(int index)
 void MainWindow::on_buttonRefreshUsers_clicked()
 {
     ui->comboboxSelectPerson->resetContent();
+}
+
+void MainWindow::on_buttonService_clicked()
+{
+    if (!activePerson->getStaff())
+        return;
+
+    control.staffServiceRoutine();
 }

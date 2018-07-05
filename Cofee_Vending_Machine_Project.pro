@@ -135,7 +135,8 @@ SOURCES += \
     hotwater.cpp \
     espresso.cpp \
     employeecombobox.cpp \
-    drinkwindow.cpp
+    drinkwindow.cpp \
+    globalobjects.cpp
 
 test {
     message(TEST BUILD)
@@ -145,13 +146,13 @@ test {
 
     SOURCES -= \
         main.cpp \
-        mainwindow.cpp \
         adminwindow.cpp \
         drinkwindow.cpp
 
     SOURCES += \
         test/testmain.cpp \
-        test/mainwindow.cpp \
+        test/adminwindow.cpp \
+        test/drinkwindow.cpp \
         test/databasetest.cpp \
         test/accounttest.cpp \
         test/bankaccounttest.cpp \
@@ -161,12 +162,12 @@ test {
 
 
     HEADERS -= \
-        mainwindow.h \
         adminwindow.h \
         drinkwindow.h
 
     HEADERS += \
-        test/mainwindow.h \
+        test/adminwindow.h \
+        test/drinkwindow.h \
         test/databasetest.h \
         test/accounttest.h \
         test/bankaccounttest.h \
@@ -174,10 +175,10 @@ test {
         test/userchoicetest.h \
         test/interactionunittest.h
 
-} else {
+}
+else {
     message(NORMAL BUILD)
 }
 
 RESOURCES += \
     images.qrc
-

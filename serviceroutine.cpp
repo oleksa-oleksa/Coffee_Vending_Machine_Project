@@ -1,34 +1,41 @@
 #include "serviceroutine.h"
 #include <QtDebug>
 
+// refill if more than half empty
+
 ServiceRoutine::ServiceRoutine()
 {
-    refillOrNot();
+    qDebug() << "SERVICE_ROUTINE: Initiating tank service routine";
 }
 
-void ServiceRoutine::refillOrNot()
+ServiceRoutine::~ServiceRoutine()
 {
-    if (this->tankIngredient->getCacaoIngredient() < 30)
+    qDebug() << "SERVICE_ROUTINE: Finalizing tank service routine";
+}
+
+void ServiceRoutine::refillOrNot(Ingredient *tankIngredient)
+{
+    if (tankIngredient->getCacaoIngredient() < CACAO_TANK_AMOUNT / 2)
     {
-        this->tankIngredient->refillCacaoTank();
+        tankIngredient->refillCacaoTank();
         qDebug() << "Tank for Cacao was refilled!";
     }
 
-    if (this->tankIngredient->getCoffeeIngredient() < 100)
+    if (tankIngredient->getCoffeeIngredient() < COFFEE_TANK_AMOUNT)
     {
-        this->tankIngredient->refillCoffeeTank();
+        tankIngredient->refillCoffeeTank();
         qDebug() << "Tank for Coffee was refilled!";
     }
 
-    if (this->tankIngredient->getMilkIngredient() < 50)
+    if (tankIngredient->getMilkIngredient() < MILK_TANK_AMOUNT)
     {
-        this->tankIngredient->refillMilkTank();
+        tankIngredient->refillMilkTank();
         qDebug() << "Tank for Milk was refilled!";
     }
 
-    if (this->tankIngredient->getSugarIngredient() < 50)
+    if (tankIngredient->getSugarIngredient() < SUGAR_TANK_AMOUNT)
     {
-        this->tankIngredient->refillSugarTank();
+        tankIngredient->refillSugarTank();
         qDebug() << "Tank for Sugar was refilled!";
     }
 }

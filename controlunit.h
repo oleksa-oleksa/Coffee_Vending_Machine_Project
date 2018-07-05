@@ -48,9 +48,12 @@ class ControlUnit
 
         Brewgroup *brew;
 
+        Ingredient *ingredientTanks;
+
     public:
 
         ControlUnit();
+        ~ControlUnit();
 
         void linkInteractionUnit(InteractionUnit *iunit);
 
@@ -69,6 +72,7 @@ class ControlUnit
         void abortPreparation();
         void prepareSelectedDrink();
         void unblockCupHolder();
+        void staffServiceRoutine();
 
         void connectRFID(RFID_Scanner *sensor);
         void connectFlow(Flowmeter *sensor);
@@ -82,7 +86,6 @@ class ControlUnit
         void connectHeater(Waterheater *actuator);
         void connectMilkMaker(Milkmaker *actuator);
         void connectBrewGroup(Brewgroup *actuator);
-
 
 
 };

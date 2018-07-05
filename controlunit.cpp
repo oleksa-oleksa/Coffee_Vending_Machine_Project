@@ -1,15 +1,23 @@
 // Implemented by Oleksandra Baga
 #include "controlunit.h"
+#include "serviceroutine.h"
 
-ControlUnit::ControlUnit()
+ControlUnit::ControlUnit() : ingredientTanks(NULL)
 {
     activeUserChoice = NULL;
+    ingredientTanks = new Ingredient();
 }
 
 void ControlUnit::linkInteractionUnit(InteractionUnit *iunit)
 {
     qDebug() << "CONTROL_UNIT: InteractionUnit linked";
     this->iunit = iunit;
+}
+
+ControlUnit::~ControlUnit()
+{
+    if (ingredientTanks)
+        delete ingredientTanks;
 }
 
 void ControlUnit::setDisplayBacklight()
@@ -193,6 +201,11 @@ void ControlUnit::maintenanceRoutine()
     qDebug() << "CONTROL_UNIT: Initialisation done. State is OK.";
 }
 
+void ControlUnit::staffServiceRoutine()
+{
+    ServiceRoutine sr;
+    sr.refillOrNot(this->ingredientTanks);
+}
 
 bool ControlUnit::checkIngredients()
 {

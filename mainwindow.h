@@ -63,6 +63,8 @@ private slots:
 
     void on_buttonRefreshUsers_clicked();
 
+    void on_buttonService_clicked();
+
 private:
     Ui::MainWindow *ui;
 
