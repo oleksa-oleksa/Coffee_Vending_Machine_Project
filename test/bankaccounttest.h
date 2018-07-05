@@ -7,6 +7,7 @@
 #include <QSqlError>
 #include <QObject>
 #include "bankaccount.h"
+#include "controlunit.h"
 
 class BankAccountTest: public QObject
 {

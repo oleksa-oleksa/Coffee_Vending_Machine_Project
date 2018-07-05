@@ -65,7 +65,7 @@ void InteractionUnitTest::testButtonPollingRoutine()
     TRIGGER_BUTTON(lessMilk);
 
     QCOMPARE(userChoice01->getSelectedDrink(), COFFEE);
-    QCOMPARE(userChoice01->getSugarAmount(), 2);
+    QCOMPARE(userChoice01->getSugarAmount(), 3);
     QCOMPARE(userChoice01->getMilkAmount(), 0);
     delete userChoice01;
 

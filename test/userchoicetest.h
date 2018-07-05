@@ -6,6 +6,8 @@
 #include <QObject>
 #include "account.h"
 #include "userchoice.h"
+#include "admin.h"
+#include "controlunit.h"
 
 class UserChoiceTest : public QObject
 {
