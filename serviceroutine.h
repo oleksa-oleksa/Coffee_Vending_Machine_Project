@@ -16,7 +16,7 @@ class ServiceRoutine
     public:
         ServiceRoutine();
         ~ServiceRoutine();
-
+        void refillOrNot();
 
 };
 
