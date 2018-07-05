@@ -84,7 +84,6 @@ HEADERS += \
     bankaccountid.h \
     defaultcoffeemachine.h \
     adminwindow.h \
-    people_combo_box.h \
     employeecombobox.h \
     drinkwindow.h
 
@@ -147,7 +146,8 @@ test {
     SOURCES -= \
         main.cpp \
         adminwindow.cpp \
-        drinkwindow.cpp
+        drinkwindow.cpp \
+        mainwindow.cpp
 
     SOURCES += \
         test/testmain.cpp \
@@ -158,12 +158,19 @@ test {
         test/bankaccounttest.cpp \
         test/cardtest.cpp \
         test/userchoicetest.cpp \
-        test/interactionunittest.cpp
-
+        test/interactionunittest.cpp \
+        test/rfidscannertest.cpp \
+        test/opticalsensortest.cpp \
+        test/controlunittest.cpp \
+        test/brightnesssensortest.cpp \
+        test/admintest.cpp \
+        test/serviceroutinetest.cpp \
+        test/ingredienttest.cpp
 
     HEADERS -= \
         adminwindow.h \
-        drinkwindow.h
+        drinkwindow.h \
+        mainwindow.h
 
     HEADERS += \
         test/adminwindow.h \
@@ -173,8 +180,14 @@ test {
         test/bankaccounttest.h \
         test/cardtest.h \
         test/userchoicetest.h \
-        test/interactionunittest.h
-
+        test/interactionunittest.h \
+        test/rfidscannertest.h \
+        test/opticalsensortest.h \
+        test/controlunittest.h \
+        test/brightnesssensortest.h \
+        test/admintest.h \
+        test/serviceroutinetest.h \
+        test/ingredienttest.h
 }
 else {
     message(NORMAL BUILD)

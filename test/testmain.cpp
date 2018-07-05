@@ -7,9 +7,13 @@
 #include "cardtest.h"
 #include "userchoicetest.h"
 #include "interactionunittest.h"
-#include "admin.h"
-#include "controlunit.h"
-
+#include "admintest.h"
+#include "controlunittest.h"
+#include "rfidscannertest.h"
+#include "opticalsensortest.h"
+#include "brightnesssensortest.h"
+#include "serviceroutinetest.h"
+#include "ingredienttest.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,11 +21,8 @@ int main(int argc, char *argv[])
     srand(time(NULL));
 
     QApplication a(argc, argv);
-    // MainWindow w;
-    // w.show();
 
     // UNIT TESTS: SEPARATE CLASSES
-    // ACTIVATE ONLY ONE TEST CALL
     DatabaseTest dbtst01;
     QTest::qExec(&dbtst01, argc, argv);
 
@@ -38,7 +39,30 @@ int main(int argc, char *argv[])
      QTest::qExec(&dbtst05, argc, argv);
 
     InteractionUnitTest dbtst06;
-    return QTest::qExec(&dbtst06, argc, argv);
+    QTest::qExec(&dbtst06, argc, argv);
+
+    AdminTest dbtst07;
+    QTest::qExec(&dbtst07, argc, argv);
+
+    ControlUnitTest dbtst08;
+    QTest::qExec(&dbtst08, argc, argv);
+
+    RFIDScannerTest dbtst09;
+    QTest::qExec(&dbtst09, argc, argv);
+
+    OpticalSensorTest dbtst10;
+    QTest::qExec(&dbtst10, argc, argv);
+
+    BrightnessSensorTest dbtst11;
+    QTest::qExec(&dbtst11, argc, argv);
+
+    ServiceRoutineTest dbtst12;
+    QTest::qExec(&dbtst12, argc, argv);
+
+    IngredientTest dbtst13;
+    QTest::qExec(&dbtst13, argc, argv);
+
+    return 0;
 
     // return a.exec();
 }

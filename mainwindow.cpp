@@ -147,6 +147,10 @@ void MainWindow::resetActiveEntities(Card *c)
 
 void MainWindow::resetServiceButtons()
 {
+    if (!activePerson->getEmployed()) {
+        disableServiceButtons();
+        return;
+    }
     ui->buttonAdmin->setEnabled(activePerson->getAdmin());
     ui->buttonService->setEnabled(activePerson->getStaff());
 }
@@ -236,7 +240,7 @@ void MainWindow::on_buttonCard_clicked()
         styleDrinkButtons();
         disableControlButtons();
         ui->buttonBigPortion->setChecked(false);
-        ui->buttonAdmin->setEnabled(false);
+        // ui->buttonAdmin->setEnabled(false);
 
         break;
     }
