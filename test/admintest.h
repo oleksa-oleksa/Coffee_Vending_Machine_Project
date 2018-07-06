@@ -9,6 +9,8 @@ class AdminTest: public QObject
 {
     Q_OBJECT
     private slots:
+        void testAddPerson();
+        void testAddBankAccount();
 
 };
 

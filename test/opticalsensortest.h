@@ -10,6 +10,9 @@ class OpticalSensorTest: public QObject
 {
     Q_OBJECT
     private slots:
+        //void testGetOpicalValue();
+        void testGetOpticalSensorsMeasurement();
+
 };
 
 #endif // OPTICALSENSORTEST_H
