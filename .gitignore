@@ -1,3 +1,11 @@
+#Genenal files to ignore
+**/*.o
+*.o
+**/*.app
+*.app
+build*
+**/build*
+
 #iOS Folders should be ignored
 .DS_Store
 **/.DS_Store
