@@ -89,7 +89,7 @@ class ControlUnit
         void connectMilkMaker(Milkmaker *actuator);
         void connectBrewGroup(Brewgroup *actuator);
 
-
+        Ingredient *getIngredients();
 };
 extern ControlUnit control;
 

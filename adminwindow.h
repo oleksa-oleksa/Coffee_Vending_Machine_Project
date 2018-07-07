@@ -42,8 +42,6 @@ private slots:
 
     void on_buttonSaveNewPerson_clicked();
 
-    void on_buttonEditEmployee_clicked();
-
     void on_buttonIngredientStatus_clicked();
 
     void on_buttonCancelNewPerson_clicked();

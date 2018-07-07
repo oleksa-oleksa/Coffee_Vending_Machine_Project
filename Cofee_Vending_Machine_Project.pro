@@ -29,7 +29,8 @@ SUBDIRS += \
 FORMS += \
     mainwindow.ui \
     adminwindow.ui \
-    drinkwindow.ui
+    drinkwindow.ui \
+    ingredientwindow.ui
 
 DISTFILES += \
     Cofee_Vending_Machine_Project.pro.user \
@@ -86,7 +87,8 @@ HEADERS += \
     adminwindow.h \
     employeecombobox.h \
     drinkwindow.h \
-    preparationstatus.h
+    preparationstatus.h \
+    ingredientwindow.h
 
 SOURCES += \
     account.cpp \
@@ -136,7 +138,8 @@ SOURCES += \
     espresso.cpp \
     employeecombobox.cpp \
     drinkwindow.cpp \
-    globalobjects.cpp
+    globalobjects.cpp \
+    ingredientwindow.cpp
 
 test {
     message(TEST BUILD)

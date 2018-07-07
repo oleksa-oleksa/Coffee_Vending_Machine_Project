@@ -13,6 +13,7 @@ DrinkWindow::DrinkWindow(QWidget *parent) :
     ui(new Ui::DrinkWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Vending Machine Drink Recipies");
     styleCoffee();
     styleCappuccino();
     styleEspresso();

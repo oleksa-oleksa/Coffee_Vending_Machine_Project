@@ -2,6 +2,8 @@
 #include "adminwindow.h"
 #include "ui_adminwindow.h"
 #include "drinkwindow.h"
+#include "ingredientwindow.h"
+#include "ingredient.h"
 #include "person.h"
 #include "bankaccount.h"
 #include "account.h"
@@ -10,6 +12,8 @@
 #include <QtDebug>
 #include <string>
 #include "admin.h"
+#include "controlunit.h"
+
 
 Admin *admin = NULL;
 Person *adminPerson;
@@ -164,9 +168,6 @@ void AdminWindow::setAdminControlButtonsStyle()
     QString colorAddNewEmployee  = QString("background-color: #0059b3; color: #ffffff;");
     ui->buttonAddNewEmployee->setStyleSheet(colorAddNewEmployee);
 
-    QString colorEditEmployee  = QString("background-color: #0066cc; color: #ffffff;");
-    ui->buttonEditEmployee->setStyleSheet(colorEditEmployee);
-
     QString colorEditDrinks  = QString("background-color: #0073e6; color: #ffffff;");
     ui->buttonViewDrinksRecipe->setStyleSheet(colorEditDrinks);
 
@@ -261,10 +262,6 @@ void AdminWindow::on_buttonAddNewEmployee_clicked()
     ui->labelCardIDForm->setText(newCard->getCardID().toQstring());
 }
 
-void AdminWindow::on_buttonEditEmployee_clicked()
-{
-    ui->widgetAddNewEmployee->hide();
-}
 
 void AdminWindow::on_buttonViewDrinksRecipe_clicked()
 {
@@ -278,7 +275,10 @@ void AdminWindow::on_buttonViewDrinksRecipe_clicked()
 void AdminWindow::on_buttonIngredientStatus_clicked()
 {
     ui->widgetAddNewEmployee->hide();
-
+    IngredientWindow tanksWindow;
+    tanksWindow.setIngredientLevels(control.getIngredients());
+    tanksWindow.setModal(true);
+    tanksWindow.exec();
 }
 
 

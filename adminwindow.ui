@@ -200,25 +200,12 @@
     <rect>
      <x>30</x>
      <y>10</y>
-     <width>201</width>
+     <width>251</width>
      <height>40</height>
     </rect>
    </property>
    <property name="text">
     <string>New employee</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="buttonEditEmployee">
-   <property name="geometry">
-    <rect>
-     <x>219</x>
-     <y>10</y>
-     <width>201</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Edit employee</string>
    </property>
   </widget>
   <widget class="QLabel" name="labelAdminProfilePhoto">
@@ -243,9 +230,9 @@
   <widget class="QPushButton" name="buttonViewDrinksRecipe">
    <property name="geometry">
     <rect>
-     <x>409</x>
+     <x>270</x>
      <y>10</y>
-     <width>201</width>
+     <width>251</width>
      <height>40</height>
     </rect>
    </property>
@@ -256,9 +243,9 @@
   <widget class="QPushButton" name="buttonIngredientStatus">
    <property name="geometry">
     <rect>
-     <x>599</x>
+     <x>509</x>
      <y>10</y>
-     <width>161</width>
+     <width>251</width>
      <height>40</height>
     </rect>
    </property>

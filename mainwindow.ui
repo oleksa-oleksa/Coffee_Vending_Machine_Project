@@ -604,48 +604,6 @@
      <string/>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBarDrinkPreparation">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>600</y>
-      <width>171</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="maximum">
-     <number>4</number>
-    </property>
-    <property name="value">
-     <number>3</number>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labelDrinkPreparation">
-    <property name="geometry">
-     <rect>
-      <x>590</x>
-      <y>580</y>
-      <width>81</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: #ffffff</string>
-    </property>
-    <property name="text">
-     <string>Sugar</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
    <widget class="QPushButton" name="buttonCupPlaceEmpty">
     <property name="geometry">
      <rect>
@@ -759,8 +717,6 @@
    <zorder>labelCupHolderImage</zorder>
    <zorder>labelCupEmpty</zorder>
    <zorder>labelProgressBackground</zorder>
-   <zorder>progressBarDrinkPreparation</zorder>
-   <zorder>labelDrinkPreparation</zorder>
    <zorder>buttonCupPlaceEmpty</zorder>
    <zorder>labelCupFull</zorder>
    <zorder>buttonCupTakeCupBack</zorder>

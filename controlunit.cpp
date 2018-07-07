@@ -393,19 +393,23 @@ PreparationStatus ControlUnit::prepareSelectedDrink()
 
     //=============================================================
     // Motor Simulation for Drink Mixing
-
-
     if (activeUserChoice->getSelectedDrink() != HOTWATER) {
         MotorType optionalMotor = MOTOR_TYPES_NUMBER;
 
         motor[MOTOR_SUGAR]->rotate(activeUserChoice->getSugarAmount());
+        ingredientTanks->setSugarIngredient(ingredientTanks->getSugarIngredient() - activeUserChoice->getSugarAmount());
+
         motor[MOTOR_MILK]->rotate(activeUserChoice->getMilkAmount());
+        ingredientTanks->setMilkIngredient(ingredientTanks->getMilkIngredient() - activeUserChoice->getMilkAmount());
+
         if (activeUserChoice->getSelectedDrink() != CACAO) {
             motor[MOTOR_COFFEE]->rotate(activeUserChoice->getSpecificRecipeComponent());
+            ingredientTanks->setCoffeeIngredient(ingredientTanks->getCoffeeIngredient() - activeUserChoice->getSpecificRecipeComponent());
             optionalMotor = MOTOR_COFFEE;
         }
         else {
             motor[MOTOR_CACAO]->rotate(activeUserChoice->getSpecificRecipeComponent());
+            ingredientTanks->setCacaoIngredient(ingredientTanks->getCacaoIngredient() - activeUserChoice->getSpecificRecipeComponent());
             optionalMotor = MOTOR_CACAO;
         }
 
@@ -510,5 +514,10 @@ void ControlUnit::unblockCupHolder()
 {
     qDebug() << "CONTROL UNIT: Cup Holder is unblocked";
 
+}
+
+Ingredient *ControlUnit::getIngredients()
+{
+    return this->ingredientTanks;
 }
 

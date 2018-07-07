@@ -36,6 +36,6 @@ class Ingredient
       int getCacaoIngredient() const;
 };
 
-extern Ingredient *tankWithIngredients;
+extern Ingredient *ingredientTanks;
 
 #endif

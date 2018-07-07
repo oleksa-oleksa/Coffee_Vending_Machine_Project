@@ -2,6 +2,7 @@
 #define SERVICEROUTINE_H
 #include "ingredient.h"
 
+#define REFILL_THRESHOLD 0.5
 
 class ServiceRoutine
 {

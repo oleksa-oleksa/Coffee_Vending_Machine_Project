@@ -15,25 +15,25 @@ ServiceRoutine::~ServiceRoutine()
 
 void ServiceRoutine::refillOrNot(Ingredient *tankIngredient)
 {
-    if (tankIngredient->getCacaoIngredient() < CACAO_TANK_AMOUNT / 2)
+    if (tankIngredient->getCacaoIngredient() < CACAO_TANK_AMOUNT * REFILL_THRESHOLD)
     {
         tankIngredient->refillCacaoTank();
         qDebug() << "Tank for Cacao was refilled!";
     }
 
-    if (tankIngredient->getCoffeeIngredient() < COFFEE_TANK_AMOUNT)
+    if (tankIngredient->getCoffeeIngredient() < COFFEE_TANK_AMOUNT * REFILL_THRESHOLD)
     {
         tankIngredient->refillCoffeeTank();
         qDebug() << "Tank for Coffee was refilled!";
     }
 
-    if (tankIngredient->getMilkIngredient() < MILK_TANK_AMOUNT)
+    if (tankIngredient->getMilkIngredient() < MILK_TANK_AMOUNT * REFILL_THRESHOLD)
     {
         tankIngredient->refillMilkTank();
         qDebug() << "Tank for Milk was refilled!";
     }
 
-    if (tankIngredient->getSugarIngredient() < SUGAR_TANK_AMOUNT)
+    if (tankIngredient->getSugarIngredient() < SUGAR_TANK_AMOUNT * REFILL_THRESHOLD)
     {
         tankIngredient->refillSugarTank();
         qDebug() << "Tank for Sugar was refilled!";
