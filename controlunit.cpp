@@ -2,6 +2,7 @@
 #include "controlunit.h"
 #include "serviceroutine.h"
 #include <QCoreApplication>
+#include <math.h>
 
 ControlUnit::ControlUnit() : ingredientTanks(NULL)
 {
@@ -215,11 +216,11 @@ void ControlUnit::maintenanceRoutine()
     if (display->getActuatorState() == UNDEFINED)
         display->setActuatorState(OK);
 
-//    for (int i = 0; i < AMOUNT_OF_MOTORS; i++)
-//    {
-//        if (motor[i]->getActuatorState() == UNDEFINED)
-//            motor[i]->setActuatorState(OK);
-//    }
+    for (int i = 0; i < AMOUNT_OF_MOTORS; i++)
+    {
+        if (motor[i]->getActuatorState() == UNDEFINED)
+            motor[i]->setActuatorState(OK);
+    }
 
     if (heater->getActuatorState() == UNDEFINED)
         heater->setActuatorState(OK);
@@ -350,6 +351,7 @@ PreparationStatus ControlUnit::checkStartConditions()
     if (activeUserChoice->payDrink())
     {
         qDebug() << "CONTROL UNIT: YOU HAVE PAID! WE CAN START PREPARE A DRINK!";
+        writeMessageLCD(WAIT_PLEASE);
         return PREPARE_IS_ALLOWED;
     }
     else
@@ -371,6 +373,7 @@ PreparationStatus ControlUnit::prepareSelectedDrink()
         return PREPARE_ERROR_NO_INGREDIENT;
     }
 
+    //=============================================================
     // heat water to the recipe temperature
     heater->setWorkTemperature(activeUserChoice->getRecipeTemperature());
     heater->heatWater();
@@ -382,18 +385,46 @@ PreparationStatus ControlUnit::prepareSelectedDrink()
     // put the heater back in a idle state
     heater->setWorkTemperature(heater->getIdleTemperature());
 
-//    if (temperatureSensor->compareTemperature()) {
-//        qDebug() << "CONTROL UNIT: Water heater does not heat a water. Aborted...";
-//        abortPreparation();
-//        return PREPARE_ERROR_HEATER;
-//    }
+    if (!temperatureSensor->compareTemperature()) {
+        qDebug() << "CONTROL UNIT: Water heater does not heat a water. Aborted...";
+        abortPreparation();
+        return PREPARE_ERROR_HEATER;
+    }
 
+    //=============================================================
+    // Motor Simulation for Drink Mixing
+
+
+    if (activeUserChoice->getSelectedDrink() != HOTWATER) {
+        MotorType optionalMotor = MOTOR_TYPES_NUMBER;
+
+        motor[MOTOR_SUGAR]->rotate(activeUserChoice->getSugarAmount());
+        motor[MOTOR_MILK]->rotate(activeUserChoice->getMilkAmount());
+        if (activeUserChoice->getSelectedDrink() != CACAO) {
+            motor[MOTOR_COFFEE]->rotate(activeUserChoice->getSpecificRecipeComponent());
+            optionalMotor = MOTOR_COFFEE;
+        }
+        else {
+            motor[MOTOR_CACAO]->rotate(activeUserChoice->getSpecificRecipeComponent());
+            optionalMotor = MOTOR_CACAO;
+        }
+
+        // Waiting for rotation
+        while (motor[MOTOR_SUGAR]->getIsRotating() ||
+               motor[MOTOR_MILK]->getIsRotating() ||
+               motor[optionalMotor]->getIsRotating()) {
+            QCoreApplication::instance()->processEvents();
+        }
+    }
+
+    //=============================================================
     // Make Milk Foam if required
     // it is assumed milk maker can not have an error state and a drink will be prepared anyway
     if (activeUserChoice->getSelectedDrink() == CAPPUCCINO || activeUserChoice->getSelectedDrink() == LATTEMACCHIOTO) {
         milkMaker->makeMilkFoam(activeUserChoice->getSelectedDrink());
     }
 
+    //=============================================================
     // Pour a drink into a cup
     flow->setRecipeAmountOfLiquid(activeUserChoice);
     if (flow->mainFlowmeterRoutine()) {
@@ -404,6 +435,7 @@ PreparationStatus ControlUnit::prepareSelectedDrink()
         return PREPARE_ERROR_FLOW;
     }
 
+    //=============================================================
     writeMessageLCD(TAKE_YOUR_DRINK);
     return PREPARE_DONE;
 }
@@ -449,6 +481,7 @@ void ControlUnit::connectMotor(DC_Motor *actuator, int numOfActuators)
 {
   for(int i = 0; i < numOfActuators; i++) {
       motor[i] = &actuator[i];
+      motor[i]->setMotorType(static_cast<MotorType>(i));
   }
 }
 
