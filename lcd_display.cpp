@@ -139,6 +139,9 @@ void LCD_Display::writeSystemErrorMessage(PreparationStatus message) {
     case (PREPARE_ERROR_FLOW):
         setTitle("Flowmeter error. Take your card...");
         break;
+    case (PREPARE_ERROR_HEATER):
+        setTitle("Water heater error. Take your card...");
+        break;
     default:
         break;
     }
@@ -146,4 +149,8 @@ void LCD_Display::writeSystemErrorMessage(PreparationStatus message) {
 
 void LCD_Display::writeTakeDrinkMessage() {
     setTitle("Take your drink! Don't forget your card.");
+}
+
+void LCD_Display::writeWaitText() {
+    setTitle("Brewing. Please wait...");
 }

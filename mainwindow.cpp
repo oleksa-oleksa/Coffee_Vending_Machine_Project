@@ -4,7 +4,7 @@
 #include "adminwindow.h"
 #include "person.h"
 #include "rfid_scanner.h"
-#include "QTimer"
+#include <QTimer>
 #include <QtDebug>
 #include "interactionunit.h"
 #include "userchoice.h"
@@ -408,6 +408,12 @@ void MainWindow::styleLCDErrorSystem()
     ui->labelPrice->setText(num);
 }
 
+void MainWindow::styleLCDWait() {
+    ui->labelLCD->setStyleSheet("color: #88cc00; border: 0px;");
+    ui->labelLCD->setText(display.getTitle());
+}
+
+
 void MainWindow::styleLCDTakeDrink() {
 
     ui->labelLCD->setStyleSheet("color: #88cc00; border: 0px;");
@@ -612,6 +618,8 @@ void MainWindow::on_buttonStart_clicked()
 
         control.blockCupHolder();
         styleBlockedCupHolder();
+
+        styleLCDWait();
 
         // DRINK PREPARATION
         // Either "DONE" or some type of error

@@ -1,6 +1,7 @@
 // Implemented by Oleksandra Baga
 #include "controlunit.h"
 #include "serviceroutine.h"
+#include <QCoreApplication>
 
 ControlUnit::ControlUnit() : ingredientTanks(NULL)
 {
@@ -161,7 +162,7 @@ void ControlUnit::writeMessageLCD(LCD_Message message)
         display->writeCardErrorText();
         break;
     case (WAIT_PLEASE):
-        // TODO
+        display->writeWaitText();
         break;
     case (TAKE_YOUR_DRINK):
         display->writeTakeDrinkMessage();
@@ -362,14 +363,39 @@ PreparationStatus ControlUnit::checkStartConditions()
 
 PreparationStatus ControlUnit::prepareSelectedDrink()
 {
+    writeMessageLCD(WAIT_PLEASE);
+
     if (!checkIngredients()) {
         qDebug() << "CONTROL UNIT: Not enough ingredients. Aborted...";
         abortPreparation();
         return PREPARE_ERROR_NO_INGREDIENT;
     }
 
+    // heat water to the recipe temperature
+    heater->setWorkTemperature(activeUserChoice->getRecipeTemperature());
+    heater->heatWater();
+
+    // Waiting for water heating
+    while (heater->getIsHeating()) {
+        QCoreApplication::instance()->processEvents();
+    }
+    // put the heater back in a idle state
+    heater->setWorkTemperature(heater->getIdleTemperature());
+
+//    if (temperatureSensor->compareTemperature()) {
+//        qDebug() << "CONTROL UNIT: Water heater does not heat a water. Aborted...";
+//        abortPreparation();
+//        return PREPARE_ERROR_HEATER;
+//    }
+
+    // Make Milk Foam if required
+    // it is assumed milk maker can not have an error state and a drink will be prepared anyway
+    if (activeUserChoice->getSelectedDrink() == CAPPUCCINO || activeUserChoice->getSelectedDrink() == LATTEMACCHIOTO) {
+        milkMaker->makeMilkFoam(activeUserChoice->getSelectedDrink());
+    }
+
+    // Pour a drink into a cup
     flow->setRecipeAmountOfLiquid(activeUserChoice);
-    // Pour a drink
     if (flow->mainFlowmeterRoutine()) {
         qDebug() << "CONTROL UNIT: Flowmeter has done his task successfuly";
     }

@@ -47,6 +47,7 @@ class LCD_Display : public Actuator
         void writeUserChoiceText(UserChoice *activeUserChoice);
         void writeSystemErrorMessage(PreparationStatus message);
         void writeTakeDrinkMessage();
+        void writeWaitText();
         QString printMessage(PreparationStatus status);
 
 };

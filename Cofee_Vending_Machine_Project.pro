@@ -189,6 +189,7 @@ test {
         test/admintest.h \
         test/serviceroutinetest.h \
         test/ingredienttest.h
+
 }
 else {
     message(NORMAL BUILD)

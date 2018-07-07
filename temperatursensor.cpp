@@ -1,18 +1,13 @@
+// Created by Oleksandra Baga
 #include "temperatursensor.h"
+#include "QDebug"
 
 TemperaturSensor::TemperaturSensor()
 {
     sensorType = TEMPERATURE;
     sensorState = UNDEFINED;
-    temperature = 0;
-}
-
-
-TemperaturSensor::TemperaturSensor(double setTemperature)
-{
-    sensorType = TEMPERATURE;
-    sensorState = UNDEFINED;
-    temperature = setTemperature;
+    referenceTemperature = 0;
+    currentTemperature = 0;
 }
 
 
@@ -21,8 +16,34 @@ TemperaturSensor::~TemperaturSensor()
 
 }
 
-double TemperaturSensor::getTemperature()
-{
-    return this->temperature;
+bool TemperaturSensor::compareTemperature() {
+
+    if (referenceTemperature <= currentTemperature) {
+        qDebug() << "TEMPERATUR SENSOR: Reference temperature is reached";
+        return true;
+    }
+    else {
+        qDebug() << "TEMPERATUR SENSOR: Reference temperature is higher";
+        return false;
+    }
+}
+
+int TemperaturSensor::getCurrentTemperature() {
+
+    return currentTemperature;
+}
+
+void TemperaturSensor::setCurrentTemperature(int currentTemperature) {
+
+    this->currentTemperature = currentTemperature;
+}
+
+void TemperaturSensor::setReferenceTemperature(int referenceTemperature) {
+
+    this->referenceTemperature = referenceTemperature;
+}
+int TemperaturSensor::getReferenceTemperature() {
+
+    return referenceTemperature;
 }
 
