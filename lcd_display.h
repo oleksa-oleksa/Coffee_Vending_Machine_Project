@@ -4,6 +4,7 @@
 #include "actuator.h"
 #include "QString"
 #include "userchoice.h"
+#include "preparationstatus.h"
 
 using namespace std;
 
@@ -14,9 +15,9 @@ enum LCD_Message {
     ERROR,
     WAIT_PLEASE,
     TAKE_YOUR_DRINK,
-    SYSTEM_ERROR
+    SYSTEM_ERROR,
+    PAYMENT_ERROR
 };
-
 
 class LCD_Display : public Actuator
 {
@@ -42,11 +43,11 @@ class LCD_Display : public Actuator
 
         void writeDefaultText(UserChoice *activeUserChoice);
         void writeGreetingText(UserChoice *activeUserChoice);
-        void writeErrorText();
+        void writeCardErrorText();
         void writeUserChoiceText(UserChoice *activeUserChoice);
-
-
-
+        void writeSystemErrorMessage(PreparationStatus message);
+        void writeTakeDrinkMessage();
+        QString printMessage(PreparationStatus status);
 
 };
 

@@ -46,6 +46,7 @@ bool RFID_Scanner::getRfidValidation(Card *userCard)
     // Card Status Validation
     if (userCard->getCardStatus() != ACTIVE)
     {
+        qDebug() << "RFID SCANNER ERROR: card status is: " << userCard->printCardStatus();
         return isChoiceAllowed = false;
 
     }
@@ -53,13 +54,14 @@ bool RFID_Scanner::getRfidValidation(Card *userCard)
     // Account Status Validation
     if (userCard->getAccount()->getAccountStatus() != ACTIVE_OK)
     {
+        qDebug() << "RFID SCANNER ERROR: Acount status is: " << userCard->getAccount()->printAccountStatus();
         return isChoiceAllowed = false;
-
     }
 
     // isEmployed Validation
     if (!userCard->getAccount()->getOwner()->getEmployed())
     {
+        qDebug() << "RFID SCANNER ERROR: Employed flag is: " << userCard->getAccount()->getOwner()->getEmployed();
         return isChoiceAllowed = false;
 
     }

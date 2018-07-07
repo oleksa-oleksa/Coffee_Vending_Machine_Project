@@ -1,4 +1,5 @@
 #include "lcd_display.h"
+#include "controlunit.h"
 #include <QDebug>
 
 LCD_Display::LCD_Display()
@@ -6,6 +7,7 @@ LCD_Display::LCD_Display()
     //actuator_duration
     actuatorType = LCD;
     actuatorState = UNDEFINED;
+    isBacklit = false;
 }
 
 LCD_Display::~LCD_Display()
@@ -83,7 +85,7 @@ void LCD_Display::writeGreetingText(UserChoice *activeUserChoice)
 
 }
 
-void LCD_Display::writeErrorText()
+void LCD_Display::writeCardErrorText()
 {
     setTitle("Not a valid card! Aborted...");
     setDrinkName("NO_DRINK");
@@ -112,4 +114,36 @@ void LCD_Display::writeUserChoiceText(UserChoice *activeUserChoice)
 
     setPrice(activeUserChoice->getPrice());
 
+}
+
+void LCD_Display::writeSystemErrorMessage(PreparationStatus message) {
+    switch (message) {
+    case (PREPARE_ERROR_NO_CARD):
+        setTitle("Insert card!");
+        break;
+    case (PREPARE_ERROR_NO_DRINK):
+        setTitle("Select drink first!");
+        break;
+    case (PREPARE_ERROR_NO_CUP):
+        setTitle("Place cup first!");
+        break;
+    case (PREPARE_ERROR_FULL_CUP):
+        setTitle("Take your drink first!");
+        break;
+    case (PREPARE_ERROR_PAYMENT):
+        setTitle("Payment error! Take your card...");
+        break;
+    case (PREPARE_ERROR_NO_INGREDIENT):
+        setTitle("Not enough ingredients!");
+        break;
+    case (PREPARE_ERROR_FLOW):
+        setTitle("Flowmeter error. Take your card...");
+        break;
+    default:
+        break;
+    }
+}
+
+void LCD_Display::writeTakeDrinkMessage() {
+    setTitle("Take your drink! Don't forget your card.");
 }

@@ -3,7 +3,7 @@
 #include "personid.h"
 #include "person.h"
 #include <QtDebug>
-const float CREDIT_LIMIT = 10.0;
+const float CREDIT_LIMIT = 5.0;
 
 std::vector<Account>Account::AllAccounts = std::vector<Account>();
 

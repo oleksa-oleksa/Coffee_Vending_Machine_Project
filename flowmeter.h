@@ -19,6 +19,8 @@ class Flowmeter : public Sensor
         void setRecipeAmountOfLiquid(UserChoice *activeUserChoice);
         bool mainFlowmeterRoutine();
         bool getHasPreparedDrink();
+        void setHasPreparedDrink(bool flag);
+
 
 };
 

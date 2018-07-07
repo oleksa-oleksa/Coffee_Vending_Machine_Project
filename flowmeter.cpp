@@ -45,3 +45,7 @@ bool Flowmeter::getHasPreparedDrink()
     qDebug() << "FLOWMETER: A drink just have been prepared: " << hasPreparedDrink;
     return hasPreparedDrink;
 }
+
+void Flowmeter::setHasPreparedDrink(bool flag) {
+    hasPreparedDrink = flag;
+}

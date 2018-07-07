@@ -34,6 +34,8 @@ private slots:
     void styleEjectButton();
     void styleDrinkButtons();
     void styleLCDErrorCard();
+    void styleLCDErrorSystem();
+    void styleLCDTakeDrink();
     void on_buttonAdmin_clicked();
     void on_buttonCard_clicked();
     void on_buttonLessSugar_clicked();

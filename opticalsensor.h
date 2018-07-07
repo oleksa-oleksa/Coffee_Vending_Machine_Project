@@ -4,6 +4,8 @@
 #include "sensor.h"
 #include "flowmeter.h"
 
+#define OPTICAL_DISTANCE 5
+
 enum CupHolderState
 {
     NO_CUP,

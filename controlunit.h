@@ -23,12 +23,6 @@
 #define AMOUNT_OF_MOTORS 4
 #define MINIMAl_THRESHOLD 5
 
-enum BrewStatus {
-    BREW_NOT_STARTED,
-    BREW_IN_PROGRESS,
-    BREW_ERROR,
-    BREW_DONE
-};
 
 class ControlUnit
 {
@@ -63,20 +57,24 @@ class ControlUnit
         bool checkCard();
         CardHolderState insertCard(Card *card);
         CupHolderState checkCupHolder();
+        void writeMessageLCD(LCD_Message message, PreparationStatus status);
         void writeMessageLCD(LCD_Message message);
+
 
         void maintenanceRoutine();
         bool checkIngredients();
-        bool checkStartConditions();
+        PreparationStatus checkStartConditions();
         void blockCupHolder();
         void abortPreparation();
-        bool prepareSelectedDrink();
+        PreparationStatus prepareSelectedDrink();
         void unblockCupHolder();
         void staffServiceRoutine();
         bool checkSugarAmount();
         bool checkMilkAmount();
         bool checkCoffeeIngredient();
         bool checkCacaoIngredient();
+
+        bool isBrewingFinished();
 
         void connectRFID(RFID_Scanner *sensor);
         void connectFlow(Flowmeter *sensor);

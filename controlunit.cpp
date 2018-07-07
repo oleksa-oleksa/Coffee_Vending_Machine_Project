@@ -23,6 +23,8 @@ ControlUnit::~ControlUnit()
 void ControlUnit::setDisplayBacklight()
 {
 
+    qDebug() << "CONTROL UNIT: setDisplayBacklight() started.";
+
     if (brightSensor->getBrightness() < 3 && !display->getBacklight()) {
         display->setBacklight(true);
         qDebug() << "LCD: Backlight turned on (BRIGHTNESS SENSOR)";
@@ -36,6 +38,8 @@ void ControlUnit::setDisplayBacklight()
 
 void ControlUnit::onStartInit() {
 
+    qDebug() << "CONTROL UNIT: onStartInit() started.";
+    qDebug() << "CONTROL UNIT: CREDIT_LIMIT = 5.0. You can change the limit in account.cpp";
     checkCardReader();
     activeUserChoice->setSelectedDrink(NO_DRINK);
     opticalSensor->setDistanceToObject(10);
@@ -60,6 +64,7 @@ bool ControlUnit::checkCard()
 
 CardHolderState ControlUnit::insertCard(Card *card)
 {
+    qDebug() << "CONTROL UNIT: insertCard() started.";
     // if NO card in RFID
     if (!checkCardReader())
     {
@@ -78,7 +83,7 @@ CardHolderState ControlUnit::insertCard(Card *card)
         // the next card can be inserted in RFID
         else
         {
-            display->writeErrorText();
+            display->writeCardErrorText();
             cardScanner->ejectCard();
 
             return NONVALID_CARD_INSIDE;
@@ -98,9 +103,16 @@ CardHolderState ControlUnit::insertCard(Card *card)
     }
 }
 
+bool ControlUnit::isBrewingFinished()
+{
+    return opticalSensor->getOpticalValue() && flow->getHasPreparedDrink();
+}
+
+
 // we need two sensors for three states: no cup, empty cup, cup with drink
 CupHolderState ControlUnit::checkCupHolder()
 {
+    qDebug() << "CONTROL UNIT: checkCupHolder() started.";
     // if cup detected
     if (opticalSensor->getOpticalValue())
     {
@@ -110,6 +122,7 @@ CupHolderState ControlUnit::checkCupHolder()
             qDebug() << "OPTICAL SENSOR: There is a full cup";
             opticalSensor->setDistanceToObject(10);
             opticalSensor->getOpticalFlowSensorsMeasurements();
+            writeMessageLCD(SYSTEM_ERROR, PREPARE_ERROR_FULL_CUP);
             return FULL_CUP;
         }
 
@@ -145,19 +158,37 @@ void ControlUnit::writeMessageLCD(LCD_Message message)
         display->writeUserChoiceText(activeUserChoice);
         break;
     case (ERROR):
-        display->writeErrorText();
+        display->writeCardErrorText();
         break;
     case (WAIT_PLEASE):
+        // TODO
         break;
     case (TAKE_YOUR_DRINK):
+        display->writeTakeDrinkMessage();
+        break;    
+    case (PAYMENT_ERROR):
+        display->writeSystemErrorMessage(PREPARE_ERROR_PAYMENT);
         break;
+    default:
+        break;
+    }
+}
+
+void ControlUnit::writeMessageLCD(LCD_Message message, PreparationStatus status)
+{
+    switch (message) {
     case (SYSTEM_ERROR):
+        display->writeSystemErrorMessage(status);
+        break;
+    default:
         break;
     }
 }
 
 void ControlUnit::maintenanceRoutine()
 {
+    qDebug() << "CONTROL UNIT: maintenanceRoutine() started.";
+
     checkIngredients();
 
 // Set sensor and actuator states OK if UNDEFINED
@@ -205,10 +236,14 @@ void ControlUnit::staffServiceRoutine()
 {
     ServiceRoutine sr;
     sr.refillOrNot(this->ingredientTanks);
+    // reset all sensors and actuators
+    maintenanceRoutine();
 }
 
 bool ControlUnit::checkIngredients()
 {
+    qDebug() << "CONTROL UNIT: checkIngredients() started.";
+
     if (activeUserChoice->getSelectedDrink() == HOTWATER) {
         qDebug() << "CONTROL UNIT: Water is OK!";
         return true; // it is assumed that we always have water
@@ -270,16 +305,18 @@ bool ControlUnit::checkMilkAmount() {
     return true;
 }
 
-bool ControlUnit::checkStartConditions()
+PreparationStatus ControlUnit::checkStartConditions()
 {
     // get Optical Sensor Measurements
     if (opticalSensor->getOpticalFlowSensorsMeasurements() == NO_CUP) {
         qDebug() << "OPTICAL SENSOR: Place your cup first!";
-        return false;
+        writeMessageLCD(SYSTEM_ERROR, PREPARE_ERROR_NO_CUP);
+        return PREPARE_ERROR_NO_CUP;
     }
     else if (opticalSensor->getOpticalFlowSensorsMeasurements() == FULL_CUP) {
         qDebug() << "OPTICAL SENSOR: Take your cup with prepared drink before order a new one! :)";
-        return false;
+        writeMessageLCD(SYSTEM_ERROR, PREPARE_ERROR_FULL_CUP);
+        return PREPARE_ERROR_FULL_CUP;
     }
 
     else if (opticalSensor->getOpticalFlowSensorsMeasurements() == EMPTY_CUP) {
@@ -290,44 +327,59 @@ bool ControlUnit::checkStartConditions()
     // check if drink is preselected
     if (activeUserChoice->getSelectedDrink() == NO_DRINK) {
         qDebug() << "CONTROL UNIT: Select drink first!";
-        return false;
+        writeMessageLCD(SYSTEM_ERROR, PREPARE_ERROR_NO_DRINK);
+        return PREPARE_ERROR_NO_DRINK;
     }
 
     // check if card is still in the card holder
     if (cardScanner->isValidCardInside() != VALID_CARD_INSIDE)
     {
         qDebug() << "RFID SCANNER: Card missed, please return your card back!";
-        return false;
+        writeMessageLCD(SYSTEM_ERROR, PREPARE_ERROR_NO_CARD);
+        return PREPARE_ERROR_NO_CARD;
     }
 
     if (!checkIngredients()) {
         qDebug() << "CONTROL UNIT: Error: Not enough ingredients...";
-        return false;
+        writeMessageLCD(SYSTEM_ERROR, PREPARE_ERROR_NO_INGREDIENT);
+        return PREPARE_ERROR_NO_INGREDIENT;
     }
 
     // if it is possible to get here, the payment process could start
     if (activeUserChoice->payDrink())
     {
-        qDebug() << "CONTROL UNIT: We can start prepare drink! Yahoo!";
-        qDebug() << "CONTROL UNIT: You can purchase next drink after this one will be prepared!";
-        return true;
+        qDebug() << "CONTROL UNIT: YOU HAVE PAID! WE CAN START PREPARE A DRINK!";
+        return PREPARE_IS_ALLOWED;
     }
     else
     {
         qDebug() << "CONTROL UNIT: Payment error!";
         qDebug() << "CONTROL UNIT: Take your card!";
-        return false;
+        writeMessageLCD(SYSTEM_ERROR, PREPARE_ERROR_PAYMENT);
+        return PREPARE_ERROR_PAYMENT;
     }
 }
 
-bool ControlUnit::prepareSelectedDrink()
+PreparationStatus ControlUnit::prepareSelectedDrink()
 {
     if (!checkIngredients()) {
-        qDebug() << "CONTROL UNIT: Preparation Error! Aborted";
+        qDebug() << "CONTROL UNIT: Not enough ingredients. Aborted...";
         abortPreparation();
-        return false;
+        return PREPARE_ERROR_NO_INGREDIENT;
     }
-    return true;
+
+    flow->setRecipeAmountOfLiquid(activeUserChoice);
+    // Pour a drink
+    if (flow->mainFlowmeterRoutine()) {
+        qDebug() << "CONTROL UNIT: Flowmeter has done his task successfuly";
+    }
+    else {
+        qDebug() << "CONTROL UNIT: Flowmeter had a problem during his task";
+        return PREPARE_ERROR_FLOW;
+    }
+
+    writeMessageLCD(TAKE_YOUR_DRINK);
+    return PREPARE_DONE;
 }
 
 void ControlUnit::abortPreparation()

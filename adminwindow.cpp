@@ -59,6 +59,7 @@ void AdminWindow::loadPersonTableWidget()
     ui->tableWidgetPerson->setColumnCount(7);
     ui->tableWidgetPerson->setHorizontalHeaderLabels(labelsPerson);
 
+
     // Items
     for (size_t row = 0; row < Person::AllEmployee.size(); row++)
     {
@@ -70,6 +71,7 @@ void AdminWindow::loadPersonTableWidget()
         ui->tableWidgetPerson->setItem(row, 5, new QTableWidgetItem(Person::AllEmployee[row].getAdmin() ? "true" : "false"));
         ui->tableWidgetPerson->setItem(row, 6, new QTableWidgetItem(Person::AllEmployee[row].getStaff() ? "true" : "false"));
     }
+
 }
 
 void AdminWindow::loadBankAccountTableWidget()

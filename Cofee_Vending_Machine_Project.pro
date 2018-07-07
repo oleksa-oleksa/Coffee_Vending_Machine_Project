@@ -85,7 +85,8 @@ HEADERS += \
     defaultcoffeemachine.h \
     adminwindow.h \
     employeecombobox.h \
-    drinkwindow.h
+    drinkwindow.h \
+    preparationstatus.h
 
 SOURCES += \
     account.cpp \

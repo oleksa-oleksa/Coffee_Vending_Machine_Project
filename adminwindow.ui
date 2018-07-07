@@ -60,7 +60,7 @@
       <enum>QAbstractItemView::SelectRows</enum>
      </property>
      <attribute name="horizontalHeaderVisible">
-      <bool>false</bool>
+      <bool>true</bool>
      </attribute>
     </widget>
     <widget class="QPushButton" name="buttonReloadPersonTable">

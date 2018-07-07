@@ -28,10 +28,10 @@ OpticalSensor::~OpticalSensor()
 
 bool OpticalSensor::getOpticalValue()
 {
-    // It is assumed that positive distanceToObject < 5 means the object is placed correctly
-    // the distanceToObject > 5 means NO object was detected and isObjectDetected = false
+    // It is assumed that positive distanceToObject < OPTICAL_DISTANCE means the object is placed correctly
+    // the distanceToObject > OPTICAL_DISTANCE means NO object was detected and isObjectDetected = false
 
-    if (distanceToObject < 5)
+    if (distanceToObject < OPTICAL_DISTANCE)
     {
         isObjectDetected = true;
 
@@ -78,6 +78,7 @@ CupHolderState OpticalSensor::getOpticalFlowSensorsMeasurements()
     else
     {
         qDebug() << "OPTICAL SENSOR: Cup holder is empty";
+        flow->setHasPreparedDrink(false);
         return NO_CUP;
     }
 }

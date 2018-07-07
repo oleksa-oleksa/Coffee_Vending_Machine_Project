@@ -396,6 +396,28 @@ void MainWindow::styleLCDErrorCard()
     ui->labelPrice->setText("");
 }
 
+
+void MainWindow::styleLCDErrorSystem()
+{
+    ui->labelLCD->setStyleSheet("color: #ff1a1a; border: 0px;");
+    ui->labelLCD->setText(display.getTitle());
+
+    ui->labelSelectedDrink->setText(display.getDrinkName());
+
+    QString num = QString::number(activeUserChoice->getPrice(), 'f', 2);
+    ui->labelPrice->setText(num);
+}
+
+void MainWindow::styleLCDTakeDrink() {
+
+    ui->labelLCD->setStyleSheet("color: #88cc00; border: 0px;");
+    ui->labelLCD->setText(display.getTitle());
+
+    ui->labelSelectedDrink->setText("");
+    ui->labelPrice->setText("");
+}
+
+
 void MainWindow::styleEjectButton()
 {
     ui->buttonCard->setStyleSheet("background-color: #e67300; color: #ffffff;");
@@ -583,20 +605,34 @@ void MainWindow::on_buttonCancel_clicked()
 
 void MainWindow::on_buttonStart_clicked()
 {
-    if (control.checkStartConditions()) {
+    // Either "ALLOWED" or some type of error
+    PreparationStatus status = control.checkStartConditions();
+
+    if (status == PREPARE_IS_ALLOWED) {
 
         control.blockCupHolder();
         styleBlockedCupHolder();
 
-        // DRINK PREPARE
-        if (control.prepareSelectedDrink()) {
+        // DRINK PREPARATION
+        // Either "DONE" or some type of error
+        if (control.prepareSelectedDrink() == PREPARE_DONE) {
              control.unblockCupHolder();
              styleCupWithDrink();
+             styleLCDTakeDrink();
         }
-        else {
+            else {
             control.unblockCupHolder();
             styleEmptyCupHolder();
+            styleLCDErrorSystem();
         }
+    } else if (status == PREPARE_ERROR_FULL_CUP) {
+        //qDebug() << "ERROR: Remove the drink first";
+        styleLCDErrorSystem();
+    }
+    else {
+        control.unblockCupHolder();
+        styleEmptyCupHolder();
+        styleLCDErrorSystem();
     }
 }
 
@@ -684,6 +720,7 @@ void MainWindow::on_buttonCupPlaceEmpty_clicked()
         default:
                     break;
     }
+    styleLCDChoiceInformation();
 }
 
 
@@ -696,19 +733,21 @@ void MainWindow::on_buttonCupTakeCupBack_clicked()
         default:
                     break;
     }
+    styleLCDChoiceInformation();
 }
 
 
 void MainWindow::on_buttonCupTakeDrink_clicked()
 {
-    switch (control.checkCupHolder()) {
-        case FULL_CUP:
-                    styleEmptyCupHolder();
+    if (control.isBrewingFinished()) {
+        styleEmptyCupHolder();
+        flow.setHasPreparedDrink(false);
+        opticalSensor.setDistanceToObject(10);
+        ui->buttonBigPortion->setChecked(false);
 
-                    break;
-        default:
-                    break;
     }
+
+    styleLCDChoiceInformation();
 }
 
 void MainWindow::on_comboboxSelectPerson_currentIndexChanged(int index)
