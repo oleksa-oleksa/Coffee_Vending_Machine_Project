@@ -95,6 +95,7 @@ void Person::setID(PersonID personID)
 
 bool Person::getEmployed()
 {
+    qDebug() << "PERSON GETTER: Employed flag is: " << this->isEmployed;
     return isEmployed;
 }
 

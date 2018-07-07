@@ -53,7 +53,7 @@ void Card::setCardID(CardID newCardID)
 CardStatus Card::getCardStatus()
 {
     QString str = printCardStatus();
-    qDebug() << "GETTER: Card status is: " << str;
+    qDebug() << "CARD GETTER: Card status is: " << str;
     return cardStatus;
 
 }

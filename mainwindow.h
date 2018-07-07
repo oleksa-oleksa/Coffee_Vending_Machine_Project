@@ -52,17 +52,15 @@ private slots:
     void on_buttonCancel_clicked();
     void on_buttonStart_clicked();
     void styleEmptyCupHolder();
+    void styleBlockedCupHolder();
     void styleCupPlacedEmplty();
     void styleCupWithDrink();
     void on_buttonCupTakeDrink_clicked();
     void on_buttonCupPlaceEmpty_clicked();
     void styleCardHolder();
     void on_buttonCupTakeCupBack_clicked();
-
     void on_comboboxSelectPerson_currentIndexChanged(int index);
-
     void on_buttonRefreshUsers_clicked();
-
     void on_buttonService_clicked();
 
 private:

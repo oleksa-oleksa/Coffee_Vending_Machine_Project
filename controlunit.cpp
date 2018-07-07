@@ -209,57 +209,131 @@ void ControlUnit::staffServiceRoutine()
 
 bool ControlUnit::checkIngredients()
 {
+    if (activeUserChoice->getSelectedDrink() == HOTWATER) {
+        qDebug() << "CONTROL UNIT: Water is OK!";
+        return true; // it is assumed that we always have water
+    }
 
+    if (!checkSugarAmount()) {
+        return false;
+    }
+
+    if (!checkMilkAmount()) {
+        return false;
+    }
+
+    if (activeUserChoice->getSelectedDrink() == CACAO) {
+        if (!checkCacaoIngredient()) {
+            return false;
+        }
+    }
+    else if (activeUserChoice->getSelectedDrink() != HOTWATER) {
+        if (!checkCoffeeIngredient()) {
+            return false;
+        }
+    }
+
+    qDebug() << "CONTROL UNIT: All Ingredients are OK!";
+    return true;
+}
+
+
+bool ControlUnit::checkCacaoIngredient() {
+    if (ingredientTanks->getCacaoIngredient() < activeUserChoice->getSpecificRecipeComponent() + MINIMAl_THRESHOLD) {
+        qDebug() << "CONTROL UNIT: Cacao Powder is not enough!";
+        return false;
+    }
+    return true;
+}
+
+bool ControlUnit::checkCoffeeIngredient() {
+    if (ingredientTanks->getCoffeeIngredient() < activeUserChoice->getSpecificRecipeComponent() + MINIMAl_THRESHOLD) {
+        qDebug() << "CONTROL UNIT: Coffee Powder is not enough!";
+        return false;
+    }
+    return true;
+}
+
+bool ControlUnit::checkSugarAmount() {
+    if (ingredientTanks->getSugarIngredient() < activeUserChoice->getSugarAmount() + MINIMAl_THRESHOLD) {
+        qDebug() << "CONTROL UNIT: Sugar is not enough!";
+        return false;
+    }
+    return true;
+}
+
+bool ControlUnit::checkMilkAmount() {
+    if (ingredientTanks->getMilkIngredient() < activeUserChoice->getMilkAmount() + MINIMAl_THRESHOLD) {
+        qDebug() << "CONTROL UNIT: Milk is not enough!";
+        return false;
+    }
+    return true;
 }
 
 bool ControlUnit::checkStartConditions()
 {
     // get Optical Sensor Measurements
     if (opticalSensor->getOpticalFlowSensorsMeasurements() == NO_CUP) {
-        qDebug() << "Place your cup first!";
+        qDebug() << "OPTICAL SENSOR: Place your cup first!";
         return false;
     }
     else if (opticalSensor->getOpticalFlowSensorsMeasurements() == FULL_CUP) {
-        qDebug() << "Take your cup with prepared drink before order a new one! :)";
+        qDebug() << "OPTICAL SENSOR: Take your cup with prepared drink before order a new one! :)";
         return false;
     }
 
     else if (opticalSensor->getOpticalFlowSensorsMeasurements() == EMPTY_CUP) {
         // PASSED
-        qDebug() << "Cup is OK, liquid can flow!";
+        qDebug() << "OPTICAL SENSOR: Cup is OK, liquid can flow!";
     }
-
+    //==============================================================
     // check if drink is preselected
     if (activeUserChoice->getSelectedDrink() == NO_DRINK) {
-        qDebug() << "Select drink first!";
+        qDebug() << "CONTROL UNIT: Select drink first!";
         return false;
     }
 
     // check if card is still in the card holder
     if (cardScanner->isValidCardInside() != VALID_CARD_INSIDE)
     {
-        qDebug() << "Card missed, please return your card back!";
+        qDebug() << "RFID SCANNER: Card missed, please return your card back!";
+        return false;
+    }
+
+    if (!checkIngredients()) {
+        qDebug() << "CONTROL UNIT: Error: Not enough ingredients...";
         return false;
     }
 
     // if it is possible to get here, the payment process could start
     if (activeUserChoice->payDrink())
     {
-        qDebug() << "We can start prepare drink! Yahoo!";
-        qDebug() << "You can purchase next drink after this one will be prepared!";
+        qDebug() << "CONTROL UNIT: We can start prepare drink! Yahoo!";
+        qDebug() << "CONTROL UNIT: You can purchase next drink after this one will be prepared!";
         return true;
     }
     else
     {
-        qDebug() << "Payment error!";
-        qDebug() << "Take your card!";
+        qDebug() << "CONTROL UNIT: Payment error!";
+        qDebug() << "CONTROL UNIT: Take your card!";
         return false;
     }
 }
 
-void ControlUnit::prepareSelectedDrink()
+bool ControlUnit::prepareSelectedDrink()
 {
-    //while (motor[0]->isRotating() && motor[1]->isRotating())
+    if (!checkIngredients()) {
+        qDebug() << "CONTROL UNIT: Preparation Error! Aborted";
+        abortPreparation();
+        return false;
+    }
+    return true;
+}
+
+void ControlUnit::abortPreparation()
+{
+    activeUserChoice->setDefaultChoice();
+    writeMessageLCD(USER_CHOICE);
 }
 
 
@@ -312,5 +386,18 @@ void ControlUnit::connectMilkMaker(Milkmaker *actuator)
 void ControlUnit::connectBrewGroup(Brewgroup *actuator)
 {
     brew = actuator;
+}
+
+
+void ControlUnit::blockCupHolder()
+{
+    qDebug() << "CONTROL UNIT: Cup Holder is blocked, the cup will be realeased after drink preparing the drink";
+}
+
+
+void ControlUnit::unblockCupHolder()
+{
+    qDebug() << "CONTROL UNIT: Cup Holder is unblocked";
+
 }
 

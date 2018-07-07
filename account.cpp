@@ -46,7 +46,7 @@ Account::Account(Person *Employee, BankAccount *Ba)
 AccountStatus Account::getAccountStatus()
 {
     QString str = printAccountStatus();
-    qDebug() << "GETTER: Account status is now: " << str;
+    qDebug() << "ACCOUNT GETTER: Account status is: " << str;
     return state;
 }
 

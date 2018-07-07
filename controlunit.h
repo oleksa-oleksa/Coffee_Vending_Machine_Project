@@ -21,6 +21,7 @@
 #include "interactionunit.h"
 
 #define AMOUNT_OF_MOTORS 4
+#define MINIMAl_THRESHOLD 5
 
 enum BrewStatus {
     BREW_NOT_STARTED,
@@ -47,7 +48,6 @@ class ControlUnit
         Milkmaker *milkMaker;
 
         Brewgroup *brew;
-
         Ingredient *ingredientTanks;
 
     public:
@@ -68,11 +68,15 @@ class ControlUnit
         void maintenanceRoutine();
         bool checkIngredients();
         bool checkStartConditions();
-        void blockCapHolder();
+        void blockCupHolder();
         void abortPreparation();
-        void prepareSelectedDrink();
+        bool prepareSelectedDrink();
         void unblockCupHolder();
         void staffServiceRoutine();
+        bool checkSugarAmount();
+        bool checkMilkAmount();
+        bool checkCoffeeIngredient();
+        bool checkCacaoIngredient();
 
         void connectRFID(RFID_Scanner *sensor);
         void connectFlow(Flowmeter *sensor);

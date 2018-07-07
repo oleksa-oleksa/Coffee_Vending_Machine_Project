@@ -218,7 +218,6 @@ void MainWindow::on_buttonCard_clicked()
         styleEjectButton();
         break;
     case (NONVALID_CARD_INSIDE):
-        qDebug() << "We are here!";
         ui->labelCard->show();
         ui->comboboxSelectPerson->setEnabled(true);
         control.writeMessageLCD(ERROR);
@@ -228,9 +227,6 @@ void MainWindow::on_buttonCard_clicked()
         disableControlButtons();
         break;
     case (NO_CARD):
-//        activeUserChoice = iunit.initUserChoice(card);
-//        control.linkUserChoice(activeUserChoice);
-//        control.writeMessageLCD(DEFAULT);
         ui->comboboxSelectPerson->setEnabled(true);
         ui->labelCard->hide();
         restartLCD();
@@ -240,8 +236,6 @@ void MainWindow::on_buttonCard_clicked()
         styleDrinkButtons();
         disableControlButtons();
         ui->buttonBigPortion->setChecked(false);
-        // ui->buttonAdmin->setEnabled(false);
-
         break;
     }
 }
@@ -297,7 +291,7 @@ void MainWindow::on_buttonLessSugar_clicked()
 
 void MainWindow::on_buttonMoreSugar_clicked()
 {
-    if (control.checkCard())
+    if (control.checkCard() && control.checkSugarAmount())
     {
         moreSugar.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
@@ -321,7 +315,7 @@ void MainWindow::on_buttonLessMilk_clicked()
 
 void MainWindow::on_buttonMoreMilk_clicked()
 {
-    if (control.checkCard())
+    if (control.checkCard() && control.checkMilkAmount())
     {
         moreMilk.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
@@ -573,7 +567,6 @@ void MainWindow::disableControlButtons()
 }
 
 
-
 void MainWindow::on_buttonCancel_clicked()
 {
     // MODEL
@@ -590,7 +583,21 @@ void MainWindow::on_buttonCancel_clicked()
 
 void MainWindow::on_buttonStart_clicked()
 {
-    control.checkStartConditions();
+    if (control.checkStartConditions()) {
+
+        control.blockCupHolder();
+        styleBlockedCupHolder();
+
+        // DRINK PREPARE
+        if (control.prepareSelectedDrink()) {
+             control.unblockCupHolder();
+             styleCupWithDrink();
+        }
+        else {
+            control.unblockCupHolder();
+            styleEmptyCupHolder();
+        }
+    }
 }
 
 void MainWindow::styleEmptyCupHolder()
@@ -604,6 +611,20 @@ void MainWindow::styleEmptyCupHolder()
     ui->buttonCupTakeDrink->hide();
 
     ui->labelCupEmpty->hide();
+    ui->labelCupFull->hide();
+}
+
+
+
+void MainWindow::styleBlockedCupHolder()
+{
+    ui->buttonCupPlaceEmpty->hide();
+
+    ui->buttonCupTakeCupBack->hide();
+
+    ui->buttonCupTakeDrink->hide();
+
+    ui->labelCupEmpty->show();
     ui->labelCupFull->hide();
 }
 
@@ -683,6 +704,7 @@ void MainWindow::on_buttonCupTakeDrink_clicked()
     switch (control.checkCupHolder()) {
         case FULL_CUP:
                     styleEmptyCupHolder();
+
                     break;
         default:
                     break;
