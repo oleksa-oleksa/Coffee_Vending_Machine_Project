@@ -3,12 +3,10 @@
 
 #include "userchoice.h"
 #include "opticalsensor.h"
-#include "proximitysensor.h"
 #include "dc_motor.h"
 #include "temperatursensor.h"
 #include "waterheater.h"
 #include "flowmeter.h"
-#include "brewgroup.h"
 #include "milkmaker.h"
 #include "rfid_scanner.h"
 

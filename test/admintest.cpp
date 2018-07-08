@@ -1,7 +1,6 @@
 #include "admintest.h"
 
-void AdminTest::testAddPerson()
-{
+void AdminTest::testAddPerson() {
     Admin *admin = new Admin();
 
     qDebug() << "01: a Admin add a new Admin";
@@ -14,7 +13,6 @@ void AdminTest::testAddPerson()
     admin->addPerson(person2, "Long", "Dje", "kudamm 20", false, true);
 }
 
-void AdminTest::testAddBankAccount()
-{
+void AdminTest::testAddBankAccount() {
 
 }

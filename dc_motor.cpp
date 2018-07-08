@@ -13,15 +13,13 @@ std::map<MotorType, const char *> MOTOR_TYPE_NAMES = {
 };
 
 
-DC_Motor::DC_Motor()
-{
+DC_Motor::DC_Motor() {
     actuatorState = UNDEFINED;
     actuatorType = DC_MOTOR;
     isRotating = false;
 }
 
-DC_Motor::~DC_Motor()
-{
+DC_Motor::~DC_Motor() {
 
 }
 

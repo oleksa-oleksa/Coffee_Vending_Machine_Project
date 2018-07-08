@@ -2,8 +2,7 @@
 #include "bankaccounttest.h"
 #include "account.h"
 
-void BankAccountTest::testLinkAccount()
-{
+void BankAccountTest::testLinkAccount() {
     Account acc01;
     Account acc02;
     Account::AllAccounts.push_back(acc01);
@@ -23,8 +22,7 @@ void BankAccountTest::testLinkAccount()
 
 }
 
-void BankAccountTest::testLinkProvidedAccount()
-{
+void BankAccountTest::testLinkProvidedAccount() {
     Account acc01;
     Account acc02;
     Account::AllAccounts.push_back(acc01);
@@ -35,6 +33,4 @@ void BankAccountTest::testLinkProvidedAccount()
 
     QCOMPARE(bacc01.linkProvidedAccount(acc01.getAccountID()), true);
     QCOMPARE(bacc01.linkProvidedAccount(accID01), false);
-
-
 }

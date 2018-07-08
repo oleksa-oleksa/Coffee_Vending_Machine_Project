@@ -7,13 +7,11 @@
 #include "QDebug"
 
 
-Admin::Admin()
-{
+Admin::Admin() {
 
 }
 
-Admin::Admin(Person *activeAdminPerson)
-{
+Admin::Admin(Person *activeAdminPerson) {
     this->setID(activeAdminPerson->getID());
     this->setName(activeAdminPerson->getName());
     this->setSurname(activeAdminPerson->getSurname());
@@ -25,29 +23,24 @@ Admin::Admin(Person *activeAdminPerson)
 
 
 
-void Admin::cancelPersonCreation(Person *newPerson)
-{
+void Admin::cancelPersonCreation(Person *newPerson) {
     delete newPerson;
 
 }
 
-void Admin::cancelBankAccountCreation(BankAccount *newBankAccount)
-{
+void Admin::cancelBankAccountCreation(BankAccount *newBankAccount) {
     delete newBankAccount;
 }
 
-void Admin::cancelAccountCreation(Account *newAccount)
-{
+void Admin::cancelAccountCreation(Account *newAccount) {
     delete newAccount;
 }
 
-void Admin::cancelCardCreation(Card *newCard)
-{
+void Admin::cancelCardCreation(Card *newCard) {
     delete newCard;
 }
 
-void Admin::clearTemporaryPointers(Person *newPerson, BankAccount *newBankAccount, Account *newAccount, Card *newCard)
-{
+void Admin::clearTemporaryPointers(Person *newPerson, BankAccount *newBankAccount, Account *newAccount, Card *newCard) {
     delete newPerson;
     newPerson = NULL;
 
@@ -63,8 +56,7 @@ void Admin::clearTemporaryPointers(Person *newPerson, BankAccount *newBankAccoun
 }
 
 void Admin::addPerson(Person *newPerson, std::string newPersonName, std::string newPersonSurname,
-                      std::string newPersonAddress, int isAdmin, int isStaff)
-{
+                      std::string newPersonAddress, int isAdmin, int isStaff) {
     newPerson->setName(newPersonName);
 
     newPerson->setSurname(newPersonSurname);
@@ -84,8 +76,7 @@ void Admin::addPerson(Person *newPerson, std::string newPersonName, std::string 
     qDebug() << "ADMIN: New Person added into AllEmployee";
 }
 
-void Admin::addBankAccount(BankAccount *newBankAccount, int taxClass)
-{
+void Admin::addBankAccount(BankAccount *newBankAccount, int taxClass) {
         newBankAccount->setAccountID(newAccount->getAccountID());
 
         newBankAccount->setTaxClass(taxClass);
@@ -97,8 +88,7 @@ void Admin::addBankAccount(BankAccount *newBankAccount, int taxClass)
         qDebug() << "ADMIN: New depending Bank Account added into AllBankAccounts";
 }
 
-void Admin::addAccount(Account *newAccount)
-{
+void Admin::addAccount(Account *newAccount) {
         // Account accountID, credit and state are predefined by constructor
 
         Person &lastPerson = Person::AllEmployee.back();
@@ -114,11 +104,9 @@ void Admin::addAccount(Account *newAccount)
         lastAccount.setBankAccount(&lastBankAccount);
         lastBankAccount.setAccount(&Account::AllAccounts.back());
         qDebug() << "New depending Account added into AllAccounts";
-
 }
 
-void Admin::addCard(Card *newCard)
-{
+void Admin::addCard(Card *newCard) {
         // CardID and CardStatus are predefined by constructor
 
         Card::AllCards.push_back(*newCard);

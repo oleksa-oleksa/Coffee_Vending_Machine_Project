@@ -13,18 +13,15 @@
 #define BIG_PORTION_OVERPRICE 0.4
 #define BIG_HOTWATER_OVERPRICE 0.1
 
-UserChoice::UserChoice(Card *card) : UserChoice()
-{
+UserChoice::UserChoice(Card *card) : UserChoice() {
     this->card = card;
 }
 
-UserChoice::UserChoice()
-{
+UserChoice::UserChoice() {
     setDefaultChoice();
 }
 
-void UserChoice::setDefaultChoice()
-{
+void UserChoice::setDefaultChoice() {
     selectedDrink = NO_DRINK;
     sugarAmount = 0;
     milkAmount = 0;
@@ -35,15 +32,12 @@ void UserChoice::setDefaultChoice()
     price = 0.0;
 }
 
-bool UserChoice::payDrink()
-{
-    if (selectedDrink == NO_DRINK)
-    {
+bool UserChoice::payDrink() {
+    if (selectedDrink == NO_DRINK) {
         qDebug() << "LCD: Please select a drink first!";
         return false;
     }
-    else
-    {
+    else {
         // Paying
         bool ret = card->withdraw(price);
         qDebug() << "payDrink() finished with exit code " << ret;
@@ -51,12 +45,10 @@ bool UserChoice::payDrink()
     }
 }
 
-void UserChoice::setSelectedDrink(DrinkType selectedDrink)
-{
+void UserChoice::setSelectedDrink(DrinkType selectedDrink) {
     this->selectedDrink = selectedDrink;
 
-    if (selectedDrink == COFFEE)
-    {
+    if (selectedDrink == COFFEE) {
         Coffee drink;
         sugarAmount = drink.getSugarAmount();
         milkAmount = drink.getMilkAmount();
@@ -65,9 +57,7 @@ void UserChoice::setSelectedDrink(DrinkType selectedDrink)
         specificRecipeComponent = drink.getRecipeIngredient();
         price = drink.getPrice();
     }
-
-    else if (selectedDrink == CAPPUCCINO)
-    {
+    else if (selectedDrink == CAPPUCCINO) {
         Cappuccino drink;
         sugarAmount = drink.getSugarAmount();
         milkAmount = drink.getMilkAmount();
@@ -76,8 +66,7 @@ void UserChoice::setSelectedDrink(DrinkType selectedDrink)
         specificRecipeComponent = drink.getRecipeIngredient();
         price = drink.getPrice();
     }
-    else if (selectedDrink == ESPRESSO)
-    {
+    else if (selectedDrink == ESPRESSO) {
         Espresso drink;
         sugarAmount = drink.getSugarAmount();
         milkAmount = drink.getMilkAmount();
@@ -86,8 +75,7 @@ void UserChoice::setSelectedDrink(DrinkType selectedDrink)
         specificRecipeComponent = drink.getRecipeIngredient();
         price = drink.getPrice();
     }
-    else if (selectedDrink == LATTEMACCHIOTO)
-    {
+    else if (selectedDrink == LATTEMACCHIOTO) {
         LatteMacchiato drink;
         sugarAmount = drink.getSugarAmount();
         milkAmount = drink.getMilkAmount();
@@ -96,8 +84,7 @@ void UserChoice::setSelectedDrink(DrinkType selectedDrink)
         specificRecipeComponent = drink.getRecipeIngredient();
         price = drink.getPrice();
     }
-    else if (selectedDrink == CACAO)
-    {
+    else if (selectedDrink == CACAO) {
         Cacao drink;
         sugarAmount = drink.getSugarAmount();
         milkAmount = drink.getMilkAmount();
@@ -106,8 +93,7 @@ void UserChoice::setSelectedDrink(DrinkType selectedDrink)
         specificRecipeComponent = drink.getRecipeIngredient();
         price = drink.getPrice();
     }
-    else if (selectedDrink == HOTWATER)
-    {
+    else if (selectedDrink == HOTWATER) {
         HotWater drink;
         sugarAmount = drink.getSugarAmount();
         milkAmount = drink.getMilkAmount();
@@ -116,8 +102,7 @@ void UserChoice::setSelectedDrink(DrinkType selectedDrink)
         specificRecipeComponent = drink.getRecipeIngredient();
         price = drink.getPrice();
     }
-    else if (selectedDrink == NO_DRINK)
-    {
+    else if (selectedDrink == NO_DRINK) {
         sugarAmount = 0;
         milkAmount = 0;
         hotWaterAmount = 100;
@@ -125,8 +110,7 @@ void UserChoice::setSelectedDrink(DrinkType selectedDrink)
         specificRecipeComponent = 0;
         price = 0.0;
     }
-    else
-    {
+    else {
         sugarAmount = 0;
         milkAmount = 0;
         hotWaterAmount = 0;
@@ -139,73 +123,60 @@ void UserChoice::setSelectedDrink(DrinkType selectedDrink)
     qDebug() << "SETTER: Selected Drink is set: " << str;
 }
 
-DrinkType UserChoice::getSelectedDrink()
-{
+DrinkType UserChoice::getSelectedDrink() {
     return selectedDrink;
 }
 
-void UserChoice::setCard(Card *card)
-{
+void UserChoice::setCard(Card *card) {
     this->card = card;
 }
 
-Card *UserChoice::getCard()
-{
+Card *UserChoice::getCard() {
     return card;
 }
 
 
-void UserChoice::setSugarAmount(int sugarAmount)
-{
-    if (selectedDrink == HOTWATER)
-    {
+void UserChoice::setSugarAmount(int sugarAmount) {
+    if (selectedDrink == HOTWATER) {
         qDebug() << "No sugar for hot water";
         this->sugarAmount = 0;
         return;
     }
 
-    if (sugarAmount >= 0 && sugarAmount < 5)
-    {
+    if (sugarAmount >= 0 && sugarAmount < COMPONENT_MAXIMUM) {
         this->sugarAmount = sugarAmount;
         qDebug() << "Sugar is: " << this->sugarAmount;
         return;
     }
-    else
-    {
+    else {
         qDebug() << "This is not allowed for sugar";
         return;
     }
 }
 
-int UserChoice::getSugarAmount()
-{
+int UserChoice::getSugarAmount() {
     return sugarAmount;
 }
 
-void UserChoice::setMilkAmount(int milkAmount)
-{
+void UserChoice::setMilkAmount(int milkAmount) {
     // milk amount if these drinks can not be modified
-    if (selectedDrink == CACAO  || selectedDrink == ESPRESSO || selectedDrink == HOTWATER)
-    {
+    if (selectedDrink == CACAO  || selectedDrink == ESPRESSO || selectedDrink == HOTWATER) {
         qDebug() << "Predefined milk can not be changed";
         return;
     }
 
-    if (milkAmount >= 0 && milkAmount < 5)
-    {
+    if (milkAmount >= 0 && milkAmount < COMPONENT_MAXIMUM) {
         this->milkAmount = milkAmount;
         qDebug() << "Milk is: " << this->milkAmount;
         return;
     }    
-    else
-    {
+    else {
         qDebug() << "This is not allowed for milk";
         return;
     }
 }
 
-int UserChoice::getMilkAmount()
-{
+int UserChoice::getMilkAmount() {
     return milkAmount;
 }
 
@@ -227,26 +198,21 @@ bool UserChoice::getBigPortion()
 
 double UserChoice::getPrice()
 {
-    if (selectedDrink == NO_DRINK)
-    {
+    if (selectedDrink == NO_DRINK) {
         return 0.0;
     }
 
-    if (isBigPortion && selectedDrink == HOTWATER)
-    {
+    if (isBigPortion && selectedDrink == HOTWATER) {
         return price + BIG_HOTWATER_OVERPRICE;
     }
-    else if (isBigPortion )
-    {
+    else if (isBigPortion ) {
         return price + BIG_PORTION_OVERPRICE;
     }
-    else
-    {
+    else {
         return price;
     }
 
 }
-
 
 QString UserChoice::printSelectedDrink()
 {

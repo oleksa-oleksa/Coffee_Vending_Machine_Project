@@ -40,15 +40,12 @@ HEADERS += \
     account.h \
     actuator.h \
     bankaccount.h \
-    brewgroup.h \
     button.h \
     card.h \
     dc_motor.h \
     flowmeter.h \
     milkmaker.h \
     opticalsensor.h \
-    pressuresensor.h \
-    proximitysensor.h \
     rfid_scanner.h \
     sensor.h \
     temperatursensor.h \
@@ -64,7 +61,6 @@ HEADERS += \
     person.h \
     sensortype.h \
     serviceroutine.h \
-    staff.h \
     state.h \
     brightnesssensor.h \
     cacao.h \
@@ -93,7 +89,6 @@ HEADERS += \
 SOURCES += \
     account.cpp \
     admin.cpp \
-    actuatortype.cpp \
     bankaccount.cpp \
     card.cpp \
     controlunit.cpp \
@@ -101,10 +96,8 @@ SOURCES += \
     interactionunit.cpp \
     person.cpp \
     sensortype.cpp \
-    staff.cpp \
     userchoice.cpp \
     actuator.cpp \
-    brewgroup.cpp \
     brightnesssensor.cpp \
     button.cpp \
     dc_motor.cpp \
@@ -113,8 +106,6 @@ SOURCES += \
     lcd_display.cpp \
     milkmaker.cpp \
     opticalsensor.cpp \
-    pressuresensor.cpp \
-    proximitysensor.cpp \
     rfid_scanner.cpp \
     sensor.cpp \
     serviceroutine.cpp \
@@ -166,7 +157,6 @@ test {
         test/rfidscannertest.cpp \
         test/opticalsensortest.cpp \
         test/controlunittest.cpp \
-        test/brightnesssensortest.cpp \
         test/admintest.cpp \
         test/serviceroutinetest.cpp \
         test/ingredienttest.cpp
@@ -188,7 +178,6 @@ test {
         test/rfidscannertest.h \
         test/opticalsensortest.h \
         test/controlunittest.h \
-        test/brightnesssensortest.h \
         test/admintest.h \
         test/serviceroutinetest.h \
         test/ingredienttest.h

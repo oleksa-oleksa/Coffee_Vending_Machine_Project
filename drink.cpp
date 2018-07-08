@@ -1,16 +1,5 @@
 #include "drink.h"
 
-//Drink::Drink(int sugar, int milk, int coffee,
-//      int cacao, int water, int temp, double p)
-//{
-//    sugarAmount = sugar;
-//    milkAmount = milk;
-//    coffeePowderAmount = coffee;
-//    cacaoPowderAmount = cacao;
-//    hotWater = water;
-//    recipeTemperature = temp;
-//    price = p;
-//}
 
 Drink::Drink()
 {

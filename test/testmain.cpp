@@ -11,12 +11,10 @@
 #include "controlunittest.h"
 #include "rfidscannertest.h"
 #include "opticalsensortest.h"
-#include "brightnesssensortest.h"
 #include "serviceroutinetest.h"
 #include "ingredienttest.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     // Random Generator Init for Random ID Foo
     srand(time(NULL));
 
@@ -53,14 +51,11 @@ int main(int argc, char *argv[])
     OpticalSensorTest dbtst10;
     QTest::qExec(&dbtst10, argc, argv);
 
-    BrightnessSensorTest dbtst11;
+    ServiceRoutineTest dbtst11;
     QTest::qExec(&dbtst11, argc, argv);
 
-    ServiceRoutineTest dbtst12;
+    IngredientTest dbtst12;
     QTest::qExec(&dbtst12, argc, argv);
-
-    IngredientTest dbtst13;
-    QTest::qExec(&dbtst13, argc, argv);
 
     return 0;
 

@@ -2,31 +2,25 @@
 #include "drink.h"
 #include "cacao.h"
 
-int Cacao::getSugarAmount()
-{
+int Cacao::getSugarAmount() {
     return sugarAmount;
 }
 
-int Cacao::getMilkAmount()
-{
+int Cacao::getMilkAmount() {
     return milkAmount;
 }
 
-int Cacao::getHotWaterAmount()
-{
+int Cacao::getHotWaterAmount() {
     return hotWaterAmount;
 }
-int Cacao::getRecipeTemperature()
-{
+int Cacao::getRecipeTemperature() {
     return recipeTemperature;
 }
 
-double Cacao::getPrice()
-{
+double Cacao::getPrice() {
     return price;
 }
 
-int Cacao::getRecipeIngredient()
-{
+int Cacao::getRecipeIngredient() {
     return cacaoPowderAmount;
 }

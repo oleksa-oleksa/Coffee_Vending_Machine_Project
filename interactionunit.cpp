@@ -2,8 +2,7 @@
 #include "interactionunit.h"
 #include <QtDebug>
 
-InteractionUnit::InteractionUnit()
-{
+InteractionUnit::InteractionUnit() {
     choice = NULL;
 
     moreSugar = NULL;
@@ -21,64 +20,60 @@ InteractionUnit::InteractionUnit()
     start = NULL;
 }
 
-InteractionUnit::~InteractionUnit()
-{
+InteractionUnit::~InteractionUnit() {
 
 }
 
-UserChoice *InteractionUnit::initUserChoice(Card *card)
-{
+UserChoice *InteractionUnit::initUserChoice(Card *card) {
     choice = new UserChoice(card);
     qDebug() << "INTERACTION_UNIT: UserChoice created";
     return choice;
 }
 
-void InteractionUnit::setMoreSugar(Button *moreSugar)
-{
+void InteractionUnit::setMoreSugar(Button *moreSugar) {
     this->moreSugar = moreSugar;
 }
-void InteractionUnit::setLessSugar(Button *lessSugar)
-{
+
+void InteractionUnit::setLessSugar(Button *lessSugar) {
     this->lessSugar = lessSugar;
 }
-void InteractionUnit::setMoreMilk(Button *moreMilk)
-{
+
+void InteractionUnit::setMoreMilk(Button *moreMilk) {
     this->moreMilk = moreMilk;
 }
-void InteractionUnit::setLessMilk(Button *lessMilk)
-{
+
+void InteractionUnit::setLessMilk(Button *lessMilk) {
     this->lessMilk = lessMilk;
 }
-void InteractionUnit::setCoffee(Button *coffee)
-{
+
+void InteractionUnit::setCoffee(Button *coffee) {
     this->coffee = coffee;
 }
-void InteractionUnit::setCappuccino(Button *cappuccino)
-{
+
+void InteractionUnit::setCappuccino(Button *cappuccino) {
     this->cappuccino = cappuccino;
 }
-void InteractionUnit::setEspresso(Button *espresso)
-{
+
+void InteractionUnit::setEspresso(Button *espresso) {
     this->espresso = espresso;
 }
-void InteractionUnit::setLatteMacchiato(Button *latteMacchiato)
-{
+
+void InteractionUnit::setLatteMacchiato(Button *latteMacchiato) {
     this->latteMacchiato = latteMacchiato;
 }
-void InteractionUnit::setCacao(Button *cacao)
-{
+
+void InteractionUnit::setCacao(Button *cacao) {
     this->cacao = cacao;
 }
-void InteractionUnit::setHotWater(Button *hotWater)
-{
+
+void InteractionUnit::setHotWater(Button *hotWater) {
     this->hotWater = hotWater;
 }
-void InteractionUnit::setBigPortion(Button *bigPortion)
-{
+void InteractionUnit::setBigPortion(Button *bigPortion) {
     this->bigPortion = bigPortion;
 }
-void InteractionUnit::setStart(Button *start)
-{
+
+void InteractionUnit::setStart(Button *start) {
     this->start = start;
 }
 
@@ -87,59 +82,56 @@ void InteractionUnit::setCancel(Button *cancel)
     this->cancel = cancel;
 }
 
-Button *InteractionUnit::getMoreSugar()
-{
+Button *InteractionUnit::getMoreSugar() {
     return moreSugar;
 }
-Button *InteractionUnit::getLessSugar()
-{
+
+Button *InteractionUnit::getLessSugar() {
     return lessSugar;
 }
-Button *InteractionUnit::getMoreMilk()
-{
+
+Button *InteractionUnit::getMoreMilk() {
     return moreMilk;
 }
-Button *InteractionUnit::getLessMilk()
-{
+
+Button *InteractionUnit::getLessMilk() {
     return lessMilk;
 }
-Button *InteractionUnit::getCoffee()
-{
+
+Button *InteractionUnit::getCoffee() {
     return coffee;
 }
-Button *InteractionUnit::getCappuccino()
-{
+
+Button *InteractionUnit::getCappuccino() {
     return cappuccino;
 }
-Button *InteractionUnit::getEspresso()
-{
+
+Button *InteractionUnit::getEspresso() {
     return espresso;
 }
-Button *InteractionUnit::getLatteMacchiato()
-{
+
+Button *InteractionUnit::getLatteMacchiato() {
     return latteMacchiato;
 }
-Button *InteractionUnit::getCacao()
-{
+
+Button *InteractionUnit::getCacao() {
     return cacao;
 }
-Button *InteractionUnit::getHotWater()
-{
+
+Button *InteractionUnit::getHotWater() {
     return hotWater;
 }
-Button *InteractionUnit::getBigPortion()
-{
+
+Button *InteractionUnit::getBigPortion() {
     return bigPortion;
 }
-Button *InteractionUnit::getStart()
-{
+
+Button *InteractionUnit::getStart() {
     return start;
 }
 
-void InteractionUnit::buttonPollingRoutine()
-{
-    if (choice == NULL)
-    {
+void InteractionUnit::buttonPollingRoutine() {
+    if (choice == NULL) {
         qDebug() << "LCD: Please insert valid card";
         return;
     }
@@ -190,12 +182,10 @@ void InteractionUnit::buttonPollingRoutine()
     }
 
     if (choice && bigPortion && bigPortion->getButtonValue()) {
-        if (choice->getBigPortion())
-        {
+        if (choice->getBigPortion()) {
             choice->setDisabledBigPortion();
         }
-        else
-        {
+        else {
             choice->setEnabledBigPortion();
         }
     }
@@ -207,5 +197,4 @@ void InteractionUnit::buttonPollingRoutine()
     if (choice && start && start->getButtonValue()) {
         choice->payDrink();
     }
-
 }

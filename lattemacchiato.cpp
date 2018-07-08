@@ -2,31 +2,25 @@
 #include "drink.h"
 #include "lattemacchiato.h"
 
-int LatteMacchiato::getSugarAmount()
-{
+int LatteMacchiato::getSugarAmount() {
     return sugarAmount;
 }
 
-int LatteMacchiato::getMilkAmount()
-{
+int LatteMacchiato::getMilkAmount() {
     return milkAmount;
 }
 
-int LatteMacchiato::getHotWaterAmount()
-{
+int LatteMacchiato::getHotWaterAmount() {
     return hotWaterAmount;
 }
-int LatteMacchiato::getRecipeTemperature()
-{
+int LatteMacchiato::getRecipeTemperature() {
     return recipeTemperature;
 }
 
-double LatteMacchiato::getPrice()
-{
+double LatteMacchiato::getPrice() {
     return price;
 }
 
-int LatteMacchiato::getRecipeIngredient()
-{
+int LatteMacchiato::getRecipeIngredient() {
     return coffeePowderAmount;
 }

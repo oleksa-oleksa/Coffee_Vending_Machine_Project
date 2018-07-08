@@ -8,14 +8,12 @@
 // Database for all Records: Person, Account, BankAccount, Card
 Database coffeeMachine_DB;
 
-DefaultCoffeeMachine::DefaultCoffeeMachine()
-{
+DefaultCoffeeMachine::DefaultCoffeeMachine() {
 
 }
 
 
-bool DefaultCoffeeMachine::createDefaulDB(std::string db_name)
-{
+bool DefaultCoffeeMachine::createDefaulDB(std::string db_name) {
     bool ret = true;
 
     coffeeMachine_DB.openDB(db_name);
@@ -55,8 +53,7 @@ bool DefaultCoffeeMachine::createDefaulDB(std::string db_name)
     People people;
     ret = ret && assert(coffeeMachine_DB.loadPeople(people) == true, "Load Persons failed during insert into BankAccount table");
 
-    for (size_t i = 0; i < people.size(); i++)
-    {
+    for (size_t i = 0; i < people.size(); i++) {
         std::string tmp_accID = std::string("ACC") + createRandomID(ACCOUNT_ID_LEN);
         QString str = QString::fromUtf8(tmp_accID.c_str());
         ret = ret && assert(coffeeMachine_DB.insertBankAccount(str, 1) == true, "Insert default BankAccounts failed");
@@ -69,8 +66,7 @@ bool DefaultCoffeeMachine::createDefaulDB(std::string db_name)
 
     // Bank Accounts and Account are always corresponding to the amount of people
     // this is the solution for this particular issue
-    for (size_t i = 0; i < people.size(); i++)
-    {
+    for (size_t i = 0; i < people.size(); i++) {
         // Obtaining Primary Key
         AccountID tmp_id1 = ba[i].getAccountID();
         QString q_aid = tmp_id1.toQstring();
@@ -89,8 +85,7 @@ bool DefaultCoffeeMachine::createDefaulDB(std::string db_name)
     Accounts a;
     ret = ret && assert(coffeeMachine_DB.loadAccounts(a) == true, "Load Accounts failed during insert into Card table");
 
-    for (size_t i = 0; i < a.size(); i++)
-    {
+    for (size_t i = 0; i < a.size(); i++) {
         AccountID tmp_id1 = a[i].getAccountID();
         QString q_aid = tmp_id1.toQstring();
 

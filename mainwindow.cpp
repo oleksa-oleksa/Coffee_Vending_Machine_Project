@@ -33,7 +33,6 @@ ControlUnit control;
 RFID_Scanner cardScanner;
 Flowmeter flow;
 OpticalSensor opticalSensor(&flow);
-PressureSensor pressureSensor;
 TemperaturSensor temperatureSensor;
 BrightnessSensor brightSensor;
 
@@ -42,12 +41,9 @@ DC_Motor motor[4];
 Waterheater heater;
 Milkmaker milkMaker;
 
-Brewgroup brew;
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
-{
+    ui(new Ui::MainWindow) {
 
     ui->setupUi(this);
     this->setWindowTitle("Coffee Machine Drinks Window");
@@ -93,7 +89,6 @@ MainWindow::MainWindow(QWidget *parent) :
     control.connectRFID(&cardScanner);
     control.connectFlow(&flow);
     control.connectOptical(&opticalSensor);
-    control.connectPressure(&pressureSensor);
     control.connectTemperatur(&temperatureSensor);
     control.connectBrightnessSensor(&brightSensor);
 
@@ -102,7 +97,6 @@ MainWindow::MainWindow(QWidget *parent) :
     control.connectMotor(&motor[0], 4);
     control.connectHeater(&heater);
     control.connectMilkMaker(&milkMaker);
-    control.connectBrewGroup(&brew);
 
     // check sensors and actuators
     control.maintenanceRoutine();
@@ -117,13 +111,11 @@ MainWindow::MainWindow(QWidget *parent) :
     setMainWindowControlButtonsStyle();
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::resetActiveEntities(Card *c)
-{
+void MainWindow::resetActiveEntities(Card *c) {
 
     // Firstly, we will start with a card provided by user into RFID
     card = c;
@@ -145,8 +137,7 @@ void MainWindow::resetActiveEntities(Card *c)
 
 }
 
-void MainWindow::resetServiceButtons()
-{
+void MainWindow::resetServiceButtons() {
     if (!activePerson->getEmployed()) {
         disableServiceButtons();
         return;
@@ -155,14 +146,12 @@ void MainWindow::resetServiceButtons()
     ui->buttonService->setEnabled(activePerson->getStaff());
 }
 
-void MainWindow::disableServiceButtons()
-{
+void MainWindow::disableServiceButtons() {
     ui->buttonAdmin->setEnabled(false);
     ui->buttonService->setEnabled(false);
 }
 
-void MainWindow::on_buttonAdmin_clicked()
-{
+void MainWindow::on_buttonAdmin_clicked() {
     // Modal approach to show a second window
     // It is impossible to access the first window during the session in the second window
     AdminWindow adminWindow;
@@ -171,8 +160,7 @@ void MainWindow::on_buttonAdmin_clicked()
 }
 
 
-void MainWindow::setMainWindowControlButtonsStyle()
-{
+void MainWindow::setMainWindowControlButtonsStyle() {
     styleCardHolder();
     styleEmptyCupHolder();
 
@@ -206,8 +194,7 @@ void MainWindow::setMainWindowControlButtonsStyle()
 
 }
 
-void MainWindow::on_buttonCard_clicked()
-{
+void MainWindow::on_buttonCard_clicked() {
     switch (control.insertCard(card)) {
     case (VALID_CARD_INSIDE):
         ui->labelCard->show();
@@ -240,8 +227,7 @@ void MainWindow::on_buttonCard_clicked()
     }
 }
 
-void MainWindow::restartLCD()
-{
+void MainWindow::restartLCD() {
     // VIEW
     ui->labelLCD->setStyleSheet("color: #ffffff; border: 0px;");
     ui->labelLCD->setText(display.getTitle());
@@ -254,8 +240,7 @@ void MainWindow::restartLCD()
 
 }
 
-void MainWindow::restartLCDCardEjected()
-{
+void MainWindow::restartLCDCardEjected() {
     // MODEL
     control.writeMessageLCD(DEFAULT);
 
@@ -277,10 +262,8 @@ void MainWindow::restartLCDCardEjected()
 
 }
 
-void MainWindow::on_buttonLessSugar_clicked()
-{
-    if (control.checkCard())
-    {
+void MainWindow::on_buttonLessSugar_clicked() {
+    if (control.checkCard()) {
         lessSugar.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
         lessSugar.setSensorState(RELEASED);
@@ -289,10 +272,8 @@ void MainWindow::on_buttonLessSugar_clicked()
     }
 }
 
-void MainWindow::on_buttonMoreSugar_clicked()
-{
-    if (control.checkCard() && control.checkSugarAmount())
-    {
+void MainWindow::on_buttonMoreSugar_clicked() {
+    if (control.checkCard() && control.checkSugarAmount()) {
         moreSugar.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
         moreSugar.setSensorState(RELEASED);
@@ -301,10 +282,8 @@ void MainWindow::on_buttonMoreSugar_clicked()
     }
 }
 
-void MainWindow::on_buttonLessMilk_clicked()
-{
-    if (control.checkCard())
-    {
+void MainWindow::on_buttonLessMilk_clicked() {
+    if (control.checkCard()) {
         lessMilk.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
         lessMilk.setSensorState(RELEASED);
@@ -313,10 +292,8 @@ void MainWindow::on_buttonLessMilk_clicked()
     }
 }
 
-void MainWindow::on_buttonMoreMilk_clicked()
-{
-    if (control.checkCard() && control.checkMilkAmount())
-    {
+void MainWindow::on_buttonMoreMilk_clicked() {
+    if (control.checkCard() && control.checkMilkAmount()) {
         moreMilk.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
         moreMilk.setSensorState(RELEASED);
@@ -326,25 +303,20 @@ void MainWindow::on_buttonMoreMilk_clicked()
 }
 
 
-void MainWindow::styleMilkProgressBar()
-{
-   if (control.checkCard())
-    {
+void MainWindow::styleMilkProgressBar() {
+   if (control.checkCard()) {
         ui->progressBarMilk->setValue(activeUserChoice->getMilkAmount());
         QString num = QString::number(activeUserChoice->getMilkAmount());
         ui->labelMilkAmount->setText(num);
     }
-   else
-   {
+   else {
        ui->progressBarMilk->setValue(0);
        ui->labelMilkAmount->setText(0);
    }
 }
 
-void MainWindow::styleSugarProgressBar()
-{
-    if (control.checkCard())
-    {
+void MainWindow::styleSugarProgressBar() {
+    if (control.checkCard()) {
         ui->progressBarSugar->setValue(activeUserChoice->getSugarAmount());
         QString num = QString::number(activeUserChoice->getSugarAmount());
         ui->labelSugarAmount->setText(num);
@@ -355,8 +327,7 @@ void MainWindow::styleSugarProgressBar()
     }
 }
 
-void MainWindow::styleLCDChoiceInformation()
-{
+void MainWindow::styleLCDChoiceInformation() {
     ui->labelLCD->setStyleSheet("color: #ffffff; border: 0px;");
     ui->labelLCD->setText("Your choice:");
 
@@ -368,18 +339,15 @@ void MainWindow::styleLCDChoiceInformation()
     ui->labelPrice->setText(num);
 }
 
-void MainWindow::styleLCDGreeting()
-{   
+void MainWindow::styleLCDGreeting() {
     ui->labelLCD->setStyleSheet("color: #ffb366; border: 0px;");
 
-    if (activeUserChoice->getSelectedDrink() == NO_DRINK)
-    {
+    if (activeUserChoice->getSelectedDrink() == NO_DRINK) {
         ui->labelLCD->setText(display.getTitle());
         ui->labelSelectedDrink->setText("");
         ui->labelPrice->setText("");
     }
-    else
-    {
+    else {
         ui->labelLCD->setText(display.getTitle());
         ui->labelSelectedDrink->setText(display.getDrinkName());
         ui->labelPrice->setText(QString::number(display.getPrice()));
@@ -387,8 +355,7 @@ void MainWindow::styleLCDGreeting()
 
 }
 
-void MainWindow::styleLCDErrorCard()
-{
+void MainWindow::styleLCDErrorCard() {
     ui->labelLCD->setStyleSheet("color: #ff1a1a; border: 0px;");
     ui->labelLCD->setText(display.getTitle());
 
@@ -397,8 +364,7 @@ void MainWindow::styleLCDErrorCard()
 }
 
 
-void MainWindow::styleLCDErrorSystem()
-{
+void MainWindow::styleLCDErrorSystem() {
     ui->labelLCD->setStyleSheet("color: #ff1a1a; border: 0px;");
     ui->labelLCD->setText(display.getTitle());
 
@@ -424,20 +390,17 @@ void MainWindow::styleLCDTakeDrink() {
 }
 
 
-void MainWindow::styleEjectButton()
-{
+void MainWindow::styleEjectButton() {
     ui->buttonCard->setStyleSheet("background-color: #e67300; color: #ffffff;");
     ui->buttonCard->setText("Eject card");
 }
 
-void MainWindow::styleInsertButton()
-{
+void MainWindow::styleInsertButton() {
     ui->buttonCard->setStyleSheet("background-color: #e67300; color: #ffffff;");
     ui->buttonCard->setText("Insert card");
 }
 
-void MainWindow::styleDrinkButtons()
-{
+void MainWindow::styleDrinkButtons() {
     ui->buttonCoffee->setStyleSheet("background-color: #663300; color: #ffffff;");
     ui->buttonCappuccino->setStyleSheet("background-color: #663300; color: #ffffff;");
     ui->buttonEspresso->setStyleSheet("background-color: #663300; color: #ffffff;");
@@ -450,10 +413,8 @@ void MainWindow::styleDrinkButtons()
 
 }
 
-void MainWindow::on_buttonCoffee_clicked()
-{
-    if (control.checkCard())
-    {
+void MainWindow::on_buttonCoffee_clicked() {
+    if (control.checkCard()) {
         // MODEL
         coffee.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
@@ -468,10 +429,8 @@ void MainWindow::on_buttonCoffee_clicked()
     }
 }
 
-void MainWindow::on_buttonCappuccino_clicked()
-{
-    if (control.checkCard())
-    {
+void MainWindow::on_buttonCappuccino_clicked() {
+    if (control.checkCard()) {
         // MODEL
         cappuccino.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
@@ -486,10 +445,8 @@ void MainWindow::on_buttonCappuccino_clicked()
     }
 }
 
-void MainWindow::on_buttonEspresso_clicked()
-{
-    if (control.checkCard())
-    {
+void MainWindow::on_buttonEspresso_clicked() {
+    if (control.checkCard()) {
         // MODEL
         espresso.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
@@ -504,10 +461,8 @@ void MainWindow::on_buttonEspresso_clicked()
     }
 }
 
-void MainWindow::on_buttonLatteMacchiato_clicked()
-{
-    if (control.checkCard())
-    {
+void MainWindow::on_buttonLatteMacchiato_clicked() {
+    if (control.checkCard()) {
         // MODEL
         latteMacchiato.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
@@ -522,10 +477,8 @@ void MainWindow::on_buttonLatteMacchiato_clicked()
     }
 }
 
-void MainWindow::on_buttonCacao_clicked()
-{
-    if (control.checkCard())
-    {
+void MainWindow::on_buttonCacao_clicked() {
+    if (control.checkCard()) {
         // MODEL
         cacao.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
@@ -540,10 +493,8 @@ void MainWindow::on_buttonCacao_clicked()
     }
 }
 
-void MainWindow::on_buttonHotwater_clicked()
-{
-    if (control.checkCard())
-    {
+void MainWindow::on_buttonHotwater_clicked() {
+    if (control.checkCard()) {
         // MODEL
         hotWater.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
@@ -558,10 +509,8 @@ void MainWindow::on_buttonHotwater_clicked()
     }
 }
 
-void MainWindow::on_buttonBigPortion_clicked()
-{
-    if (control.checkCard())
-    {
+void MainWindow::on_buttonBigPortion_clicked() {
+    if (control.checkCard()) {
 
         bigPortion.setSensorState(PRESSED);
         iunit.buttonPollingRoutine();
@@ -572,8 +521,7 @@ void MainWindow::on_buttonBigPortion_clicked()
     }
 }
 
-void MainWindow::enableControlButtons()
-{
+void MainWindow::enableControlButtons() {
     ui->buttonBigPortion->setEnabled(true);
     ui->buttonMoreMilk->setEnabled(true);
     ui->buttonLessMilk->setEnabled(true);
@@ -583,8 +531,7 @@ void MainWindow::enableControlButtons()
     ui->buttonCancel->setEnabled(true);
 }
 
-void MainWindow::disableControlButtons()
-{
+void MainWindow::disableControlButtons() {
     ui->buttonBigPortion->setEnabled(false);
     ui->buttonMoreMilk->setEnabled(false);
     ui->buttonLessMilk->setEnabled(false);
@@ -595,8 +542,7 @@ void MainWindow::disableControlButtons()
 }
 
 
-void MainWindow::on_buttonCancel_clicked()
-{
+void MainWindow::on_buttonCancel_clicked() {
     // MODEL
     activeUserChoice->setDefaultChoice();
     control.writeMessageLCD(USER_CHOICE);
@@ -609,8 +555,7 @@ void MainWindow::on_buttonCancel_clicked()
 }
 
 
-void MainWindow::on_buttonStart_clicked()
-{
+void MainWindow::on_buttonStart_clicked() {
     // Either "ALLOWED" or some type of error
     PreparationStatus status = control.checkStartConditions();
 
@@ -644,8 +589,7 @@ void MainWindow::on_buttonStart_clicked()
     }
 }
 
-void MainWindow::styleEmptyCupHolder()
-{
+void MainWindow::styleEmptyCupHolder() {
     ui->buttonCupPlaceEmpty->show();
     ui->buttonCupPlaceEmpty->setStyleSheet("background-color: #e67300; color: #ffffff;");
     ui->buttonCupPlaceEmpty->setText("Place cup");
@@ -660,8 +604,7 @@ void MainWindow::styleEmptyCupHolder()
 
 
 
-void MainWindow::styleBlockedCupHolder()
-{
+void MainWindow::styleBlockedCupHolder() {
     ui->buttonCupPlaceEmpty->hide();
 
     ui->buttonCupTakeCupBack->hide();
@@ -672,8 +615,7 @@ void MainWindow::styleBlockedCupHolder()
     ui->labelCupFull->hide();
 }
 
-void MainWindow::styleCupPlacedEmplty()
-{
+void MainWindow::styleCupPlacedEmplty() {
     ui->buttonCupPlaceEmpty->hide();
 
     ui->buttonCupTakeCupBack->show();
@@ -686,8 +628,7 @@ void MainWindow::styleCupPlacedEmplty()
     ui->labelCupFull->hide();
 }
 
-void MainWindow::styleCupWithDrink()
-{
+void MainWindow::styleCupWithDrink() {
     ui->buttonCupPlaceEmpty->hide();
     ui->buttonCupTakeCupBack->hide();
 
@@ -697,12 +638,9 @@ void MainWindow::styleCupWithDrink()
 
     ui->labelCupEmpty->hide();
     ui->labelCupFull->show();
-
 }
 
-
-void MainWindow::styleCardHolder()
-{
+void MainWindow::styleCardHolder() {
 
     switch (cardScanner.InitRFID()) {
     case VALID_CARD_INSIDE:
@@ -719,8 +657,7 @@ void MainWindow::styleCardHolder()
 }
 
 
-void MainWindow::on_buttonCupPlaceEmpty_clicked()
-{
+void MainWindow::on_buttonCupPlaceEmpty_clicked() {
     switch (control.checkCupHolder()) {
         case NO_CUP:
                     styleCupPlacedEmplty();
@@ -732,8 +669,7 @@ void MainWindow::on_buttonCupPlaceEmpty_clicked()
 }
 
 
-void MainWindow::on_buttonCupTakeCupBack_clicked()
-{
+void MainWindow::on_buttonCupTakeCupBack_clicked() {
     switch (control.checkCupHolder()) {
         case EMPTY_CUP:
                     styleEmptyCupHolder();
@@ -745,8 +681,7 @@ void MainWindow::on_buttonCupTakeCupBack_clicked()
 }
 
 
-void MainWindow::on_buttonCupTakeDrink_clicked()
-{
+void MainWindow::on_buttonCupTakeDrink_clicked() {
     if (control.isBrewingFinished()) {
         styleEmptyCupHolder();
         flow.setHasPreparedDrink(false);
@@ -758,8 +693,7 @@ void MainWindow::on_buttonCupTakeDrink_clicked()
     styleLCDChoiceInformation();
 }
 
-void MainWindow::on_comboboxSelectPerson_currentIndexChanged(int index)
-{
+void MainWindow::on_comboboxSelectPerson_currentIndexChanged(int index) {
     if (index < 0) {
         card = NULL;
         return;
@@ -771,13 +705,11 @@ void MainWindow::on_comboboxSelectPerson_currentIndexChanged(int index)
                 QString::fromUtf8(activePerson->getSurname().c_str());
 }
 
-void MainWindow::on_buttonRefreshUsers_clicked()
-{
+void MainWindow::on_buttonRefreshUsers_clicked() {
     ui->comboboxSelectPerson->resetContent();
 }
 
-void MainWindow::on_buttonService_clicked()
-{
+void MainWindow::on_buttonService_clicked() {
     if (!activePerson->getStaff())
         return;
 

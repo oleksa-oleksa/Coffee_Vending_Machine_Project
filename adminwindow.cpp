@@ -24,8 +24,7 @@ Card *newCard;
 
 AdminWindow::AdminWindow(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::AdminWindow)
-{
+    ui(new Ui::AdminWindow) {
 
     ui->setupUi(this);
     this->setWindowTitle("Admin Window");
@@ -49,13 +48,11 @@ AdminWindow::AdminWindow(QWidget *parent) :
     loadCardTableWidget();
 }
 
-AdminWindow::~AdminWindow()
-{
+AdminWindow::~AdminWindow() {
     delete ui;
 }
 
-void AdminWindow::loadPersonTableWidget()
-{
+void AdminWindow::loadPersonTableWidget() {
     const QStringList labelsPerson = {"PersonID", "Name", "Surname", "Address", "isEmployed", "isAdmin", "isStaff"};
 
     // Person UI Table
@@ -65,8 +62,7 @@ void AdminWindow::loadPersonTableWidget()
 
 
     // Items
-    for (size_t row = 0; row < Person::AllEmployee.size(); row++)
-    {
+    for (size_t row = 0; row < Person::AllEmployee.size(); row++) {
         ui->tableWidgetPerson->setItem(row, 0, new QTableWidgetItem(Person::AllEmployee[row].getID().toQstring()));
         ui->tableWidgetPerson->setItem(row, 1, new QTableWidgetItem(Person::AllEmployee[row].getName().c_str()));
         ui->tableWidgetPerson->setItem(row, 2, new QTableWidgetItem(Person::AllEmployee[row].getSurname().c_str()));
@@ -78,8 +74,7 @@ void AdminWindow::loadPersonTableWidget()
 
 }
 
-void AdminWindow::loadBankAccountTableWidget()
-{
+void AdminWindow::loadBankAccountTableWidget() {
     const QStringList labelsBankAccount = {"Name", "Surname", "IBAN", "AccountID", "Tax Class"};
 
     // Bank Account Table
@@ -89,8 +84,7 @@ void AdminWindow::loadBankAccountTableWidget()
     ui->tableWidgetBankAccount->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     // Items
-    for (size_t row = 0; row < BankAccount::AllBankAccounts.size(); row++)
-    {
+    for (size_t row = 0; row < BankAccount::AllBankAccounts.size(); row++) {
         ui->tableWidgetBankAccount->setItem(row, 0, new QTableWidgetItem(Person::AllEmployee[row].getName().c_str()));
         ui->tableWidgetBankAccount->setItem(row, 1, new QTableWidgetItem(Person::AllEmployee[row].getSurname().c_str()));
         ui->tableWidgetBankAccount->setItem(row, 2, new QTableWidgetItem(BankAccount::AllBankAccounts[row].getIBAN().toQstring()));
@@ -99,8 +93,7 @@ void AdminWindow::loadBankAccountTableWidget()
     }
 }
 
-void AdminWindow::loadAccountTableWidget()
-{
+void AdminWindow::loadAccountTableWidget() {
     const QStringList labelsAccount = {"Name", "Surname", "AccountID", "Credit", "State"};
 
     // Account Table
@@ -110,8 +103,7 @@ void AdminWindow::loadAccountTableWidget()
     ui->tableWidgetAccount->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     // Items
-    for (size_t row = 0; row < Account::AllAccounts.size(); row++)
-    {
+    for (size_t row = 0; row < Account::AllAccounts.size(); row++) {
         ui->tableWidgetAccount->setItem(row, 0, new QTableWidgetItem(Person::AllEmployee[row].getName().c_str()));
         ui->tableWidgetAccount->setItem(row, 1, new QTableWidgetItem(Person::AllEmployee[row].getSurname().c_str()));
         ui->tableWidgetAccount->setItem(row, 2, new QTableWidgetItem(Account::AllAccounts[row].getAccountID().toQstring()));
@@ -120,8 +112,7 @@ void AdminWindow::loadAccountTableWidget()
     }
 }
 
-void AdminWindow::loadCardTableWidget()
-{
+void AdminWindow::loadCardTableWidget() {
     const QStringList labelsCard = {"Name", "Surname", "CardID", "Card Status"};
 
     // Card Table
@@ -131,8 +122,7 @@ void AdminWindow::loadCardTableWidget()
     ui->tableWidgetCard->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     // Items
-    for (size_t row = 0; row < Account::AllAccounts.size(); row++)
-    {
+    for (size_t row = 0; row < Account::AllAccounts.size(); row++) {
         ui->tableWidgetCard->setItem(row, 0, new QTableWidgetItem(Person::AllEmployee[row].getName().c_str()));
         ui->tableWidgetCard->setItem(row, 1, new QTableWidgetItem(Person::AllEmployee[row].getSurname().c_str()));
         ui->tableWidgetCard->setItem(row, 2, new QTableWidgetItem(Card::AllCards[row].getCardID().toQstring()));
@@ -140,29 +130,24 @@ void AdminWindow::loadCardTableWidget()
     }
 }
 
-void AdminWindow::on_buttonReloadPersonTable_clicked()
-{
+void AdminWindow::on_buttonReloadPersonTable_clicked() {
     loadPersonTableWidget();
 }
 
-void AdminWindow::on_buttonReloadBankAccountTable_clicked()
-{
+void AdminWindow::on_buttonReloadBankAccountTable_clicked() {
     loadBankAccountTableWidget();
 }
 
-void AdminWindow::on_buttonReloadAccountTable_clicked()
-{
+void AdminWindow::on_buttonReloadAccountTable_clicked() {
     loadAccountTableWidget();
 }
 
-void AdminWindow::on_buttonReloadCardTable_clicked()
-{
+void AdminWindow::on_buttonReloadCardTable_clicked() {
     loadCardTableWidget();
 }
 
 
-void AdminWindow::setAdminControlButtonsStyle()
-{
+void AdminWindow::setAdminControlButtonsStyle() {
 
     // Admin buttons preset
     QString colorAddNewEmployee  = QString("background-color: #0059b3; color: #ffffff;");
@@ -182,8 +167,7 @@ void AdminWindow::setAdminControlButtonsStyle()
 }
 
 
-void AdminWindow::on_buttonSaveNewPerson_clicked()
-{
+void AdminWindow::on_buttonSaveNewPerson_clicked() {
     std::string newPersonName = ui->lineNameForm->text().toUtf8().constData();
 
     std::string newPersonSurname = ui->lineSurnameForm->text().toUtf8().constData();
@@ -227,21 +211,18 @@ void AdminWindow::on_buttonSaveNewPerson_clicked()
 
 }
 
-void AdminWindow::on_buttonSaveNewPerson_pressed()
-{
+void AdminWindow::on_buttonSaveNewPerson_pressed() {
     QString colorSaveNewPerson  = QString("background-color: #4d6600; color: #ffffff;");
     ui->buttonSaveNewPerson->setStyleSheet(colorSaveNewPerson);
 }
 
-void AdminWindow::on_buttonSaveNewPerson_released()
-{
+void AdminWindow::on_buttonSaveNewPerson_released() {
     QString colorSaveNewPerson  = QString("background-color: #739900; color: #ffffff;");
     ui->buttonSaveNewPerson->setStyleSheet(colorSaveNewPerson);
     ui->widgetAddNewEmployee->hide();
 }
 
-void AdminWindow::on_buttonAddNewEmployee_clicked()
-{
+void AdminWindow::on_buttonAddNewEmployee_clicked() {
     foreach(QLineEdit *widget, this->findChildren<QLineEdit*>()) {
         widget->clear();
     }
@@ -263,8 +244,7 @@ void AdminWindow::on_buttonAddNewEmployee_clicked()
 }
 
 
-void AdminWindow::on_buttonViewDrinksRecipe_clicked()
-{
+void AdminWindow::on_buttonViewDrinksRecipe_clicked() {
     ui->widgetAddNewEmployee->hide();
     DrinkWindow drinkWindow;
     drinkWindow.setModal(true);
@@ -272,8 +252,7 @@ void AdminWindow::on_buttonViewDrinksRecipe_clicked()
 }
 
 
-void AdminWindow::on_buttonIngredientStatus_clicked()
-{
+void AdminWindow::on_buttonIngredientStatus_clicked() {
     ui->widgetAddNewEmployee->hide();
     IngredientWindow tanksWindow;
     tanksWindow.setIngredientLevels(control.getIngredients());
@@ -282,8 +261,7 @@ void AdminWindow::on_buttonIngredientStatus_clicked()
 }
 
 
-void AdminWindow::on_buttonCancelNewPerson_clicked()
-{
+void AdminWindow::on_buttonCancelNewPerson_clicked() {
     admin->cancelPersonCreation(newPerson);
     admin->cancelBankAccountCreation(newBankAccount);
     admin->cancelAccountCreation(newAccount);
@@ -291,14 +269,12 @@ void AdminWindow::on_buttonCancelNewPerson_clicked()
     ui->widgetAddNewEmployee->hide();
 }
 
-void AdminWindow::on_buttonCancelNewPerson_pressed()
-{
+void AdminWindow::on_buttonCancelNewPerson_pressed() {
     QString colorCancelNewPerson  = QString("background-color: #cccccc; color: #000000;");
     ui->buttonCancelNewPerson->setStyleSheet(colorCancelNewPerson);
 }
 
-void AdminWindow::on_buttonCancelNewPerson_released()
-{
+void AdminWindow::on_buttonCancelNewPerson_released() {
     QString colorCancelNewPerson  = QString("background-color: #e6e6e6; color: #000000;");
     ui->buttonCancelNewPerson->setStyleSheet(colorCancelNewPerson);
 }

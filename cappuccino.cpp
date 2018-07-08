@@ -2,31 +2,26 @@
 #include "drink.h"
 #include "cappuccino.h"
 
-int Cappuccino::getSugarAmount()
-{
+int Cappuccino::getSugarAmount() {
     return sugarAmount;
 }
 
-int Cappuccino::getMilkAmount()
-{
+int Cappuccino::getMilkAmount() {
     return milkAmount;
 }
 
-int Cappuccino::getHotWaterAmount()
-{
+int Cappuccino::getHotWaterAmount() {
     return hotWaterAmount;
 }
-int Cappuccino::getRecipeTemperature()
-{
+
+int Cappuccino::getRecipeTemperature() {
     return recipeTemperature;
 }
 
-double Cappuccino::getPrice()
-{
+double Cappuccino::getPrice() {
     return price;
 }
 
-int Cappuccino::getRecipeIngredient()
-{
+int Cappuccino::getRecipeIngredient() {
     return coffeePowderAmount;
 }

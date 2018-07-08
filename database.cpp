@@ -14,12 +14,10 @@
 // typedeff => std::vector
 // test the initialisation of class instances separately
 
-bool Database::createPersonTable()
-{
+bool Database::createPersonTable() {
     // Create table "Person"
     bool ret = false;
-    if (isOpen())
-    {
+    if (isOpen()) {
         QSqlQuery query;
         ret = query.exec("create table IF NOT EXISTS Person "
                          "(personID VARCHAR(5) NOT NULL primary key asc, "
@@ -35,12 +33,10 @@ bool Database::createPersonTable()
      return ret;
 }
 
-bool Database::createBankAccountTable()
-{
+bool Database::createBankAccountTable() {
     // Create table "BankAccount"
     bool ret = false;
-    if (isOpen())
-    {
+    if (isOpen()) {
         QSqlQuery query;
         ret = query.exec("create table IF NOT EXISTS BankAccount "
                          "(IBAN VARCHAR(22) NOT NULL, "
@@ -54,12 +50,10 @@ bool Database::createBankAccountTable()
      return ret;
 }
 
-bool Database::createAccountTable()
-{
+bool Database::createAccountTable() {
     // Create table "Account"
     bool ret = false;
-    if (isOpen())
-    {
+    if (isOpen()) {
         QSqlQuery query;
         ret = query.exec("create table IF NOT EXISTS Account "
                          "(accountID VARCHAR(12) NOT NULL, "
@@ -77,12 +71,10 @@ bool Database::createAccountTable()
 }
 
 
-bool Database::createCardTable()
-{
+bool Database::createCardTable() {
     // Create table "Account"
     bool ret = false;
-    if (isOpen())
-    {
+    if (isOpen()) {
         QSqlQuery query;
         ret = query.exec("create table IF NOT EXISTS Card "
                          "(cardID VARCHAR(16) NOT NULL, "
@@ -97,13 +89,11 @@ bool Database::createCardTable()
 }
 
 bool Database::insertPerson(QString name, QString surname,
-                 QString address, int isEmployed, int isAdmin, int isStaff)
-{
+                 QString address, int isEmployed, int isAdmin, int isStaff) {
     bool ret = false;
     std::string personID = createRandomID(PERSON_ID_LEN);
 
-    if (isOpen())
-    {
+    if (isOpen()) {
            QSqlQuery query;
            // HINT: query.exec().arg().arg() => obj.arg().arg() => obj.arg()
            ret = query.exec(QString("insert into Person values('%1','%2', '%3', '%4', %5, %6, %7)")
@@ -114,13 +104,11 @@ bool Database::insertPerson(QString name, QString surname,
      return ret;
 }
 
-bool Database::insertBankAccount(QString accountID, int taxClass)
-{
+bool Database::insertBankAccount(QString accountID, int taxClass) {
     bool ret = false;
     std::string IBAN = std::string("DEBBER") + createRandomID(IBAN_LEN);
 
-    if (isOpen())
-    {
+    if (isOpen()) {
            QSqlQuery query;
            ret = query.exec(QString("insert into BankAccount values('%1','%2', %3)")
            .arg(IBAN.c_str()).arg(accountID).arg(taxClass));
@@ -130,12 +118,10 @@ bool Database::insertBankAccount(QString accountID, int taxClass)
      return ret;
 }
 
-bool Database::insertAccount(QString accountID, QString personID, QString IBAN, double credit, int state)
-{
+bool Database::insertAccount(QString accountID, QString personID, QString IBAN, double credit, int state) {
     bool ret = false;
 
-    if (isOpen())
-    {
+    if (isOpen()) {
            QSqlQuery query;
            ret = query.exec(QString("insert into Account values('%1','%2', '%3', %4, %5)")
            .arg(accountID).arg(personID).arg(IBAN).arg(credit).arg(state));
@@ -145,13 +131,11 @@ bool Database::insertAccount(QString accountID, QString personID, QString IBAN, 
     return ret;
 }
 
-bool Database::insertCard(int cardStatus, QString accountID)
-{
+bool Database::insertCard(int cardStatus, QString accountID) {
     bool ret = false;
     std::string cardID = std::string("5100") + createRandomID(CARD_ID_LEN);
 
-    if (isOpen())
-    {
+    if (isOpen()) {
            QSqlQuery query;
            ret = query.exec(QString("insert into Card values('%1',%2, '%3')")
            .arg(cardID.c_str()).arg(cardStatus).arg(accountID));
@@ -161,8 +145,7 @@ bool Database::insertCard(int cardStatus, QString accountID)
     return ret;
 }
 
-bool Database::openDB(std::string db_name)
-{
+bool Database::openDB(std::string db_name) {
     // Find QSLite driver
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
 
@@ -186,8 +169,7 @@ bool Database::openDB(std::string db_name)
    return ret;
 }
 
-QSqlError Database::lastError()
-{
+QSqlError Database::lastError() {
     // If opening database has failed user can ask
     // error description by QSqlError::text()
     QSqlDatabase db = QSqlDatabase::database();
@@ -195,8 +177,7 @@ QSqlError Database::lastError()
     return db.lastError();
 }
 
-bool Database::deleteDB()
-{
+bool Database::deleteDB() {
     // Close database
     closeDatabase();
 
@@ -212,20 +193,17 @@ bool Database::deleteDB()
     #endif
 }
 
-bool Database::isOpen()
-{
+bool Database::isOpen() {
     return QSqlDatabase::database().isOpen();
 }
 
-void Database::closeDatabase()
-{
+void Database::closeDatabase() {
     QSqlDatabase db = QSqlDatabase::database();
 
     db.close();
 }
 
-bool Database::loadPeople(People &people)
-{
+bool Database::loadPeople(People &people) {
     QSqlQuery query;
     bool ret = query.exec("SELECT personID, name, surname, address, isEmployed, isAdmin, isStaff FROM Person");
 
@@ -244,8 +222,7 @@ bool Database::loadPeople(People &people)
     return ret;
 }
 
-bool Database::loadBankAccounts(BAccounts &ba)
-{
+bool Database::loadBankAccounts(BAccounts &ba) {
     QSqlQuery query;
 
     bool ret = query.exec("SELECT IBAN, accountID, taxClass FROM BankAccount");
@@ -265,8 +242,7 @@ bool Database::loadBankAccounts(BAccounts &ba)
     return ret;
 }
 
-bool Database::loadAccounts(Accounts &a)
-{
+bool Database::loadAccounts(Accounts &a) {
     QSqlQuery query;
 
     bool ret = query.exec("SELECT accountID, personID, IBAN, credit, state FROM Account");
@@ -286,8 +262,7 @@ bool Database::loadAccounts(Accounts &a)
     return ret;
 }
 
-bool Database::loadCards(Cards &c)
-{
+bool Database::loadCards(Cards &c) {
     QSqlQuery query;
 
     bool ret = query.exec("SELECT cardID, cardStatus, accountID FROM Card");

@@ -58,25 +58,21 @@ int OpticalSensor::getDistanceToObject()
 CupHolderState OpticalSensor::getOpticalFlowSensorsMeasurements()
 {
     // if cup detected
-    if (getOpticalValue())
-    {
+    if (getOpticalValue()) {
         // and a drink was prepared
-        if (flow->getHasPreparedDrink())
-        {
+        if (flow->getHasPreparedDrink()) {
             qDebug() << "OPTICAL SENSOR: There is a full cup";
             return FULL_CUP;
         }
 
         // only cup stays and no drink was prepared
-        else
-        {
+        else {
             qDebug() << "OPTICAL SENSOR: There is an empty cup";
             return EMPTY_CUP;
         }
     }
     // there is not cup and no drink
-    else
-    {
+    else {
         qDebug() << "OPTICAL SENSOR: Cup holder is empty";
         flow->setHasPreparedDrink(false);
         return NO_CUP;

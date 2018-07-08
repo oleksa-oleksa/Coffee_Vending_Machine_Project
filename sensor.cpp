@@ -1,35 +1,29 @@
 #include "sensor.h"
 
-Sensor::Sensor()
-{
+Sensor::Sensor() {
 
 }
 
-Sensor::~Sensor()
-{
+Sensor::~Sensor() {
 
 }
 
-SensorType Sensor::getSensorType()
-{
+SensorType Sensor::getSensorType() {
     return sensorType;
 }
 
-State Sensor::getSensorState()
-{
+State Sensor::getSensorState() {
     return sensorState;
 }
 
-void Sensor::setSensorType(SensorType sensorType)
-{
+void Sensor::setSensorType(SensorType sensorType) {
    this->sensorType = sensorType;
 
    QString str_type = printSensorType();
    qDebug() << "SENSOR: Type is set: " << str_type;
 }
 
-void Sensor::setSensorState(State sensorState)
-{
+void Sensor::setSensorState(State sensorState) {
     this->sensorState = sensorState;
 
     QString str_state = printSensorState();
@@ -37,8 +31,7 @@ void Sensor::setSensorState(State sensorState)
     qDebug() << "SENSOR: State of " << str_type << "is set: " << str_state;
 }
 
-QString Sensor::printSensorState()
-{
+QString Sensor::printSensorState() {
     QString str;
     switch (sensorState) {
     case (OK):
@@ -57,8 +50,7 @@ QString Sensor::printSensorState()
 }
 
 
-QString Sensor::printSensorType()
-{
+QString Sensor::printSensorType() {
     QString str;
     switch (sensorType) {
     case (RFID):
@@ -86,5 +78,4 @@ QString Sensor::printSensorType()
         break;
     }
     return "UNDEFINED";
-
 }

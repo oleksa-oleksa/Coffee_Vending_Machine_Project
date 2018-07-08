@@ -5,6 +5,8 @@
 #include "drinktype.h"
 #include "button.h"
 
+#define COMPONENT_MAXIMUM 5
+
 class UserChoice
 {
     private:

@@ -2,82 +2,69 @@
 #include "controlunit.h"
 #include <QDebug>
 
-LCD_Display::LCD_Display()
-{
+LCD_Display::LCD_Display() {
     //actuator_duration
     actuatorType = LCD;
     actuatorState = UNDEFINED;
     isBacklit = false;
 }
 
-LCD_Display::~LCD_Display()
-{
+LCD_Display::~LCD_Display() {
 
 }
 
 
-QString LCD_Display::getTitle()
-{
+QString LCD_Display::getTitle() {
     return title;
 }
 
-void LCD_Display::setTitle(QString title)
-{
+void LCD_Display::setTitle(QString title) {
     this->title = title;
     qDebug() << "LCD: " << title;
 }
 
-QString LCD_Display::getDrinkName()
-{
+QString LCD_Display::getDrinkName() {
     return drinkName;
 }
 
-void LCD_Display::setDrinkName(QString drinkName)
-{
+void LCD_Display::setDrinkName(QString drinkName) {
     this->drinkName = drinkName;
     qDebug() << "LCD: You have selected: " <<  this->drinkName;
 
 }
 
-double LCD_Display::getPrice()
-{
+double LCD_Display::getPrice() {
     return price;
 }
 
-void LCD_Display::setPrice(double price)
-{
+void LCD_Display::setPrice(double price) {
     this->price = price;
     qDebug() << "LCD: You have to pay " << price << "for your drink!";
 }
 
 
-void LCD_Display::setBacklight(bool isBacklit)
-{
+void LCD_Display::setBacklight(bool isBacklit) {
     this->isBacklit = isBacklit;
 }
-bool LCD_Display::getBacklight()
-{
+
+bool LCD_Display::getBacklight() {
     return isBacklit;
 }
 
-void LCD_Display::writeDefaultText(UserChoice *activeUserChoice)
-{
+void LCD_Display::writeDefaultText(UserChoice *activeUserChoice) {
     setTitle("Please insert card");
-    if (activeUserChoice->getSelectedDrink() == NO_DRINK)
-    {
+    if (activeUserChoice->getSelectedDrink() == NO_DRINK) {
         setDrinkName("NO_DRINK");
         setPrice(0.0);
     }
-    else
-    {
+    else {
         setDrinkName(activeUserChoice->printSelectedDrink());
         setPrice(activeUserChoice->getPrice());
     }
 
 }
 
-void LCD_Display::writeGreetingText(UserChoice *activeUserChoice)
-{
+void LCD_Display::writeGreetingText(UserChoice *activeUserChoice) {
     QString str = activeUserChoice->getCard()->getAccount()->getOwner()->getName().c_str();
     setTitle("Nice to see you again, " + str);
     setDrinkName("Nothing");
@@ -85,30 +72,24 @@ void LCD_Display::writeGreetingText(UserChoice *activeUserChoice)
 
 }
 
-void LCD_Display::writeCardErrorText()
-{
+void LCD_Display::writeCardErrorText() {
     setTitle("Not a valid card! Aborted...");
     setDrinkName("NO_DRINK");
     setPrice(0.0);
 }
 
-void LCD_Display::writeUserChoiceText(UserChoice *activeUserChoice)
-{
-    if (activeUserChoice->getBigPortion())
-    {
+void LCD_Display::writeUserChoiceText(UserChoice *activeUserChoice) {
+    if (activeUserChoice->getBigPortion()) {
         setTitle("Your choice is big portion");
     }
-    else
-    {
+    else {
         setTitle("Your choice is regular portion");
     }
 
-    if (activeUserChoice->getSelectedDrink() != NO_DRINK)
-    {
+    if (activeUserChoice->getSelectedDrink() != NO_DRINK) {
         setDrinkName(activeUserChoice->printSelectedDrink());
     }
-    else
-    {
+    else {
         setDrinkName("No drink selected");
     }
 

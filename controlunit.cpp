@@ -4,26 +4,22 @@
 #include <QCoreApplication>
 #include <math.h>
 
-ControlUnit::ControlUnit() : ingredientTanks(NULL)
-{
+ControlUnit::ControlUnit() : ingredientTanks(NULL) {
     activeUserChoice = NULL;
     ingredientTanks = new Ingredient();
 }
 
-void ControlUnit::linkInteractionUnit(InteractionUnit *iunit)
-{
+void ControlUnit::linkInteractionUnit(InteractionUnit *iunit) {
     qDebug() << "CONTROL_UNIT: InteractionUnit linked";
     this->iunit = iunit;
 }
 
-ControlUnit::~ControlUnit()
-{
+ControlUnit::~ControlUnit() {
     if (ingredientTanks)
         delete ingredientTanks;
 }
 
-void ControlUnit::setDisplayBacklight()
-{
+void ControlUnit::setDisplayBacklight() {
 
     qDebug() << "CONTROL UNIT: setDisplayBacklight() started.";
 
@@ -47,34 +43,26 @@ void ControlUnit::onStartInit() {
     opticalSensor->setDistanceToObject(10);
     opticalSensor->getOpticalFlowSensorsMeasurements();
     setDisplayBacklight();
-
-
 }
 
-
-bool ControlUnit::checkCardReader()
-{
+bool ControlUnit::checkCardReader() {
     return cardScanner->getIsCardInside();
 }
 
-bool ControlUnit::checkCard()
-{
+bool ControlUnit::checkCard() {
     return cardScanner->isValidCardInside();
 }
 
 
 
-CardHolderState ControlUnit::insertCard(Card *card)
-{
+CardHolderState ControlUnit::insertCard(Card *card) {
     qDebug() << "CONTROL UNIT: insertCard() started.";
     // if NO card in RFID
-    if (!checkCardReader())
-    {
+    if (!checkCardReader()) {
         // After card was inserted, the RFID Scanner provides verification
         // without instructions outside
         // modifies private attribute isChoiceAllowed for InteractionUnit
-        if (cardScanner->insertCard(card))
-        {
+        if (cardScanner->insertCard(card)) {
             display->writeGreetingText(activeUserChoice);
 
             return VALID_CARD_INSIDE;
@@ -83,44 +71,36 @@ CardHolderState ControlUnit::insertCard(Card *card)
         // if card is not valid, it will be automaticaly ejected (simulation in Design)
         // and the purschasing will be ended
         // the next card can be inserted in RFID
-        else
-        {
+        else {
             display->writeCardErrorText();
             cardScanner->ejectCard();
-
             return NONVALID_CARD_INSIDE;
         }
     }
 
     // if there IS A CARD
-    else
-    {
+    else {
         cardScanner->ejectCard();
         delete(activeUserChoice);
         activeUserChoice = iunit->initUserChoice(card);
         activeUserChoice->setDefaultChoice();
         display->writeDefaultText(activeUserChoice);
-
         return NO_CARD;
     }
 }
 
-bool ControlUnit::isBrewingFinished()
-{
+bool ControlUnit::isBrewingFinished() {
     return opticalSensor->getOpticalValue() && flow->getHasPreparedDrink();
 }
 
 
 // we need two sensors for three states: no cup, empty cup, cup with drink
-CupHolderState ControlUnit::checkCupHolder()
-{
+CupHolderState ControlUnit::checkCupHolder() {
     qDebug() << "CONTROL UNIT: checkCupHolder() started.";
     // if cup detected
-    if (opticalSensor->getOpticalValue())
-    {
+    if (opticalSensor->getOpticalValue()) {
         // and a drink was prepared
-        if (flow->getHasPreparedDrink())
-        {
+        if (flow->getHasPreparedDrink()) {
             qDebug() << "OPTICAL SENSOR: There is a full cup";
             opticalSensor->setDistanceToObject(10);
             opticalSensor->getOpticalFlowSensorsMeasurements();
@@ -129,8 +109,7 @@ CupHolderState ControlUnit::checkCupHolder()
         }
 
         // only cup stays and no drink was prepared
-        else
-        {
+        else {
             qDebug() << "OPTICAL SENSOR: There is an empty cup";
             opticalSensor->setDistanceToObject(10);
             opticalSensor->getOpticalFlowSensorsMeasurements();
@@ -138,8 +117,7 @@ CupHolderState ControlUnit::checkCupHolder()
         }
     }
     // there is not cup and no drink
-    else
-    {
+    else {
         qDebug() << "OPTICAL SENSOR: Cup holder is empty";
         opticalSensor->setDistanceToObject(2);
         opticalSensor->getOpticalFlowSensorsMeasurements();
@@ -147,8 +125,7 @@ CupHolderState ControlUnit::checkCupHolder()
     }
 }
 
-void ControlUnit::writeMessageLCD(LCD_Message message)
-{
+void ControlUnit::writeMessageLCD(LCD_Message message) {
     switch (message) {
     case (DEFAULT):
         display->writeDefaultText(activeUserChoice);
@@ -176,8 +153,7 @@ void ControlUnit::writeMessageLCD(LCD_Message message)
     }
 }
 
-void ControlUnit::writeMessageLCD(LCD_Message message, PreparationStatus status)
-{
+void ControlUnit::writeMessageLCD(LCD_Message message, PreparationStatus status) {
     switch (message) {
     case (SYSTEM_ERROR):
         display->writeSystemErrorMessage(status);
@@ -187,8 +163,7 @@ void ControlUnit::writeMessageLCD(LCD_Message message, PreparationStatus status)
     }
 }
 
-void ControlUnit::maintenanceRoutine()
-{
+void ControlUnit::maintenanceRoutine() {
     qDebug() << "CONTROL UNIT: maintenanceRoutine() started.";
 
     checkIngredients();
@@ -204,9 +179,6 @@ void ControlUnit::maintenanceRoutine()
     if (opticalSensor->getSensorState() == UNDEFINED)
         opticalSensor->setSensorState(OK);
 
-    if (pressureSensor->getSensorState() == UNDEFINED)
-        pressureSensor->setSensorState(OK);
-
     if (temperatureSensor->getSensorState() == UNDEFINED)
         temperatureSensor->setSensorState(OK);
 
@@ -216,8 +188,7 @@ void ControlUnit::maintenanceRoutine()
     if (display->getActuatorState() == UNDEFINED)
         display->setActuatorState(OK);
 
-    for (int i = 0; i < AMOUNT_OF_MOTORS; i++)
-    {
+    for (int i = 0; i < AMOUNT_OF_MOTORS; i++) {
         if (motor[i]->getActuatorState() == UNDEFINED)
             motor[i]->setActuatorState(OK);
     }
@@ -225,25 +196,20 @@ void ControlUnit::maintenanceRoutine()
     if (heater->getActuatorState() == UNDEFINED)
         heater->setActuatorState(OK);
 
-    if (brew->getActuatorState() == UNDEFINED)
-        brew->setActuatorState(OK);
-
     if (milkMaker->getActuatorState() == UNDEFINED)
         milkMaker->setActuatorState(OK);
 
     qDebug() << "CONTROL_UNIT: Initialisation done. State is OK.";
 }
 
-void ControlUnit::staffServiceRoutine()
-{
+void ControlUnit::staffServiceRoutine() {
     ServiceRoutine sr;
     sr.refillOrNot(this->ingredientTanks);
     // reset all sensors and actuators
     maintenanceRoutine();
 }
 
-bool ControlUnit::checkIngredients()
-{
+bool ControlUnit::checkIngredients() {
     qDebug() << "CONTROL UNIT: checkIngredients() started.";
 
     if (activeUserChoice->getSelectedDrink() == HOTWATER) {
@@ -273,7 +239,6 @@ bool ControlUnit::checkIngredients()
     qDebug() << "CONTROL UNIT: All Ingredients are OK!";
     return true;
 }
-
 
 bool ControlUnit::checkCacaoIngredient() {
     if (ingredientTanks->getCacaoIngredient() < activeUserChoice->getSpecificRecipeComponent() + MINIMAl_THRESHOLD) {
@@ -307,8 +272,7 @@ bool ControlUnit::checkMilkAmount() {
     return true;
 }
 
-PreparationStatus ControlUnit::checkStartConditions()
-{
+PreparationStatus ControlUnit::checkStartConditions() {
     // get Optical Sensor Measurements
     if (opticalSensor->getOpticalFlowSensorsMeasurements() == NO_CUP) {
         qDebug() << "OPTICAL SENSOR: Place your cup first!";
@@ -334,8 +298,7 @@ PreparationStatus ControlUnit::checkStartConditions()
     }
 
     // check if card is still in the card holder
-    if (cardScanner->isValidCardInside() != VALID_CARD_INSIDE)
-    {
+    if (cardScanner->isValidCardInside() != VALID_CARD_INSIDE) {
         qDebug() << "RFID SCANNER: Card missed, please return your card back!";
         writeMessageLCD(SYSTEM_ERROR, PREPARE_ERROR_NO_CARD);
         return PREPARE_ERROR_NO_CARD;
@@ -348,14 +311,12 @@ PreparationStatus ControlUnit::checkStartConditions()
     }
 
     // if it is possible to get here, the payment process could start
-    if (activeUserChoice->payDrink())
-    {
+    if (activeUserChoice->payDrink()) {
         qDebug() << "CONTROL UNIT: YOU HAVE PAID! WE CAN START PREPARE A DRINK!";
         writeMessageLCD(WAIT_PLEASE);
         return PREPARE_IS_ALLOWED;
     }
-    else
-    {
+    else {
         qDebug() << "CONTROL UNIT: Payment error!";
         qDebug() << "CONTROL UNIT: Take your card!";
         writeMessageLCD(SYSTEM_ERROR, PREPARE_ERROR_PAYMENT);
@@ -363,8 +324,7 @@ PreparationStatus ControlUnit::checkStartConditions()
     }
 }
 
-PreparationStatus ControlUnit::prepareSelectedDrink()
-{
+PreparationStatus ControlUnit::prepareSelectedDrink() {
     writeMessageLCD(WAIT_PLEASE);
 
     if (!checkIngredients()) {
@@ -444,80 +404,62 @@ PreparationStatus ControlUnit::prepareSelectedDrink()
     return PREPARE_DONE;
 }
 
-void ControlUnit::abortPreparation()
-{
+void ControlUnit::abortPreparation() {
     activeUserChoice->setDefaultChoice();
     writeMessageLCD(USER_CHOICE);
 }
 
 
-void ControlUnit::connectRFID(RFID_Scanner *sensor)
-{
+void ControlUnit::connectRFID(RFID_Scanner *sensor) {
     cardScanner = sensor;
 }
 void ControlUnit::connectOptical(OpticalSensor *sensor)
 {
     opticalSensor = sensor;
 }
-void ControlUnit::connectPressure(PressureSensor *sensor)
-{
-    pressureSensor = sensor;
-}
-void ControlUnit::connectTemperatur(TemperaturSensor *sensor)
-{
+
+void ControlUnit::connectTemperatur(TemperaturSensor *sensor) {
     temperatureSensor = sensor;
 }
 
-void ControlUnit::connectBrightnessSensor(BrightnessSensor *sensor)
-{
+void ControlUnit::connectBrightnessSensor(BrightnessSensor *sensor) {
     brightSensor = sensor;
 }
-void ControlUnit::connectFlow(Flowmeter *sensor)
-{
+
+void ControlUnit::connectFlow(Flowmeter *sensor) {
     flow = sensor;
 }
 
-void ControlUnit::connectLCD(LCD_Display *actuator)
-{
+void ControlUnit::connectLCD(LCD_Display *actuator) {
     display = actuator;
 }
-void ControlUnit::connectMotor(DC_Motor *actuator, int numOfActuators)
-{
+
+void ControlUnit::connectMotor(DC_Motor *actuator, int numOfActuators) {
   for(int i = 0; i < numOfActuators; i++) {
       motor[i] = &actuator[i];
       motor[i]->setMotorType(static_cast<MotorType>(i));
   }
 }
 
-void ControlUnit::connectHeater(Waterheater *actuator)
-{
+void ControlUnit::connectHeater(Waterheater *actuator) {
     heater = actuator;
 }
-void ControlUnit::connectMilkMaker(Milkmaker *actuator)
-{
+
+void ControlUnit::connectMilkMaker(Milkmaker *actuator) {
     milkMaker = actuator;
 }
 
-void ControlUnit::connectBrewGroup(Brewgroup *actuator)
-{
-    brew = actuator;
-}
-
-
-void ControlUnit::blockCupHolder()
-{
+void ControlUnit::blockCupHolder() {
     qDebug() << "CONTROL UNIT: Cup Holder is blocked, the cup will be realeased after drink preparing the drink";
 }
 
 
-void ControlUnit::unblockCupHolder()
-{
+void ControlUnit::unblockCupHolder() {
     qDebug() << "CONTROL UNIT: Cup Holder is unblocked";
 
 }
 
-Ingredient *ControlUnit::getIngredients()
-{
+Ingredient *ControlUnit::getIngredients() {
     return this->ingredientTanks;
 }
 

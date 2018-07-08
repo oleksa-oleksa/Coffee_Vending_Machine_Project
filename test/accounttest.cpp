@@ -2,8 +2,7 @@
 #include "accounttest.h"
 #include "person.h"
 
-void AccountTest::testCheckCreditLimit()
-{
+void AccountTest::testCheckCreditLimit() {
     // The Credit limit for calculations is const CREDIT_LIMIT
     Account test01;
     test01.setAccountCredit(8.0);
@@ -38,8 +37,7 @@ void AccountTest::testCheckCreditLimit()
 }
 
 
-void AccountTest::testAddCredit()
-{
+void AccountTest::testAddCredit() {
     Account test01;
     test01.setAccountCredit(8);
 
@@ -59,8 +57,7 @@ void AccountTest::testAddCredit()
     test01.getAccountCredit();
 }
 
-void AccountTest::testActivateAccount()
-{
+void AccountTest::testActivateAccount() {
     Account test01;
 
     // PASS
@@ -82,12 +79,10 @@ void AccountTest::testActivateAccount()
     test01.getAccountStatus();
     test01.activateAccount();
     test01.getAccountStatus();
-
 }
 
 
-void AccountTest::testDeactivateAccount()
-{
+void AccountTest::testDeactivateAccount() {
     Account test01;
 
     // PASS
@@ -112,8 +107,7 @@ void AccountTest::testDeactivateAccount()
 
 }
 
-void AccountTest::testBlockAccount()
-{
+void AccountTest::testBlockAccount() {
     Account test01;
 
     // PASS
@@ -136,8 +130,7 @@ void AccountTest::testBlockAccount()
 
 }
 
-void AccountTest::testLinkOwner()
-{
+void AccountTest::testLinkOwner() {
     Person test01;
     Person test02;
 
@@ -158,8 +151,7 @@ void AccountTest::testLinkOwner()
     qDebug() << "VERIFY: Linked account personID is: " << acc01.getOwner()->getID().toQstring();
 }
 
-void AccountTest::testLinkBankAccount()
-{
+void AccountTest::testLinkBankAccount() {
     BankAccount test01;
     BankAccount::AllBankAccounts.push_back(test01);
 
@@ -178,6 +170,4 @@ void AccountTest::testLinkBankAccount()
 
     // FAILED, ID NOT existing in Array, OLD ID kept
     QCOMPARE(acc01.linkBankAccount(tmpID02), false);
-
-
 }

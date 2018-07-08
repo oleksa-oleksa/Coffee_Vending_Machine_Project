@@ -1,7 +1,6 @@
 #include "opticalsensortest.h"
 
-void OpticalSensorTest::testGetOpticalSensorsMeasurement()
-{
+void OpticalSensorTest::testGetOpticalSensorsMeasurement() {
     //Test1
     Flowmeter fm1;
 

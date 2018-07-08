@@ -3,13 +3,11 @@
 #include "tools.h"
 #include <iostream>
 
-CardID::CardID(std::string id) : cardID(id)
-{
+CardID::CardID(std::string id) : cardID(id) {
 
 }
 
-CardID::CardID()
-{
+CardID::CardID() {
     cardID = std::string("5100") + createRandomID(CARD_ID_LEN);
 }
 

@@ -2,8 +2,7 @@
 #include "temperatursensor.h"
 #include "QDebug"
 
-TemperaturSensor::TemperaturSensor()
-{
+TemperaturSensor::TemperaturSensor() {
     sensorType = TEMPERATURE;
     sensorState = UNDEFINED;
     referenceTemperature = 0;
@@ -11,8 +10,7 @@ TemperaturSensor::TemperaturSensor()
 }
 
 
-TemperaturSensor::~TemperaturSensor()
-{
+TemperaturSensor::~TemperaturSensor() {
 
 }
 
@@ -29,19 +27,17 @@ bool TemperaturSensor::compareTemperature() {
 }
 
 int TemperaturSensor::getCurrentTemperature() {
-
     return currentTemperature;
 }
 
 void TemperaturSensor::setCurrentTemperature(int currentTemperature) {
-
     this->currentTemperature = currentTemperature;
 }
 
 void TemperaturSensor::setReferenceTemperature(int referenceTemperature) {
-
     this->referenceTemperature = referenceTemperature;
 }
+
 int TemperaturSensor::getReferenceTemperature() {
 
     return referenceTemperature;

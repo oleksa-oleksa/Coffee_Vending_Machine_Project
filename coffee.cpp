@@ -2,31 +2,25 @@
 #include "drink.h"
 #include "coffee.h"
 
-int Coffee::getSugarAmount()
-{
+int Coffee::getSugarAmount() {
     return sugarAmount;
 }
 
-int Coffee::getMilkAmount()
-{
+int Coffee::getMilkAmount() {
     return milkAmount;
 }
 
-int Coffee::getHotWaterAmount()
-{
+int Coffee::getHotWaterAmount() {
     return hotWaterAmount;
 }
-int Coffee::getRecipeTemperature()
-{
+int Coffee::getRecipeTemperature() {
     return recipeTemperature;
 }
 
-double Coffee::getPrice()
-{
+double Coffee::getPrice() {
     return price;
 }
 
-int Coffee::getRecipeIngredient()
-{
+int Coffee::getRecipeIngredient() {
     return coffeePowderAmount;
 }

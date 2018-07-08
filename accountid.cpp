@@ -3,18 +3,15 @@
 #include "tools.h"
 #include <iostream>
 
-AccountID::AccountID(std::string id) : accountID(id)
-{
+AccountID::AccountID(std::string id) : accountID(id) {
 
 }
 
-AccountID::AccountID()
-{
+AccountID::AccountID() {
     accountID = std::string("ACC") + createRandomID(ACCOUNT_ID_LEN);
 }
 
-QString AccountID::toQstring()
-{
+QString AccountID::toQstring() {
   return QString::fromUtf8(accountID.c_str());
 }
 

@@ -7,8 +7,7 @@ const float CREDIT_LIMIT = 5.0;
 
 std::vector<Account>Account::AllAccounts = std::vector<Account>();
 
-Account::Account() : accountID()
-{
+Account::Account() : accountID() {
     credit = 0.0;
     state = ACTIVE_OK;
     owner = NULL;
@@ -17,8 +16,7 @@ Account::Account() : accountID()
 
 // This constructor assumes that it receives a valid query
 // pointing at some row of data from Account table
-Account::Account(QSqlRecord &query)
-{
+Account::Account(QSqlRecord &query) {
     using namespace std;
 
     QString q_aid = query.value(0).toString();
@@ -35,47 +33,40 @@ Account::Account(QSqlRecord &query)
     linkBankAccount(iban);
 }
 
-Account::Account(Person *Employee, BankAccount *Ba)
-{
+Account::Account(Person *Employee, BankAccount *Ba) {
     credit = 0.0;
     state = ACTIVE_OK;
     owner = Employee;
     ba = Ba;
 }
 
-AccountStatus Account::getAccountStatus()
-{
+AccountStatus Account::getAccountStatus() {
     QString str = printAccountStatus();
     qDebug() << "ACCOUNT GETTER: Account status is: " << str;
     return state;
 }
 
 
-void Account::setAccountStatus(AccountStatus state)
-{
+void Account::setAccountStatus(AccountStatus state) {
     this->state = state;
     QString str = printAccountStatus();
 }
 
-bool Account::checkCreditLimit(double amount)
-{
+bool Account::checkCreditLimit(double amount) {
     // Not active account case
-    if (getAccountStatus() != ACTIVE_OK)
-    {
+    if (getAccountStatus() != ACTIVE_OK) {
         qDebug() << "Account is not active, purchase canceled...";
         return false;
     }
 
     // Check Limit case
-    if (credit >= CREDIT_LIMIT)
-    {
+    if (credit >= CREDIT_LIMIT) {
         qDebug() << "Limit: " << CREDIT_LIMIT  << " is reached. Oops!";
         blockAccount();
         return false;
     }
 
-    if ((credit + amount) >= CREDIT_LIMIT)
-    {
+    if ((credit + amount) >= CREDIT_LIMIT) {
         qDebug() << "You can not buy this drink, the limit will be exceeded!";
         double tmp = CREDIT_LIMIT -  getAccountCredit();
         qDebug() << tmp << "€ is available for drink purchase!";
@@ -86,61 +77,50 @@ bool Account::checkCreditLimit(double amount)
 }
 
 
-double Account::getAccountCredit()
-{
+double Account::getAccountCredit() {
     return credit;
 }
 
-Person *Account::getOwner()
-{
+Person *Account::getOwner() {
     return owner;
 }
 
-void Account::setOwner(Person *owner)
-{
+void Account::setOwner(Person *owner) {
     this->owner = owner;
 }
 
-BankAccount *Account::getBankAccount()
-{
+BankAccount *Account::getBankAccount() {
     return ba;
 }
 
-void Account::setAccountID(AccountID accountID)
-{
+void Account::setAccountID(AccountID accountID) {
    this->accountID = accountID;
 }
 
-AccountID Account::getAccountID()
-{
+AccountID Account::getAccountID() {
     return accountID;
 }
 
-void Account::setBankAccount(BankAccount *ba)
-{
+void Account::setBankAccount(BankAccount *ba) {
     this->ba = ba;
 }
 
 // Simple setter
-void Account::setAccountCredit(double credit)
-{
+void Account::setAccountCredit(double credit) {
     this->credit = credit;
     qDebug() << "SETTER: credit is set: " << credit;
 
 }
 
 // increases credit if account is not blocked and limit will be not exceeded
-bool Account::addCredit(double amount)
-{
-    if (getAccountStatus() != ACTIVE_OK)
-    {
+bool Account::addCredit(double amount) {
+    if (getAccountStatus() != ACTIVE_OK) {
         qDebug() << "Account is not active, purchase canceled...";
         return false;
     }
 
     // if credit limit is not reached, user can buy a new drink
-    if (checkCreditLimit(amount))
-    {
+    if (checkCreditLimit(amount)) {
         // Obtaining actual credit
         double tmp_cr = getAccountCredit();
         // increasing
@@ -152,39 +132,32 @@ bool Account::addCredit(double amount)
         qDebug() << "New credit: " <<  credit;
         return true;
     }
-    else
-    {
+    else {
         qDebug() << "Payment attemt is canceled...";
         return false;
     }
 }
 
-void Account::activateAccount()
-{
+void Account::activateAccount() {
     setAccountStatus(ACTIVE_OK);
     qDebug() << "ACTIVATE: Account is activated";
 }
 
-void Account::deactivateAccount()
-{
+void Account::deactivateAccount() {
     setAccountStatus(DEACTIVATED_OLD);
     qDebug() << "DEACTIVATE: Account is deactivated";
 }
 
-void Account::blockAccount()
-{
+void Account::blockAccount() {
     setAccountStatus(BLOCKED_UNPAID);
     qDebug() << "BLOCK: Account is blocked";
 }
 
-bool Account::linkOwner(PersonID personID)
-{
+bool Account::linkOwner(PersonID personID) {
     bool ret = false;
 
-    for (size_t i = 0; i < Person::AllEmployee.size(); i++)
-    {
-       if (Person::AllEmployee[i].getID().toQstring() == personID.toQstring())
-       {
+    for (size_t i = 0; i < Person::AllEmployee.size(); i++) {
+       if (Person::AllEmployee[i].getID().toQstring() == personID.toQstring()) {
           setOwner(&Person::AllEmployee[i]);
           qDebug() << "LINK TO ACCOUNT: OWNER is set to PersonID:" << Person::AllEmployee[i].getID().toQstring();
           ret = true;
@@ -193,28 +166,23 @@ bool Account::linkOwner(PersonID personID)
     return ret;
 }
 
-bool Account::linkBankAccount(BankAccountID iban)
-{
+bool Account::linkBankAccount(BankAccountID iban) {
     bool ret = false;
 
-    for (size_t i = 0; i < BankAccount::AllBankAccounts.size(); i++)
-    {
-       if (BankAccount::AllBankAccounts[i].getIBAN().toQstring() == iban.toQstring())
-       {
+    for (size_t i = 0; i < BankAccount::AllBankAccounts.size(); i++) {
+       if (BankAccount::AllBankAccounts[i].getIBAN().toQstring() == iban.toQstring()) {
           setBankAccount(&BankAccount::AllBankAccounts[i]);
           qDebug() << "LINK TO ACCOUNT: BANK ACCOUNT is set to IBAN:" << BankAccount::AllBankAccounts[i].getIBAN().toQstring();
           ret = true;
        }
     }
-    if (!ret)
-    {
+    if (!ret) {
         qDebug() << "Bank Account was not linked! No corresponding record in array!";
     }
     return ret;
 }
 
-QString Account::printAccountStatus()
-{
+QString Account::printAccountStatus() {
     QString str;
     switch (this->state) {
     case ACTIVE_OK:
@@ -229,6 +197,5 @@ QString Account::printAccountStatus()
     default:
         break;
     }
-
 }
 

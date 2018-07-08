@@ -6,50 +6,43 @@
 #include <vector>
 #include "tools.h"
 
-void DatabaseTest::testOpenDB()
-{
+void DatabaseTest::testOpenDB() {
     Database db_t;
 
     QVERIFY2(db_t.openDB(DATABASE_NAME_TEST) == true, "OpenDB() failed");
 }
 
 
-/* bool DatabaseTest::testRestoreDatabase()
-{
+/* bool DatabaseTest::testRestoreDatabase() {
 
 } */
 
 
-void DatabaseTest::testCreatePersonTable()
-{
+void DatabaseTest::testCreatePersonTable() {
     Database db_t;
     db_t.openDB(DATABASE_NAME_TEST);
     QVERIFY(db_t.createPersonTable());
 }
 
-void DatabaseTest::testCreateBankAccountTable()
-{
+void DatabaseTest::testCreateBankAccountTable() {
     Database db_t;
     db_t.openDB(DATABASE_NAME_TEST);
     QVERIFY(db_t.createBankAccountTable());
 }
 
-void DatabaseTest::testCreateAccountTable()
-{
+void DatabaseTest::testCreateAccountTable() {
     Database db_t;
     db_t.openDB(DATABASE_NAME_TEST);
     QVERIFY(db_t.createAccountTable());
 }
 
-void DatabaseTest::testCreateCardTable()
-{
+void DatabaseTest::testCreateCardTable() {
     Database db_t;
     db_t.openDB(DATABASE_NAME_TEST);
     QVERIFY(db_t.createCardTable());
 }
 
-void DatabaseTest::testInsertPerson()
-{
+void DatabaseTest::testInsertPerson() {
     Database db_t;
     db_t.openDB(DATABASE_NAME_TEST);
 
@@ -62,8 +55,7 @@ void DatabaseTest::testInsertPerson()
     QVERIFY(db_t.insertPerson("Anetta", "UnemployedAdmin", "Bismarkstrasse 45", 0, 1, 0));
 }
 
-void DatabaseTest::testInsertBankAccount()
-{
+void DatabaseTest::testInsertBankAccount() {
     Database db_t;
     db_t.openDB(DATABASE_NAME_TEST);
 
@@ -72,16 +64,14 @@ void DatabaseTest::testInsertBankAccount()
     People people;
     db_t.loadPeople(people);
 
-    for (size_t i = 0; i < people.size(); i++)
-    {
+    for (size_t i = 0; i < people.size(); i++) {
        std::string tmp_accID = std::string("ACC") + createRandomID(ACCOUNT_ID_LEN);
        QString str = QString::fromUtf8(tmp_accID.c_str());
        QVERIFY(db_t.insertBankAccount(str, 1));
     }
 }
 
-void DatabaseTest::testInsertAccount()
-{
+void DatabaseTest::testInsertAccount() {
     Database db_t;
     db_t.openDB(DATABASE_NAME_TEST);
     People people;
@@ -92,8 +82,7 @@ void DatabaseTest::testInsertAccount()
     // Obtaining Foreign Keys
     // Bank Accounts and Account are always corresponding to the amount of people
     // this is the solution for this particular issue
-    for (size_t i = 0; i < people.size(); i++)
-    {
+    for (size_t i = 0; i < people.size(); i++) {
        AccountID tmp_id1 = ba[i].getAccountID();
        QString q_aid = tmp_id1.toQstring();
 
@@ -107,15 +96,13 @@ void DatabaseTest::testInsertAccount()
     }
 }
 
-void DatabaseTest::testInsertCard()
-{
+void DatabaseTest::testInsertCard() {
     Database db_t;
     db_t.openDB(DATABASE_NAME_TEST);
     Accounts a;
     db_t.loadAccounts(a);
 
-    for (size_t i = 0; i < a.size(); i++)
-    {
+    for (size_t i = 0; i < a.size(); i++) {
         AccountID tmp_id1 = a[i].getAccountID();
         QString q_aid = tmp_id1.toQstring();
 
@@ -123,19 +110,16 @@ void DatabaseTest::testInsertCard()
     }
 }
 
-void DatabaseTest::testLoadPeople()
-{
+void DatabaseTest::testLoadPeople() {
     Database db_t;
     db_t.openDB(DATABASE_NAME_TEST);
 
     // Saving from DB into static global
     QVERIFY(db_t.loadPeople(Person::AllEmployee));
-
 }
 
 
-void DatabaseTest::testLoadBankAccounts()
-{
+void DatabaseTest::testLoadBankAccounts() {
     Database db_t;
     db_t.openDB(DATABASE_NAME_TEST);
 
@@ -143,30 +127,26 @@ void DatabaseTest::testLoadBankAccounts()
     QVERIFY(db_t.loadBankAccounts(BankAccount::AllBankAccounts));
 }
 
-void DatabaseTest::testLoadAccounts()
-{
+void DatabaseTest::testLoadAccounts() {
     Database db_t;
     db_t.openDB(DATABASE_NAME_TEST);
 
     QVERIFY(db_t.loadAccounts(Account::AllAccounts));
 
     // connect account and bank account verification
-    for (size_t i = 0; i < Account::AllAccounts.size(); i++)
-    {
+    for (size_t i = 0; i < Account::AllAccounts.size(); i++) {
         QVERIFY(Account::AllAccounts[i].getBankAccount()->linkProvidedAccount(Account::AllAccounts[i].getAccountID()));
     }
 }
 
-void DatabaseTest::testLoadCards()
-{
+void DatabaseTest::testLoadCards() {
     Database db_t;
     db_t.openDB(DATABASE_NAME_TEST);
 
     QVERIFY(db_t.loadCards(Card::AllCards));
 }
 
-void DatabaseTest::testCloseDatabase()
-{
+void DatabaseTest::testCloseDatabase() {
     Database db_t;
     db_t.closeDatabase();
 
@@ -178,8 +158,7 @@ void DatabaseTest::testCloseDatabase()
 
 // Uncomment to test delete
 /*
-void DatabaseTest::testDeleteDB()
-{
+void DatabaseTest::testDeleteDB() {
     Database db_t;
     QVERIFY(db_t.deleteDB());
 }

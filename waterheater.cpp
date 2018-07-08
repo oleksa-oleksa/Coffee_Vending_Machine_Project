@@ -4,8 +4,7 @@
 #include <math.h>
 #include <QTimer>
 
-Waterheater::Waterheater()
-{
+Waterheater::Waterheater() {
     actuatorState = UNDEFINED;
     actuatorType = WATERHEATER;
     idleTemperature = 60;
@@ -13,8 +12,7 @@ Waterheater::Waterheater()
     currentTemperature = idleTemperature;
 }
 
-Waterheater::~Waterheater()
-{
+Waterheater::~Waterheater() {
 
 }
 
@@ -48,8 +46,7 @@ bool Waterheater::heatingDone() {
     if (temperatureSensor.compareTemperature()) {
         qDebug() << "WATER HEATER: Realtime heating simulation done. Water heated to" << currentTemperature << "degrees";
         return true;
-    }
-    else {
+    } else {
         qDebug() << "WATER HEATER: Water heater does not heat a water. Aborted...";
         return false;
     }
@@ -78,6 +75,7 @@ int Waterheater::getWorkTemperature() {
 void Waterheater::setCurrentTemperature(int currentTemperature) {
     this->currentTemperature = currentTemperature;
 }
+
 void Waterheater::setIdleTemperature(int idleTemperature) {
     this->idleTemperature = idleTemperature;
 }
@@ -85,6 +83,7 @@ void Waterheater::setIdleTemperature(int idleTemperature) {
 int Waterheater::getCurrentTemperature() {
     return currentTemperature;
 }
+
 int Waterheater::getIdleTemperature() {
        return idleTemperature;
 }

@@ -2,31 +2,25 @@
 #include "drink.h"
 #include "hotwater.h"
 
-int HotWater::getSugarAmount()
-{
+int HotWater::getSugarAmount() {
     return sugarAmount;
 }
 
-int HotWater::getMilkAmount()
-{
+int HotWater::getMilkAmount() {
     return milkAmount;
 }
 
-int HotWater::getHotWaterAmount()
-{
+int HotWater::getHotWaterAmount() {
     return hotWaterAmount;
 }
-int HotWater::getRecipeTemperature()
-{
+int HotWater::getRecipeTemperature() {
     return recipeTemperature;
 }
 
-double HotWater::getPrice()
-{
+double HotWater::getPrice() {
     return price;
 }
 
-int HotWater::getRecipeIngredient()
-{
+int HotWater::getRecipeIngredient() {
     return specificIngredient;
 }

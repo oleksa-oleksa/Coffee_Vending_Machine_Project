@@ -2,8 +2,7 @@
 #include <QDebug>
 #include "account.h"
 
-void RFIDScannerTest:: testInsertCard()
-{
+void RFIDScannerTest:: testInsertCard() {
     // wiht one Card multiple test and multiple Status
     RFID_Scanner rfid;
 
@@ -36,8 +35,7 @@ void RFIDScannerTest:: testInsertCard()
     QCOMPARE(rfid.insertCard(&card1), false);
 }
 
-void RFIDScannerTest::testEjectCard()
-{
+void RFIDScannerTest::testEjectCard() {
     Account acc01;
     Account::AllAccounts.push_back(acc01);
 
@@ -58,8 +56,7 @@ void RFIDScannerTest::testEjectCard()
       QCOMPARE(rfid.getIsCardInside(), false);
 }
 
-void RFIDScannerTest::testIsvalidCardInside()
-{
+void RFIDScannerTest::testIsvalidCardInside() {
     Account acc01;
     Account::AllAccounts.push_back(acc01);
 
@@ -98,8 +95,7 @@ void RFIDScannerTest::testIsvalidCardInside()
     QCOMPARE(rfid.isValidCardInside(), false);
 }
 
-void RFIDScannerTest::TestInitRFID()
-{
+void RFIDScannerTest::TestInitRFID() {
     Account acc01;
     Account::AllAccounts.push_back(acc01);
 

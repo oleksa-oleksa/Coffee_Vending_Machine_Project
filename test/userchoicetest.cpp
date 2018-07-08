@@ -12,8 +12,7 @@ void UserChoiceTest::testSetDefaultChoice() {
 }
 
 
-void UserChoiceTest::testPayDrink()
-{
+void UserChoiceTest::testPayDrink() {
     // All Object and dependencies
     // THE RIGHT ORDER TO GET ACCESS FOR PAYMENT
     Account ts_acc01;
@@ -47,8 +46,7 @@ void UserChoiceTest::testPayDrink()
     QCOMPARE(choice01.payDrink(), false);
 }
 
-void UserChoiceTest::testSetSelectedDrink()
-{
+void UserChoiceTest::testSetSelectedDrink() {
     DrinkType dt01 = CAPPUCCINO;
     DrinkType dt02 = HOTWATER;
     DrinkType dt03 = NO_DRINK;

@@ -1,8 +1,7 @@
 // Exisiting file implemented for project by Oleksandra Baga
 #include "ingredient.h"
 
-Ingredient::Ingredient()
-{
+Ingredient::Ingredient() {
     sugarIngredient = SUGAR_TANK_AMOUNT;
     milkIngredient = MILK_TANK_AMOUNT;
     coffeeIngredient = COFFEE_TANK_AMOUNT;
@@ -16,64 +15,54 @@ Ingredient::Ingredient(int sugarIngredient, int milkIngredient, int coffeeIngred
     this->cacaoIngredient = cacaoIngredient;
 }
 
-void Ingredient::refillAllIngredients()
-{
+void Ingredient::refillAllIngredients() {
     sugarIngredient = SUGAR_TANK_AMOUNT;
     milkIngredient = MILK_TANK_AMOUNT;
     coffeeIngredient = COFFEE_TANK_AMOUNT;
     cacaoIngredient = CACAO_TANK_AMOUNT;
 }
 
-void Ingredient::refillSugarTank()
-{
+void Ingredient::refillSugarTank() {
     sugarIngredient = SUGAR_TANK_AMOUNT;
 }
 
-void Ingredient::refillMilkTank()
-{
+void Ingredient::refillMilkTank() {
     milkIngredient = MILK_TANK_AMOUNT;
 }
 
-void Ingredient::refillCoffeeTank()
-{
+void Ingredient::refillCoffeeTank() {
     coffeeIngredient = COFFEE_TANK_AMOUNT;
 }
 
-void Ingredient::refillCacaoTank()
-{
+void Ingredient::refillCacaoTank() {
     cacaoIngredient = CACAO_TANK_AMOUNT;
 }
 
-void Ingredient::setSugarIngredient(int sugarIngredient)
-{
+void Ingredient::setSugarIngredient(int sugarIngredient) {
     this->sugarIngredient = sugarIngredient;
 }
-void Ingredient::setMilkIngredient(int milkIngredient)
-{
+void Ingredient::setMilkIngredient(int milkIngredient) {
     this->milkIngredient = milkIngredient;
 }
-void Ingredient::setCoffeeIngredient(int coffeeIngredient)
-{
+void Ingredient::setCoffeeIngredient(int coffeeIngredient) {
     this->coffeeIngredient = coffeeIngredient;
 }
-void Ingredient::setCacaoIngredient(int cacaoIngredient)
-{
+
+void Ingredient::setCacaoIngredient(int cacaoIngredient) {
     this->cacaoIngredient = cacaoIngredient;
 }
 
-int Ingredient::getSugarIngredient() const
-{
+int Ingredient::getSugarIngredient() const {
     return sugarIngredient;
 }
-int Ingredient::getMilkIngredient() const
-{
+
+int Ingredient::getMilkIngredient() const {
     return milkIngredient;
 }
-int Ingredient::getCoffeeIngredient() const
-{
+
+int Ingredient::getCoffeeIngredient() const {
     return coffeeIngredient;
 }
-int Ingredient::getCacaoIngredient() const
-{
+int Ingredient::getCacaoIngredient() const {
     return cacaoIngredient;
 }

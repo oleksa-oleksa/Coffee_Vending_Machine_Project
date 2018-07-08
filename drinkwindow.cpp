@@ -10,8 +10,7 @@
 
 DrinkWindow::DrinkWindow(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::DrinkWindow)
-{
+    ui(new Ui::DrinkWindow) {
     ui->setupUi(this);
     this->setWindowTitle("Vending Machine Drink Recipies");
     styleCoffee();
@@ -22,14 +21,12 @@ DrinkWindow::DrinkWindow(QWidget *parent) :
     styleWater();
 }
 
-DrinkWindow::~DrinkWindow()
-{
+DrinkWindow::~DrinkWindow() {
     delete ui;
 }
 
 
-void DrinkWindow::styleCoffee()
-{
+void DrinkWindow::styleCoffee() {
     Coffee drink;
 
     QString title = "COFFEE";
@@ -43,8 +40,7 @@ void DrinkWindow::styleCoffee()
 }
 
 
-void DrinkWindow::styleCappuccino()
-{
+void DrinkWindow::styleCappuccino() {
     Cappuccino drink;
 
     QString title = "CAPPUCCINO";
@@ -57,8 +53,8 @@ void DrinkWindow::styleCappuccino()
     ui->labelCuppText->setText(sugar + "<br />" + milk + "<br />" + spec + "<br />" + water);
 
 }
-void DrinkWindow::styleEspresso()
-{
+
+void DrinkWindow::styleEspresso() {
     Espresso drink;
 
     QString title = "ESPRESSO";
@@ -70,8 +66,8 @@ void DrinkWindow::styleEspresso()
     QString water = "Water: " + QString::number(drink.getHotWaterAmount());
     ui->labelEsprText->setText(sugar + "<br />" + milk + "<br />" + spec + "<br />" + water);
 }
-void DrinkWindow::styleLatte()
-{
+
+void DrinkWindow::styleLatte() {
     LatteMacchiato drink;
 
     QString title = "LATTE MACCHIOTO";
@@ -83,8 +79,8 @@ void DrinkWindow::styleLatte()
     QString water = "Water: " + QString::number(drink.getHotWaterAmount());
     ui->labelLatText->setText(sugar + "<br />" + milk + "<br />" + spec + "<br />" + water);
 }
-void DrinkWindow::styleCacao()
-{
+
+void DrinkWindow::styleCacao() {
     Cacao drink;
 
     QString title = "CACAO";
@@ -96,8 +92,8 @@ void DrinkWindow::styleCacao()
     QString water = "Water: " + QString::number(drink.getHotWaterAmount());
     ui->labelCacaoText->setText(sugar + "<br />" + milk + "<br />" + spec + "<br />" + water);
 }
-void DrinkWindow::styleWater()
-{
+
+void DrinkWindow::styleWater() {
     HotWater drink;
 
     QString title = "HOTWATER";

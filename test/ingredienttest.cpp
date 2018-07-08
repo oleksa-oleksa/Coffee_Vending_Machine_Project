@@ -1,7 +1,6 @@
 #include "ingredienttest.h"
 
-void IngredientTest::testRefillAllIngredients()
-{
+void IngredientTest::testRefillAllIngredients() {
     Ingredient ingredient1(0, 0, 0, 0);
     Ingredient ingredient2(10, 20, 10, 10);
 
@@ -20,8 +19,7 @@ void IngredientTest::testRefillAllIngredients()
     QCOMPARE(ingredient2.getMilkIngredient(), MILK_TANK_AMOUNT);
 }
 
-void IngredientTest::testRefillSugarTank()
-{
+void IngredientTest::testRefillSugarTank() {
     Ingredient ingredient1(0, 0, 0, 0);
     Ingredient ingredient2(10, 20, 10, 10);
 
@@ -34,8 +32,7 @@ void IngredientTest::testRefillSugarTank()
     QCOMPARE(ingredient2.getSugarIngredient(), SUGAR_TANK_AMOUNT);
 }
 
-void IngredientTest::testRefillCoffeeTank()
-{
+void IngredientTest::testRefillCoffeeTank() {
     Ingredient ingredient1(0, 0, 0, 0);
     Ingredient ingredient2(10, 20, 10, 10);
 
@@ -48,8 +45,7 @@ void IngredientTest::testRefillCoffeeTank()
     QCOMPARE(ingredient2.getCoffeeIngredient(), COFFEE_TANK_AMOUNT);
 }
 
-void IngredientTest::testRefillCacaoTank()
-{
+void IngredientTest::testRefillCacaoTank() {
     Ingredient ingredient1(0, 0, 0, 0);
     Ingredient ingredient2(10, 20, 10, 10);
 
@@ -62,8 +58,7 @@ void IngredientTest::testRefillCacaoTank()
     QCOMPARE(ingredient2.getCacaoIngredient(), CACAO_TANK_AMOUNT);
 }
 
-void IngredientTest::testRefillMilkTank()
-{
+void IngredientTest::testRefillMilkTank() {
     Ingredient ingredient1(0, 0, 0, 0);
     Ingredient ingredient2(10, 20, 10, 10);
 

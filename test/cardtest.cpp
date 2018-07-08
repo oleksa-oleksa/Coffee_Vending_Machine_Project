@@ -3,8 +3,7 @@
 #include "card.h"
 #include "cardid.h"
 
-void CardTest::testDeactivateCard()
-{
+void CardTest::testDeactivateCard() {
     Card test01;
 
     qDebug() << "01.";
@@ -17,8 +16,7 @@ void CardTest::testDeactivateCard()
 
 }
 
-void CardTest::testActivateCard()
-{
+void CardTest::testActivateCard() {
     Card test01;
 
     qDebug() << "02.";
@@ -35,8 +33,7 @@ void CardTest::testActivateCard()
 
 }
 
-void CardTest::testWithdraw()
-{
+void CardTest::testWithdraw() {
     Account ts_acc01;
     Person ts_per01;
 
@@ -66,8 +63,7 @@ void CardTest::testWithdraw()
     QCOMPARE(test01.withdraw(5.0), false);
 }
 
-void CardTest::testLinkAccount()
-{
+void CardTest::testLinkAccount() {
     Account ts_acc01;
     Account ts_acc02;
 

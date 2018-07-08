@@ -11,25 +11,20 @@ Flowmeter::Flowmeter()
 }
 
 
-Flowmeter::~Flowmeter()
-{
+Flowmeter::~Flowmeter() {
 
 }
 
-int Flowmeter::getRecipeAmountOfLiquid()
-{
+int Flowmeter::getRecipeAmountOfLiquid() {
     return recipeAmountOfLiquid;
 }
 
-void Flowmeter::setRecipeAmountOfLiquid(UserChoice *activeUserChoice)
-{
+void Flowmeter::setRecipeAmountOfLiquid(UserChoice *activeUserChoice) {
     recipeAmountOfLiquid = activeUserChoice->getHotWaterAmount();
 }
 
-bool Flowmeter::mainFlowmeterRoutine()
-{
-    for (int i = 0; i < recipeAmountOfLiquid; i++)
-    {
+bool Flowmeter::mainFlowmeterRoutine() {
+    for (int i = 0; i < recipeAmountOfLiquid; i++) {
         // we will do here some simulation
     }
 
@@ -40,8 +35,7 @@ bool Flowmeter::mainFlowmeterRoutine()
     return hasPreparedDrink;
 }
 
-bool Flowmeter::getHasPreparedDrink()
-{
+bool Flowmeter::getHasPreparedDrink() {
     qDebug() << "FLOWMETER: A drink just have been prepared: " << hasPreparedDrink;
     return hasPreparedDrink;
 }

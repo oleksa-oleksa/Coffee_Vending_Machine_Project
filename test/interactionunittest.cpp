@@ -11,8 +11,7 @@
                           button.setSensorState(RELEASED);})
 
 
-void InteractionUnitTest::testInitUserChoice()
-{
+void InteractionUnitTest::testInitUserChoice() {
     Card card;
     UserChoice sample;
     UserChoice *user; // this object will be created inside InteractionUnit
@@ -26,8 +25,7 @@ void InteractionUnitTest::testInitUserChoice()
 }
 
 
-void InteractionUnitTest::testButtonPollingRoutine()
-{
+void InteractionUnitTest::testButtonPollingRoutine() {
     Card test_card;
     InteractionUnit iunit;
 
@@ -88,5 +86,4 @@ void InteractionUnitTest::testButtonPollingRoutine()
     QCOMPARE(userChoice02->getSugarAmount(), 0);
     QCOMPARE(userChoice02->getMilkAmount(), 0);
     delete userChoice02;
-
 }

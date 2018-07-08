@@ -1,18 +1,15 @@
 #include "actuator.h"
 #include <QDebug>
 
-Actuator::Actuator()
-{
+Actuator::Actuator() {
 
 }
 
-Actuator::~Actuator()
-{
+Actuator::~Actuator() {
 
 }
 
-void Actuator:: setActuatorState(State actuatorState)
-{
+void Actuator:: setActuatorState(State actuatorState) {
      this->actuatorState = actuatorState;
 
      QString str_state = printActuatorState();
@@ -20,35 +17,29 @@ void Actuator:: setActuatorState(State actuatorState)
      qDebug() << "ACTUATOR: State of " << str_type << "is set: " << str_state;
 }
 
-void Actuator:: setActuatorDuration(unsigned int actuatorDuration)
-{
+void Actuator:: setActuatorDuration(unsigned int actuatorDuration) {
     this->actuatorDuration = actuatorDuration;
     qDebug() << "ACTUATOR: Duration is set: " << this->actuatorDuration;
 }
 
-void Actuator:: setActuatorType(ActuatorType actuatorType)
-{
+void Actuator:: setActuatorType(ActuatorType actuatorType) {
     this->actuatorType = actuatorType;
     qDebug() << "ACTUATOR: Type is set: " << this->actuatorType;
 }
 
-ActuatorType Actuator::getActuatorType() const
-{
+ActuatorType Actuator::getActuatorType() const {
     return this->actuatorType;
 }
 
-unsigned int Actuator::getActuatorDuration() const
-{
+unsigned int Actuator::getActuatorDuration() const {
     return this->actuatorDuration;
 }
 
-State Actuator::getActuatorState() const
-{
+State Actuator::getActuatorState() const {
     return this->actuatorState;
 }
 
-QString Actuator::printActuatorState()
-{
+QString Actuator::printActuatorState() {
     QString str;
     switch (actuatorState) {
     case (OK):
@@ -67,8 +58,7 @@ QString Actuator::printActuatorState()
 }
 
 
-QString Actuator::printActuatorType()
-{
+QString Actuator::printActuatorType() {
     QString str;
     switch (actuatorType) {
     case (DC_MOTOR):

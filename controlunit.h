@@ -7,14 +7,12 @@
 #include "temperatursensor.h"
 #include "waterheater.h"
 #include "flowmeter.h"
-#include "brewgroup.h"
 #include "milkmaker.h"
 #include "rfid_scanner.h"
 #include "card.h"
 #include <QDebug>
 #include "userchoice.h"
 #include "ingredient.h"
-#include "pressuresensor.h"
 #include "lcd_display.h"
 #include "card.h"
 #include "brightnesssensor.h"
@@ -32,7 +30,6 @@ class ControlUnit
         RFID_Scanner *cardScanner;
         Flowmeter *flow;
         OpticalSensor *opticalSensor;
-        PressureSensor *pressureSensor;
         TemperaturSensor *temperatureSensor;
         BrightnessSensor *brightSensor;
 
@@ -41,7 +38,6 @@ class ControlUnit
         Waterheater *heater;
         Milkmaker *milkMaker;
 
-        Brewgroup *brew;
         Ingredient *ingredientTanks;
 
     public:
@@ -79,7 +75,6 @@ class ControlUnit
         void connectRFID(RFID_Scanner *sensor);
         void connectFlow(Flowmeter *sensor);
         void connectOptical(OpticalSensor *sensor);
-        void connectPressure(PressureSensor *sensor);
         void connectTemperatur(TemperaturSensor *sensor);
         void connectBrightnessSensor(BrightnessSensor *sensor);
 
@@ -87,7 +82,6 @@ class ControlUnit
         void connectMotor(DC_Motor *actuator, int numOfActuators);
         void connectHeater(Waterheater *actuator);
         void connectMilkMaker(Milkmaker *actuator);
-        void connectBrewGroup(Brewgroup *actuator);
 
         Ingredient *getIngredients();
 };

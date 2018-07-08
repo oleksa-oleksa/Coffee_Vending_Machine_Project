@@ -17,15 +17,12 @@ int main(int argc, char *argv[])
     ret = QFile::exists(DATABASE_NAME);
 
     // Creation the default DB from scratch with predefined records
-    if (!ret)
-    {
+    if (!ret) {
         ret = coffeeVendingMachine.createDefaulDB(DATABASE_NAME);
-        if (ret)
-        {
+        if (ret) {
             qDebug() << "Default records created successfuly";
         }
-        else
-        {
+        else {
             qDebug() << "Error creating default records for non-existing DB";
         }
     }
