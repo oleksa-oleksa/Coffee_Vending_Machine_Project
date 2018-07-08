@@ -395,8 +395,7 @@ PreparationStatus ControlUnit::prepareSelectedDrink() {
         qDebug() << "CONTROL UNIT: Flowmeter has done his task successfuly";
     }
     else {
-        qDebug() << "CONTROL UNIT: Flowmeter had a problem during his task";
-        return PREPARE_ERROR_FLOW;
+        qDebug() << "CONTROL UNIT: Flowmeter had a problem during his task"; return PREPARE_ERROR_FLOW;
     }
 
     //=============================================================

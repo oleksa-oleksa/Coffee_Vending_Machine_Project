@@ -42,14 +42,14 @@ void CardTest::testWithdraw() {
     test01.getAccount()->setOwner(&ts_per01);
 
     // PASS
-    // Default credit 0 + 5 < 10
+    // Default credit 0 + 4 < 5
     // isEmploeyd
     qDebug() << "01:";
-    QCOMPARE(test01.withdraw(5.0), true);
+    QCOMPARE(test01.withdraw(4.0), true);
 
-    ts_acc01.setAccountCredit(9.0);
+    ts_acc01.setAccountCredit(4.0);
     // FAILED
-    // Default credit 9 + 5 > 10
+    // Default credit 4 + 5 > 10
     // isEmploeyd
     qDebug() << "02:";
     QCOMPARE(test01.withdraw(5.0), false);
@@ -60,7 +60,7 @@ void CardTest::testWithdraw() {
     // Default credit < 10
     // isEmploeyd = false
     qDebug() << "03:";
-    QCOMPARE(test01.withdraw(5.0), false);
+    QCOMPARE(test01.withdraw(2.0), false);
 }
 
 void CardTest::testLinkAccount() {

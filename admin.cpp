@@ -40,20 +40,6 @@ void Admin::cancelCardCreation(Card *newCard) {
     delete newCard;
 }
 
-void Admin::clearTemporaryPointers(Person *newPerson, BankAccount *newBankAccount, Account *newAccount, Card *newCard) {
-    delete newPerson;
-    newPerson = NULL;
-
-    delete newBankAccount;
-    newBankAccount = NULL;
-
-    delete newAccount;
-    newAccount = NULL;
-
-    delete newCard;
-    newCard = NULL;
-
-}
 
 void Admin::addPerson(Person *newPerson, std::string newPersonName, std::string newPersonSurname,
                       std::string newPersonAddress, int isAdmin, int isStaff) {
@@ -70,8 +56,6 @@ void Admin::addPerson(Person *newPerson, std::string newPersonName, std::string 
     newPerson->setStaff(isStaff);
 
     Person::AllEmployee.push_back(*newPerson);
-    //delete newPerson; newPerson = NULL;
-    Person &lastPerson = Person::AllEmployee.back();
 
     qDebug() << "ADMIN: New Person added into AllEmployee";
 }
@@ -82,14 +66,11 @@ void Admin::addBankAccount(BankAccount *newBankAccount, int taxClass) {
         newBankAccount->setTaxClass(taxClass);
         BankAccount::AllBankAccounts.push_back(*newBankAccount);
 
-        //delete newBankAccount; newBankAccount = NULL;
-        BankAccount &lastBankAccount = BankAccount::AllBankAccounts.back();
-
         qDebug() << "ADMIN: New depending Bank Account added into AllBankAccounts";
 }
 
 void Admin::addAccount(Account *newAccount) {
-        // Account accountID, credit and state are predefined by constructor
+        //  accountID, credit and state are predefined by constructor
 
         Person &lastPerson = Person::AllEmployee.back();
         newAccount->setOwner(&lastPerson);

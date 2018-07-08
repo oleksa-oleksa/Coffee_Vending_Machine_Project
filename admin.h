@@ -12,13 +12,11 @@ class Admin : public Person
     public:
          Admin();
          Admin(Person *activeAdminPerson);
-        ~Admin();  
 
          void cancelPersonCreation(Person *newPerson);
          void cancelBankAccountCreation(BankAccount *newBankAccount);
          void cancelAccountCreation(Account *newAccount);
          void cancelCardCreation(Card *newCard);
-         void clearTemporaryPointers(Person *newPerson, BankAccount *newBankAccount, Account *newAccount, Card *newCard);
 
          void addPerson(Person *newPerson, std::string newPersonName, std::string newPersonSurname,
                         std::string newPersonAddress, int isAdmin, int isStaff);

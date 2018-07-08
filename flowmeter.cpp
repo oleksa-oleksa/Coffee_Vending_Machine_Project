@@ -7,7 +7,6 @@ Flowmeter::Flowmeter()
     sensorState = UNDEFINED;
     recipeAmountOfLiquid = 0;
     hasPreparedDrink = false;
-
 }
 
 

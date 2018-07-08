@@ -13,3 +13,4 @@ BankAccount *bankAccount = NULL;
 
 UserChoice *activeUserChoice = NULL;
 Card *card = NULL;
+

@@ -162,9 +162,6 @@ void AdminWindow::setAdminControlButtonsStyle()
     QString colorAddNewEmployee  = QString("background-color: #0059b3; color: #ffffff;");
     ui->buttonAddNewEmployee->setStyleSheet(colorAddNewEmployee);
 
-    QString colorEditEmployee  = QString("background-color: #0066cc; color: #ffffff;");
-    ui->buttonEditEmployee->setStyleSheet(colorEditEmployee);
-
     QString colorEditDrinks  = QString("background-color: #0073e6; color: #ffffff;");
     ui->buttonViewDrinksRecipe->setStyleSheet(colorEditDrinks);
 

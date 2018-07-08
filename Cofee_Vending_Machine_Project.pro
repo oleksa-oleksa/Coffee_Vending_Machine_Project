@@ -130,7 +130,7 @@ SOURCES += \
     employeecombobox.cpp \
     drinkwindow.cpp \
     globalobjects.cpp \
-    ingredientwindow.cpp
+    ingredientwindow.cpp \
 
 test {
     message(TEST BUILD)
@@ -159,7 +159,9 @@ test {
         test/controlunittest.cpp \
         test/admintest.cpp \
         test/serviceroutinetest.cpp \
-        test/ingredienttest.cpp
+        test/ingredienttest.cpp \
+        test/systemtest.cpp
+
 
     HEADERS -= \
         adminwindow.h \
@@ -167,9 +169,9 @@ test {
         mainwindow.h
 
     HEADERS += \
+        test/databasetest.h \
         test/adminwindow.h \
         test/drinkwindow.h \
-        test/databasetest.h \
         test/accounttest.h \
         test/bankaccounttest.h \
         test/cardtest.h \
@@ -180,7 +182,9 @@ test {
         test/controlunittest.h \
         test/admintest.h \
         test/serviceroutinetest.h \
-        test/ingredienttest.h
+        test/ingredienttest.h \
+        test/systemtest.h
+
 }
 else {
     message(NORMAL BUILD)

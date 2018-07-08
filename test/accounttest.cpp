@@ -5,13 +5,13 @@
 void AccountTest::testCheckCreditLimit() {
     // The Credit limit for calculations is const CREDIT_LIMIT
     Account test01;
-    test01.setAccountCredit(8.0);
+    test01.setAccountCredit(3.0);
 
-    // PASS 8.0 + 1.5 < 10.0
+    // PASS 3.0 + 1.5 < 5.0
     qDebug() << "01:";
     QCOMPARE(test01.checkCreditLimit(1.5), true);
 
-    // FAIL 8.0 + 3.0 > 10.0
+    // FAIL 3.0 + 3.0 >= 5.0
     // Expected: 2€ is available
     qDebug() << "02:";
     QCOMPARE(test01.checkCreditLimit(3), false);
@@ -29,7 +29,7 @@ void AccountTest::testCheckCreditLimit() {
     qDebug() << "05:";
     QCOMPARE(test01.checkCreditLimit(0.85), false);
 
-    // FAIL. Expected: 0.80€ is available
+    // FAIL. Credit exceeded
     qDebug() << "06:";
     test01.setAccountStatus(ACTIVE_OK);
     test01.setAccountCredit(9.20);
@@ -39,19 +39,19 @@ void AccountTest::testCheckCreditLimit() {
 
 void AccountTest::testAddCredit() {
     Account test01;
-    test01.setAccountCredit(8);
+    test01.setAccountCredit(3);
 
-    // PASS 8.0 + 1.5 < 10.0
+    // PASS 3.0 + 1.5 < 5.0
     qDebug() << "01:";
     QCOMPARE(test01.addCredit(1.5), true);
     test01.getAccountCredit();
 
-    // FAIL 9.5 + 1.25 > 10.0
+    // FAIL 3 + 2.25 > 5.0
     qDebug() << "02:";
-    QCOMPARE(test01.addCredit(1.25), false);
+    QCOMPARE(test01.addCredit(2.25), false);
     test01.getAccountCredit();
 
-    // PASS 9.5 + 0.25 < 10.0
+    // PASS 4.5 + 0.25 < 10.0
     qDebug() << "03:";
     QCOMPARE(test01.addCredit(0.25), true);
     test01.getAccountCredit();

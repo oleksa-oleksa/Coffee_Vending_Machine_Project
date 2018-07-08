@@ -13,12 +13,17 @@
 #include "opticalsensortest.h"
 #include "serviceroutinetest.h"
 #include "ingredienttest.h"
+#include "systemtest.h"
 
 int main(int argc, char *argv[]) {
     // Random Generator Init for Random ID Foo
     srand(time(NULL));
 
     QApplication a(argc, argv);
+
+    // SYSTEM TEST
+    SystemTest system;
+    QTest::qExec(&system, argc, argv);
 
     // UNIT TESTS: SEPARATE CLASSES
     DatabaseTest dbtst01;

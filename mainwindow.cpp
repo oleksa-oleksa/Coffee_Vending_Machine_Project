@@ -53,14 +53,10 @@ MainWindow::MainWindow(QWidget *parent) :
     // there is always an active person interacting with Vending Machine
     // To change the game characher the drop list should be used
     // and new charachter will be loaded with button "load"
-    // Note: to simulate invalid card
-    // 1: Comment all card, ba, acc and person lines
-    // 2. create a new random Card *card
-    // 3. run programm
-    //Card *card;
 
     resetActiveEntities(&Card::AllCards[0]);
     resetServiceButtons();
+
     //======================================================================
     // and finaly: UserChoice initialisation in InteractionUnit in order
     // to track all interactions with buttons
