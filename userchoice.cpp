@@ -123,7 +123,7 @@ void UserChoice::setSelectedDrink(DrinkType selectedDrink) {
     qDebug() << "SETTER: Selected Drink is set: " << str;
 }
 
-DrinkType UserChoice::getSelectedDrink() {
+DrinkType UserChoice::getSelectedDrink() const {
     return selectedDrink;
 }
 
@@ -131,7 +131,7 @@ void UserChoice::setCard(Card *card) {
     this->card = card;
 }
 
-Card *UserChoice::getCard() {
+Card *UserChoice::getCard() const {
     return card;
 }
 
@@ -154,7 +154,7 @@ void UserChoice::setSugarAmount(int sugarAmount) {
     }
 }
 
-int UserChoice::getSugarAmount() {
+int UserChoice::getSugarAmount() const {
     return sugarAmount;
 }
 
@@ -176,7 +176,7 @@ void UserChoice::setMilkAmount(int milkAmount) {
     }
 }
 
-int UserChoice::getMilkAmount() {
+int UserChoice::getMilkAmount() const {
     return milkAmount;
 }
 
@@ -191,12 +191,12 @@ void UserChoice::setDisabledBigPortion()
     isBigPortion = false;
 }
 
-bool UserChoice::getBigPortion()
+bool UserChoice::getBigPortion() const
 {
     return isBigPortion;
 }
 
-double UserChoice::getPrice()
+double UserChoice::getPrice() const
 {
     if (selectedDrink == NO_DRINK) {
         return 0.0;
@@ -245,15 +245,14 @@ QString UserChoice::printSelectedDrink()
     return "NO_DRINK";
 }
 
-int UserChoice::getHotWaterAmount()
-{
+int UserChoice::getHotWaterAmount() const {
     return hotWaterAmount;
 }
-int UserChoice::getRecipeTemperature()
-{
+
+int UserChoice::getRecipeTemperature() const {
     return recipeTemperature;
 }
-int UserChoice::getSpecificRecipeComponent()
-{
+
+int UserChoice::getSpecificRecipeComponent() const {
     return specificRecipeComponent;
 }

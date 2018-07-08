@@ -28,7 +28,7 @@ class OpticalSensor : public Sensor
         ~OpticalSensor();
 
         bool getOpticalValue();
-        int getDistanceToObject();
+        int getDistanceToObject() const;
         void setDistanceToObject(int distanceToObject);
         CupHolderState getOpticalFlowSensorsMeasurements();
 };

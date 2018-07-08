@@ -10,7 +10,7 @@ class Button : public Sensor
         Button();
         Button(bool);
 
-        bool getButtonValue();
+        bool getButtonValue() const;
         void toggleButton();
         virtual void setSensorState(State newState);
 };

@@ -12,10 +12,10 @@ class TemperaturSensor : public Sensor
     public:
         TemperaturSensor();
         virtual ~TemperaturSensor();
-        int getCurrentTemperature();
+        int getCurrentTemperature() const;
         void setCurrentTemperature(int currentTemperature);
         void setReferenceTemperature(int currentTemperature);
-        int getReferenceTemperature();
+        int getReferenceTemperature() const;
         bool compareTemperature();
 };
 

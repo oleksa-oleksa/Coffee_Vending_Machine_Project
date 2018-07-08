@@ -26,7 +26,7 @@ bool TemperaturSensor::compareTemperature() {
     }
 }
 
-int TemperaturSensor::getCurrentTemperature() {
+int TemperaturSensor::getCurrentTemperature() const {
     return currentTemperature;
 }
 
@@ -38,7 +38,7 @@ void TemperaturSensor::setReferenceTemperature(int referenceTemperature) {
     this->referenceTemperature = referenceTemperature;
 }
 
-int TemperaturSensor::getReferenceTemperature() {
+int TemperaturSensor::getReferenceTemperature() const {
 
     return referenceTemperature;
 }

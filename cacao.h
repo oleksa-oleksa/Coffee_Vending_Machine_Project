@@ -22,14 +22,14 @@ class Cacao : public Drink
             cacaoPowderAmount = 20;
         }
 
-        int getSugarAmount();
-        int getMilkAmount();
-        int getHotWaterAmount();
-        int getRecipeTemperature();
-        double getPrice();
+        int getSugarAmount() const;
+        int getMilkAmount() const;
+        int getHotWaterAmount() const;
+        int getRecipeTemperature() const;
+        double getPrice() const;
 
         // the specific recipe ingredient. CacaoPowder for Cacao drink
-        int getRecipeIngredient();
+        int getRecipeIngredient() const;
 
 };
 

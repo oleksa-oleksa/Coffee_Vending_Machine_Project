@@ -2,25 +2,25 @@
 #include "drink.h"
 #include "espresso.h"
 
-int Espresso::getSugarAmount() {
+int Espresso::getSugarAmount() const {
     return sugarAmount;
 }
 
-int Espresso::getMilkAmount() {
+int Espresso::getMilkAmount() const {
     return milkAmount;
 }
 
-int Espresso::getHotWaterAmount() {
+int Espresso::getHotWaterAmount() const {
     return hotWaterAmount;
 }
-int Espresso::getRecipeTemperature() {
+int Espresso::getRecipeTemperature() const {
     return recipeTemperature;
 }
 
-double Espresso::getPrice() {
+double Espresso::getPrice() const {
     return price;
 }
 
-int Espresso::getRecipeIngredient() {
+int Espresso::getRecipeIngredient() const {
     return coffeePowderAmount;
 }

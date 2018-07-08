@@ -16,8 +16,8 @@ class Sensor
         Sensor();
         virtual ~Sensor();
 
-        virtual SensorType getSensorType();
-        virtual State getSensorState();
+        virtual SensorType getSensorType() const;
+        virtual State getSensorState() const;
         virtual void setSensorType(SensorType);
         virtual void setSensorState(State);
 

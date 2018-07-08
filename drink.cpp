@@ -11,8 +11,7 @@ Drink::Drink(int sugarAmount,
              int milkAmount,
              int hotWaterAmount,
              int recipeTemperature,
-             double price)
-{
+             double price) {
     this->sugarAmount = sugarAmount;
     this->milkAmount = milkAmount;
     this->hotWaterAmount = hotWaterAmount;
@@ -20,27 +19,15 @@ Drink::Drink(int sugarAmount,
     this->price = price;
 }
 
-int Drink::getSugarAmount()
-{
+int Drink::getSugarAmount() const {
     return sugarAmount;
 }
 
-int Drink::getMilkAmount()
-{
+int Drink::getMilkAmount() const {
     return milkAmount;
 }
 
-double Drink::getPrice()
-{
+double Drink::getPrice() const {
     return price;
 }
 
-//Drink DrinkRecipes[] = {
-//    Drink(1, 1, 1, 0, 200, 100, 0.9), // COFFEE,
-//    Drink(), // CAPPUCCINO,
-//    Drink(), // ESPRESSO,
-//    Drink(), // LATTEMACCHIOTO,
-//    Drink(), // CACAO,
-//    Drink()  // HOTWATER
-//
-//};

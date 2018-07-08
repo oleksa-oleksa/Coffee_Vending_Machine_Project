@@ -31,7 +31,7 @@ void Waterheater::heatWater() {
     }
 }
 
-bool Waterheater::getIsHeating() {
+bool Waterheater::getIsHeating() const {
 
     return isHeating;
 }
@@ -67,7 +67,7 @@ void Waterheater::setWorkTemperature(int workTemperature) {
     this->workTemperature = workTemperature;
 }
 
-int Waterheater::getWorkTemperature() {
+int Waterheater::getWorkTemperature() const {
     return workTemperature;
 }
 
@@ -80,11 +80,11 @@ void Waterheater::setIdleTemperature(int idleTemperature) {
     this->idleTemperature = idleTemperature;
 }
 
-int Waterheater::getCurrentTemperature() {
+int Waterheater::getCurrentTemperature() const {
     return currentTemperature;
 }
 
-int Waterheater::getIdleTemperature() {
+int Waterheater::getIdleTemperature() const {
        return idleTemperature;
 }
 

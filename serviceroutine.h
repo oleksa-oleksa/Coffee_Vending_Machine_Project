@@ -8,10 +8,6 @@ class ServiceRoutine
 {
 
     private:
-        bool isCleanedStorageContainer = false;
-        bool isCleanedModules = false;
-        bool isCleanedGarbageBin = false;
-
 
     public:
         ServiceRoutine();

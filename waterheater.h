@@ -29,11 +29,11 @@ class Waterheater : public QObject, public Actuator
         void setWorkTemperature(int workTemperature);
         void setCurrentTemperature(int currentTemperature);
         void setIdleTemperature(int idleTemperature);
-        int getWorkTemperature();
-        int getCurrentTemperature();
-        int getIdleTemperature();
+        int getWorkTemperature() const;
+        int getCurrentTemperature() const;
+        int getIdleTemperature() const;
         int calculateHeatingTime();
-        bool getIsHeating();
+        bool getIsHeating() const;
 
     public slots:
     bool heatingDone();

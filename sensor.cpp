@@ -8,11 +8,11 @@ Sensor::~Sensor() {
 
 }
 
-SensorType Sensor::getSensorType() {
+SensorType Sensor::getSensorType() const {
     return sensorType;
 }
 
-State Sensor::getSensorState() {
+State Sensor::getSensorState() const {
     return sensorState;
 }
 

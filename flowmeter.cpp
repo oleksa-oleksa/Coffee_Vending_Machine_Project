@@ -15,7 +15,7 @@ Flowmeter::~Flowmeter() {
 
 }
 
-int Flowmeter::getRecipeAmountOfLiquid() {
+int Flowmeter::getRecipeAmountOfLiquid() const {
     return recipeAmountOfLiquid;
 }
 
@@ -35,7 +35,7 @@ bool Flowmeter::mainFlowmeterRoutine() {
     return hasPreparedDrink;
 }
 
-bool Flowmeter::getHasPreparedDrink() {
+bool Flowmeter::getHasPreparedDrink() const {
     qDebug() << "FLOWMETER: A drink just have been prepared: " << hasPreparedDrink;
     return hasPreparedDrink;
 }

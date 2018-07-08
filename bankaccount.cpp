@@ -29,14 +29,14 @@ void BankAccount::setIBAN(BankAccountID IBAN) {
     this->IBAN = IBAN;
 }
 
-BankAccountID BankAccount::getIBAN() {
+BankAccountID BankAccount::getIBAN() const  {
     return IBAN;
 }
 
 void BankAccount::setAccountID(AccountID accountID) {
     this->accountID = accountID;
 }
-AccountID BankAccount::getAccountID() {
+AccountID BankAccount::getAccountID() const {
     return accountID;
 }
 
@@ -44,7 +44,7 @@ void BankAccount::setAccount(Account *account) {
     this->account = account;
 }
 
-Account *BankAccount::getAccount() {
+Account *BankAccount::getAccount() const {
     return account;
 }
 
@@ -52,7 +52,7 @@ void BankAccount::setTaxClass(int taxClass) {
     this->taxClass = taxClass;
 }
 
-int BankAccount::getTaxClass() {
+int BankAccount::getTaxClass() const {
     return taxClass;
 }
 

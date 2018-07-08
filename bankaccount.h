@@ -31,13 +31,13 @@ class BankAccount
         static std::vector<BankAccount> AllBankAccounts;
 
         void setIBAN(BankAccountID iban);
-        BankAccountID getIBAN();
+        BankAccountID getIBAN() const;
         void setAccountID(AccountID accountID);
-        AccountID getAccountID();
+        AccountID getAccountID() const;
         void setAccount(Account *account);
-        Account *getAccount();
+        Account *getAccount() const;
         void setTaxClass(int tc);
-        int getTaxClass();
+        int getTaxClass() const;
         bool linkAccount();
         bool linkProvidedAccount(AccountID accountID);
 };

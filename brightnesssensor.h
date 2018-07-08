@@ -12,7 +12,7 @@ class BrightnessSensor : public Sensor
         BrightnessSensor(unsigned int);
         virtual ~BrightnessSensor();
 
-        unsigned int getBrightness();
+        unsigned int getBrightness() const;
 };
 
 extern BrightnessSensor brightSensor;

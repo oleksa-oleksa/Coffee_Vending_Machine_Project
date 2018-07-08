@@ -12,7 +12,7 @@ Button::Button(bool setIsPushed) {
     isPushed = setIsPushed;
 }
 
-bool Button::getButtonValue() {
+bool Button::getButtonValue() const {
     return this->isPushed;
 }
 

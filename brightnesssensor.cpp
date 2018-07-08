@@ -18,7 +18,7 @@ BrightnessSensor::~BrightnessSensor()
 
 }
 
-unsigned int BrightnessSensor::getBrightness() {
+unsigned int BrightnessSensor::getBrightness() const {
   time_t t = time(0);
   tm *now = localtime(&t);
 

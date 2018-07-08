@@ -459,7 +459,7 @@ void ControlUnit::unblockCupHolder() {
 
 }
 
-Ingredient *ControlUnit::getIngredients() {
+Ingredient *ControlUnit::getIngredients() const {
     return this->ingredientTanks;
 }
 

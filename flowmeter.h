@@ -15,10 +15,10 @@ class Flowmeter : public Sensor
         Flowmeter();
         virtual ~Flowmeter();
 
-        int getRecipeAmountOfLiquid();
+        int getRecipeAmountOfLiquid() const;
         void setRecipeAmountOfLiquid(UserChoice *activeUserChoice);
         bool mainFlowmeterRoutine();
-        bool getHasPreparedDrink();
+        bool getHasPreparedDrink() const;
         void setHasPreparedDrink(bool flag);
 
 

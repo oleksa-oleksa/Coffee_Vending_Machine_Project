@@ -41,11 +41,11 @@ int DC_Motor::calculateRotatingTime(int componentAmount) {
     return time;
 }
 
-bool DC_Motor::getIsRotating() {
+bool DC_Motor::getIsRotating() const {
     return isRotating;
 }
 
-bool DC_Motor::rotatingDone() {
+void DC_Motor::rotatingDone() {
 
     isRotating = false;
     qDebug() << "DC MOTOR:: Realtime motor simulation done:" << MOTOR_TYPE_NAMES[motorType];

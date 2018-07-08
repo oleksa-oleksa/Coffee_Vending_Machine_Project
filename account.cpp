@@ -77,11 +77,11 @@ bool Account::checkCreditLimit(double amount) {
 }
 
 
-double Account::getAccountCredit() {
+double Account::getAccountCredit()  const {
     return credit;
 }
 
-Person *Account::getOwner() {
+Person *Account::getOwner()  const {
     return owner;
 }
 
@@ -89,7 +89,7 @@ void Account::setOwner(Person *owner) {
     this->owner = owner;
 }
 
-BankAccount *Account::getBankAccount() {
+BankAccount *Account::getBankAccount()  const {
     return ba;
 }
 
@@ -97,7 +97,7 @@ void Account::setAccountID(AccountID accountID) {
    this->accountID = accountID;
 }
 
-AccountID Account::getAccountID() {
+AccountID Account::getAccountID() const {
     return accountID;
 }
 

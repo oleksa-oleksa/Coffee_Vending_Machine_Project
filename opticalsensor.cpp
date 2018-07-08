@@ -2,8 +2,7 @@
 #include "opticalsensor.h"
 #include <QDebug>
 
-OpticalSensor::OpticalSensor()
-{
+OpticalSensor::OpticalSensor() {
     sensorType = OPTICAL;
     sensorState = UNDEFINED;
     isObjectDetected = false;
@@ -11,8 +10,7 @@ OpticalSensor::OpticalSensor()
     flow = NULL;
 }
 
-OpticalSensor::OpticalSensor(Flowmeter *flow)
-{
+OpticalSensor::OpticalSensor(Flowmeter *flow) {
     sensorType = OPTICAL;
     sensorState = UNDEFINED;
     isObjectDetected = false;
@@ -21,13 +19,11 @@ OpticalSensor::OpticalSensor(Flowmeter *flow)
 }
 
 
-OpticalSensor::~OpticalSensor()
-{
+OpticalSensor::~OpticalSensor() {
 
 }
 
-bool OpticalSensor::getOpticalValue()
-{
+bool OpticalSensor::getOpticalValue() {
     // It is assumed that positive distanceToObject < OPTICAL_DISTANCE means the object is placed correctly
     // the distanceToObject > OPTICAL_DISTANCE means NO object was detected and isObjectDetected = false
 
@@ -43,20 +39,17 @@ bool OpticalSensor::getOpticalValue()
     return isObjectDetected;
 }
 
-void OpticalSensor::setDistanceToObject(int distanceToObject)
-{
+void OpticalSensor::setDistanceToObject(int distanceToObject) {
     this->distanceToObject = distanceToObject;
 }
 
-int OpticalSensor::getDistanceToObject()
-{
+int OpticalSensor::getDistanceToObject()  const {
     return distanceToObject;
 }
 
 // Main Function to obtain the state of cup holder
 // we need two sensors for three states: no cup, empty cup, cup with drink
-CupHolderState OpticalSensor::getOpticalFlowSensorsMeasurements()
-{
+CupHolderState OpticalSensor::getOpticalFlowSensorsMeasurements() {
     // if cup detected
     if (getOpticalValue()) {
         // and a drink was prepared

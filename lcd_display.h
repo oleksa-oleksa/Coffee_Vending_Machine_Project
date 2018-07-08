@@ -32,14 +32,14 @@ class LCD_Display : public Actuator
         LCD_Display();
         virtual ~LCD_Display();
 
-        QString getTitle();
+        QString getTitle() const;
         void setTitle(QString title);
-        QString getDrinkName();
+        QString getDrinkName() const;
         void setDrinkName(QString drinkName);
-        double getPrice();
+        double getPrice() const;
         void setPrice(double price);
         void setBacklight(bool isBacklit);
-        bool getBacklight();
+        bool getBacklight() const;
 
         void writeDefaultText(UserChoice *activeUserChoice);
         void writeGreetingText(UserChoice *activeUserChoice);

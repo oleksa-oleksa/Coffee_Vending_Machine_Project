@@ -21,7 +21,7 @@ void RFID_Scanner::setIsCardInside(bool isCardInside) {
     this->isCardInside = isCardInside;
 }
 
-bool RFID_Scanner::getIsCardInside() {
+bool RFID_Scanner::getIsCardInside() const {
     return isCardInside;
 }
 

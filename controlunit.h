@@ -83,7 +83,7 @@ class ControlUnit
         void connectHeater(Waterheater *actuator);
         void connectMilkMaker(Milkmaker *actuator);
 
-        Ingredient *getIngredients();
+        Ingredient *getIngredients() const;
 };
 extern ControlUnit control;
 

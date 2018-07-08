@@ -82,51 +82,51 @@ void InteractionUnit::setCancel(Button *cancel)
     this->cancel = cancel;
 }
 
-Button *InteractionUnit::getMoreSugar() {
+Button *InteractionUnit::getMoreSugar() const {
     return moreSugar;
 }
 
-Button *InteractionUnit::getLessSugar() {
+Button *InteractionUnit::getLessSugar() const {
     return lessSugar;
 }
 
-Button *InteractionUnit::getMoreMilk() {
+Button *InteractionUnit::getMoreMilk() const {
     return moreMilk;
 }
 
-Button *InteractionUnit::getLessMilk() {
+Button *InteractionUnit::getLessMilk() const {
     return lessMilk;
 }
 
-Button *InteractionUnit::getCoffee() {
+Button *InteractionUnit::getCoffee() const {
     return coffee;
 }
 
-Button *InteractionUnit::getCappuccino() {
+Button *InteractionUnit::getCappuccino() const {
     return cappuccino;
 }
 
-Button *InteractionUnit::getEspresso() {
+Button *InteractionUnit::getEspresso() const {
     return espresso;
 }
 
-Button *InteractionUnit::getLatteMacchiato() {
+Button *InteractionUnit::getLatteMacchiato() const {
     return latteMacchiato;
 }
 
-Button *InteractionUnit::getCacao() {
+Button *InteractionUnit::getCacao() const {
     return cacao;
 }
 
-Button *InteractionUnit::getHotWater() {
+Button *InteractionUnit::getHotWater() const {
     return hotWater;
 }
 
-Button *InteractionUnit::getBigPortion() {
+Button *InteractionUnit::getBigPortion() const {
     return bigPortion;
 }
 
-Button *InteractionUnit::getStart() {
+Button *InteractionUnit::getStart() const {
     return start;
 }
 

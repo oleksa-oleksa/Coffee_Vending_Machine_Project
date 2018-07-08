@@ -25,14 +25,14 @@ class HotWater : public Drink
             specificIngredient = 0;
         }
 
-        int getSugarAmount();
-        int getMilkAmount();
-        int getHotWaterAmount();
-        int getRecipeTemperature();
-        double getPrice();
+        int getSugarAmount() const;
+        int getMilkAmount() const;
+        int getHotWaterAmount() const;
+        int getRecipeTemperature() const;
+        double getPrice() const;
 
         // the specific recipe ingredient. coffeePowderAmount for Coffee drink
-        int getRecipeIngredient();
+        int getRecipeIngredient() const;
 
 };
 

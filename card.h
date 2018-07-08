@@ -27,13 +27,13 @@ class Card
         ~Card();
         static std::vector<Card> AllCards;
 
-        CardID getCardID();
+        CardID getCardID() const;
         void setCardID(CardID newCardID);
         CardStatus getCardStatus();
         void setCardStatus(CardStatus newStatus);
         void deactivateCard();
         void activateCard();
-        Account *getAccount();
+        Account *getAccount() const;
         void setAccount(Account *account);
         bool withdraw(double price);
         bool linkAccount(AccountID accountID);

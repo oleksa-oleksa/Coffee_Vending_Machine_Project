@@ -14,7 +14,7 @@ LCD_Display::~LCD_Display() {
 }
 
 
-QString LCD_Display::getTitle() {
+QString LCD_Display::getTitle() const {
     return title;
 }
 
@@ -23,7 +23,7 @@ void LCD_Display::setTitle(QString title) {
     qDebug() << "LCD: " << title;
 }
 
-QString LCD_Display::getDrinkName() {
+QString LCD_Display::getDrinkName() const {
     return drinkName;
 }
 
@@ -33,7 +33,7 @@ void LCD_Display::setDrinkName(QString drinkName) {
 
 }
 
-double LCD_Display::getPrice() {
+double LCD_Display::getPrice() const {
     return price;
 }
 
@@ -47,7 +47,7 @@ void LCD_Display::setBacklight(bool isBacklit) {
     this->isBacklit = isBacklit;
 }
 
-bool LCD_Display::getBacklight() {
+bool LCD_Display::getBacklight() const {
     return isBacklit;
 }
 

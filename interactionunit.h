@@ -45,18 +45,18 @@ class InteractionUnit
         void setCancel(Button *cancel);
         void setStart(Button *start);
 
-        Button *getMoreSugar();
-        Button *getLessSugar();
-        Button *getMoreMilk();
-        Button *getLessMilk();
-        Button *getCoffee();
-        Button *getCappuccino();
-        Button *getEspresso();
-        Button *getLatteMacchiato();
-        Button *getCacao();
-        Button *getHotWater();
-        Button *getBigPortion();
-        Button *getStart();
+        Button *getMoreSugar() const;
+        Button *getLessSugar() const;
+        Button *getMoreMilk() const;
+        Button *getLessMilk() const;
+        Button *getCoffee() const;
+        Button *getCappuccino() const;
+        Button *getEspresso() const;
+        Button *getLatteMacchiato() const;
+        Button *getCacao() const;
+        Button *getHotWater() const;
+        Button *getBigPortion() const;
+        Button *getStart() const;
 };
 
 extern InteractionUnit iunit;

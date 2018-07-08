@@ -31,9 +31,9 @@ class Drink
             int recipeTemperature,
             double price);
 
-      int getSugarAmount();
-      int getMilkAmount();
-      double getPrice();
+      int getSugarAmount() const;
+      int getMilkAmount() const;
+      double getPrice() const;
 };
 
 

@@ -2,25 +2,25 @@
 #include "drink.h"
 #include "cacao.h"
 
-int Cacao::getSugarAmount() {
+int Cacao::getSugarAmount() const {
     return sugarAmount;
 }
 
-int Cacao::getMilkAmount() {
+int Cacao::getMilkAmount() const {
     return milkAmount;
 }
 
-int Cacao::getHotWaterAmount() {
+int Cacao::getHotWaterAmount() const {
     return hotWaterAmount;
 }
-int Cacao::getRecipeTemperature() {
+int Cacao::getRecipeTemperature() const {
     return recipeTemperature;
 }
 
-double Cacao::getPrice() {
+double Cacao::getPrice() const {
     return price;
 }
 
-int Cacao::getRecipeIngredient() {
+int Cacao::getRecipeIngredient() const {
     return cacaoPowderAmount;
 }

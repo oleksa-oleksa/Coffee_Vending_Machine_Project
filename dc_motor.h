@@ -28,12 +28,12 @@ class DC_Motor : public QObject, public Actuator
         DC_Motor();
         virtual ~DC_Motor();
         void rotate(int componentAmount);
-        bool getIsRotating();
+        bool getIsRotating() const;
         int calculateRotatingTime(int componentAmount);
         void setMotorType(MotorType motorType);
 
     public slots:
-        bool rotatingDone();
+        void rotatingDone();
 };
 
 #endif // DC_MOTOR_H

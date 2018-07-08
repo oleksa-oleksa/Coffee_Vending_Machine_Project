@@ -35,7 +35,7 @@ Card::Card(QSqlRecord &query) {
     linkAccount(accountID);
 }
 
-CardID Card::getCardID() {
+CardID Card::getCardID() const {
     return cardID;
 }
 
@@ -65,7 +65,7 @@ void Card::activateCard() {
     setCardStatus(ACTIVE);
 }
 
-Account *Card::getAccount() {
+Account *Card::getAccount() const {
     return account;
 }
 
