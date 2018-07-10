@@ -14,6 +14,11 @@
 #include "serviceroutinetest.h"
 #include "ingredienttest.h"
 #include "systemtest.h"
+#include "flowmetertest.h"
+#include "lcdtest.h"
+#include "milkmakertest.h"
+#include "temperaturesensortest.h"
+#include "dc_motortest.h"
 
 int main(int argc, char *argv[]) {
     // Random Generator Init for Random ID Foo
@@ -61,6 +66,21 @@ int main(int argc, char *argv[]) {
 
     IngredientTest dbtst12;
     QTest::qExec(&dbtst12, argc, argv);
+
+    FlowmeterTest dbtst13;
+    QTest::qExec(&dbtst13, argc, argv);
+
+    LcdTest dbtst14;
+    QTest::qExec(&dbtst14, argc, argv);
+
+    MilkmakerTest dbtst15;
+    QTest::qExec(&dbtst15, argc, argv);
+
+    TemperatureSensorTest dbtst16;
+    QTest::qExec(&dbtst16, argc, argv);
+
+    DC_MotorTest dbtst17;
+    QTest::qExec(&dbtst17, argc, argv);
 
     return 0;
 

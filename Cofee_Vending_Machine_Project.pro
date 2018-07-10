@@ -160,7 +160,12 @@ test {
         test/admintest.cpp \
         test/serviceroutinetest.cpp \
         test/ingredienttest.cpp \
-        test/systemtest.cpp
+        test/systemtest.cpp \
+        test/flowmetertest.cpp \
+        test/lcdtest.cpp \
+        test/milkmakertest.cpp \
+        test/temperaturesensortest.cpp \
+        test/dc_motortest.cpp
 
 
     HEADERS -= \
@@ -183,8 +188,12 @@ test {
         test/admintest.h \
         test/serviceroutinetest.h \
         test/ingredienttest.h \
-        test/systemtest.h
-
+        test/systemtest.h \
+        test/flowmetertest.h \
+        test/lcdtest.h \
+        test/milkmakertest.h \
+        test/temperaturesensortest.h \
+        test/dc_motortest.h
 }
 else {
     message(NORMAL BUILD)
