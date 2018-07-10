@@ -53,8 +53,6 @@ bool ControlUnit::checkCard() {
     return cardScanner->isValidCardInside();
 }
 
-
-
 CardHolderState ControlUnit::insertCard(Card *card) {
     qDebug() << "CONTROL UNIT: insertCard() started.";
     // if NO card in RFID

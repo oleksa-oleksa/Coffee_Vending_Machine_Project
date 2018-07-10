@@ -22,7 +22,9 @@ class ControlUnitTest: public QObject
     void cleanup();
 
 
+
     void testControlUnitInit();
+    void testCheckIngredients();
 };
 
 #endif // CONTROLUNITTEST_H
