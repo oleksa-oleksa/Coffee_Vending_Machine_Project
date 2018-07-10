@@ -3,16 +3,16 @@
 void DC_MotorTest::testRotate() {
 
     DC_Motor motor;
+    motor.setMotorType(MOTOR_CACAO);
 
-
+    motor.rotate(0);
     while (!motor.getIsRotating()) {
-        motor.rotate(0);
         QCoreApplication::instance()->processEvents();
         QCOMPARE(motor.getIsRotating(), true);
     }
 
+    motor.rotate(20);
     while (!motor.getIsRotating()) {
-        motor.rotate(20);
         QCoreApplication::instance()->processEvents();
         QCOMPARE(motor.getIsRotating(), true);
     }
