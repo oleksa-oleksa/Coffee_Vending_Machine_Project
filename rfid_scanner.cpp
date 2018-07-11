@@ -32,8 +32,10 @@ bool RFID_Scanner::getRfidValidation(Card *userCard) {
 
     // CardID Validation
     for (size_t i = 0; i < Card::AllCards.size(); i++) {
-        if (Card::AllCards[i].getCardID().toQstring() == userCard->getCardID().toQstring())
-        isChoiceAllowed = true;
+        if (Card::AllCards[i].getCardID().toQstring() == userCard->getCardID().toQstring()) {
+            isChoiceAllowed = true;
+            break;
+        }
     }
 
     // Card Status Validation

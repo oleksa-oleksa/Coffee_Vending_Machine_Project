@@ -25,6 +25,9 @@ class ControlUnitTest: public QObject
 
     void testControlUnitInit();
     void testCheckIngredients();
+    void testCheckStartConditions();
+    void testPrepareSelectedDrink();
+
 };
 
 #endif // CONTROLUNITTEST_H

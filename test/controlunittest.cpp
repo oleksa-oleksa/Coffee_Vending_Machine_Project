@@ -73,7 +73,48 @@ void ControlUnitTest::testCheckIngredients()
 
 }
 
-//         PreparationStatus checkStartConditions();
+void ControlUnitTest::testCheckStartConditions()
+{
+    opticalSensor->setDistanceToObject(10);
+    QCOMPARE(cu->checkStartConditions(), PREPARE_ERROR_NO_CUP);
+
+    opticalSensor->setDistanceToObject(1);
+    flow->setHasPreparedDrink(true);
+    QCOMPARE(cu->checkStartConditions(), PREPARE_ERROR_FULL_CUP);
+
+    flow->setHasPreparedDrink(false);
+    activeUserChoice->setSelectedDrink(NO_DRINK);
+    QCOMPARE(cu->checkStartConditions(), PREPARE_ERROR_NO_DRINK);
+
+    activeUserChoice->setSelectedDrink(COFFEE);
+    QCOMPARE(cu->checkStartConditions(), PREPARE_ERROR_NO_CARD);
+
+    Card::AllCards.push_back(Card());
+    Card &c = Card::AllCards[0];
+    Account a;
+    Person o;
+
+    c.setCardStatus(DEACTIVATED);
+    c.setAccount(&a);
+    a.setOwner(&o);
+    activeUserChoice->setCard(&c);
+    cardScanner->insertCard(&c);
+    QCOMPARE(cu->checkStartConditions(), PREPARE_ERROR_NO_CARD);
+
+    c.setCardStatus(ACTIVE);
+    cardScanner->insertCard(&c);
+
+    cu->getIngredients()->setCoffeeIngredient(0);
+    QCOMPARE(cu->checkStartConditions(), PREPARE_ERROR_NO_INGREDIENT);
+
+    cu->getIngredients()->setCoffeeIngredient(100);
+    QCOMPARE(cu->checkStartConditions(), PREPARE_IS_ALLOWED);
+}
+
+void ControlUnitTest::testPrepareSelectedDrink()
+{
+
+}
 //         PreparationStatus prepareSelectedDrink();
 //         void staffServiceRoutine();
 //         bool checkSugarAmount();
