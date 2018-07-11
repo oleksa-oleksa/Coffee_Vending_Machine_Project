@@ -111,14 +111,3 @@ void ControlUnitTest::testCheckStartConditions()
     QCOMPARE(cu->checkStartConditions(), PREPARE_IS_ALLOWED);
 }
 
-void ControlUnitTest::testPrepareSelectedDrink()
-{
-
-}
-//         PreparationStatus prepareSelectedDrink();
-//         void staffServiceRoutine();
-//         bool checkSugarAmount();
-// bool checkMilkAmount();
-// bool checkCoffeeIngredient();
-// bool checkCacaoIngredient();
-

@@ -84,7 +84,9 @@ HEADERS += \
     employeecombobox.h \
     drinkwindow.h \
     preparationstatus.h \
-    ingredientwindow.h
+    ingredientwindow.h \
+    test/integrationtest01.h \
+    test/integrationtest02.h
 
 SOURCES += \
     account.cpp \
@@ -131,6 +133,8 @@ SOURCES += \
     drinkwindow.cpp \
     globalobjects.cpp \
     ingredientwindow.cpp \
+    test/integrationtest01.cpp \
+    test/integrationtest02.cpp
 
 test {
     message(TEST BUILD)
