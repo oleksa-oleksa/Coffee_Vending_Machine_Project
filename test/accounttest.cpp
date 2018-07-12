@@ -2,6 +2,14 @@
 #include "accounttest.h"
 #include "person.h"
 
+void AccountTest::cleanup()
+{
+    Person::AllEmployee.clear();
+    BankAccount::AllBankAccounts.clear();
+    Account::AllAccounts.clear();
+    Card::AllCards.clear();
+}
+
 void AccountTest::testCheckCreditLimit() {
     // The Credit limit for calculations is const CREDIT_LIMIT
     Account test01;

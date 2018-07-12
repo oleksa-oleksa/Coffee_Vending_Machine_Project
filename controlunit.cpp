@@ -460,3 +460,50 @@ Ingredient *ControlUnit::getIngredients() const {
     return this->ingredientTanks;
 }
 
+RFID_Scanner *ControlUnit::getCardScanner() const
+{
+    return cardScanner;
+}
+
+Flowmeter *ControlUnit::getFlowmeter() const
+{
+    return flow;
+
+}
+
+OpticalSensor *ControlUnit::getOpticalSensor() const
+{
+    return opticalSensor;
+}
+
+TemperaturSensor *ControlUnit::getTemperatureSensor() const
+{
+    return temperatureSensor;
+}
+
+BrightnessSensor *ControlUnit::getBrightSensor() const
+{
+    return brightSensor;
+}
+
+LCD_Display *ControlUnit::getDisplay() const
+{
+    return display;
+}
+
+DC_Motor *ControlUnit::getMotor(MotorType mt) const
+{
+    return motor[mt];
+}
+
+Waterheater *ControlUnit::getHeater() const
+{
+    return heater;
+}
+
+
+Milkmaker *ControlUnit::getMilkMaker() const
+{
+    return milkMaker;
+}
+

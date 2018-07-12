@@ -13,6 +13,7 @@ class BankAccountTest: public QObject
 {
     Q_OBJECT
     private slots:
+        void cleanup();
         void testLinkAccount();
         void testLinkProvidedAccount();
 };

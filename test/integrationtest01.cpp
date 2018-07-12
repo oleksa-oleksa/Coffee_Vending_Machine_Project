@@ -1,6 +1,14 @@
 #include "integrationtest01.h"
 #include "controlunit.h"
 
+void IntegrationTest01::cleanup()
+{
+    Person::AllEmployee.clear();
+    BankAccount::AllBankAccounts.clear();
+    Account::AllAccounts.clear();
+    Card::AllCards.clear();
+}
+
 void IntegrationTest01::testBrewingDrink()
 {
     ControlUnit cu;

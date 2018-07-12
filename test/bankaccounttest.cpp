@@ -2,6 +2,14 @@
 #include "bankaccounttest.h"
 #include "account.h"
 
+void BankAccountTest::cleanup()
+{
+    Person::AllEmployee.clear();
+    BankAccount::AllBankAccounts.clear();
+    Account::AllAccounts.clear();
+    Card::AllCards.clear();
+}
+
 void BankAccountTest::testLinkAccount() {
     Account acc01;
     Account acc02;

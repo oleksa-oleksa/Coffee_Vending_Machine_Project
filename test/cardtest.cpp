@@ -3,6 +3,14 @@
 #include "card.h"
 #include "cardid.h"
 
+void CardTest::cleanup()
+{
+    Person::AllEmployee.clear();
+    BankAccount::AllBankAccounts.clear();
+    Account::AllAccounts.clear();
+    Card::AllCards.clear();
+}
+
 void CardTest::testDeactivateCard() {
     Card test01;
 

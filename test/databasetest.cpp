@@ -6,6 +6,14 @@
 #include <vector>
 #include "tools.h"
 
+void DatabaseTest::cleanupTestCase()
+{
+    Person::AllEmployee.clear();
+    BankAccount::AllBankAccounts.clear();
+    Account::AllAccounts.clear();
+    Card::AllCards.clear();
+}
+
 void DatabaseTest::testOpenDB() {
     Database db_t;
 

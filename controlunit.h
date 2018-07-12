@@ -83,7 +83,21 @@ class ControlUnit
         void connectHeater(Waterheater *actuator);
         void connectMilkMaker(Milkmaker *actuator);
 
+        // Hardware getters
         Ingredient *getIngredients() const;
+
+        RFID_Scanner *getCardScanner() const;
+        Flowmeter *getFlowmeter() const;
+        OpticalSensor *getOpticalSensor() const;
+        TemperaturSensor *getTemperatureSensor() const;
+        BrightnessSensor *getBrightSensor() const;
+
+        LCD_Display *getDisplay() const;
+        DC_Motor *getMotor(MotorType mt) const;
+        Waterheater *getHeater() const;
+        Milkmaker *getMilkMaker() const;
+
+
 };
 extern ControlUnit control;
 

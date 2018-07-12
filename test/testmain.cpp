@@ -19,6 +19,9 @@
 #include "milkmakertest.h"
 #include "temperaturesensortest.h"
 #include "dc_motortest.h"
+#include "integrationtest01.h"
+#include "integrationtest02.h"
+
 
 int main(int argc, char *argv[]) {
     // Random Generator Init for Random ID Foo
@@ -81,6 +84,13 @@ int main(int argc, char *argv[]) {
 
     DC_MotorTest dbtst17;
     QTest::qExec(&dbtst17, argc, argv);
+
+    IntegrationTest01 itest01;
+    QTest::qExec(&itest01, argc, argv);
+
+    IntegrationTest02 itest02;
+    QTest::qExec(&itest02, argc, argv);
+
 
     return 0;
 

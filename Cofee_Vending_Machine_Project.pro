@@ -146,7 +146,7 @@ test {
         main.cpp \
         adminwindow.cpp \
         drinkwindow.cpp \
-        mainwindow.cpp
+#         mainwindow.cpp
 
     SOURCES += \
         test/testmain.cpp \
@@ -175,7 +175,7 @@ test {
     HEADERS -= \
         adminwindow.h \
         drinkwindow.h \
-        mainwindow.h
+#        mainwindow.h
 
     HEADERS += \
         test/databasetest.h \

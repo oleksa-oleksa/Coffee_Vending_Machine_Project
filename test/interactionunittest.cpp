@@ -5,6 +5,14 @@
 #include "userchoice.h"
 #include "card.h"
 
+void InteractionUnitTest::cleanup()
+{
+    Person::AllEmployee.clear();
+    BankAccount::AllBankAccounts.clear();
+    Account::AllAccounts.clear();
+    Card::AllCards.clear();
+}
+
 // FOR TEST PURPOSE TO AVOID EXTRA LOC
 #define TRIGGER_BUTTON(button) ({button.setSensorState(PRESSED); \
                           iunit.buttonPollingRoutine();\

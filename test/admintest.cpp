@@ -11,6 +11,11 @@ void AdminTest::init()
 
 void AdminTest::cleanup()
 {
+    Person::AllEmployee.clear();
+    BankAccount::AllBankAccounts.clear();
+    Account::AllAccounts.clear();
+    Card::AllCards.clear();
+
     delete admin;
 }
 

@@ -10,6 +10,7 @@ class CardTest : public QObject
 {
     Q_OBJECT
     private slots:
+        void cleanup();
         void testDeactivateCard();
         void testActivateCard();
         void testWithdraw();

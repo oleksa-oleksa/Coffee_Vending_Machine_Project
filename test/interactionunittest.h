@@ -9,7 +9,7 @@ class InteractionUnitTest : public QObject
 {
     Q_OBJECT
     private slots:
-
+    void cleanup();
     void testInitUserChoice();
     void testButtonPollingRoutine();
 };

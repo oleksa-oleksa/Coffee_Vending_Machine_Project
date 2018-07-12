@@ -9,34 +9,20 @@
 #include "flowmeter.h"
 #include "controlunit.h"
 
-// global buttons:
-Button moreSugar;
-Button lessSugar;
-Button moreMilk;
-Button lessMilk;
-Button coffee;
-Button cappuccino;
-Button espresso;
-Button latteMacchiato;
-Button cacao;
-Button hotWater;
-Button bigPortion;
-Button cancel;
-Button start;
 
-// global sensors and actuators
-ControlUnit control;
+SystemTest::SystemTest() : QObject(), opticalSensor(&flow)
+{
 
-RFID_Scanner cardScanner;
-Flowmeter flow;
-OpticalSensor opticalSensor(&flow);
-TemperaturSensor temperatureSensor;
-BrightnessSensor brightSensor;
 
-LCD_Display display;
-DC_Motor motor[4];
-Waterheater heater;
-Milkmaker milkMaker;
+}
+
+void SystemTest::cleanup()
+{
+    Person::AllEmployee.clear();
+    BankAccount::AllBankAccounts.clear();
+    Account::AllAccounts.clear();
+    Card::AllCards.clear();
+}
 
 void SystemTest::systemTest() {
 

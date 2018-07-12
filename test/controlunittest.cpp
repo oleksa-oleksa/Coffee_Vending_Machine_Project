@@ -1,6 +1,7 @@
 #include "controlunittest.h"
 #include "userchoice.h"
 
+
 void ControlUnitTest::init()
 {
     choice = new UserChoice();
@@ -31,6 +32,11 @@ void ControlUnitTest::cleanup()
     delete cu;
 
     activeUserChoice = NULL;
+
+    Person::AllEmployee.clear();
+    BankAccount::AllBankAccounts.clear();
+    Account::AllAccounts.clear();
+    Card::AllCards.clear();
 }
 
 void ControlUnitTest::testControlUnitInit()

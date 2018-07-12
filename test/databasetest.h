@@ -12,6 +12,7 @@ class DatabaseTest: public QObject
 {
     Q_OBJECT
     private slots:
+        void cleanupTestCase();
         void testOpenDB();
 
         // Database create tables

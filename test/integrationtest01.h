@@ -9,7 +9,7 @@ class IntegrationTest01 : public QObject
     Q_OBJECT
 
 private slots:
-
+    void cleanup();
     void testBrewingDrink();
 };
 

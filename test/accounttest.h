@@ -10,6 +10,8 @@ class AccountTest: public QObject
 {
     Q_OBJECT
     private slots:
+        void cleanup();
+
         void testCheckCreditLimit();
         void testAddCredit();
         void testActivateAccount();
