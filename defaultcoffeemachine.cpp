@@ -1,4 +1,6 @@
 // Created by Oleksandra Baga
+#if defined( USE_DATABASE )
+
 #include "defaultcoffeemachine.h"
 #include <QFile>
 #include "database.h"
@@ -114,3 +116,4 @@ bool DefaultCoffeeMachine::restoreDefaultDB(std::string db_name)
     coffeeMachine_DB.closeDatabase();
     return ret;
 }
+#endif

@@ -2,14 +2,13 @@
 #include <QApplication>
 #include <QDebug>
 #include <QFile>
+
+
+#if defined( USE_DATABASE )
+
 #include "defaultcoffeemachine.h"
-#include "defaultcoffeemachinewithoutdb.h"
 
-
-#define USE_DATABASE false
-
-
-void setupWithDatabase()
+void setupApplicationState()
 {
     bool ret;
 
@@ -35,23 +34,22 @@ void setupWithDatabase()
 
 }
 
-void setupWithoutDatabase()
+#else
+#include "defaultcoffeemachinewithoutdb.h"
+
+void setupApplicationState()
 {
     DefaultCoffeeMachineWithoutDb coffeeVendingMachine;
 
     coffeeVendingMachine.createRecords();
 }
+#endif
 
 int main(int argc, char *argv[])
 {
     // Random Generator Init for Random ID Foo
     srand(time(NULL));
-
-    if (USE_DATABASE) {
-        setupWithDatabase();
-    } else {
-        setupWithoutDatabase();
-    }
+    setupApplicationState();
 
     QApplication a(argc, argv);
     MainWindow w;
