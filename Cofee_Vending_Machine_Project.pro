@@ -85,7 +85,7 @@ HEADERS += \
     drinkwindow.h \
     preparationstatus.h \
     ingredientwindow.h \
-    defauntcoffeemachinewithoutdb.h
+    defaultcoffeemachinewithoutdb.h
 
 SOURCES += \
     account.cpp \
@@ -132,7 +132,7 @@ SOURCES += \
     drinkwindow.cpp \
     globalobjects.cpp \
     ingredientwindow.cpp \
-    defauntcoffeemachinewithoutdb.cpp
+    defaultcoffeemachinewithoutdb.cpp
 
 test {
     message(TEST BUILD)

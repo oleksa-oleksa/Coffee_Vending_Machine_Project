@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QFile>
 #include "defaultcoffeemachine.h"
-#include "defauntcoffeemachinewithoutdb.h"
+#include "defaultcoffeemachinewithoutdb.h"
 
 
 #define USE_DATABASE false
@@ -37,7 +37,7 @@ void setupWithDatabase()
 
 void setupWithoutDatabase()
 {
-    DefauntCoffeeMachineWithoutDb coffeeVendingMachine;
+    DefaultCoffeeMachineWithoutDb coffeeVendingMachine;
 
     coffeeVendingMachine.createRecords();
 }

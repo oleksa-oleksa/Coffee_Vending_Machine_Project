@@ -1,11 +1,11 @@
 #include <vector>
-#include "defauntcoffeemachinewithoutdb.h"
+#include "defaultcoffeemachinewithoutdb.h"
 #include "person.h"
 #include "card.h"
 #include "bankaccount.h"
 #include "account.h"
 
-void DefauntCoffeeMachineWithoutDb::createRecords()
+void DefaultCoffeeMachineWithoutDb::createRecords()
 {
     // Employees
 
