@@ -8,11 +8,36 @@ const float CREDIT_LIMIT = 5.0;
 
 std::vector<Account>Account::AllAccounts = std::vector<Account>();
 
+Account *Account::createGlobal(Person *owner, BankAccount *ba,double credit, AccountStatus state)
+{
+    Account::AllAccounts.push_back(Account());
+    Account *pa = &Account::AllAccounts.back();
+
+    pa->setBankAccount(ba);
+    pa->setOwner(owner);
+    pa->setAccountCredit(credit);
+    pa->setAccountStatus(state);
+
+    ba->setAccount(pa);
+
+    return pa;
+}
+
 Account::Account() : accountID() {
     credit = 0.0;
     state = ACTIVE_OK;
     owner = NULL;
     ba = NULL;
+}
+
+Account::Account(const Account &other) :
+    credit(other.credit),
+    owner(other.owner),
+    state(other.state),
+    ba(other.ba),
+    accountID(other.accountID)
+{
+
 }
 
 // This constructor assumes that it receives a valid query

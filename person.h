@@ -33,7 +33,10 @@ class Person
 
    public:
       Person();
+      Person(const Person &other);
       static std::vector<Person> AllEmployee;
+      static Person *createGlobal(std::string name, std::string surname, std::string address,
+                                  bool isEmployed, bool isAdmin, bool isStaff);
 
       std::string const & getName() const;
       std::string const & getSurname() const;

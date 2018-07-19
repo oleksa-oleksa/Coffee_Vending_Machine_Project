@@ -28,7 +28,11 @@ class BankAccount
 
     public:
         BankAccount();
+        BankAccount(const BankAccount &other);
+
         static std::vector<BankAccount> AllBankAccounts;
+        static BankAccount *createGlobal(int taxClass);
+
 
         void setIBAN(BankAccountID iban);
         BankAccountID getIBAN() const;

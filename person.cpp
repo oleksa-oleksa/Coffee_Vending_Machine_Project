@@ -6,6 +6,28 @@
 
 std::vector<Person>Person::AllEmployee = std::vector<Person>();
 
+Person::Person(const Person &other) : name(other.name), surname(other.surname), address(other.address),
+    isAdmin(other.isAdmin), isStaff(other.isStaff), isEmployed(other.isEmployed), personID(other.personID)
+{
+
+}
+
+
+Person *Person::createGlobal(std::string name, std::string surname, std::string address, bool isEmployed, bool isAdmin, bool isStaff)
+{
+    Person::AllEmployee.push_back(Person());
+    Person *p = &Person::AllEmployee.back();
+
+    p->setName(name);
+    p->setSurname(surname);
+    p->setAddress(address);
+
+    p->setEmployed(isEmployed);
+    p->setAdmin(isAdmin);
+    p->setStaff(isStaff);
+    return p;
+}
+
 // Default constructor is necessary b/c other is defined
 // Effectively it's a default constructor
 Person::Person() : personID() {

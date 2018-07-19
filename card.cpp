@@ -17,9 +17,25 @@ Card::Card(Account *ac) {
     account = ac;
 }
 
+Card::Card(const Card &other) : cardStatus(other.cardStatus), account(other.account)
+{
+
+}
+
+
 Card::~Card() {
 
 }
+
+Card *Card::createGlobal(Account *account, CardStatus status)
+{
+    Card::AllCards.push_back(Card());
+    Card *c = &Card::AllCards.back();
+    c->setAccount(account);
+    c->setCardStatus(status);
+    return c;
+}
+
 
 // This constructor assumes that it receives a valid query
 // pointing at some row of data from Card table

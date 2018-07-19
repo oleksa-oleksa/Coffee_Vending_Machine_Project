@@ -2,8 +2,25 @@
 #include "bankaccount.h"
 #include <string>
 #include <QtDebug>
+#include "tools.h"
+
 
 std::vector<BankAccount>BankAccount::AllBankAccounts = std::vector<BankAccount>();
+
+BankAccount *BankAccount::createGlobal(int taxClass)
+{
+    BankAccount::AllBankAccounts.push_back(BankAccount());
+    BankAccount *ba = &BankAccount::AllBankAccounts.back();
+    ba->setAccountID(std::string("ACC") + createRandomID(ACCOUNT_ID_LEN));
+    ba->setTaxClass(taxClass);
+    return ba;
+}
+
+BankAccount::BankAccount(const BankAccount &other) : accountID(other.accountID), account(other.account)
+{
+
+}
+
 
 // Default constructor
 BankAccount::BankAccount() : IBAN(), accountID() {

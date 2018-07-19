@@ -24,8 +24,11 @@ class Card
     public:
         Card();
         Card(Account *ac);
+        Card(const Card &other);
+
         ~Card();
         static std::vector<Card> AllCards;
+        static Card *createGlobal(Account *account, CardStatus status);
 
         CardID getCardID() const;
         void setCardID(CardID newCardID);

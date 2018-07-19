@@ -85,8 +85,7 @@ HEADERS += \
     drinkwindow.h \
     preparationstatus.h \
     ingredientwindow.h \
-    test/integrationtest01.h \
-    test/integrationtest02.h
+    defauntcoffeemachinewithoutdb.h
 
 SOURCES += \
     account.cpp \
@@ -133,8 +132,7 @@ SOURCES += \
     drinkwindow.cpp \
     globalobjects.cpp \
     ingredientwindow.cpp \
-    test/integrationtest01.cpp \
-    test/integrationtest02.cpp
+    defauntcoffeemachinewithoutdb.cpp
 
 test {
     message(TEST BUILD)
@@ -169,7 +167,9 @@ test {
         test/lcdtest.cpp \
         test/milkmakertest.cpp \
         test/temperaturesensortest.cpp \
-        test/dc_motortest.cpp
+        test/dc_motortest.cpp \
+        test/integrationtest01.cpp \
+        test/integrationtest02.cpp
 
 
     HEADERS -= \
@@ -197,7 +197,9 @@ test {
         test/lcdtest.h \
         test/milkmakertest.h \
         test/temperaturesensortest.h \
-        test/dc_motortest.h
+        test/dc_motortest.h \
+        test/integrationtest01.h
+        test/integrationtest02.h
 }
 else {
     message(NORMAL BUILD)
