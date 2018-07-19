@@ -16,12 +16,6 @@ BankAccount *BankAccount::createGlobal(int taxClass)
     return ba;
 }
 
-BankAccount::BankAccount(const BankAccount &other) : accountID(other.accountID), account(other.account)
-{
-
-}
-
-
 // Default constructor
 BankAccount::BankAccount() : IBAN(), accountID() {
     taxClass = 1; // default tax class

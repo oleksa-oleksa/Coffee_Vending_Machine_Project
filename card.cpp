@@ -17,12 +17,6 @@ Card::Card(Account *ac) {
     account = ac;
 }
 
-Card::Card(const Card &other) : cardStatus(other.cardStatus), account(other.account)
-{
-
-}
-
-
 Card::~Card() {
 
 }

@@ -33,9 +33,11 @@ int main(int argc, char *argv[]) {
     SystemTest system;
     QTest::qExec(&system, argc, argv);
 
+#if defined(USE_DATABASE)
     // UNIT TESTS: SEPARATE CLASSES
     DatabaseTest dbtst01;
     QTest::qExec(&dbtst01, argc, argv);
+#endif
 
     AccountTest dbtst02;
      QTest::qExec(&dbtst02, argc, argv);

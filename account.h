@@ -32,7 +32,6 @@ class Account
         Account();
         Account(Person *newEmployee, BankAccount *newBa);
 
-        Account(const Account &other);
         static std::vector<Account> AllAccounts;
 
         static Account *createGlobal(Person *owner, BankAccount *ba, double credit, AccountStatus state);

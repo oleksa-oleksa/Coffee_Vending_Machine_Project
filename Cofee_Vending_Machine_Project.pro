@@ -201,7 +201,7 @@ test {
         test/milkmakertest.h \
         test/temperaturesensortest.h \
         test/dc_motortest.h \
-        test/integrationtest01.h
+        test/integrationtest01.h \
         test/integrationtest02.h
 }
 else {

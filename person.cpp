@@ -6,12 +6,6 @@
 
 std::vector<Person>Person::AllEmployee = std::vector<Person>();
 
-Person::Person(const Person &other) : name(other.name), surname(other.surname), address(other.address),
-    isAdmin(other.isAdmin), isStaff(other.isStaff), isEmployed(other.isEmployed), personID(other.personID)
-{
-
-}
-
 
 Person *Person::createGlobal(std::string name, std::string surname, std::string address, bool isEmployed, bool isAdmin, bool isStaff)
 {

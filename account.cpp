@@ -30,16 +30,6 @@ Account::Account() : accountID() {
     ba = NULL;
 }
 
-Account::Account(const Account &other) :
-    credit(other.credit),
-    owner(other.owner),
-    state(other.state),
-    ba(other.ba),
-    accountID(other.accountID)
-{
-
-}
-
 // This constructor assumes that it receives a valid query
 // pointing at some row of data from Account table
 Account::Account(QSqlRecord &query) {

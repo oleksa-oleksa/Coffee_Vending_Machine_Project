@@ -170,7 +170,6 @@ void AccountTest::testLinkBankAccount() {
     qDebug() << "GETTER: IBAN is: " << tmpID02.toQstring();
 
     Account acc01;
-
     qDebug() << "VERIFY: New created account IBAN: " << acc01.getBankAccount();
 
     // PASS, ID existing in Array
