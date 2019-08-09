@@ -1,6 +1,6 @@
 Software Project in C++ Project with GUI.
 
-During the Sommer Semester 2018 the projest was written in C++ using QT Creator. Initially started as a team project of 4 students it was finally implemented by me and a smal part of unit tests was created by one student.
+During the Sommer Semester 2018 the projest was written in C++ using QT Creator. Initially started as a team project of 4 students it was finally implemented by me and a small part of unit tests was created by one student.
 
 It is a software simulation of a coffee vending machine with graphical interface. The free icons was used for the project and a GUI was created directly in QT Creator. There is a software real time simulation of the different actuators and sensors.
 
